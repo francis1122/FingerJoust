@@ -141,6 +141,31 @@
 		DE1CC94E178FA31D00CB1C59 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DE1CC94D178FA31D00CB1C59 /* AppDelegate.m */; };
 		DE1CC951178FA31D00CB1C59 /* HelloWorldLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DE1CC950178FA31D00CB1C59 /* HelloWorldLayer.m */; };
 		DE1CC954178FA31D00CB1C59 /* IntroLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DE1CC953178FA31D00CB1C59 /* IntroLayer.m */; };
+		DE3987FC17D4745900B155E7 /* Touch.vsh in Sources */ = {isa = PBXBuildFile; fileRef = DE3987FB17D4745900B155E7 /* Touch.vsh */; };
+		DE3987FE17D4746600B155E7 /* Touch.fsh in Sources */ = {isa = PBXBuildFile; fileRef = DE3987FD17D4746600B155E7 /* Touch.fsh */; };
+		DE3987FF17D474DE00B155E7 /* Touch.vsh in Resources */ = {isa = PBXBuildFile; fileRef = DE3987FB17D4745900B155E7 /* Touch.vsh */; };
+		DE39880017D474DE00B155E7 /* Touch.fsh in Resources */ = {isa = PBXBuildFile; fileRef = DE3987FD17D4746600B155E7 /* Touch.fsh */; };
+		DE6055B617D2E20F00288F46 /* PowerStone.m in Sources */ = {isa = PBXBuildFile; fileRef = DE6055B517D2E20F00288F46 /* PowerStone.m */; };
+		DE6055BA17D4123800288F46 /* JoustF_JoustF-ipadhd.png in Resources */ = {isa = PBXBuildFile; fileRef = DE6055B817D4123800288F46 /* JoustF_JoustF-ipadhd.png */; };
+		DE6055BB17D4123800288F46 /* JoustF_JoustF.png in Resources */ = {isa = PBXBuildFile; fileRef = DE6055B917D4123800288F46 /* JoustF_JoustF.png */; };
+		DE6055BD17D4129C00288F46 /* JoustF_JoustF.plist in Resources */ = {isa = PBXBuildFile; fileRef = DE6055BC17D4129C00288F46 /* JoustF_JoustF.plist */; };
+		DE6055C717D4350A00288F46 /* Grain.fsh in Sources */ = {isa = PBXBuildFile; fileRef = DE6055C617D4350A00288F46 /* Grain.fsh */; };
+		DE6055C817D4378100288F46 /* Grain.fsh in Resources */ = {isa = PBXBuildFile; fileRef = DE6055C617D4350A00288F46 /* Grain.fsh */; };
+		DE6055CA17D4397500288F46 /* Grain.vsh in Sources */ = {isa = PBXBuildFile; fileRef = DE6055C917D4397500288F46 /* Grain.vsh */; };
+		DE6055CB17D439BC00288F46 /* Grain.vsh in Resources */ = {isa = PBXBuildFile; fileRef = DE6055C917D4397500288F46 /* Grain.vsh */; };
+		DE6055CD17D44A5100288F46 /* Jouster.png in Resources */ = {isa = PBXBuildFile; fileRef = DE6055CC17D44A5100288F46 /* Jouster.png */; };
+		DE6055D017D44AB300288F46 /* Jouster2.png in Resources */ = {isa = PBXBuildFile; fileRef = DE6055CE17D44AB300288F46 /* Jouster2.png */; };
+		DE6055D117D44AB300288F46 /* Jousternon.png in Resources */ = {isa = PBXBuildFile; fileRef = DE6055CF17D44AB300288F46 /* Jousternon.png */; };
+		DE85E53717C971C5002BCC79 /* MathHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = DE85E53617C971C5002BCC79 /* MathHelper.m */; };
+		DE8F13B217C3344F00050E5E /* JousterC.m in Sources */ = {isa = PBXBuildFile; fileRef = DE8F13B117C3344F00050E5E /* JousterC.m */; };
+		DE8F13B517C33C6200050E5E /* JousterD.m in Sources */ = {isa = PBXBuildFile; fileRef = DE8F13B417C33C6200050E5E /* JousterD.m */; };
+		DE91641917BB0929009817AD /* JousterB.m in Sources */ = {isa = PBXBuildFile; fileRef = DE91641817BB0929009817AD /* JousterB.m */; };
+		DE919A3F17B22CCD00DAA954 /* JousterA.m in Sources */ = {isa = PBXBuildFile; fileRef = DE919A3E17B22CCD00DAA954 /* JousterA.m */; };
+		DEB525FE17D579A00010AFF9 /* CollisionEffect.plist in Resources */ = {isa = PBXBuildFile; fileRef = DEB525FD17D579A00010AFF9 /* CollisionEffect.plist */; };
+		DEB5260117D5B5C50010AFF9 /* CCWarpSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = DEB5260017D5B54D0010AFF9 /* CCWarpSprite.m */; };
+		DEBB5274178FAD7D006FEB1C /* TitleLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DEBB5273178FAD7D006FEB1C /* TitleLayer.m */; };
+		DEBB5277178FAF12006FEB1C /* GameLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DEBB5276178FAF12006FEB1C /* GameLayer.m */; };
+		DEBB527A178FB212006FEB1C /* Jouster.m in Sources */ = {isa = PBXBuildFile; fileRef = DEBB5279178FB212006FEB1C /* Jouster.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -425,6 +450,37 @@
 		DE1CC950178FA31D00CB1C59 /* HelloWorldLayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HelloWorldLayer.m; sourceTree = "<group>"; };
 		DE1CC952178FA31D00CB1C59 /* IntroLayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IntroLayer.h; sourceTree = "<group>"; };
 		DE1CC953178FA31D00CB1C59 /* IntroLayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IntroLayer.m; sourceTree = "<group>"; };
+		DE3987FB17D4745900B155E7 /* Touch.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Touch.vsh; sourceTree = "<group>"; };
+		DE3987FD17D4746600B155E7 /* Touch.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Touch.fsh; sourceTree = "<group>"; };
+		DE6055B417D2E20F00288F46 /* PowerStone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PowerStone.h; sourceTree = "<group>"; };
+		DE6055B517D2E20F00288F46 /* PowerStone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PowerStone.m; sourceTree = "<group>"; };
+		DE6055B817D4123800288F46 /* JoustF_JoustF-ipadhd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "JoustF_JoustF-ipadhd.png"; sourceTree = "<group>"; };
+		DE6055B917D4123800288F46 /* JoustF_JoustF.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = JoustF_JoustF.png; sourceTree = "<group>"; };
+		DE6055BC17D4129C00288F46 /* JoustF_JoustF.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = JoustF_JoustF.plist; sourceTree = "<group>"; };
+		DE6055C617D4350A00288F46 /* Grain.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Grain.fsh; sourceTree = SOURCE_ROOT; };
+		DE6055C917D4397500288F46 /* Grain.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Grain.vsh; sourceTree = "<group>"; };
+		DE6055CC17D44A5100288F46 /* Jouster.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Jouster.png; sourceTree = "<group>"; };
+		DE6055CE17D44AB300288F46 /* Jouster2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Jouster2.png; sourceTree = "<group>"; };
+		DE6055CF17D44AB300288F46 /* Jousternon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Jousternon.png; sourceTree = "<group>"; };
+		DE85E53517C971C5002BCC79 /* MathHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MathHelper.h; sourceTree = "<group>"; };
+		DE85E53617C971C5002BCC79 /* MathHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MathHelper.m; sourceTree = "<group>"; };
+		DE8F13B017C3344F00050E5E /* JousterC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JousterC.h; sourceTree = "<group>"; };
+		DE8F13B117C3344F00050E5E /* JousterC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JousterC.m; sourceTree = "<group>"; };
+		DE8F13B317C33C6200050E5E /* JousterD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JousterD.h; sourceTree = "<group>"; };
+		DE8F13B417C33C6200050E5E /* JousterD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JousterD.m; sourceTree = "<group>"; };
+		DE91641717BB0929009817AD /* JousterB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JousterB.h; sourceTree = "<group>"; };
+		DE91641817BB0929009817AD /* JousterB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JousterB.m; sourceTree = "<group>"; };
+		DE919A3D17B22CCD00DAA954 /* JousterA.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JousterA.h; sourceTree = "<group>"; };
+		DE919A3E17B22CCD00DAA954 /* JousterA.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JousterA.m; sourceTree = "<group>"; };
+		DEB525FD17D579A00010AFF9 /* CollisionEffect.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = CollisionEffect.plist; sourceTree = "<group>"; };
+		DEB525FF17D5B54D0010AFF9 /* CCWarpSprite.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CCWarpSprite.h; sourceTree = "<group>"; };
+		DEB5260017D5B54D0010AFF9 /* CCWarpSprite.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CCWarpSprite.m; sourceTree = "<group>"; };
+		DEBB5272178FAD7D006FEB1C /* TitleLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TitleLayer.h; sourceTree = "<group>"; };
+		DEBB5273178FAD7D006FEB1C /* TitleLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TitleLayer.m; sourceTree = "<group>"; };
+		DEBB5275178FAF12006FEB1C /* GameLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameLayer.h; path = ../GameLayer.h; sourceTree = "<group>"; };
+		DEBB5276178FAF12006FEB1C /* GameLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GameLayer.m; path = ../GameLayer.m; sourceTree = "<group>"; };
+		DEBB5278178FB212006FEB1C /* Jouster.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Jouster.h; path = ../Jouster.h; sourceTree = "<group>"; };
+		DEBB5279178FB212006FEB1C /* Jouster.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Jouster.m; path = ../Jouster.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -485,12 +541,22 @@
 		DE1CC7BB178FA31700CB1C59 /* FingerJoust */ = {
 			isa = PBXGroup;
 			children = (
+				DEB525FF17D5B54D0010AFF9 /* CCWarpSprite.h */,
+				DEB5260017D5B54D0010AFF9 /* CCWarpSprite.m */,
+				DE6055B317D2E19300288F46 /* GameObjects */,
+				DE919A3C17B22CAA00DAA954 /* Jousters */,
 				DE1CC94C178FA31D00CB1C59 /* AppDelegate.h */,
 				DE1CC94D178FA31D00CB1C59 /* AppDelegate.m */,
 				DE1CC94F178FA31D00CB1C59 /* HelloWorldLayer.h */,
 				DE1CC950178FA31D00CB1C59 /* HelloWorldLayer.m */,
 				DE1CC952178FA31D00CB1C59 /* IntroLayer.h */,
 				DE1CC953178FA31D00CB1C59 /* IntroLayer.m */,
+				DEBB5272178FAD7D006FEB1C /* TitleLayer.h */,
+				DE85E53617C971C5002BCC79 /* MathHelper.m */,
+				DEBB5273178FAD7D006FEB1C /* TitleLayer.m */,
+				DEBB5275178FAF12006FEB1C /* GameLayer.h */,
+				DEBB5276178FAF12006FEB1C /* GameLayer.m */,
+				DE85E53517C971C5002BCC79 /* MathHelper.h */,
 				DE1CC7BC178FA31700CB1C59 /* Resources */,
 				DE1CC7D4178FA31800CB1C59 /* libs */,
 				DE1CC948178FA31D00CB1C59 /* Supporting Files */,
@@ -501,7 +567,13 @@
 		DE1CC7BC178FA31700CB1C59 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				DEB525FC17D579970010AFF9 /* particles */,
+				DE6055C517D434CC00288F46 /* shaders */,
+				DE6055B717D4122800288F46 /* spriteSheet */,
 				DE1CC7BD178FA31700CB1C59 /* Default.png */,
+				DE6055CE17D44AB300288F46 /* Jouster2.png */,
+				DE6055CF17D44AB300288F46 /* Jousternon.png */,
+				DE6055CC17D44A5100288F46 /* Jouster.png */,
 				DE1CC7BF178FA31700CB1C59 /* Default@2x.png */,
 				DE1CC7C1178FA31800CB1C59 /* Default-568h@2x.png */,
 				DE1CC7C3178FA31800CB1C59 /* Default-Landscape~ipad.png */,
@@ -879,6 +951,61 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		DE6055B317D2E19300288F46 /* GameObjects */ = {
+			isa = PBXGroup;
+			children = (
+				DE6055B417D2E20F00288F46 /* PowerStone.h */,
+				DE6055B517D2E20F00288F46 /* PowerStone.m */,
+			);
+			name = GameObjects;
+			sourceTree = "<group>";
+		};
+		DE6055B717D4122800288F46 /* spriteSheet */ = {
+			isa = PBXGroup;
+			children = (
+				DE6055BC17D4129C00288F46 /* JoustF_JoustF.plist */,
+				DE6055B817D4123800288F46 /* JoustF_JoustF-ipadhd.png */,
+				DE6055B917D4123800288F46 /* JoustF_JoustF.png */,
+			);
+			name = spriteSheet;
+			sourceTree = "<group>";
+		};
+		DE6055C517D434CC00288F46 /* shaders */ = {
+			isa = PBXGroup;
+			children = (
+				DE6055C617D4350A00288F46 /* Grain.fsh */,
+				DE6055C917D4397500288F46 /* Grain.vsh */,
+				DE3987FD17D4746600B155E7 /* Touch.fsh */,
+				DE3987FB17D4745900B155E7 /* Touch.vsh */,
+			);
+			name = shaders;
+			sourceTree = "<group>";
+		};
+		DE919A3C17B22CAA00DAA954 /* Jousters */ = {
+			isa = PBXGroup;
+			children = (
+				DEBB5278178FB212006FEB1C /* Jouster.h */,
+				DEBB5279178FB212006FEB1C /* Jouster.m */,
+				DE919A3D17B22CCD00DAA954 /* JousterA.h */,
+				DE919A3E17B22CCD00DAA954 /* JousterA.m */,
+				DE91641717BB0929009817AD /* JousterB.h */,
+				DE91641817BB0929009817AD /* JousterB.m */,
+				DE8F13B017C3344F00050E5E /* JousterC.h */,
+				DE8F13B117C3344F00050E5E /* JousterC.m */,
+				DE8F13B317C33C6200050E5E /* JousterD.h */,
+				DE8F13B417C33C6200050E5E /* JousterD.m */,
+			);
+			name = Jousters;
+			sourceTree = "<group>";
+		};
+		DEB525FC17D579970010AFF9 /* particles */ = {
+			isa = PBXGroup;
+			children = (
+				DEB525FD17D579A00010AFF9 /* CollisionEffect.plist */,
+			);
+			name = particles;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -930,6 +1057,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DE3987FF17D474DE00B155E7 /* Touch.vsh in Resources */,
+				DE39880017D474DE00B155E7 /* Touch.fsh in Resources */,
+				DE6055CB17D439BC00288F46 /* Grain.vsh in Resources */,
+				DE6055C817D4378100288F46 /* Grain.fsh in Resources */,
 				DE1CC7BE178FA31700CB1C59 /* Default.png in Resources */,
 				DE1CC7C0178FA31700CB1C59 /* Default@2x.png in Resources */,
 				DE1CC7C2178FA31800CB1C59 /* Default-568h@2x.png in Resources */,
@@ -942,6 +1073,13 @@
 				DE1CC7D0178FA31800CB1C59 /* Icon@2x.png in Resources */,
 				DE1CC7D3178FA31800CB1C59 /* iTunesArtwork in Resources */,
 				DE1CC92C178FA31D00CB1C59 /* ChangeLog in Resources */,
+				DE6055BA17D4123800288F46 /* JoustF_JoustF-ipadhd.png in Resources */,
+				DE6055BB17D4123800288F46 /* JoustF_JoustF.png in Resources */,
+				DE6055BD17D4129C00288F46 /* JoustF_JoustF.plist in Resources */,
+				DE6055CD17D44A5100288F46 /* Jouster.png in Resources */,
+				DE6055D017D44AB300288F46 /* Jouster2.png in Resources */,
+				DE6055D117D44AB300288F46 /* Jousternon.png in Resources */,
+				DEB525FE17D579A00010AFF9 /* CollisionEffect.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -952,6 +1090,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DEB5260117D5B5C50010AFF9 /* CCWarpSprite.m in Sources */,
 				DE1CC7D8178FA31800CB1C59 /* CCAction.m in Sources */,
 				DE1CC7DB178FA31800CB1C59 /* CCActionCamera.m in Sources */,
 				DE1CC7DE178FA31800CB1C59 /* CCActionCatmullRom.m in Sources */,
@@ -1064,6 +1203,19 @@
 				DE1CC94E178FA31D00CB1C59 /* AppDelegate.m in Sources */,
 				DE1CC951178FA31D00CB1C59 /* HelloWorldLayer.m in Sources */,
 				DE1CC954178FA31D00CB1C59 /* IntroLayer.m in Sources */,
+				DEBB5274178FAD7D006FEB1C /* TitleLayer.m in Sources */,
+				DEBB5277178FAF12006FEB1C /* GameLayer.m in Sources */,
+				DEBB527A178FB212006FEB1C /* Jouster.m in Sources */,
+				DE919A3F17B22CCD00DAA954 /* JousterA.m in Sources */,
+				DE91641917BB0929009817AD /* JousterB.m in Sources */,
+				DE8F13B217C3344F00050E5E /* JousterC.m in Sources */,
+				DE8F13B517C33C6200050E5E /* JousterD.m in Sources */,
+				DE85E53717C971C5002BCC79 /* MathHelper.m in Sources */,
+				DE6055B617D2E20F00288F46 /* PowerStone.m in Sources */,
+				DE6055C717D4350A00288F46 /* Grain.fsh in Sources */,
+				DE6055CA17D4397500288F46 /* Grain.vsh in Sources */,
+				DE3987FC17D4745900B155E7 /* Touch.vsh in Sources */,
+				DE3987FE17D4746600B155E7 /* Touch.fsh in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1114,18 +1266,22 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = FingerJoust/Prefix.pch;
 				HEADER_SEARCH_PATHS = "\"FingerJoust/libs/kazmath/include\"";
 				INFOPLIST_FILE = FingerJoust/Resources/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				OTHER_LDFLAGS = (
 					"-lz",
 					"-lsqlite3",
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = 2;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1134,17 +1290,21 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = FingerJoust/Prefix.pch;
 				HEADER_SEARCH_PATHS = "\"FingerJoust/libs/kazmath/include\"";
 				INFOPLIST_FILE = FingerJoust/Resources/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				OTHER_LDFLAGS = (
 					"-lz",
 					"-lsqlite3",
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = 2;
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
 			};
@@ -1169,6 +1329,7 @@
 				DE1CC959178FA31D00CB1C59 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

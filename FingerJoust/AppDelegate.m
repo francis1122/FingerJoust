@@ -9,7 +9,7 @@
 #import "cocos2d.h"
 
 #import "AppDelegate.h"
-#import "IntroLayer.h"
+#import "TitleLayer.h"
 
 @implementation MyNavigationController
 
@@ -47,7 +47,7 @@
 	if(director.runningScene == nil) {
 		// Add the first scene to the stack. The director will draw it immediately into the framebuffer. (Animation is started automatically when the view is displayed.)
 		// and add the scene to the stack. The director will run it when it automatically when the view is displayed.
-		[director runWithScene: [IntroLayer scene]];
+		[director runWithScene: [TitleLayer node]];
 	}
 }
 @end
@@ -83,6 +83,8 @@
 									sharegroup:nil
 								 multiSampling:NO
 							   numberOfSamples:0];
+    
+    [glView setMultipleTouchEnabled:YES];
 	
 	director_ = (CCDirectorIOS*) [CCDirector sharedDirector];
 	
@@ -96,6 +98,7 @@
 	
 	// attach the openglView to the director
 	[director_ setView:glView];
+
 	
 	// 2D projection
 	[director_ setProjection:kCCDirectorProjection2D];
@@ -122,6 +125,10 @@
 	
 	// Assume that PVR images have premultiplied alpha
 	[CCTexture2D PVRImagesHavePremultipliedAlpha:YES];
+    
+    CCSpriteFrameCache* frameCache = [CCSpriteFrameCache sharedSpriteFrameCache];
+    // Add the sprite frames. This will load the texture as well
+    [frameCache addSpriteFramesWithFile:@"JoustF_JoustF.plist"];
 	
 	// Create a Navigation Controller with the Director
 	navController_ = [[MyNavigationController alloc] initWithRootViewController:director_];
@@ -135,6 +142,7 @@
 	
 	// make main window visible
 	[window_ makeKeyAndVisible];
+
 	
 	return YES;
 }
