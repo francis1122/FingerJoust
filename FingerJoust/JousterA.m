@@ -8,37 +8,38 @@
 
 #import "JousterA.h"
 #import "MathHelper.h"
+#import "CCWarpSprite.h"
 
 @implementation JousterA
 
 
 -(void) resetJouster{
-    [super resetJouster];
     self.joustPosition = ccp(1,0);
     previousVelocity = ccp(1,0);
     joustVelocity = ccp(1,0);
+    [super resetJouster];
 }
 
 -(void) update:(ccTime)dt{
     
 
     
-    //update velocity
-    self.position = ccpAdd(self.position, ccpMult(self.velocity, dt));
+
     
-    //reduce velocity
-    velocity = ccpMult(velocity, .95);
+    [super update:dt];
+    
     
     if(player == 1){
         aliveTicker += dt/2 * (1 + ccpLength(velocity) * .02);
     }else{
         aliveTicker += dt/2 * (1 + ccpLength(velocity) * .02);
     }
-    
     [self calculateJoustPosition:dt];
-    previousVelocity = velocity;
-    [self checkBoundaries];
-    [super update:dt];
+    
+    jousterInnerSprite.velocity = joustVelocity;
+    jousterSprite.velocity = joustVelocity;
+    [jousterSprite update:dt];
+    [jousterInnerSprite update:dt];
 }
 
 -(void) calculateJoustPosition:(ccTime) dt{
@@ -48,8 +49,8 @@
     joustVelocity = ccpMult(joustVelocity, .98);
     float distance = ccpLength(self.joustPosition);
     distance = distance/.06;
-    if(distance < 1){
-        joustPosition = ccpAdd(self.joustPosition, joustVelocity);
+    if(distance < .05){
+        joustPosition = ccpAdd(self.joustPosition,  ccpMult(joustVelocity, dt));
         return;
     }
     

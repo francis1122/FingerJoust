@@ -13,8 +13,8 @@
 @interface Jouster : CCSprite {
     int player;
     
-    CCSprite *jousterSprite;
-    CCSprite *jousterInnerSprite;
+    CCWarpSprite *jousterSprite;
+    CCWarpSprite *jousterInnerSprite;
     
     CCWarpSprite *bodyOuterSprite;
     CCWarpSprite *bodyInnerSprite;
@@ -41,6 +41,10 @@
     BOOL isSuperMode;
     float superModeTimer;
     
+    //stun stuff
+    BOOL isStunned;
+    float stunTimer;
+    
 }
 
 
@@ -57,6 +61,7 @@
 
 -(void) engageSuperMode;
 -(void) disengateSuperMode;
+-(void) stunBody;
 
 -(void) calculateJoustPosition:(ccTime) dt;
 -(void) joustCollision:(CGPoint) joustPos withRadius:(float) radius;

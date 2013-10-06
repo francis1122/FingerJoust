@@ -20,19 +20,14 @@
 
 -(void) update:(ccTime)dt{
 
-    //update velocity
-    self.position = ccpAdd(self.position, ccpMult(self.velocity, dt));
-    
-    //reduce velocity
-    velocity = ccpMult(velocity, .95);
-    
+
     if(player == 1){
-        aliveTicker += dt * 2;
+        aliveTicker += dt * 2.8;
     }else{
-        aliveTicker += dt * 1.5;
+        aliveTicker += dt * 2.0;
     }
-    
-    joustPosition = ccpMult( ccp(cos(aliveTicker), sin(aliveTicker)), bodyRadius);
+
+    joustPosition = ccpMult( ccp(cos(aliveTicker), sin(aliveTicker)), bodyRadius * 3.0);
     //normalize velocity
     
     
@@ -41,8 +36,7 @@
     
     //    [self calculateJoustPosition];
     
-    previousVelocity = velocity;
-    [self checkBoundaries];
+
     [super update:dt];
 }
 
@@ -65,6 +59,7 @@
 }
 
 - (void) draw{
+    /*
     if(player == 1){
         ccDrawColor4F(1.0f, 0.0f, 0.0f, 1.0f);
     }else{
@@ -73,7 +68,7 @@
     ccDrawCircle(CGPointZero, bodyRadius, 0, 30, NO);
     //joust
     ccDrawCircle(joustPosition, joustRadius, 0, 30, NO);
-    
+    */
     [super draw];
 }
 /*

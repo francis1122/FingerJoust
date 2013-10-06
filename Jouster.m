@@ -32,10 +32,11 @@
         [bodyOuterSprite addChild:bodyInnerSprite];
 
         
-        jousterSprite = [CCSprite spriteWithSpriteFrameName:@"JousterOuter"];
+        jousterSprite = [CCWarpSprite spriteWithSpriteFrameName:@"JousterOuter"];
         [self addChild:jousterSprite];
-        
-        jousterInnerSprite = [CCSprite spriteWithSpriteFrameName:@"JousterInner"];
+        jousterSprite.isWarping = YES;
+        jousterInnerSprite = [CCWarpSprite spriteWithSpriteFrameName:@"JousterInner"];
+        jousterInnerSprite.isWarping = YES;
         jousterInnerSprite.position = ccp(jousterSprite.contentSize.width/2, jousterSprite.contentSize.height/2);
         [jousterSprite addChild:jousterInnerSprite];
         
@@ -80,9 +81,15 @@
         jousterInnerSprite.color = ccBLUE;
         bodyInnerSprite.color = ccBLUE;
     }
+    
+    
     velocity = ccp(1,0);
     previousVelocity = ccp(1,0);
     self.position = pos;
+    [self update:0.05];
+    [self resetTouch];
+    isStunned = NO;    
+    bodyOuterSprite.color = ccWHITE;
 }
 
 -(void) engageSuperMode{
@@ -91,7 +98,6 @@
     isSuperMode = YES;
 }
 
-
 -(void) disengateSuperMode{
     superModeTimer = 0;
     powerStones = 0;
@@ -99,18 +105,47 @@
     isSuperMode = NO;
 }
 
+-(void) stunBody{
+    isStunned = YES;
+    stunTimer = 5.0;
+    bodyOuterSprite.color = ccBLACK;
+}
+
+-(void) clampMaxSpeed{
+    float speed = ccpLength(self.velocity);
+    NSLog(@"speed %f", speed);
+    if(speed > 1100){
+        CGPoint normal = ccpNormalize(self.velocity);
+        self.velocity = ccpMult(normal, 1100);
+    }
+}
+
 -(void) update:(ccTime)dt{
+
+    
+    jousterSprite.position = joustPosition;
+//    jousterSprite.rotation = jousterSprite.rotation + 2.5;
+    if(powerStones > 4){
+        [self engageSuperMode];
+    }
+    
+    //velocity and position
+    //reduce velocity
+    [self clampMaxSpeed];
+    velocity = ccpMult(velocity, .965);
+    
+    //update velocity
+    self.position = ccpAdd(self.position, ccpMult(self.velocity, dt));
+
+    previousVelocity = velocity;
+
     bodyOuterSprite.velocity = velocity;
     bodyInnerSprite.velocity = velocity;
     [bodyOuterSprite update:dt];
     [bodyInnerSprite update:dt];
     
-    jousterSprite.position = joustPosition;
-//    jousterSprite.rotation = jousterSprite.rotation + 2.5;
-    if(powerStones > 5){
-        [self engageSuperMode];
-    }
-        [jousterSprite.shaderProgram updateUniforms];
+    
+    //[jousterSprite.shaderProgram updateUniforms];
     //run super mode stuff
     if(isSuperMode){
         superModeTimer += dt;
@@ -119,7 +154,16 @@
         }
     }
     
+    //stun stuff
+    if(isStunned){
+        stunTimer -= dt;
+        if(stunTimer < 0){
+            isStunned = NO;
+            bodyOuterSprite.color = ccWHITE;
+        }
+    }
     
+    [self checkBoundaries];
 }
 
 -(void) setWorldPositionOfJoust:(CGPoint) pos{
@@ -179,13 +223,6 @@
     */
   
     [super draw];
-    
-    
-    
-
-    
-
-    
 }
 
 -(void) resetTouch{
@@ -202,12 +239,33 @@
 
     CGPoint difference = ccpSub(touch, previousTouch);
 
-    if(!isSuperMode){
-        difference = ccp(difference.x * 2.5, difference.y *1.8);
+    //NSLog(@"diffference : %f, %f", difference.x, difference.y);
+    
+
+    if(isSuperMode){
+        difference = ccp(difference.x * 5.5, difference.y *4.1);
+    }else if(isStunned){
+        difference = ccp(difference.x * 1.6, difference.y *1.2);
     }else{
-        difference = ccp(difference.x * 5.0, difference.y *3.6);
+        
+        difference = ccp(difference.x * 3.5, difference.y *2.6);
+//        difference = ccp(difference.x * 6, difference.y *6);
+
     }
     self.velocity = ccpAdd(velocity, difference);
+
+    
+    //tweaked movement
+    
+    //normalize direction
+/*    CGPoint normalizedDifference = ccpNormalize(difference);
+    
+    //get magnitude of swipe
+    float speed = ccpLength(difference);
+    speed = log2f(1 +speed*speed);
+    CGPoint newVelocity = ccp(normalizedDifference.x * speed, normalizedDifference.y *speed);
+    self.velocity = ccpAdd(velocity, newVelocity);
+    */
     
     previousTouch = touch;
     

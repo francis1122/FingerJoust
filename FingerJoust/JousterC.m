@@ -8,6 +8,7 @@
 
 #import "JousterC.h"
 #import "MathHelper.h"
+#import "CCWarpSprite.h"
 
 
 @implementation JousterC
@@ -30,18 +31,22 @@
 
 -(void) resetJouster{
     [super resetJouster];
+    //offset the growing and shrinking of circle
+    if(player == 1){
+        aliveTicker = 3.14/2;
+    }else{
+        aliveTicker = 0;
+    }
 }
 
 -(void) update:(ccTime)dt{
-    //update velocity
-    self.position = ccpAdd(self.position, ccpMult(self.velocity, dt));
-    
-    //reduce velocity
-    velocity = ccpMult(velocity, .95);
+    [super update:dt];
     aliveTicker += dt;
     joustRadius = 21 * (1.2 + cos(aliveTicker));
     
-    
+//    jousterInnerSprite.scale = joustRadius/28.0;
+    jousterSprite.scale = joustRadius/20.0;
+
 //    joustPosition = ccpMult( ccp(cos(aliveTicker), sin(aliveTicker)), bodyRadius);
     //normalize velocity
     
@@ -51,9 +56,7 @@
     
     //    [self calculateJoustPosition];
     
-    previousVelocity = velocity;
-    [self checkBoundaries];
-    [super update:dt];
+
 }
 
 

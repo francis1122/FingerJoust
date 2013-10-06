@@ -12,7 +12,9 @@
 #define CONTROL_OFFSET 286
 #define EXTRA_CONTROL_OFFSET 370
 
-#define ROUND_TIME 10
+#define ROUND_TIME 20
+#define VORTEX_DISTANCE 350
+#define STUN_CONTRAINT 340
 
 typedef enum GameState
 {   
@@ -23,7 +25,7 @@ typedef enum GameState
     GAME_START = 4,
 }GameState;
 
-@class Jouster, PowerStone;
+@class Jouster, PowerStone, SneakyJoystick;
 @interface GameLayer : CCLayerColor  {
     CCLayerColor *redLayer;
     CCLayerColor *blueLayer;
@@ -42,6 +44,10 @@ typedef enum GameState
     
     //powerstone object
     PowerStone * powerStone;
+    
+    //vortex array
+    NSMutableArray *vortexArray;
+    
     
     //death clock
     NSString *winner;
@@ -65,17 +71,24 @@ typedef enum GameState
 
 
 @property (retain, nonatomic) PowerStone *powerStone;
+@property (retain, nonatomic) NSMutableArray *vortexArray;
+
+
+@property (retain, nonatomic) SneakyJoystick *redJoystick;
 
 -(id) initWithPlayerOne:(int) characterOne playerTwo:(int) characterTwo;
+-(void) spawnVortexAtPoint:(CGPoint) point;
 -(Jouster*) createJouster:(int) character;
 -(void) refreshUI;
 -(void) resetJousters;
 -(void) spawnPowerStone;
+-(void) spawnVortexAtPoint:(CGPoint)point;
 
 -(void) updateTimer:(ccTime) dt;
+-(void) updateVortex:(ccTime)dt;
 
 -(void) checkClosestJousterToCenter;
-
+-(void) checkBodyOnBodyStun;
 //collision stuff
 -(void) powerStoneCollisionCheck;
 -(BOOL) bodyOnBodyCheck;
@@ -93,5 +106,5 @@ typedef enum GameState
 
 //special effects
 -(void) clashEffect:(CGPoint) p1 otherPoint:(CGPoint) p2;
-
+-(CCParticleSystemQuad*) vortexEffect:(CGPoint) pt;
 @end

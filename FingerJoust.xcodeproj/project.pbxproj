@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DE161B4D17D80F9B0004267C /* Vortex.m in Sources */ = {isa = PBXBuildFile; fileRef = DE161B4C17D80F9B0004267C /* Vortex.m */; };
 		DE1CC7A8178FA31700CB1C59 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE1CC7A7178FA31700CB1C59 /* QuartzCore.framework */; };
 		DE1CC7AA178FA31700CB1C59 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE1CC7A9178FA31700CB1C59 /* OpenGLES.framework */; };
 		DE1CC7AC178FA31700CB1C59 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE1CC7AB178FA31700CB1C59 /* OpenAL.framework */; };
@@ -157,6 +158,15 @@
 		DE6055D017D44AB300288F46 /* Jouster2.png in Resources */ = {isa = PBXBuildFile; fileRef = DE6055CE17D44AB300288F46 /* Jouster2.png */; };
 		DE6055D117D44AB300288F46 /* Jousternon.png in Resources */ = {isa = PBXBuildFile; fileRef = DE6055CF17D44AB300288F46 /* Jousternon.png */; };
 		DE85E53717C971C5002BCC79 /* MathHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = DE85E53617C971C5002BCC79 /* MathHelper.m */; };
+		DE8C294717DFC5E60066F709 /* SneakyJoystickSkinnedBase.m in Sources */ = {isa = PBXBuildFile; fileRef = DE8C294217DFC5E60066F709 /* SneakyJoystickSkinnedBase.m */; };
+		DE8C294817DFC5E60066F709 /* SneakyJoystickSkinnedDPadExample.m in Sources */ = {isa = PBXBuildFile; fileRef = DE8C294417DFC5E60066F709 /* SneakyJoystickSkinnedDPadExample.m */; };
+		DE8C294917DFC5E60066F709 /* SneakyJoystickSkinnedJoystickExample.m in Sources */ = {isa = PBXBuildFile; fileRef = DE8C294617DFC5E60066F709 /* SneakyJoystickSkinnedJoystickExample.m */; };
+		DE8C294A17DFC5F20066F709 /* SneakyJoystick.m in Sources */ = {isa = PBXBuildFile; fileRef = DE8C293F17DFC5B00066F709 /* SneakyJoystick.m */; };
+		DE8C294F17DFC5FD0066F709 /* ColoredSquareSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = DE8C294C17DFC5FD0066F709 /* ColoredSquareSprite.m */; };
+		DE8C295017DFC5FD0066F709 /* ColoredCircleSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = DE8C294E17DFC5FD0066F709 /* ColoredCircleSprite.m */; };
+		DE8C295317DFC6060066F709 /* SneakyButton.m in Sources */ = {isa = PBXBuildFile; fileRef = DE8C295217DFC6060066F709 /* SneakyButton.m */; };
+		DE8C295617DFC60D0066F709 /* SneakyButtonSkinnedBase.m in Sources */ = {isa = PBXBuildFile; fileRef = DE8C295517DFC60D0066F709 /* SneakyButtonSkinnedBase.m */; };
+		DE8C8C7B17D8633B0021E121 /* VortexEffect.plist in Resources */ = {isa = PBXBuildFile; fileRef = DE8C8C7A17D8633B0021E121 /* VortexEffect.plist */; };
 		DE8F13B217C3344F00050E5E /* JousterC.m in Sources */ = {isa = PBXBuildFile; fileRef = DE8F13B117C3344F00050E5E /* JousterC.m */; };
 		DE8F13B517C33C6200050E5E /* JousterD.m in Sources */ = {isa = PBXBuildFile; fileRef = DE8F13B417C33C6200050E5E /* JousterD.m */; };
 		DE91641917BB0929009817AD /* JousterB.m in Sources */ = {isa = PBXBuildFile; fileRef = DE91641817BB0929009817AD /* JousterB.m */; };
@@ -169,6 +179,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		DE161B4B17D80F9B0004267C /* Vortex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vortex.h; sourceTree = "<group>"; };
+		DE161B4C17D80F9B0004267C /* Vortex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Vortex.m; sourceTree = "<group>"; };
 		DE1CC7A4178FA31700CB1C59 /* FingerJoust.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FingerJoust.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE1CC7A7178FA31700CB1C59 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		DE1CC7A9178FA31700CB1C59 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -464,6 +476,23 @@
 		DE6055CF17D44AB300288F46 /* Jousternon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Jousternon.png; sourceTree = "<group>"; };
 		DE85E53517C971C5002BCC79 /* MathHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MathHelper.h; sourceTree = "<group>"; };
 		DE85E53617C971C5002BCC79 /* MathHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MathHelper.m; sourceTree = "<group>"; };
+		DE8C293E17DFC5B00066F709 /* SneakyJoystick.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SneakyJoystick.h; sourceTree = "<group>"; };
+		DE8C293F17DFC5B00066F709 /* SneakyJoystick.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SneakyJoystick.m; sourceTree = "<group>"; };
+		DE8C294117DFC5E60066F709 /* SneakyJoystickSkinnedBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SneakyJoystickSkinnedBase.h; sourceTree = "<group>"; };
+		DE8C294217DFC5E60066F709 /* SneakyJoystickSkinnedBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SneakyJoystickSkinnedBase.m; sourceTree = "<group>"; };
+		DE8C294317DFC5E60066F709 /* SneakyJoystickSkinnedDPadExample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SneakyJoystickSkinnedDPadExample.h; sourceTree = "<group>"; };
+		DE8C294417DFC5E60066F709 /* SneakyJoystickSkinnedDPadExample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SneakyJoystickSkinnedDPadExample.m; sourceTree = "<group>"; };
+		DE8C294517DFC5E60066F709 /* SneakyJoystickSkinnedJoystickExample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SneakyJoystickSkinnedJoystickExample.h; sourceTree = "<group>"; };
+		DE8C294617DFC5E60066F709 /* SneakyJoystickSkinnedJoystickExample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SneakyJoystickSkinnedJoystickExample.m; sourceTree = "<group>"; };
+		DE8C294B17DFC5FD0066F709 /* ColoredCircleSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColoredCircleSprite.h; sourceTree = "<group>"; };
+		DE8C294C17DFC5FD0066F709 /* ColoredSquareSprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColoredSquareSprite.m; sourceTree = "<group>"; };
+		DE8C294D17DFC5FD0066F709 /* ColoredSquareSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColoredSquareSprite.h; sourceTree = "<group>"; };
+		DE8C294E17DFC5FD0066F709 /* ColoredCircleSprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColoredCircleSprite.m; sourceTree = "<group>"; };
+		DE8C295117DFC6060066F709 /* SneakyButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SneakyButton.h; sourceTree = "<group>"; };
+		DE8C295217DFC6060066F709 /* SneakyButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SneakyButton.m; sourceTree = "<group>"; };
+		DE8C295417DFC60D0066F709 /* SneakyButtonSkinnedBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SneakyButtonSkinnedBase.h; sourceTree = "<group>"; };
+		DE8C295517DFC60D0066F709 /* SneakyButtonSkinnedBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SneakyButtonSkinnedBase.m; sourceTree = "<group>"; };
+		DE8C8C7A17D8633B0021E121 /* VortexEffect.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = VortexEffect.plist; sourceTree = "<group>"; };
 		DE8F13B017C3344F00050E5E /* JousterC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JousterC.h; sourceTree = "<group>"; };
 		DE8F13B117C3344F00050E5E /* JousterC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JousterC.m; sourceTree = "<group>"; };
 		DE8F13B317C33C6200050E5E /* JousterD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JousterD.h; sourceTree = "<group>"; };
@@ -543,6 +572,7 @@
 			children = (
 				DEB525FF17D5B54D0010AFF9 /* CCWarpSprite.h */,
 				DEB5260017D5B54D0010AFF9 /* CCWarpSprite.m */,
+				DE8C293C17DFC4970066F709 /* joystick */,
 				DE6055B317D2E19300288F46 /* GameObjects */,
 				DE919A3C17B22CAA00DAA954 /* Jousters */,
 				DE1CC94C178FA31D00CB1C59 /* AppDelegate.h */,
@@ -552,11 +582,11 @@
 				DE1CC952178FA31D00CB1C59 /* IntroLayer.h */,
 				DE1CC953178FA31D00CB1C59 /* IntroLayer.m */,
 				DEBB5272178FAD7D006FEB1C /* TitleLayer.h */,
-				DE85E53617C971C5002BCC79 /* MathHelper.m */,
 				DEBB5273178FAD7D006FEB1C /* TitleLayer.m */,
 				DEBB5275178FAF12006FEB1C /* GameLayer.h */,
 				DEBB5276178FAF12006FEB1C /* GameLayer.m */,
 				DE85E53517C971C5002BCC79 /* MathHelper.h */,
+				DE85E53617C971C5002BCC79 /* MathHelper.m */,
 				DE1CC7BC178FA31700CB1C59 /* Resources */,
 				DE1CC7D4178FA31800CB1C59 /* libs */,
 				DE1CC948178FA31D00CB1C59 /* Supporting Files */,
@@ -956,6 +986,8 @@
 			children = (
 				DE6055B417D2E20F00288F46 /* PowerStone.h */,
 				DE6055B517D2E20F00288F46 /* PowerStone.m */,
+				DE161B4B17D80F9B0004267C /* Vortex.h */,
+				DE161B4C17D80F9B0004267C /* Vortex.m */,
 			);
 			name = GameObjects;
 			sourceTree = "<group>";
@@ -981,6 +1013,45 @@
 			name = shaders;
 			sourceTree = "<group>";
 		};
+		DE8C293C17DFC4970066F709 /* joystick */ = {
+			isa = PBXGroup;
+			children = (
+				DE8C293D17DFC5970066F709 /* sneakjoystick */,
+			);
+			name = joystick;
+			sourceTree = "<group>";
+		};
+		DE8C293D17DFC5970066F709 /* sneakjoystick */ = {
+			isa = PBXGroup;
+			children = (
+				DE8C293E17DFC5B00066F709 /* SneakyJoystick.h */,
+				DE8C293F17DFC5B00066F709 /* SneakyJoystick.m */,
+				DE8C294117DFC5E60066F709 /* SneakyJoystickSkinnedBase.h */,
+				DE8C294217DFC5E60066F709 /* SneakyJoystickSkinnedBase.m */,
+				DE8C294317DFC5E60066F709 /* SneakyJoystickSkinnedDPadExample.h */,
+				DE8C294417DFC5E60066F709 /* SneakyJoystickSkinnedDPadExample.m */,
+				DE8C294517DFC5E60066F709 /* SneakyJoystickSkinnedJoystickExample.h */,
+				DE8C294617DFC5E60066F709 /* SneakyJoystickSkinnedJoystickExample.m */,
+				DE8C294B17DFC5FD0066F709 /* ColoredCircleSprite.h */,
+				DE8C294C17DFC5FD0066F709 /* ColoredSquareSprite.m */,
+				DE8C294D17DFC5FD0066F709 /* ColoredSquareSprite.h */,
+				DE8C294E17DFC5FD0066F709 /* ColoredCircleSprite.m */,
+				DE8C295117DFC6060066F709 /* SneakyButton.h */,
+				DE8C295217DFC6060066F709 /* SneakyButton.m */,
+				DE8C295417DFC60D0066F709 /* SneakyButtonSkinnedBase.h */,
+				DE8C295517DFC60D0066F709 /* SneakyButtonSkinnedBase.m */,
+				DE8C294017DFC5D80066F709 /* skinning */,
+			);
+			name = sneakjoystick;
+			sourceTree = "<group>";
+		};
+		DE8C294017DFC5D80066F709 /* skinning */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = skinning;
+			sourceTree = "<group>";
+		};
 		DE919A3C17B22CAA00DAA954 /* Jousters */ = {
 			isa = PBXGroup;
 			children = (
@@ -1001,6 +1072,7 @@
 		DEB525FC17D579970010AFF9 /* particles */ = {
 			isa = PBXGroup;
 			children = (
+				DE8C8C7A17D8633B0021E121 /* VortexEffect.plist */,
 				DEB525FD17D579A00010AFF9 /* CollisionEffect.plist */,
 			);
 			name = particles;
@@ -1080,6 +1152,7 @@
 				DE6055D017D44AB300288F46 /* Jouster2.png in Resources */,
 				DE6055D117D44AB300288F46 /* Jousternon.png in Resources */,
 				DEB525FE17D579A00010AFF9 /* CollisionEffect.plist in Resources */,
+				DE8C8C7B17D8633B0021E121 /* VortexEffect.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1090,6 +1163,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DE8C294A17DFC5F20066F709 /* SneakyJoystick.m in Sources */,
 				DEB5260117D5B5C50010AFF9 /* CCWarpSprite.m in Sources */,
 				DE1CC7D8178FA31800CB1C59 /* CCAction.m in Sources */,
 				DE1CC7DB178FA31800CB1C59 /* CCActionCamera.m in Sources */,
@@ -1216,6 +1290,14 @@
 				DE6055CA17D4397500288F46 /* Grain.vsh in Sources */,
 				DE3987FC17D4745900B155E7 /* Touch.vsh in Sources */,
 				DE3987FE17D4746600B155E7 /* Touch.fsh in Sources */,
+				DE161B4D17D80F9B0004267C /* Vortex.m in Sources */,
+				DE8C294717DFC5E60066F709 /* SneakyJoystickSkinnedBase.m in Sources */,
+				DE8C294817DFC5E60066F709 /* SneakyJoystickSkinnedDPadExample.m in Sources */,
+				DE8C294917DFC5E60066F709 /* SneakyJoystickSkinnedJoystickExample.m in Sources */,
+				DE8C294F17DFC5FD0066F709 /* ColoredSquareSprite.m in Sources */,
+				DE8C295017DFC5FD0066F709 /* ColoredCircleSprite.m in Sources */,
+				DE8C295317DFC6060066F709 /* SneakyButton.m in Sources */,
+				DE8C295617DFC60D0066F709 /* SneakyButtonSkinnedBase.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

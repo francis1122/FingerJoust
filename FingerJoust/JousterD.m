@@ -34,18 +34,18 @@
 
 -(void) resetJouster{
     [super resetJouster];
+
+    if(player == 1){
     joustPosition = ccp(0,100);
+    }else{
+    joustPosition = ccp(0,-100);
+    }
     previousVelocity = ccp(1,0);
     joustVelocity = ccp(1,0);
 }
 
 -(void) update:(ccTime)dt{
     [super update:dt];
-    //update velocity
-    self.position = ccpAdd(self.position, ccpMult(self.velocity, dt));
-    
-    //reduce velocity
-    velocity = ccpMult(velocity, .95);
     
     if(player == 1){
         aliveTicker += dt/2 * (1 + ccpLength(velocity) * .02);
@@ -66,9 +66,7 @@
         offset = ccpMult(offset, -1);
         joustVelocity = offset;
     }
-    
-    previousVelocity = velocity;
-    [self checkBoundaries];
+
     [self checkJoustBoundaries];
     [super update:dt];
 }
@@ -77,7 +75,7 @@
     
     //make sure speed is 13
     joustVelocity = ccpNormalize(joustVelocity);
-    joustVelocity = ccpMult(joustVelocity, 700);
+    joustVelocity = ccpMult(joustVelocity, 650);
     
     //    joustPosition = ccpMult( ccp(cos(aliveTicker), sin(aliveTicker)), bodyRadius);
     //    joustPosition =

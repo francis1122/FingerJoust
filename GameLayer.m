@@ -15,16 +15,20 @@
 #import "TitleLayer.h"
 #import "MathHelper.h"
 #import "PowerStone.h"
+#import "Vortex.h"
 
-
+#import "SneakyJoystick.h"
+#import "SneakyJoystickSkinnedBase.h"
+#import "ColoredCircleSprite.h"
 
 @implementation GameLayer
 
-@synthesize powerStone;
+@synthesize powerStone, vortexArray, redJoystick;
 
 -(id) initWithPlayerOne:(int) characterOne playerTwo:(int) characterTwo{
     if(self = [super initWithColor:ccc4(50, 50, 50, 255)] ){
         CGSize winSize= [[CCDirector sharedDirector] winSize];
+        self.vortexArray = [[NSMutableArray alloc] init];
         
         redLayer = [CCLayerColor layerWithColor:ccc4(255, 200, 200, 255) width:CONTROL_OFFSET height:winSize.height];
         redLayer.position = ccp(0, 0);
@@ -110,7 +114,7 @@
         
         displayedTime = ROUND_TIME;
         roundTimer = ROUND_TIME;
-        timerLabel = [CCLabelTTF labelWithString:@"10" fontName:@"Marker Felt" fontSize:32];
+        timerLabel = [CCLabelTTF labelWithString:@"20" fontName:@"Marker Felt" fontSize:32];
         timerLabel.position = ccp(winSize.width/2, 720);
         [self addChild:timerLabel];
 
@@ -120,6 +124,22 @@
         centerSprite.color = ccYELLOW;
         [self addChild:centerSprite];
 
+        
+        
+        
+        // setup joysticks
+   /*     SneakyJoystickSkinnedBase *leftJoy = [[[SneakyJoystickSkinnedBase alloc] init] autorelease];
+        leftJoy.position = ccp(128, winSize.height - 128);
+        leftJoy.backgroundSprite = [ColoredCircleSprite circleWithColor:ccc4(255, 0, 0, 128) radius:128];
+        leftJoy.thumbSprite = [ColoredCircleSprite circleWithColor:ccc4(0, 0, 255, 200) radius:32];
+        
+        //add actual joystick
+        leftJoy.joystick = [[[SneakyJoystick alloc] initWithRect:CGRectMake(0,0,128,128)] autorelease];
+        self.redJoystick = leftJoy.joystick;
+        [self addChild:leftJoy];
+    
+    */
+        
         [self gameIntro];
     }
     return self;
@@ -143,11 +163,21 @@
         }else if(ccpDistance(blueJouster.position, powerStone.position) < 100){
             validSpawnPosition = NO;
         }
-        
     }
     [self addChild:self.powerStone];
     [self refreshUI];
 }
+
+
+-(void) spawnVortexAtPoint:(CGPoint) point{
+    Vortex *vortex = [[Vortex alloc] init];
+
+    vortex.position = point;
+    [self addChild:vortex];
+    [self.vortexArray addObject:vortex];
+    vortex.pEffect = [self vortexEffect:point];
+}
+
 
 -(Jouster*) createJouster:(int) character{
     if(character == 0 ){
@@ -174,6 +204,14 @@
     displayedTime = ROUND_TIME;
     centerSprite.visible = NO;
     timerLabel.string = [NSString stringWithFormat:@"%d", displayedTime];
+    //removej all vortexs' from the board
+    for(Vortex *vortex in self.vortexArray){
+        [vortex.pEffect stopSystem];
+        [vortex removeFromParent];
+    }
+    [self.vortexArray removeAllObjects];
+        
+    
 }
 
 -(void) refreshUI{
@@ -186,11 +224,21 @@
 -(void) dealloc{
     [redJouster release];
     [blueJouster release];
+    [self.vortexArray release];
     [super dealloc];
 }
 
 -(void) update:(ccTime)dt{
     if(currentState == GAMEPLAY){
+        //red joystick
+ //       CGPoint vel = self.redJoystick.velocity;
+
+  //      vel = ccpMult(vel, 380);
+//        [redJouster touch:vel];
+        //redJouster.velocity = ccpAdd(redJouster.velocity, vel);
+        
+        
+        
         [redJouster update:dt];
         [blueJouster update:dt];
         //check collision for powerStone
@@ -202,6 +250,7 @@
             [self jousterOnBodyCheck];
         }
         
+        [self updateVortex:dt];
         [self updateTimer:dt];
     }
 }
@@ -221,6 +270,46 @@
             //check distance to center point, closest player wins
             [self checkClosestJousterToCenter];
             
+        }
+    }
+}
+
+-(void) updateVortex:(ccTime)dt{
+    //take care of vortex affecting the jousters body
+    for(Vortex *vortex in self.vortexArray){
+        //distance
+        float redDistance = ccpDistance(vortex.position, redJouster.position);
+        float blueDistance = ccpDistance(vortex.position, blueJouster.position);
+        
+        //normalized direction to vortex
+        CGPoint redToVortex = ccpNormalize(ccpSub(vortex.position, redJouster.position));
+        CGPoint blueToVortex = ccpNormalize(ccpSub(vortex.position, blueJouster.position));
+        
+        float maxDistance = VORTEX_DISTANCE;
+        float redPullPower = maxDistance - redDistance;
+        redPullPower = redPullPower * redPullPower;
+        float bluePullPower = maxDistance - blueDistance;
+        bluePullPower = bluePullPower * bluePullPower;
+        redPullPower = redPullPower/70;
+        bluePullPower = bluePullPower/70;
+        
+        CGPoint redVortexVel = ccpMult(redToVortex, redPullPower);
+        CGPoint blueVortexVel = ccpMult(blueToVortex, bluePullPower);
+        
+        //add vortex velocity to jouster's velocity
+        redJouster.velocity = ccpAdd(redJouster.velocity,ccpMult(redVortexVel, dt));
+        blueJouster.velocity = ccpAdd(blueJouster.velocity,ccpMult(blueVortexVel, dt));
+        
+        [vortex update:dt];
+    }
+
+    //delete old vortex
+    for(int i = [self.vortexArray count] - 1; i >= 0; i-- ){
+        Vortex *vortex = [self.vortexArray objectAtIndex:i];
+        if(vortex.timeAlive > 4.0){
+            [vortex.pEffect stopSystem];
+            [vortex removeFromParent];
+            [self.vortexArray removeObject:vortex];
         }
     }
 }
@@ -253,6 +342,30 @@
     
 }
 
+-(void) checkBodyOnBodyStun{
+    //get normalized vector pointing at enemy
+    CGPoint redToBlue = ccpNormalize(ccpSub(redJouster.position, blueJouster.position));
+    CGPoint blueToRed = ccpMult(redToBlue, -1);
+    
+    //multiply normalized vector by bodies velocity
+    CGPoint redRelativeVelocity = ccp(redToBlue.x * redJouster.velocity.x, redToBlue.y * redJouster.velocity.y);
+    CGPoint blueRelativeVelocity = ccp(blueToRed.x * blueJouster.velocity.x, blueToRed.y * blueJouster.velocity.y);
+    
+    //check if magnitude of that number is high enough to cause stun damage
+    float redMagnitude = ccpLength(redRelativeVelocity);
+    float blueMagnitude = ccpLength(blueRelativeVelocity);
+    if(redMagnitude > STUN_CONTRAINT){
+        // stun blue
+        [blueJouster stunBody];
+    }
+    if(blueMagnitude > STUN_CONTRAINT){
+        // stun red
+        [redJouster stunBody];
+    }
+    
+    NSLog(@"redMag :%f", redMagnitude);
+    NSLog(@"blueMag :%f", blueMagnitude);
+}
 
 #pragma mark - collision functions
 -(void) powerStoneCollisionCheck{
@@ -272,10 +385,11 @@
 -(BOOL) bodyOnBodyCheck{
     //bodies hit
     if( [MathHelper circleCollisionPositionA:redJouster.position raidusA:redJouster.bodyRadius positionB:blueJouster.position radiusB:blueJouster.bodyRadius]){
+        [self checkBodyOnBodyStun];
         //bounce off eachother
         CGPoint offset = ccpSub(redJouster.position, blueJouster.position);
         offset = [MathHelper normalize:offset];
-        offset = ccpMult(offset, 410);
+        offset = ccpMult(offset, 610);
         redJouster.velocity = offset;
         offset = ccpMult(offset, -1);
         blueJouster.velocity = offset;
@@ -316,7 +430,6 @@
 }
 
 -(BOOL) jousterOnJousterCheck{
-    
     //jousters hitting
     if( [MathHelper circleCollisionPositionA:[redJouster getWorldPositionOfJoust]  raidusA:[redJouster joustRadius] positionB:[blueJouster getWorldPositionOfJoust] radiusB: [blueJouster joustRadius]]){
         //bounce off eachother
@@ -324,6 +437,7 @@
         
         [redJouster joustCollision: [blueJouster getWorldPositionOfJoust] withRadius: blueJouster.joustRadius];
         [blueJouster joustCollision: [redJouster getWorldPositionOfJoust] withRadius: redJouster.joustRadius];
+        [self spawnVortexAtPoint:ccpMidpoint([redJouster getWorldPositionOfJoust] , [blueJouster getWorldPositionOfJoust])];
         [self clashEffect:[redJouster getWorldPositionOfJoust] otherPoint:[blueJouster getWorldPositionOfJoust]];
         return YES;
     }
@@ -339,6 +453,10 @@
 }
 
 -(void)ccTouchesMoved:(NSSet *)touches withEvent:(UIEvent *)event{
+    if(currentState != GAMEPLAY){
+        return;
+    }
+    
     BOOL redAlreadyChosen = NO;
     BOOL blueAlreadyChosen = NO;
     for(UITouch* touch in touches){
@@ -365,6 +483,9 @@
 }
 
 - (void) ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{
+    if(currentState != GAMEPLAY){
+        return;
+    }
     BOOL redAlreadyChosen = NO;
     BOOL blueAlreadyChosen = NO;
     for(UITouch* touch in touches){
@@ -385,6 +506,9 @@
 }
 
 - (void) ccTouchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event{
+    if(currentState != GAMEPLAY){
+        return;
+    }
     BOOL redAlreadyChosen = NO;
     BOOL blueAlreadyChosen = NO;
     for(UITouch* touch in touches){
@@ -518,7 +642,14 @@
     collisionEffect.rotation = -rotation + 90;
     collisionEffect.position = midPoint;
     [self addChild:collisionEffect];
-    
+}
+
+-(CCParticleSystemQuad*) vortexEffect:(CGPoint) pt{
+    CCParticleSystemQuad *collisionEffect = [[CCParticleSystemQuad alloc] initWithFile: @"VortexEffect.plist"];
+    collisionEffect.autoRemoveOnFinish = YES;
+    collisionEffect.position = pt;
+    [self addChild:collisionEffect];
+    return collisionEffect;
     
 }
 
