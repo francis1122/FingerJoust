@@ -40,6 +40,14 @@
         jousterInnerSprite.position = ccp(jousterSprite.contentSize.width/2, jousterSprite.contentSize.height/2);
         [jousterSprite addChild:jousterInnerSprite];
         
+        
+        
+        stunParticles = [[CCParticleSystemQuad alloc] initWithFile: @"StunParticles.plist"];
+        stunParticles.positionType = kCCPositionTypeRelative;
+        [stunParticles stopSystem];
+//        [self addChild:redMotionStreak z:1];
+        [self addChild:stunParticles z:-1];
+        
         /*
         const GLchar * fragmentSource = (GLchar*) [[NSString stringWithContentsOfFile:[[CCFileUtils sharedFileUtils] fullPathForFilename:@"Grain.fsh"] encoding:NSUTF8StringEncoding error:nil] UTF8String];
         const GLchar * vertexSource = (GLchar*) [[NSString stringWithContentsOfFile:[[CCFileUtils sharedFileUtils] fullPathForFilename:@"Grain.vsh"] encoding:NSUTF8StringEncoding error:nil] UTF8String];
@@ -73,18 +81,23 @@
     joustRadius = 25;
     orbitalOffset = 0;
     CGPoint pos;
+    [stunParticles resetSystem];
+    [stunParticles updateWithNoTime];
+    [stunParticles stopSystem];
     if(player == 1){
         pos = ccp(350, winSize.height/2);
         bodyOuterSprite.color = ccORANGE;
-        jousterSprite.color = ccORANGE;
-        jousterInnerSprite.color = ccORANGE;
         bodyInnerSprite.color = ccORANGE;
+        jousterSprite.color = ccc3(255, 190, 70);
+        jousterInnerSprite.color = ccc3(255, 190, 70);
+
     }else{
         pos = ccp(winSize.width - 350, winSize.height/2);
         bodyOuterSprite.color = ccRED;
-        jousterSprite.color = ccRED;
-        jousterInnerSprite.color = ccRED;
         bodyInnerSprite.color = ccRED;
+        jousterSprite.color = ccc3(255, 100, 100);
+        jousterInnerSprite.color = ccc3(255, 100, 100);
+
     }
     
     
@@ -93,7 +106,8 @@
     self.position = pos;
     [self update:0.05];
     [self resetTouch];
-    isStunned = NO;    
+    isStunned = NO;
+    stunTimer = -1;
 }
 
 -(void) engageSuperMode{
@@ -110,9 +124,11 @@
 }
 
 -(void) stunBody{
+
     isStunned = YES;
     stunTimer = 5.0;
-    bodyOuterSprite.color = ccBLACK;
+//    bodyOuterSprite.color = ccBLACK;
+
 }
 
 -(void) clampMaxSpeed{
@@ -162,7 +178,8 @@
         stunTimer -= dt;
         if(stunTimer < 0){
             isStunned = NO;
-            bodyOuterSprite.color = ccWHITE;
+            //bodyOuterSprite.color = ccWHITE;
+            [stunParticles stopSystem];
         }
     }
 }

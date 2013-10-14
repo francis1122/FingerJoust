@@ -200,6 +200,7 @@
     //remove all vortexs' from the board
     for(Vortex *vortex in self.vortexArray){
         [vortex.pEffect resetSystem];
+        [vortex.pEffect stopSystem];
         [vortex removeFromParent];
     }
     [self.vortexArray removeAllObjects];
@@ -421,13 +422,13 @@
     //get direction
     CGPoint offset = ccpSub(redJouster.position, blueJouster.position);
     offset = [MathHelper normalize:offset];
-    CGPoint redKnock = ccpMult(offset, blueMagnitude + 150);
+    CGPoint redKnock = ccpMult(offset, blueMagnitude + 350);
     redJouster.velocity = redKnock;
     offset = ccpMult(offset, -1);
-    CGPoint blueKnock = ccpMult(offset, redMagnitude + 150);
+    CGPoint blueKnock = ccpMult(offset, redMagnitude + 350);
     blueJouster.velocity = blueKnock;
     
-    [self clashEffect:redJouster.position otherPoint:blueJouster.position withMagnitude:blueMagnitude + redMagnitude withStun:isStun];
+    [self clashEffect:redJouster.position otherPoint:blueJouster.position withMagnitude:blueMagnitude + redMagnitude + 500 withStun:isStun];
     
     
 //    NSLog(@"redMag :%f", redMagnitude);
@@ -663,7 +664,6 @@
 -(void) transitionToGamePlay{
     currentState = GAMEPLAY;
 }
-
 
 -(void) transitionToEndRound{
     currentState = ROUND_END;

@@ -48,6 +48,8 @@
     BOOL isStunned;
     float stunTimer;
     
+    CCParticleSystemQuad *stunParticles;
+    
 }
 
 
