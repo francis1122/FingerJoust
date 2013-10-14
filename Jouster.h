@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 
+#define JOUSTER_BODY_MAXSPEED 600
+
 @class CCWarpSprite;
 @interface Jouster : CCSprite {
     int player;
@@ -22,6 +24,7 @@
     CGPoint previousVelocity;
     CGPoint velocity;
     
+    CGPoint joustVelocity;
     
     BOOL waitingForTouch;
     CGPoint previousTouch;
@@ -53,6 +56,9 @@
 @property float bodyRadius, joustRadius, orbitalOffset;
 @property BOOL waitingForTouch;
 @property CGPoint velocity, joustPosition;
+@property CGPoint joustVelocity;
+
+@property (nonatomic, assign) CCWarpSprite *jousterSprite;
 
 -(void) setWorldPositionOfJoust:(CGPoint) pos;
 -(CGPoint) getWorldPositionOfJoust;
@@ -63,6 +69,7 @@
 -(void) disengateSuperMode;
 -(void) stunBody;
 
+-(void) checkJoustBoundaries;
 -(void) calculateJoustPosition:(ccTime) dt;
 -(void) joustCollision:(CGPoint) joustPos withRadius:(float) radius;
 -(void) resetTouch;

@@ -16,6 +16,8 @@
 #import "MathHelper.h"
 #import "PowerStone.h"
 #import "Vortex.h"
+#import "CCWarpSprite.h"
+#import "UILayer.h"
 
 #import "SneakyJoystick.h"
 #import "SneakyJoystickSkinnedBase.h"
@@ -23,42 +25,30 @@
 
 @implementation GameLayer
 
-@synthesize powerStone, vortexArray, redJoystick;
+@synthesize powerStone, vortexArray, redJoystick, redVictoryArray, blueVictoryArray;
 
 -(id) initWithPlayerOne:(int) characterOne playerTwo:(int) characterTwo{
-    if(self = [super initWithColor:ccc4(50, 50, 50, 255)] ){
+    if(self = [super initWithColor:COLOR_GAMEAREA_B4] ){
         CGSize winSize= [[CCDirector sharedDirector] winSize];
         self.vortexArray = [[NSMutableArray alloc] init];
         
-        redLayer = [CCLayerColor layerWithColor:ccc4(255, 200, 200, 255) width:CONTROL_OFFSET height:winSize.height];
-        redLayer.position = ccp(0, 0);
-        [self addChild: redLayer];
-        blueLayer = [CCLayerColor layerWithColor:ccc4(200, 200, 255, 255) width:CONTROL_OFFSET height:winSize.height];
-        blueLayer.position = ccp(winSize.width - blueLayer.contentSize.width, 0);
-        [self addChild:blueLayer];
-        
-        redBorderLayer = [CCLayerColor layerWithColor:ccc4(255, 255, 255, 255) width:40 height:winSize.height];
-        redBorderLayer.position = ccp(CONTROL_OFFSET - redBorderLayer.contentSize.width, 0);
-        [self addChild:redBorderLayer];
-        blueBorderLayer = [CCLayerColor layerWithColor:ccc4(255, 255, 255, 255) width:40 height:winSize.height];
-        blueBorderLayer.position = ccp(winSize.width - CONTROL_OFFSET, 0);
-        [self addChild:blueBorderLayer];
+        uiLayer = [[[UILayer alloc] init] autorelease];
+        [self addChild:uiLayer z:10];
         
         //labels to display who is winning
-        redWinsLabel = [CCLabelTTF labelWithString:@"0" fontName:@"Marker Felt" fontSize:64];
+/*        redWinsLabel = [CCLabelTTF labelWithString:@"0" fontName:@"Marker Felt" fontSize:64];
         redWinsLabel.color = ccRED;
-        redWinsLabel.position = ccp(winSize.width/2 - 50, 50);
+        redWinsLabel.position = ccp(winSize.width/2 - 50, 20);
         blueWinsLabel = [CCLabelTTF labelWithString:@"0" fontName:@"Marker Felt" fontSize:64];
-        blueWinsLabel.position = ccp(winSize.width/2 + 50, 50);
+        blueWinsLabel.position = ccp(winSize.width/2 + 50, 20);
         blueWinsLabel.color = ccBLUE;
         
         [self addChild:redWinsLabel];
         [self addChild:blueWinsLabel];
-        
-
+ */
         
         //powerstones display labels
-        redPowerStonesLabel = [CCLabelTTF labelWithString:@"0" fontName:@"Marker Felt" fontSize:32];
+       /* redPowerStonesLabel = [CCLabelTTF labelWithString:@"0" fontName:@"Marker Felt" fontSize:32];
         redPowerStonesLabel.color = ccRED;
         redPowerStonesLabel.position = ccp(150, 50);
         bluePowerStonesLabel = [CCLabelTTF labelWithString:@"0" fontName:@"Marker Felt" fontSize:32];
@@ -67,8 +57,7 @@
         
         [self addChild:redPowerStonesLabel];
         [self addChild:bluePowerStonesLabel];
-        
-        
+        */
         [self scheduleUpdate];
         _touchEnabled = YES;
         currentRound = 0;
@@ -76,28 +65,6 @@
         
         redJouster = [self createJouster:characterOne];
         redJouster.player = 1;
-        //shader tests
-        
-        /*
-        const GLchar * fragmentSource = (GLchar*) [[NSString stringWithContentsOfFile:[[CCFileUtils sharedFileUtils] fullPathForFilename:@"Touch.fsh"] encoding:NSUTF8StringEncoding error:nil] UTF8String];
-        const GLchar * vertexSource = (GLchar*) [[NSString stringWithContentsOfFile:[[CCFileUtils sharedFileUtils] fullPathForFilename:@"Touch.vsh"] encoding:NSUTF8StringEncoding error:nil] UTF8String];
-        self.shaderProgram = [[CCGLProgram alloc] initWithVertexShaderByteArray:ccPositionColor_vert
-                                                                 fragmentShaderByteArray:fragmentSource];
-        
-        [self.shaderProgram addAttribute:kCCAttributeNamePosition
-                                            index:kCCVertexAttrib_Position];
-        [self.shaderProgram addAttribute:kCCAttributeNameColor
-                                            index:kCCVertexAttrib_Color];
-        
-        [self.shaderProgram addAttribute:kCCAttributeNameTexCoord
-                                            index:kCCVertexAttrib_TexCoords];
-        [self.shaderProgram link];
-        [self.shaderProgram updateUniforms];
-        
-        
-        */
-        
-        
         
         blueJouster =  [self createJouster:characterTwo];
         blueJouster.player = 2;
@@ -105,18 +72,14 @@
         [redJouster resetJouster];
         [blueJouster resetJouster];
         
-        [self addChild:redJouster];
-        [self addChild:blueJouster];
+        [self addChild:redJouster z:2];
+        [self addChild:blueJouster z:2];
+        redJouster.visible = NO;
+        blueJouster.visible = NO;
         
-        self.powerStone = [[PowerStone alloc] init];
+  //      self.powerStone = [[PowerStone alloc] init];
         //has to be called after jousters have been added
-        [self spawnPowerStone];
-        
-        displayedTime = ROUND_TIME;
-        roundTimer = ROUND_TIME;
-        timerLabel = [CCLabelTTF labelWithString:@"20" fontName:@"Marker Felt" fontSize:32];
-        timerLabel.position = ccp(winSize.width/2, 720);
-        [self addChild:timerLabel];
+//        [self spawnPowerStone];
 
         centerSprite = [CCSprite spriteWithSpriteFrameName:@"BodyOuter"];
         centerSprite.visible = NO;
@@ -124,40 +87,68 @@
         centerSprite.color = ccYELLOW;
         [self addChild:centerSprite];
 
+        //setup victory display
+        self.redVictoryArray = [NSMutableArray array];
+        self.blueVictoryArray = [NSMutableArray array];
+        for(int i = 0; i < 3; i++){
+            CCSprite *victorySprite = [[[CCSprite alloc] initWithFile:@"Icon-72.png"] autorelease];
+            [self addChild:victorySprite];
+            [self.redVictoryArray addObject:victorySprite];
+        }
+        for(int i = 0; i < 3; i++){
+            CCSprite *victorySprite = [[[CCSprite alloc] initWithFile:@"Icon-72.png"] autorelease];
+            [self addChild:victorySprite];
+            [self.blueVictoryArray addObject:victorySprite];
+        }
+        [self refreshVictoryPoint];
         
         
         
-        // setup joysticks
-   /*     SneakyJoystickSkinnedBase *leftJoy = [[[SneakyJoystickSkinnedBase alloc] init] autorelease];
-        leftJoy.position = ccp(128, winSize.height - 128);
-        leftJoy.backgroundSprite = [ColoredCircleSprite circleWithColor:ccc4(255, 0, 0, 128) radius:128];
-        leftJoy.thumbSprite = [ColoredCircleSprite circleWithColor:ccc4(0, 0, 255, 200) radius:32];
+        //motion streak test
+        // create the streak object and add it to the scene
+       /*streak = [CCMotionStreak streakWithFade:.5 minSeg:.2 width:128 color:ccWHITE textureFilename:@"BodyOuter.png"];
+        ccBlendFunc blend = {GL_SRC_COLOR, GL_ONE_MINUS_SRC_ALPHA};
+        streak.blendFunc = blend;
+        streak.fastMode = YES;
+        [self addChild:streak];*/
         
-        //add actual joystick
-        leftJoy.joystick = [[[SneakyJoystick alloc] initWithRect:CGRectMake(0,0,128,128)] autorelease];
-        self.redJoystick = leftJoy.joystick;
-        [self addChild:leftJoy];
-    
-    */
-        
+        redMotionStreak = [[CCParticleSystemQuad alloc] initWithFile: @"MotionStreak.plist"];
+        blueMotionStreak = [[CCParticleSystemQuad alloc] initWithFile: @"MotionStreak.plist"];
+
+        [redMotionStreak setStartColor:ccc4f(1.0, 0.5, 0, 1.0)];
+        [redMotionStreak setEndColor:ccc4f(1.0, 0.5, 0, 1.0)];
+        [blueMotionStreak setStartColor:ccc4f(0.0, 0.0, 1.0, 1.0)];
+        [blueMotionStreak setEndColor:ccc4f(0.0, 0.0, 1.0, 1.0)];
+        [redMotionStreak stopSystem];
+        [blueMotionStreak stopSystem];
+        [self addChild:redMotionStreak z:1];
+        [self addChild:blueMotionStreak z:1];
         [self gameIntro];
     }
     return self;
 }
 
 
+-(void) dealloc{
+    [redJouster release];
+    [blueJouster release];
+    [self.vortexArray release];
+    [redVictoryArray release];
+    [blueVictoryArray release];
+    [super dealloc];
+}
+
 -(void) spawnPowerStone{
     
     [self.powerStone removeFromParent];
     //make sure power stone
-    
     //make sure stone doesn't spawn too close to either of the players
     BOOL validSpawnPosition = NO;
     while(!validSpawnPosition){
         validSpawnPosition = YES;
         [self.powerStone randomSpot];
         
-        //check position against josuters
+        //check position against jousters
         if(ccpDistance(redJouster.position, powerStone.position) < 100){
             validSpawnPosition = NO;
         }else if(ccpDistance(blueJouster.position, powerStone.position) < 100){
@@ -199,14 +190,16 @@
     [self addChild:blueJouster];
     [redJouster resetJouster];
     [blueJouster resetJouster];
+    [blueMotionStreak resetSystem];
+    [redMotionStreak resetSystem];
     
-    roundTimer = ROUND_TIME;
-    displayedTime = ROUND_TIME;
+    uiLayer.roundTimer = ROUND_TIME;
+    uiLayer.displayedTime = ROUND_TIME;
     centerSprite.visible = NO;
-    timerLabel.string = [NSString stringWithFormat:@"%d", displayedTime];
-    //removej all vortexs' from the board
+    uiLayer.timerLabel.string = [NSString stringWithFormat:@"%d", uiLayer.displayedTime];
+    //remove all vortexs' from the board
     for(Vortex *vortex in self.vortexArray){
-        [vortex.pEffect stopSystem];
+        [vortex.pEffect resetSystem];
         [vortex removeFromParent];
     }
     [self.vortexArray removeAllObjects];
@@ -215,58 +208,115 @@
 }
 
 -(void) refreshUI{
-    [redWinsLabel setString:[NSString stringWithFormat:@"%d", redWins]];
-    [blueWinsLabel setString:[NSString stringWithFormat:@"%d", blueWins]];
-    [redPowerStonesLabel setString:[NSString stringWithFormat:@"%d", redJouster.powerStones]];
-    [bluePowerStonesLabel setString:[NSString stringWithFormat:@"%d", blueJouster.powerStones]];
-}
-
--(void) dealloc{
-    [redJouster release];
-    [blueJouster release];
-    [self.vortexArray release];
-    [super dealloc];
+//    [redWinsLabel setString:[NSString stringWithFormat:@"%d", redWins]];
+//    [blueWinsLabel setString:[NSString stringWithFormat:@"%d", blueWins]];
+    [self refreshVictoryPoint];
+//    [redPowerStonesLabel setString:[NSString stringWithFormat:@"%d", redJouster.powerStones]];
+  //  [bluePowerStonesLabel setString:[NSString stringWithFormat:@"%d", blueJouster.powerStones]];
 }
 
 -(void) update:(ccTime)dt{
     if(currentState == GAMEPLAY){
-        //red joystick
- //       CGPoint vel = self.redJoystick.velocity;
-
-  //      vel = ccpMult(vel, 380);
-//        [redJouster touch:vel];
-        //redJouster.velocity = ccpAdd(redJouster.velocity, vel);
-        
-        
-        
         [redJouster update:dt];
         [blueJouster update:dt];
-        //check collision for powerStone
-        [self powerStoneCollisionCheck];
-        BOOL bodyHit = [self bodyOnBodyCheck];
-        BOOL joustersHit = [self jousterOnJousterCheck];
-        //prevents odd losses
-        if(!joustersHit && !bodyHit){
-            [self jousterOnBodyCheck];
-        }
-        
+        [self collisionChecks:dt];
         [self updateVortex:dt];
         [self updateTimer:dt];
+
+    }else if(currentState == ROUND_START){
+        timeBeforeNewRoundStarts -= dt;
+        //some transitions don't allow movement
+        if(timeBeforeNewRoundStarts <= 0.0) timeBeforeNewRoundStarts = .01;
+        //take care of starting game round timer increase
+        float timeScale = (TRANSITION_TIME - timeBeforeNewRoundStarts)/TRANSITION_TIME;
+        dt = dt * timeScale;
+        [redJouster update:dt];
+        [blueJouster update:dt];
+        //slow motion, no deaths allowed
+        redJouster.position = ccpAdd(redJouster.position, ccpMult(redJouster.velocity, dt));
+        blueJouster.position = ccpAdd(blueJouster.position, ccpMult(blueJouster.velocity, dt));
+        redJouster.jousterSprite.position = ccpAdd(redJouster.joustPosition,  ccpMult(redJouster.joustVelocity, dt));
+        blueJouster.jousterSprite.position = ccpAdd(blueJouster.joustPosition,  ccpMult(blueJouster.joustVelocity, dt));
+        [redJouster checkBoundaries];
+        [blueJouster checkBoundaries];
+    }else if(currentState == ROUND_END){
+        [redJouster update:dt];
+        [blueJouster update:dt];
+        //slow motion, no deaths allowed
+        redJouster.position = ccpAdd(redJouster.position, ccpMult(redJouster.velocity, dt));
+        blueJouster.position = ccpAdd(blueJouster.position, ccpMult(blueJouster.velocity, dt));
+        redJouster.jousterSprite.position = ccpAdd(redJouster.joustPosition,  ccpMult(redJouster.joustVelocity, dt));
+        blueJouster.jousterSprite.position = ccpAdd(blueJouster.joustPosition,  ccpMult(blueJouster.joustVelocity, dt));
+        [redJouster checkBoundaries];
+        [blueJouster checkBoundaries];
+    }else if(currentState == GAME_OVER){
+        [redJouster update:dt];
+        [blueJouster update:dt];
+        //slow motion, no deaths allowed
+        redJouster.position = ccpAdd(redJouster.position, ccpMult(redJouster.velocity, dt));
+        blueJouster.position = ccpAdd(blueJouster.position, ccpMult(blueJouster.velocity, dt));
+        redJouster.jousterSprite.position = ccpAdd(redJouster.joustPosition,  ccpMult(redJouster.joustVelocity, dt));
+        blueJouster.jousterSprite.position = ccpAdd(blueJouster.joustPosition,  ccpMult(blueJouster.joustVelocity, dt));
+        [redJouster checkBoundaries];
+        [blueJouster checkBoundaries];
+    }else if(currentState == GAME_START){
+        dt = dt/10;
+        [redJouster update:dt];
+        [blueJouster update:dt];
+        //slow motion, no deaths allowed
+        redJouster.position = ccpAdd(redJouster.position, ccpMult(redJouster.velocity, dt));
+        blueJouster.position = ccpAdd(blueJouster.position, ccpMult(blueJouster.velocity, dt));
+        redJouster.jousterSprite.position = ccpAdd(redJouster.joustPosition,  ccpMult(redJouster.joustVelocity, dt));
+        blueJouster.jousterSprite.position = ccpAdd(blueJouster.joustPosition,  ccpMult(blueJouster.joustVelocity, dt));
+        [redJouster checkBoundaries];
+        [blueJouster checkBoundaries];
+    }
+    redMotionStreak.position = redJouster.position;
+    blueMotionStreak.position = blueJouster.position;
+}
+
+
+-(void) collisionChecks:(ccTime) dt{
+    //update the position using velocity, do update in steps
+    BOOL bodyHit = NO;
+    BOOL joustersHit = NO;
+    BOOL death = NO;
+    for (int i = 0; i < COLLISION_STEPS; i++) {
+        //step body position
+        if(!bodyHit){
+            redJouster.position = ccpAdd(redJouster.position, ccpMult(redJouster.velocity, dt/COLLISION_STEPS));
+            blueJouster.position = ccpAdd(blueJouster.position, ccpMult(blueJouster.velocity, dt/COLLISION_STEPS));
+            bodyHit = [self bodyOnBodyCheck];
+            [redJouster checkBoundaries];
+            [blueJouster checkBoundaries];
+        }
+        
+        //step jouster position
+        if(!joustersHit){
+            redJouster.jousterSprite.position = ccpAdd(redJouster.joustPosition,  ccpMult(redJouster.joustVelocity, dt/COLLISION_STEPS));
+            blueJouster.jousterSprite.position = ccpAdd(blueJouster.joustPosition,  ccpMult(blueJouster.joustVelocity, dt/COLLISION_STEPS));
+            joustersHit = [self jousterOnJousterCheck];
+        }
+
+        //prevents odd losses
+        if(!joustersHit && !bodyHit & !death){
+            death = [self jousterOnBodyCheck];
+        }
     }
 }
 
 -(void) updateTimer:(ccTime) dt{
-    roundTimer -= dt;
-    if((int)roundTimer < displayedTime){
-        displayedTime = (int)roundTimer;
-        timerLabel.string = [NSString stringWithFormat:@"%d", displayedTime];
+    uiLayer.roundTimer -= dt;
+    if((int)uiLayer.roundTimer < uiLayer.displayedTime){
+        uiLayer.displayedTime = (int)uiLayer.roundTimer;
+        uiLayer.timerLabel.string = [NSString stringWithFormat:@"%d", uiLayer.displayedTime];
         
-        if(displayedTime < 6){
+        if(uiLayer.displayedTime < 6){
             centerSprite.visible = YES;
         }
         
         //endGame based on distance to center
-        if(displayedTime < 1){
+        if(uiLayer.displayedTime < 1){
             //check distance to center point, closest player wins
             [self checkClosestJousterToCenter];
             
@@ -290,6 +340,7 @@
         redPullPower = redPullPower * redPullPower;
         float bluePullPower = maxDistance - blueDistance;
         bluePullPower = bluePullPower * bluePullPower;
+        // adjust the strength of the vortex
         redPullPower = redPullPower/70;
         bluePullPower = bluePullPower/70;
         
@@ -354,30 +405,46 @@
     //check if magnitude of that number is high enough to cause stun damage
     float redMagnitude = ccpLength(redRelativeVelocity);
     float blueMagnitude = ccpLength(blueRelativeVelocity);
+    BOOL isStun = NO;
     if(redMagnitude > STUN_CONTRAINT){
         // stun blue
         [blueJouster stunBody];
+        isStun = YES;
     }
     if(blueMagnitude > STUN_CONTRAINT){
         // stun red
         [redJouster stunBody];
+        isStun = YES;
     }
     
-    NSLog(@"redMag :%f", redMagnitude);
-    NSLog(@"blueMag :%f", blueMagnitude);
+    //bounce off eachother
+    //get direction
+    CGPoint offset = ccpSub(redJouster.position, blueJouster.position);
+    offset = [MathHelper normalize:offset];
+    CGPoint redKnock = ccpMult(offset, blueMagnitude + 150);
+    redJouster.velocity = redKnock;
+    offset = ccpMult(offset, -1);
+    CGPoint blueKnock = ccpMult(offset, redMagnitude + 150);
+    blueJouster.velocity = blueKnock;
+    
+    [self clashEffect:redJouster.position otherPoint:blueJouster.position withMagnitude:blueMagnitude + redMagnitude withStun:isStun];
+    
+    
+//    NSLog(@"redMag :%f", redMagnitude);
+//    NSLog(@"blueMag :%f", blueMagnitude);
 }
 
 #pragma mark - collision functions
 -(void) powerStoneCollisionCheck{
     //blue joust hitting red dude
     if([MathHelper circleCollisionPositionA:powerStone.position  raidusA:powerStone.bodyRadius positionB:redJouster.position radiusB:redJouster.bodyRadius] ){
-        redJouster.powerStones++;
-        [self spawnPowerStone];
+//        redJouster.powerStones++;
+        //[self spawnPowerStone];
         [self refreshUI];
     }
     if([MathHelper circleCollisionPositionA:powerStone.position  raidusA:powerStone.bodyRadius positionB:blueJouster.position radiusB:blueJouster.bodyRadius]){
-        blueJouster.powerStones++;
-        [self spawnPowerStone];
+//        blueJouster.powerStones++;
+//        [self spawnPowerStone];
         [self refreshUI];
     }
 }
@@ -386,22 +453,13 @@
     //bodies hit
     if( [MathHelper circleCollisionPositionA:redJouster.position raidusA:redJouster.bodyRadius positionB:blueJouster.position radiusB:blueJouster.bodyRadius]){
         [self checkBodyOnBodyStun];
-        //bounce off eachother
-        CGPoint offset = ccpSub(redJouster.position, blueJouster.position);
-        offset = [MathHelper normalize:offset];
-        offset = ccpMult(offset, 610);
-        redJouster.velocity = offset;
-        offset = ccpMult(offset, -1);
-        blueJouster.velocity = offset;
-
-        [self clashEffect:redJouster.position otherPoint:blueJouster.position];
         return YES;
         
     }
     return NO;
 }
 
--(void) jousterOnBodyCheck{
+-(BOOL) jousterOnBodyCheck{
     //blue joust hitting red dude
     if([MathHelper circleCollisionPositionA:[blueJouster getWorldPositionOfJoust]  raidusA:[blueJouster joustRadius] positionB:redJouster.position radiusB:redJouster.bodyRadius] ){
         winner = @"Blue Wins";
@@ -413,7 +471,10 @@
             [self transitionToEndRound];
         }
         [redJouster removeFromParentAndCleanup:YES];
+        [redMotionStreak resetSystem];
+        [redMotionStreak stopSystem];
         [self refreshUI];
+        return YES;
     }
     if([MathHelper circleCollisionPositionA:[redJouster getWorldPositionOfJoust]  raidusA:[redJouster joustRadius] positionB:blueJouster.position radiusB:blueJouster.bodyRadius]){
         winner = @"Red Wins";
@@ -425,8 +486,12 @@
             [self transitionToEndRound];
         }
         [blueJouster removeFromParentAndCleanup:YES];
+        [blueMotionStreak resetSystem];
+        [blueMotionStreak stopSystem];
         [self refreshUI];
+        return YES;
     }
+    return NO;
 }
 
 -(BOOL) jousterOnJousterCheck{
@@ -438,7 +503,7 @@
         [redJouster joustCollision: [blueJouster getWorldPositionOfJoust] withRadius: blueJouster.joustRadius];
         [blueJouster joustCollision: [redJouster getWorldPositionOfJoust] withRadius: redJouster.joustRadius];
         [self spawnVortexAtPoint:ccpMidpoint([redJouster getWorldPositionOfJoust] , [blueJouster getWorldPositionOfJoust])];
-        [self clashEffect:[redJouster getWorldPositionOfJoust] otherPoint:[blueJouster getWorldPositionOfJoust]];
+//        [self clashEffect:[redJouster getWorldPositionOfJoust] otherPoint:[blueJouster getWorldPositionOfJoust]];
         return YES;
     }
     return NO;
@@ -446,16 +511,16 @@
 
 #pragma mark - touch code
 -(BOOL) ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event{
-    if(currentState != GAMEPLAY){
+    /*if(currentState != GAMEPLAY){
         return NO;
-    }
+    }*/
     return YES;
 }
 
 -(void)ccTouchesMoved:(NSSet *)touches withEvent:(UIEvent *)event{
-    if(currentState != GAMEPLAY){
+   /*if(currentState != GAMEPLAY){
         return;
-    }
+    }*/
     
     BOOL redAlreadyChosen = NO;
     BOOL blueAlreadyChosen = NO;
@@ -483,9 +548,9 @@
 }
 
 - (void) ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{
-    if(currentState != GAMEPLAY){
+    /*if(currentState != GAMEPLAY){
         return;
-    }
+    }*/
     BOOL redAlreadyChosen = NO;
     BOOL blueAlreadyChosen = NO;
     for(UITouch* touch in touches){
@@ -506,9 +571,9 @@
 }
 
 - (void) ccTouchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event{
-    if(currentState != GAMEPLAY){
+    /*if(currentState != GAMEPLAY){
         return;
-    }
+    }*/
     BOOL redAlreadyChosen = NO;
     BOOL blueAlreadyChosen = NO;
     for(UITouch* touch in touches){
@@ -545,8 +610,18 @@
     CCLabelTTF *gameStartLabel = [[[CCLabelTTF alloc] initWithString:@"Blue vs Red" fontName:@"Marker Felt" fontSize:32] autorelease];
     gameStartLabel.position = ccp(winSize.width/2, winSize.height/2);
     [self addChild:gameStartLabel];
+    //run actions
+    [uiLayer animateTouchAreasIn];
+    CCDelayTime *delayAnim = [CCDelayTime actionWithDuration:1];
+    CCCallBlock *blockAnim = [CCCallBlock actionWithBlock:^{
+        [uiLayer smashTopBottomAlreadyInPlace:NO];
+    }];
+    CCSequence *seqAnim = [CCSequence actionOne:delayAnim two:blockAnim];
+    [gameStartLabel runAction:seqAnim];
     
-    CCDelayTime *delay = [CCDelayTime actionWithDuration:1];
+    
+    
+    CCDelayTime *delay = [CCDelayTime actionWithDuration:TRANSITION_TIME];
     CCCallBlock *block = [CCCallBlock actionWithBlock:^{
         [self removeChild:gameStartLabel];
         //transition to round Start
@@ -560,14 +635,22 @@
 
 -(void) transitionToStartRound{
     currentRound++;
+    
+    if(currentState == GAME_START){
+        [redJouster resetJouster];
+        [blueJouster resetJouster];
+        [blueMotionStreak resetSystem];
+        [redMotionStreak resetSystem];
+    }
+    
     currentState = ROUND_START;
     //show names of fighters
     CGSize winSize= [[CCDirector sharedDirector] winSize];
     CCLabelTTF *gameStartLabel = [[[CCLabelTTF alloc] initWithString:[NSString stringWithFormat:@"Round %d", currentRound] fontName:@"Marker Felt" fontSize:32] autorelease];
     gameStartLabel.position = ccp(winSize.width/2, winSize.height/2);
     [self addChild:gameStartLabel];
-    
-    CCDelayTime *delay = [CCDelayTime actionWithDuration:1];
+    timeBeforeNewRoundStarts = TRANSITION_TIME;
+    CCDelayTime *delay = [CCDelayTime actionWithDuration:TRANSITION_TIME];
     CCCallBlock *block = [CCCallBlock actionWithBlock:^{
         [self removeChild:gameStartLabel];
         [self transitionToGamePlay];
@@ -590,7 +673,15 @@
     gameStartLabel.position = ccp(winSize.width/2, winSize.height/2);
     [self addChild:gameStartLabel];
     
-    CCDelayTime *delay = [CCDelayTime actionWithDuration:1];
+    //animation
+    CCDelayTime *delayAnim = [CCDelayTime actionWithDuration:1];
+    CCCallBlock *blockAnim = [CCCallBlock actionWithBlock:^{
+        [uiLayer smashTopBottomAlreadyInPlace:YES];
+    }];
+    CCSequence *seqAnim = [CCSequence actionOne:delayAnim two:blockAnim];
+    [gameStartLabel runAction:seqAnim];
+    
+    CCDelayTime *delay = [CCDelayTime actionWithDuration:TRANSITION_TIME];
     CCCallBlock *block = [CCCallBlock actionWithBlock:^{
         [self removeChild:gameStartLabel];
         [self resetJousters];
@@ -608,7 +699,7 @@
     gameStartLabel.position = ccp(winSize.width/2, winSize.height/2);
     [self addChild:gameStartLabel];
     
-    CCDelayTime *delay = [CCDelayTime actionWithDuration:2];
+    CCDelayTime *delay = [CCDelayTime actionWithDuration:TRANSITION_TIME + 1];
     CCCallBlock *block = [CCCallBlock actionWithBlock:^{
         //transition to titleLayer
         TitleLayer *title = [TitleLayer node];
@@ -623,9 +714,20 @@
 
 #pragma mark - special effects
 
--(void) clashEffect:(CGPoint) p1 otherPoint:(CGPoint) p2{
+-(void) clashEffect:(CGPoint) p1 otherPoint:(CGPoint) p2 withMagnitude:(float) magnitude withStun:(BOOL) stun{
+    
+    ccColor4F effectColor = ccc4f(1, 1, 1, 1);
+    if(stun){
+        effectColor = ccc4f(1.0, 1.0, 0, 1);
+    }
+    //how fast the particles move
+    float particleSpeed = magnitude/2;
+    
     //collision effect
     CCParticleSystemQuad *collisionEffect = [[CCParticleSystemQuad alloc] initWithFile: @"CollisionEffect.plist"];
+    collisionEffect.startColor = effectColor;
+    collisionEffect.endColor = effectColor;
+    collisionEffect.speed = particleSpeed;
     collisionEffect.autoRemoveOnFinish = YES;
     CGPoint midPoint = ccpMidpoint(p1, p2);
     float rotation = [MathHelper degreeAngleBetween:p1 and:p2];
@@ -636,6 +738,9 @@
     
     collisionEffect = [[CCParticleSystemQuad alloc] initWithFile: @"CollisionEffect.plist"];
     collisionEffect.autoRemoveOnFinish = YES;
+    collisionEffect.startColor = effectColor;
+    collisionEffect.endColor = effectColor;
+    collisionEffect.speed = particleSpeed;
     midPoint = ccpMidpoint(p1, p2);
     rotation = [MathHelper degreeAngleBetween:p1 and:p2];
     
@@ -651,6 +756,33 @@
     [self addChild:collisionEffect];
     return collisionEffect;
     
+}
+
+#pragma mark - victory point stuff
+
+-(void) refreshVictoryPoint{
+    CGSize winSize= [[CCDirector sharedDirector] winSize];
+    //red victory
+    for(int i = 0; i < self.redVictoryArray.count; ++i){
+        CCSprite *victorySprite = [self.redVictoryArray objectAtIndex:i];
+        victorySprite.position = ccp(CONTROL_OFFSET + 50 + i*60, 20);
+        if(i < redWins){
+            victorySprite.visible = YES;
+        }else{
+            victorySprite.visible = NO;
+       }
+    }
+    
+    //red victory
+    for(int i = 0; i < self.blueVictoryArray.count; ++i){
+        CCSprite *victorySprite = [self.blueVictoryArray objectAtIndex:i];
+        victorySprite.position = ccp((winSize.width - CONTROL_OFFSET) - 50 - i*60, 20);
+        if(i < blueWins){
+            victorySprite.visible = YES;
+        }else{
+            victorySprite.visible = NO;
+        }
+    }
 }
 
 @end

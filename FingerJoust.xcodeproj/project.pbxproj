@@ -171,6 +171,9 @@
 		DE8F13B517C33C6200050E5E /* JousterD.m in Sources */ = {isa = PBXBuildFile; fileRef = DE8F13B417C33C6200050E5E /* JousterD.m */; };
 		DE91641917BB0929009817AD /* JousterB.m in Sources */ = {isa = PBXBuildFile; fileRef = DE91641817BB0929009817AD /* JousterB.m */; };
 		DE919A3F17B22CCD00DAA954 /* JousterA.m in Sources */ = {isa = PBXBuildFile; fileRef = DE919A3E17B22CCD00DAA954 /* JousterA.m */; };
+		DEA6ADC01809DBBC000A4B0C /* BodyOuter.png in Resources */ = {isa = PBXBuildFile; fileRef = DEA6ADBF1809DBBC000A4B0C /* BodyOuter.png */; };
+		DEA6ADC21809DEE4000A4B0C /* MotionStreak.plist in Resources */ = {isa = PBXBuildFile; fileRef = DEA6ADC11809DEE4000A4B0C /* MotionStreak.plist */; };
+		DEA6ADC6180B6F9D000A4B0C /* UILayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DEA6ADC5180B6F9D000A4B0C /* UILayer.m */; };
 		DEB525FE17D579A00010AFF9 /* CollisionEffect.plist in Resources */ = {isa = PBXBuildFile; fileRef = DEB525FD17D579A00010AFF9 /* CollisionEffect.plist */; };
 		DEB5260117D5B5C50010AFF9 /* CCWarpSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = DEB5260017D5B54D0010AFF9 /* CCWarpSprite.m */; };
 		DEBB5274178FAD7D006FEB1C /* TitleLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DEBB5273178FAD7D006FEB1C /* TitleLayer.m */; };
@@ -501,6 +504,10 @@
 		DE91641817BB0929009817AD /* JousterB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JousterB.m; sourceTree = "<group>"; };
 		DE919A3D17B22CCD00DAA954 /* JousterA.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JousterA.h; sourceTree = "<group>"; };
 		DE919A3E17B22CCD00DAA954 /* JousterA.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JousterA.m; sourceTree = "<group>"; };
+		DEA6ADBF1809DBBC000A4B0C /* BodyOuter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BodyOuter.png; sourceTree = "<group>"; };
+		DEA6ADC11809DEE4000A4B0C /* MotionStreak.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = MotionStreak.plist; sourceTree = "<group>"; };
+		DEA6ADC4180B6F9D000A4B0C /* UILayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UILayer.h; sourceTree = "<group>"; };
+		DEA6ADC5180B6F9D000A4B0C /* UILayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UILayer.m; sourceTree = "<group>"; };
 		DEB525FD17D579A00010AFF9 /* CollisionEffect.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = CollisionEffect.plist; sourceTree = "<group>"; };
 		DEB525FF17D5B54D0010AFF9 /* CCWarpSprite.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CCWarpSprite.h; sourceTree = "<group>"; };
 		DEB5260017D5B54D0010AFF9 /* CCWarpSprite.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CCWarpSprite.m; sourceTree = "<group>"; };
@@ -583,8 +590,7 @@
 				DE1CC953178FA31D00CB1C59 /* IntroLayer.m */,
 				DEBB5272178FAD7D006FEB1C /* TitleLayer.h */,
 				DEBB5273178FAD7D006FEB1C /* TitleLayer.m */,
-				DEBB5275178FAF12006FEB1C /* GameLayer.h */,
-				DEBB5276178FAF12006FEB1C /* GameLayer.m */,
+				DEA6ADC3180B6F73000A4B0C /* Game */,
 				DE85E53517C971C5002BCC79 /* MathHelper.h */,
 				DE85E53617C971C5002BCC79 /* MathHelper.m */,
 				DE1CC7BC178FA31700CB1C59 /* Resources */,
@@ -602,6 +608,7 @@
 				DE6055B717D4122800288F46 /* spriteSheet */,
 				DE1CC7BD178FA31700CB1C59 /* Default.png */,
 				DE6055CE17D44AB300288F46 /* Jouster2.png */,
+				DEA6ADBF1809DBBC000A4B0C /* BodyOuter.png */,
 				DE6055CF17D44AB300288F46 /* Jousternon.png */,
 				DE6055CC17D44A5100288F46 /* Jouster.png */,
 				DE1CC7BF178FA31700CB1C59 /* Default@2x.png */,
@@ -1069,9 +1076,21 @@
 			name = Jousters;
 			sourceTree = "<group>";
 		};
+		DEA6ADC3180B6F73000A4B0C /* Game */ = {
+			isa = PBXGroup;
+			children = (
+				DEBB5275178FAF12006FEB1C /* GameLayer.h */,
+				DEBB5276178FAF12006FEB1C /* GameLayer.m */,
+				DEA6ADC4180B6F9D000A4B0C /* UILayer.h */,
+				DEA6ADC5180B6F9D000A4B0C /* UILayer.m */,
+			);
+			name = Game;
+			sourceTree = "<group>";
+		};
 		DEB525FC17D579970010AFF9 /* particles */ = {
 			isa = PBXGroup;
 			children = (
+				DEA6ADC11809DEE4000A4B0C /* MotionStreak.plist */,
 				DE8C8C7A17D8633B0021E121 /* VortexEffect.plist */,
 				DEB525FD17D579A00010AFF9 /* CollisionEffect.plist */,
 			);
@@ -1104,7 +1123,7 @@
 		DE1CC79C178FA31700CB1C59 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0460;
+				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = "Hunter Francis";
 			};
 			buildConfigurationList = DE1CC79F178FA31700CB1C59 /* Build configuration list for PBXProject "FingerJoust" */;
@@ -1129,6 +1148,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DEA6ADC21809DEE4000A4B0C /* MotionStreak.plist in Resources */,
 				DE3987FF17D474DE00B155E7 /* Touch.vsh in Resources */,
 				DE39880017D474DE00B155E7 /* Touch.fsh in Resources */,
 				DE6055CB17D439BC00288F46 /* Grain.vsh in Resources */,
@@ -1151,6 +1171,7 @@
 				DE6055CD17D44A5100288F46 /* Jouster.png in Resources */,
 				DE6055D017D44AB300288F46 /* Jouster2.png in Resources */,
 				DE6055D117D44AB300288F46 /* Jousternon.png in Resources */,
+				DEA6ADC01809DBBC000A4B0C /* BodyOuter.png in Resources */,
 				DEB525FE17D579A00010AFF9 /* CollisionEffect.plist in Resources */,
 				DE8C8C7B17D8633B0021E121 /* VortexEffect.plist in Resources */,
 			);
@@ -1226,6 +1247,7 @@
 				DE1CC898178FA31B00CB1C59 /* CCTexturePVR.m in Sources */,
 				DE1CC89B178FA31B00CB1C59 /* CCTileMapAtlas.m in Sources */,
 				DE1CC89E178FA31B00CB1C59 /* CCTMXLayer.m in Sources */,
+				DEA6ADC6180B6F9D000A4B0C /* UILayer.m in Sources */,
 				DE1CC8A1178FA31B00CB1C59 /* CCTMXObjectGroup.m in Sources */,
 				DE1CC8A4178FA31B00CB1C59 /* CCTMXTiledMap.m in Sources */,
 				DE1CC8A7178FA31B00CB1C59 /* CCTMXXMLParser.m in Sources */,
@@ -1307,7 +1329,12 @@
 		DE1CC955178FA31D00CB1C59 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -1317,9 +1344,14 @@
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -1328,7 +1360,12 @@
 		DE1CC956178FA31D00CB1C59 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -1336,7 +1373,11 @@
 					"NS_BLOCK_ASSERTIONS=1",
 				);
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				SDKROOT = iphoneos;

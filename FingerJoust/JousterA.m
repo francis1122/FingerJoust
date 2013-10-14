@@ -40,6 +40,7 @@
     jousterSprite.velocity = joustVelocity;
     [jousterSprite update:dt];
     [jousterInnerSprite update:dt];
+    [self checkJoustBoundaries];
 }
 
 -(void) calculateJoustPosition:(ccTime) dt{
@@ -62,13 +63,13 @@
     joustVelocity = ccpAdd(joustVelocity, ccpMult( ccpMult(someVec, distance) , dt));
     //make sure velocity isn't too high
     float speed = ccpLength(joustVelocity);
-    if(speed >850){
+    if(speed >650){
         joustVelocity = ccpNormalize(joustVelocity);
-        joustVelocity = ccpMult(joustVelocity, 850);
+        joustVelocity = ccpMult(joustVelocity, 650);
     }
     
     //set position of joust according to joust velocity
-    joustPosition = ccpAdd(self.joustPosition,  ccpMult(joustVelocity, dt)); 
+    joustPosition = ccpAdd(self.joustPosition,  ccpMult(joustVelocity, dt));
 }
 /*
 -(void) touch:(CGPoint) touch{

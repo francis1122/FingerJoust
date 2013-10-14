@@ -61,21 +61,20 @@
         //bounce off eachother
         CGPoint offset = ccpSub(self.position, ccpAdd(self.position, joustPosition));
         offset = [self normalize:offset];
-        offset = ccpMult(offset, 1000);
+        offset = ccpMult(offset, JOUSTER_JOUSTER_D_SPEED);
 //        self.velocity = offset;
         offset = ccpMult(offset, -1);
         joustVelocity = offset;
     }
 
     [self checkJoustBoundaries];
-    [super update:dt];
 }
 
 -(void) calculateJoustPosition:(ccTime) dt{
     
     //make sure speed is 13
     joustVelocity = ccpNormalize(joustVelocity);
-    joustVelocity = ccpMult(joustVelocity, 650);
+    joustVelocity = ccpMult(joustVelocity, JOUSTER_JOUSTER_D_SPEED);
     
     //    joustPosition = ccpMult( ccp(cos(aliveTicker), sin(aliveTicker)), bodyRadius);
     //    joustPosition =
@@ -152,41 +151,13 @@
 }
 */
 
--(void) checkJoustBoundaries{
-    CGSize winSize= [[CCDirector sharedDirector] winSize];
-    CGPoint pos = [self getWorldPositionOfJoust];
-    float radius = joustRadius;
-    //check north side
-    if((pos.y + radius) > winSize.height){
-        [self setWorldPositionOfJoust:ccp(pos.x, winSize.height - joustRadius)];
-        joustVelocity = ccp(joustVelocity.x, joustVelocity.y * -1);
-    }
-    
-    //check south side
-    if( (pos.y - joustRadius) < 0 ){
-        [self setWorldPositionOfJoust:ccp(pos.x, joustRadius)];
-        joustVelocity = ccp(joustVelocity.x, joustVelocity.y * -1);
-    }
-    
-    //left side
-    if((pos.x - joustRadius) < CONTROL_OFFSET){
-        [self setWorldPositionOfJoust:ccp(CONTROL_OFFSET + joustRadius, pos.y)];
-        joustVelocity = ccp(joustVelocity.x *  -1, joustVelocity.y);
-    }
-    
-    //right side
-    if((pos.x + joustRadius) >  (winSize.width - CONTROL_OFFSET)){
-        [self setWorldPositionOfJoust:ccp(winSize.width - CONTROL_OFFSET - joustRadius, pos.y)];
-        joustVelocity = ccp(joustVelocity.x * -1, joustVelocity.y);
-    }
-    
-}
+
 
 -(void) joustCollision:(CGPoint) joustPos withRadius:(float) radius{
     //jouster gets knocked away
     CGPoint offset = ccpSub([self getWorldPositionOfJoust] , joustPos);
     offset = [MathHelper normalize:offset];
-    offset = ccpMult(offset, 1200);
+    offset = ccpMult(offset, JOUSTER_JOUSTER_D_SPEED);
     joustVelocity = offset;
 }
 

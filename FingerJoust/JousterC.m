@@ -46,7 +46,7 @@
     
 //    jousterInnerSprite.scale = joustRadius/28.0;
     jousterSprite.scale = joustRadius/20.0;
-
+    joustVelocity = CGPointZero;
 //    joustPosition = ccpMult( ccp(cos(aliveTicker), sin(aliveTicker)), bodyRadius);
     //normalize velocity
     
@@ -56,7 +56,6 @@
     
     //    [self calculateJoustPosition];
     
-
 }
 
 

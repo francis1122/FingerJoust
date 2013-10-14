@@ -9,12 +9,26 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 
-#define CONTROL_OFFSET 286
+#define COLOR_TOUCHAREA ccc3(223,214,195)
+#define COLOR_TOUCHAREA_B4 ccc4(223,214,195,255)
+#define COLOR_GAMEAREA ccc3(25,25,25)
+#define COLOR_GAMEAREA_B4 ccc4(25,25,25,255)
+
+//#define CONTROL_OFFSET 286
+#define CONTROL_OFFSET 312
 #define EXTRA_CONTROL_OFFSET 370
+#define MIDDLEBAR_HEIGHT 60
 
 #define ROUND_TIME 20
 #define VORTEX_DISTANCE 350
-#define STUN_CONTRAINT 340
+#define STUN_CONTRAINT 370
+
+#define COLLISION_STEPS 10
+#define TRANSITION_TIME 2.0
+
+
+#define PLAYER_ONE_COLOR ccORANGE
+#define PLAYER_TWO_COLOR ccYELLOW
 
 typedef enum GameState
 {   
@@ -25,12 +39,12 @@ typedef enum GameState
     GAME_START = 4,
 }GameState;
 
-@class Jouster, PowerStone, SneakyJoystick;
+@class Jouster, PowerStone, SneakyJoystick, UILayer;
 @interface GameLayer : CCLayerColor  {
-    CCLayerColor *redLayer;
-    CCLayerColor *blueLayer;
-    CCLayerColor *redBorderLayer;
-    CCLayerColor *blueBorderLayer;
+    UILayer *uiLayer;
+    
+    
+
     
     Jouster *redJouster;
     Jouster *blueJouster;
@@ -53,10 +67,7 @@ typedef enum GameState
     NSString *winner;
     float deathClock;
     
-    //round timer
-    float roundTimer;
-    int displayedTime;
-    CCLabelTTF *timerLabel;
+
     
     //center sprite
     CCSprite *centerSprite;
@@ -65,13 +76,24 @@ typedef enum GameState
     int currentRound;
     int blueWins;
     int redWins;
+    float timeBeforeNewRoundStarts;
     BOOL didRedWinRound;
     GameState currentState;
+    
+    //victory count sprites
+    NSMutableArray *redVictoryArray;
+    NSMutableArray *blueVictoryArray;
+    CCMotionStreak *streak;
+    
+    CCParticleSystemQuad *redMotionStreak;
+    CCParticleSystemQuad *blueMotionStreak;
 }
 
 
 @property (retain, nonatomic) PowerStone *powerStone;
 @property (retain, nonatomic) NSMutableArray *vortexArray;
+@property (retain, nonatomic) NSMutableArray *redVictoryArray;
+@property (retain, nonatomic) NSMutableArray *blueVictoryArray;
 
 
 @property (retain, nonatomic) SneakyJoystick *redJoystick;
@@ -82,7 +104,7 @@ typedef enum GameState
 -(void) refreshUI;
 -(void) resetJousters;
 -(void) spawnPowerStone;
--(void) spawnVortexAtPoint:(CGPoint)point;
+//-(void) spawnVortexAtPoint:(CGPoint)point;
 
 -(void) updateTimer:(ccTime) dt;
 -(void) updateVortex:(ccTime)dt;
@@ -90,9 +112,10 @@ typedef enum GameState
 -(void) checkClosestJousterToCenter;
 -(void) checkBodyOnBodyStun;
 //collision stuff
+-(void) collisionChecks:(ccTime) dt;
 -(void) powerStoneCollisionCheck;
 -(BOOL) bodyOnBodyCheck;
--(void) jousterOnBodyCheck;
+-(BOOL) jousterOnBodyCheck;
 -(BOOL) jousterOnJousterCheck;
 
 
@@ -105,6 +128,10 @@ typedef enum GameState
 
 
 //special effects
--(void) clashEffect:(CGPoint) p1 otherPoint:(CGPoint) p2;
+//-(void) clashEffect:(CGPoint) p1 otherPoint:(CGPoint) p2;
+-(void) clashEffect:(CGPoint) p1 otherPoint:(CGPoint) p2 withMagnitude:(float) magnitude withStun:(BOOL) stun;
 -(CCParticleSystemQuad*) vortexEffect:(CGPoint) pt;
+
+#pragma mark - victory point stuff
+-(void) refreshVictoryPoint;
 @end

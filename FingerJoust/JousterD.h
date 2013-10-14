@@ -10,8 +10,10 @@
 #import "cocos2d.h"
 #import "Jouster.h"
 
+
+#define JOUSTER_JOUSTER_D_SPEED 750
+
 @interface JousterD : Jouster {
-    CGPoint joustVelocity;
 }
 
 -(void) checkJoustBoundaries;

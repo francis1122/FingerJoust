@@ -14,7 +14,7 @@
 
 
 -(id) init{
-    if(self = [super initWithColor:ccc4(100, 100, 100, 255)] ){
+    if(self = [super initWithColor:COLOR_GAMEAREA_B4] ){
         // create and initialize a Label
 		CCLabelTTF *label = [CCLabelTTF labelWithString:@"Finger Joust" fontName:@"Marker Felt" fontSize:64];
         

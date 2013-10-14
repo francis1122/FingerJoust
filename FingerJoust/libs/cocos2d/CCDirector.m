@@ -530,7 +530,7 @@ static CCDirector *_sharedDirector = nil;
 		[_runningScene onEnterTransitionDidFinish];
 	}
 }
-
+- (BOOL)prefersStatusBarHidden {return YES;}
 -(void) pause
 {
 	if( _isPaused )

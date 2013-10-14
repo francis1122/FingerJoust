@@ -11,7 +11,7 @@
 #import "Jouster.h"
 
 @interface JousterA : Jouster {
-    CGPoint joustVelocity;
+
 }
 
 @end

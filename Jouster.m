@@ -13,7 +13,7 @@
 
 @implementation Jouster
 
-@synthesize velocity, waitingForTouch, bodyRadius, joustRadius, orbitalOffset,joustPosition, player, powerStones;
+@synthesize velocity, waitingForTouch, bodyRadius, joustRadius, orbitalOffset,joustPosition, player, powerStones, jousterSprite, joustVelocity;
 
 -(id) init{
     if(self = [super init]){
@@ -24,19 +24,19 @@
         [self resetJouster];
         
         bodyOuterSprite = [CCWarpSprite spriteWithSpriteFrameName:@"BodyOuter"];
-        bodyOuterSprite.isWarping = YES;
+        bodyOuterSprite.isWarping = NO;
         bodyInnerSprite = [CCWarpSprite spriteWithSpriteFrameName:@"BodyInner"];
-        bodyInnerSprite.isWarping = YES;
+        bodyInnerSprite.isWarping = NO;
         bodyInnerSprite.position = ccp(bodyOuterSprite.contentSize.width/2, bodyOuterSprite.contentSize.height/2);
         [self addChild:bodyOuterSprite];
         [bodyOuterSprite addChild:bodyInnerSprite];
 
         
-        jousterSprite = [CCWarpSprite spriteWithSpriteFrameName:@"JousterOuter"];
+        self.jousterSprite = [CCWarpSprite spriteWithSpriteFrameName:@"JousterOuter"];
         [self addChild:jousterSprite];
-        jousterSprite.isWarping = YES;
+        jousterSprite.isWarping = NO;
         jousterInnerSprite = [CCWarpSprite spriteWithSpriteFrameName:@"JousterInner"];
-        jousterInnerSprite.isWarping = YES;
+        jousterInnerSprite.isWarping = NO;
         jousterInnerSprite.position = ccp(jousterSprite.contentSize.width/2, jousterSprite.contentSize.height/2);
         [jousterSprite addChild:jousterInnerSprite];
         
@@ -67,19 +67,24 @@
 -(void) resetJouster{
     CGSize winSize= [[CCDirector sharedDirector] winSize];
     [self disengateSuperMode];
+    self.visible = YES;
     powerStones = 0;
-    bodyRadius = 30;
-    joustRadius = 20;
+    bodyRadius = 35;
+    joustRadius = 25;
     orbitalOffset = 0;
     CGPoint pos;
     if(player == 1){
         pos = ccp(350, winSize.height/2);
-        jousterInnerSprite.color = ccRED;
-        bodyInnerSprite.color = ccRED;
+        bodyOuterSprite.color = ccORANGE;
+        jousterSprite.color = ccORANGE;
+        jousterInnerSprite.color = ccORANGE;
+        bodyInnerSprite.color = ccORANGE;
     }else{
         pos = ccp(winSize.width - 350, winSize.height/2);
-        jousterInnerSprite.color = ccBLUE;
-        bodyInnerSprite.color = ccBLUE;
+        bodyOuterSprite.color = ccRED;
+        jousterSprite.color = ccRED;
+        jousterInnerSprite.color = ccRED;
+        bodyInnerSprite.color = ccRED;
     }
     
     
@@ -89,7 +94,6 @@
     [self update:0.05];
     [self resetTouch];
     isStunned = NO;    
-    bodyOuterSprite.color = ccWHITE;
 }
 
 -(void) engageSuperMode{
@@ -113,17 +117,16 @@
 
 -(void) clampMaxSpeed{
     float speed = ccpLength(self.velocity);
-    NSLog(@"speed %f", speed);
-    if(speed > 1100){
+    if(speed > JOUSTER_BODY_MAXSPEED){
         CGPoint normal = ccpNormalize(self.velocity);
-        self.velocity = ccpMult(normal, 1100);
+        self.velocity = ccpMult(normal, JOUSTER_BODY_MAXSPEED);
     }
 }
 
 -(void) update:(ccTime)dt{
 
     
-    jousterSprite.position = joustPosition;
+    //jousterSprite.position = joustPosition;
 //    jousterSprite.rotation = jousterSprite.rotation + 2.5;
     if(powerStones > 4){
         [self engageSuperMode];
@@ -132,10 +135,10 @@
     //velocity and position
     //reduce velocity
     [self clampMaxSpeed];
-    velocity = ccpMult(velocity, .965);
+    velocity = ccpMult(velocity, .96);
     
     //update velocity
-    self.position = ccpAdd(self.position, ccpMult(self.velocity, dt));
+//    self.position = ccpAdd(self.position, ccpMult(self.velocity, dt));
 
     previousVelocity = velocity;
 
@@ -162,8 +165,6 @@
             bodyOuterSprite.color = ccWHITE;
         }
     }
-    
-    [self checkBoundaries];
 }
 
 -(void) setWorldPositionOfJoust:(CGPoint) pos{
@@ -245,10 +246,10 @@
     if(isSuperMode){
         difference = ccp(difference.x * 5.5, difference.y *4.1);
     }else if(isStunned){
-        difference = ccp(difference.x * 1.6, difference.y *1.2);
+        difference = ccp(difference.x * 1.5, difference.y *1.2);
     }else{
         
-        difference = ccp(difference.x * 3.5, difference.y *2.6);
+        difference = ccp(difference.x * 2.7, difference.y *2.2);
 //        difference = ccp(difference.x * 6, difference.y *6);
 
     }
@@ -271,6 +272,37 @@
     
 }
 
+
+-(void) checkJoustBoundaries{
+    CGSize winSize= [[CCDirector sharedDirector] winSize];
+    CGPoint pos = [self getWorldPositionOfJoust];
+    float radius = joustRadius;
+    //check north side
+    if((pos.y + radius) > winSize.height - MIDDLEBAR_HEIGHT){
+        [self setWorldPositionOfJoust:ccp(pos.x, winSize.height - joustRadius - MIDDLEBAR_HEIGHT)];
+        joustVelocity = ccp(joustVelocity.x, joustVelocity.y * -1);
+    }
+    
+    //check south side
+    if( (pos.y - joustRadius) < MIDDLEBAR_HEIGHT ){
+        [self setWorldPositionOfJoust:ccp(pos.x, MIDDLEBAR_HEIGHT + joustRadius)];
+        joustVelocity = ccp(joustVelocity.x, joustVelocity.y * -1);
+    }
+    
+    //left side
+    if((pos.x - joustRadius) < CONTROL_OFFSET){
+        [self setWorldPositionOfJoust:ccp(CONTROL_OFFSET + joustRadius, pos.y)];
+        joustVelocity = ccp(joustVelocity.x *  -1, joustVelocity.y);
+    }
+    
+    //right side
+    if((pos.x + joustRadius) >  (winSize.width - CONTROL_OFFSET)){
+        [self setWorldPositionOfJoust:ccp(winSize.width - CONTROL_OFFSET - joustRadius, pos.y)];
+        joustVelocity = ccp(joustVelocity.x * -1, joustVelocity.y);
+    }
+    
+}
+
 -(void) checkBoundaries{
     CGSize winSize= [[CCDirector sharedDirector] winSize];
     
@@ -278,27 +310,27 @@
     float radius = self.bodyRadius;
     
     //check north side
-    if((pos.y + radius) > winSize.height){
-        self.position = ccp(self.position.x, winSize.height - radius);
-        self.velocity = ccp(self.velocity.x, self.velocity.y * -1);
+    if((pos.y + radius) > winSize.height - MIDDLEBAR_HEIGHT){
+        self.position = ccp(self.position.x, winSize.height - radius - MIDDLEBAR_HEIGHT);
+        self.velocity = ccp(self.velocity.x, self.velocity.y * -.8);
     }
     
     //check south side
-    if( (pos.y - radius) < 0 ){
-        self.position = ccp(self.position.x, radius);
-        self.velocity = ccp(self.velocity.x, self.velocity.y * -1);
+    if( (pos.y - radius) < MIDDLEBAR_HEIGHT ){
+        self.position = ccp(self.position.x, MIDDLEBAR_HEIGHT + radius);
+        self.velocity = ccp(self.velocity.x, self.velocity.y * -.8);
     }
     
     //left side
     if((pos.x - radius) < CONTROL_OFFSET){
         self.position = ccp(CONTROL_OFFSET + radius, self.position.y);
-        self.velocity = ccp(self.velocity.x *  -1, self.velocity.y);
+        self.velocity = ccp(self.velocity.x *  -.8, self.velocity.y);
     }
     
     //right side
     if((pos.x + radius) >  (winSize.width - CONTROL_OFFSET)){
         self.position = ccp(winSize.width - CONTROL_OFFSET - radius, self.position.y);
-        self.velocity = ccp(self.velocity.x * -1, self.velocity.y);
+        self.velocity = ccp(self.velocity.x * -.8, self.velocity.y);
     }
 }
 
