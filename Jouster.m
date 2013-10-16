@@ -9,17 +9,16 @@
 #import "Jouster.h"
 #import "GameLayer.h"
 #import "CCWarpSprite.h"
-
+#import "GameLayer.h"
 
 @implementation Jouster
 
-@synthesize velocity, waitingForTouch, bodyRadius, joustRadius, orbitalOffset,joustPosition, player, powerStones, jousterSprite, joustVelocity;
+@synthesize velocity, waitingForTouch, bodyRadius, joustRadius, orbitalOffset,joustPosition, player, powerStones, jousterSprite, joustVelocity, motionStreak;
 
 -(id) init{
     if(self = [super init]){
         self.velocity = CGPointZero;
         waitingForTouch = YES;
-        player = 1;
         joustPosition = ccp(1,0);
         [self resetJouster];
         
@@ -45,8 +44,11 @@
         stunParticles = [[CCParticleSystemQuad alloc] initWithFile: @"StunParticles.plist"];
         stunParticles.positionType = kCCPositionTypeRelative;
         [stunParticles stopSystem];
-//        [self addChild:redMotionStreak z:1];
         [self addChild:stunParticles z:-1];
+        
+    
+
+        
         
         /*
         const GLchar * fragmentSource = (GLchar*) [[NSString stringWithContentsOfFile:[[CCFileUtils sharedFileUtils] fullPathForFilename:@"Grain.fsh"] encoding:NSUTF8StringEncoding error:nil] UTF8String];
@@ -72,13 +74,38 @@
     return self;
 }
 
+-(void) makeTail{
+    if(self.motionStreak){
+        [self.motionStreak removeFromParentAndCleanup:YES];
+        [self.motionStreak release];
+        self.motionStreak = nil;
+    }
+    self.motionStreak = [[CCParticleSystemQuad alloc] initWithFile: @"MotionStreak.plist"];
+    if(player == 1){
+        [motionStreak setStartColor:ccc4f(0.7, 0.0, 0.7, 1.0)];
+        [motionStreak setEndColor:ccc4f(0.7, 0.0, 1.0, 1.0)];
+
+    }else if(player == 2){
+        [motionStreak setStartColor:ccc4f(0.0, 0.0, 1.0, 1.0)];
+        [motionStreak setEndColor:ccc4f(0.0, 0.0, 1.0, 1.0)];
+    }
+    
+    motionStreak.positionType = kCCPositionTypeFree;
+    [self addChild:motionStreak z:-1];
+}
+
+-(void) dealloc{
+    [motionStreak release];
+    [super dealloc];
+}
+
 -(void) resetJouster{
     CGSize winSize= [[CCDirector sharedDirector] winSize];
     [self disengateSuperMode];
     self.visible = YES;
     powerStones = 0;
-    bodyRadius = 35;
-    joustRadius = 25;
+    bodyRadius = 30;
+    joustRadius = 20;
     orbitalOffset = 0;
     CGPoint pos;
     [stunParticles resetSystem];
@@ -86,20 +113,20 @@
     [stunParticles stopSystem];
     if(player == 1){
         pos = ccp(350, winSize.height/2);
-        bodyOuterSprite.color = ccORANGE;
+        bodyOuterSprite.color = ccWHITE;
         bodyInnerSprite.color = ccORANGE;
-        jousterSprite.color = ccc3(255, 190, 70);
+        jousterSprite.color = ccWHITE;
         jousterInnerSprite.color = ccc3(255, 190, 70);
 
     }else{
         pos = ccp(winSize.width - 350, winSize.height/2);
-        bodyOuterSprite.color = ccRED;
+        bodyOuterSprite.color = ccWHITE;
         bodyInnerSprite.color = ccRED;
-        jousterSprite.color = ccc3(255, 100, 100);
+        jousterSprite.color = ccWHITE;
         jousterInnerSprite.color = ccc3(255, 100, 100);
 
     }
-    
+    [self resolve];
     
     velocity = ccp(1,0);
     previousVelocity = ccp(1,0);
@@ -127,7 +154,7 @@
 
     isStunned = YES;
     stunTimer = 5.0;
-//    bodyOuterSprite.color = ccBLACK;
+    bodyOuterSprite.color = ccBLACK;
 
 }
 
@@ -140,10 +167,6 @@
 }
 
 -(void) update:(ccTime)dt{
-
-    
-    //jousterSprite.position = joustPosition;
-//    jousterSprite.rotation = jousterSprite.rotation + 2.5;
     if(powerStones > 4){
         [self engageSuperMode];
     }
@@ -178,7 +201,7 @@
         stunTimer -= dt;
         if(stunTimer < 0){
             isStunned = NO;
-            //bodyOuterSprite.color = ccWHITE;
+            bodyOuterSprite.color = ccWHITE;
             [stunParticles stopSystem];
         }
     }
@@ -263,10 +286,12 @@
     if(isSuperMode){
         difference = ccp(difference.x * 5.5, difference.y *4.1);
     }else if(isStunned){
-        difference = ccp(difference.x * 1.5, difference.y *1.2);
+        difference = ccp(difference.x * 1.6, difference.y *1.4);
     }else{
         
-        difference = ccp(difference.x * 2.7, difference.y *2.2);
+//        difference = ccp(difference.x * 2.7, difference.y *2.2);
+        difference = ccp(difference.x * 10, difference.y *10);
+//        difference = ccp(difference.x * 2.0, difference.y *1.6);
 //        difference = ccp(difference.x * 6, difference.y *6);
 
     }
@@ -294,28 +319,33 @@
     CGSize winSize= [[CCDirector sharedDirector] winSize];
     CGPoint pos = [self getWorldPositionOfJoust];
     float radius = joustRadius;
+    GameLayer *gameLayer =(GameLayer*)self.parent;
     //check north side
     if((pos.y + radius) > winSize.height - MIDDLEBAR_HEIGHT){
         [self setWorldPositionOfJoust:ccp(pos.x, winSize.height - joustRadius - MIDDLEBAR_HEIGHT)];
         joustVelocity = ccp(joustVelocity.x, joustVelocity.y * -1);
+        [gameLayer clashEffect:ccp(pos.x, winSize.height - MIDDLEBAR_HEIGHT - 1) otherPoint:ccp(pos.x, winSize.height - MIDDLEBAR_HEIGHT) withMagnitude:500 withStun:NO];
     }
     
     //check south side
     if( (pos.y - joustRadius) < MIDDLEBAR_HEIGHT ){
         [self setWorldPositionOfJoust:ccp(pos.x, MIDDLEBAR_HEIGHT + joustRadius)];
         joustVelocity = ccp(joustVelocity.x, joustVelocity.y * -1);
+        [gameLayer clashEffect:ccp(pos.x, MIDDLEBAR_HEIGHT - 1) otherPoint:ccp(pos.x, MIDDLEBAR_HEIGHT) withMagnitude:500 withStun:NO];
     }
     
     //left side
     if((pos.x - joustRadius) < CONTROL_OFFSET){
         [self setWorldPositionOfJoust:ccp(CONTROL_OFFSET + joustRadius, pos.y)];
         joustVelocity = ccp(joustVelocity.x *  -1, joustVelocity.y);
+        [gameLayer clashEffect:ccp(CONTROL_OFFSET, pos.y) otherPoint:ccp(CONTROL_OFFSET - 1, pos.y) withMagnitude:500 withStun:NO];
     }
     
     //right side
     if((pos.x + joustRadius) >  (winSize.width - CONTROL_OFFSET)){
         [self setWorldPositionOfJoust:ccp(winSize.width - CONTROL_OFFSET - joustRadius, pos.y)];
         joustVelocity = ccp(joustVelocity.x * -1, joustVelocity.y);
+        [gameLayer clashEffect:ccp(winSize.width - CONTROL_OFFSET, pos.y) otherPoint:ccp(winSize.width - CONTROL_OFFSET - 1, pos.y) withMagnitude:500 withStun:NO];
     }
     
 }
@@ -326,28 +356,34 @@
     CGPoint pos = self.position;
     float radius = self.bodyRadius;
     
+    GameLayer *gameLayer =(GameLayer*)self.parent;
     //check north side
     if((pos.y + radius) > winSize.height - MIDDLEBAR_HEIGHT){
         self.position = ccp(self.position.x, winSize.height - radius - MIDDLEBAR_HEIGHT);
         self.velocity = ccp(self.velocity.x, self.velocity.y * -.8);
+        [gameLayer clashEffect:ccp(pos.x, winSize.height - MIDDLEBAR_HEIGHT - 1) otherPoint:ccp(pos.x, winSize.height - MIDDLEBAR_HEIGHT) withMagnitude:500 withStun:NO];
     }
     
     //check south side
     if( (pos.y - radius) < MIDDLEBAR_HEIGHT ){
         self.position = ccp(self.position.x, MIDDLEBAR_HEIGHT + radius);
         self.velocity = ccp(self.velocity.x, self.velocity.y * -.8);
+        [gameLayer clashEffect:ccp(pos.x, MIDDLEBAR_HEIGHT - 1) otherPoint:ccp(pos.x, MIDDLEBAR_HEIGHT) withMagnitude:500 withStun:NO];
     }
     
     //left side
     if((pos.x - radius) < CONTROL_OFFSET){
         self.position = ccp(CONTROL_OFFSET + radius, self.position.y);
         self.velocity = ccp(self.velocity.x *  -.8, self.velocity.y);
+        [gameLayer clashEffect:ccp(CONTROL_OFFSET, pos.y) otherPoint:ccp(CONTROL_OFFSET - 1, pos.y) withMagnitude:500 withStun:NO];
     }
+    
     
     //right side
     if((pos.x + radius) >  (winSize.width - CONTROL_OFFSET)){
         self.position = ccp(winSize.width - CONTROL_OFFSET - radius, self.position.y);
         self.velocity = ccp(self.velocity.x * -.8, self.velocity.y);
+        [gameLayer clashEffect:ccp(winSize.width - CONTROL_OFFSET, pos.y) otherPoint:ccp(winSize.width - CONTROL_OFFSET - 1, pos.y) withMagnitude:500 withStun:NO];
     }
 }
 

@@ -11,7 +11,7 @@
 #import "Jouster.h"
 
 
-#define JOUSTER_JOUSTER_D_SPEED 750
+#define JOUSTER_JOUSTER_D_SPEED 550
 
 @interface JousterD : Jouster {
 }

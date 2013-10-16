@@ -175,6 +175,8 @@
 		DEA6ADC21809DEE4000A4B0C /* MotionStreak.plist in Resources */ = {isa = PBXBuildFile; fileRef = DEA6ADC11809DEE4000A4B0C /* MotionStreak.plist */; };
 		DEA6ADC6180B6F9D000A4B0C /* UILayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DEA6ADC5180B6F9D000A4B0C /* UILayer.m */; };
 		DEA6ADC8180BAAB1000A4B0C /* StunParticles.plist in Resources */ = {isa = PBXBuildFile; fileRef = DEA6ADC7180BAAB1000A4B0C /* StunParticles.plist */; };
+		DEA6ADCA180C8593000A4B0C /* jousterDeathParticle.plist in Resources */ = {isa = PBXBuildFile; fileRef = DEA6ADC9180C8593000A4B0C /* jousterDeathParticle.plist */; };
+		DEA6ADD1180CF4DA000A4B0C /* CCShake.m in Sources */ = {isa = PBXBuildFile; fileRef = DEA6ADD0180CF4DA000A4B0C /* CCShake.m */; };
 		DEB525FE17D579A00010AFF9 /* CollisionEffect.plist in Resources */ = {isa = PBXBuildFile; fileRef = DEB525FD17D579A00010AFF9 /* CollisionEffect.plist */; };
 		DEB5260117D5B5C50010AFF9 /* CCWarpSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = DEB5260017D5B54D0010AFF9 /* CCWarpSprite.m */; };
 		DEBB5274178FAD7D006FEB1C /* TitleLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DEBB5273178FAD7D006FEB1C /* TitleLayer.m */; };
@@ -510,6 +512,9 @@
 		DEA6ADC4180B6F9D000A4B0C /* UILayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UILayer.h; sourceTree = "<group>"; };
 		DEA6ADC5180B6F9D000A4B0C /* UILayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UILayer.m; sourceTree = "<group>"; };
 		DEA6ADC7180BAAB1000A4B0C /* StunParticles.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = StunParticles.plist; sourceTree = "<group>"; };
+		DEA6ADC9180C8593000A4B0C /* jousterDeathParticle.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = jousterDeathParticle.plist; sourceTree = "<group>"; };
+		DEA6ADCF180CF4DA000A4B0C /* CCShake.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCShake.h; sourceTree = "<group>"; };
+		DEA6ADD0180CF4DA000A4B0C /* CCShake.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCShake.m; sourceTree = "<group>"; };
 		DEB525FD17D579A00010AFF9 /* CollisionEffect.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = CollisionEffect.plist; sourceTree = "<group>"; };
 		DEB525FF17D5B54D0010AFF9 /* CCWarpSprite.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CCWarpSprite.h; sourceTree = "<group>"; };
 		DEB5260017D5B54D0010AFF9 /* CCWarpSprite.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CCWarpSprite.m; sourceTree = "<group>"; };
@@ -581,6 +586,8 @@
 			children = (
 				DEB525FF17D5B54D0010AFF9 /* CCWarpSprite.h */,
 				DEB5260017D5B54D0010AFF9 /* CCWarpSprite.m */,
+				DEA6ADCF180CF4DA000A4B0C /* CCShake.h */,
+				DEA6ADD0180CF4DA000A4B0C /* CCShake.m */,
 				DE8C293C17DFC4970066F709 /* joystick */,
 				DE6055B317D2E19300288F46 /* GameObjects */,
 				DE919A3C17B22CAA00DAA954 /* Jousters */,
@@ -1092,6 +1099,7 @@
 		DEB525FC17D579970010AFF9 /* particles */ = {
 			isa = PBXGroup;
 			children = (
+				DEA6ADC9180C8593000A4B0C /* jousterDeathParticle.plist */,
 				DEA6ADC7180BAAB1000A4B0C /* StunParticles.plist */,
 				DEA6ADC11809DEE4000A4B0C /* MotionStreak.plist */,
 				DE8C8C7A17D8633B0021E121 /* VortexEffect.plist */,
@@ -1173,6 +1181,7 @@
 				DE6055BD17D4129C00288F46 /* JoustF_JoustF.plist in Resources */,
 				DEA6ADC8180BAAB1000A4B0C /* StunParticles.plist in Resources */,
 				DE6055CD17D44A5100288F46 /* Jouster.png in Resources */,
+				DEA6ADCA180C8593000A4B0C /* jousterDeathParticle.plist in Resources */,
 				DE6055D017D44AB300288F46 /* Jouster2.png in Resources */,
 				DE6055D117D44AB300288F46 /* Jousternon.png in Resources */,
 				DEA6ADC01809DBBC000A4B0C /* BodyOuter.png in Resources */,
@@ -1230,6 +1239,7 @@
 				DE1CC849178FA31A00CB1C59 /* CCNode.m in Sources */,
 				DE1CC84C178FA31A00CB1C59 /* CCParallaxNode.m in Sources */,
 				DE1CC84F178FA31A00CB1C59 /* CCParticleBatchNode.m in Sources */,
+				DEA6ADD1180CF4DA000A4B0C /* CCShake.m in Sources */,
 				DE1CC852178FA31A00CB1C59 /* CCParticleExamples.m in Sources */,
 				DE1CC855178FA31A00CB1C59 /* CCParticleSystem.m in Sources */,
 				DE1CC858178FA31A00CB1C59 /* CCParticleSystemQuad.m in Sources */,

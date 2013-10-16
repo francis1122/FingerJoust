@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 
-#define JOUSTER_BODY_MAXSPEED 600
+#define JOUSTER_BODY_MAXSPEED 500
 
 @class CCWarpSprite;
 @interface Jouster : CCSprite {
@@ -49,7 +49,7 @@
     float stunTimer;
     
     CCParticleSystemQuad *stunParticles;
-    
+    CCParticleSystemQuad *motionStreak;
 }
 
 
@@ -60,7 +60,10 @@
 @property CGPoint velocity, joustPosition;
 @property CGPoint joustVelocity;
 
+@property (nonatomic, retain) CCParticleSystemQuad *motionStreak;
 @property (nonatomic, assign) CCWarpSprite *jousterSprite;
+
+-(void) makeTail;
 
 -(void) setWorldPositionOfJoust:(CGPoint) pos;
 -(CGPoint) getWorldPositionOfJoust;

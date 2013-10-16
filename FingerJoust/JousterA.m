@@ -21,11 +21,6 @@
 }
 
 -(void) update:(ccTime)dt{
-    
-
-    
-
-    
     [super update:dt];
     
     
@@ -63,7 +58,7 @@
     joustVelocity = ccpAdd(joustVelocity, ccpMult( ccpMult(someVec, distance) , dt));
     //make sure velocity isn't too high
     float speed = ccpLength(joustVelocity);
-    if(speed >650){
+    if(speed > 650){
         joustVelocity = ccpNormalize(joustVelocity);
         joustVelocity = ccpMult(joustVelocity, 650);
     }

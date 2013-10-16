@@ -24,7 +24,7 @@
 			<key>MaxSheetSize</key>
 			<integer>4096</integer>
 			<key>NpotSize</key>
-			<string>{2004, 640}</string>
+			<string>{2016, 640}</string>
 			<key>Padding</key>
 			<integer>8</integer>
 			<key>PixelFormat</key>
@@ -135,9 +135,9 @@
 						<key>FlipY</key>
 						<false/>
 						<key>Frame</key>
-						<string>{{940, 70}, {48.5, 49}}</string>
+						<string>{{908, 178}, {48.5, 49}}</string>
 						<key>Frame-HD</key>
-						<string>{{1880, 140}, {97, 98}}</string>
+						<string>{{1816, 356}, {97, 98}}</string>
 						<key>Image</key>
 						<string>JoustF_JoustF.png</string>
 						<key>Image-HD</key>
@@ -163,7 +163,7 @@
 						<key>OriginalSize</key>
 						<string>{130, 128}</string>
 						<key>Position</key>
-						<string>{1880, 140}</string>
+						<string>{1816, 356}</string>
 						<key>Scale</key>
 						<string>{1, 1}</string>
 						<key>SpriteSize</key>
@@ -557,9 +557,9 @@
 						<key>FlipY</key>
 						<false/>
 						<key>Frame</key>
-						<string>{{776, 168}, {37, 37}}</string>
+						<string>{{962, 228}, {37, 37}}</string>
 						<key>Frame-HD</key>
-						<string>{{1552, 336}, {74, 74}}</string>
+						<string>{{1924, 456}, {74, 74}}</string>
 						<key>Image</key>
 						<string>JoustF_JoustF.png</string>
 						<key>Image-HD</key>
@@ -585,7 +585,7 @@
 						<key>OriginalSize</key>
 						<string>{100, 95}</string>
 						<key>Position</key>
-						<string>{1552, 336}</string>
+						<string>{1924, 456}</string>
 						<key>Scale</key>
 						<string>{1, 1}</string>
 						<key>SpriteSize</key>
@@ -698,9 +698,9 @@
 						<key>FlipY</key>
 						<false/>
 						<key>Frame</key>
-						<string>{{940, 122}, {46, 46}}</string>
+						<string>{{962, 178}, {46, 46}}</string>
 						<key>Frame-HD</key>
-						<string>{{1880, 244}, {92, 92}}</string>
+						<string>{{1924, 356}, {92, 92}}</string>
 						<key>Image</key>
 						<string>JoustF_JoustF.png</string>
 						<key>Image-HD</key>
@@ -726,7 +726,7 @@
 						<key>OriginalSize</key>
 						<string>{100, 95}</string>
 						<key>Position</key>
-						<string>{1880, 244}</string>
+						<string>{1924, 356}</string>
 						<key>Scale</key>
 						<string>{1, 1}</string>
 						<key>SpriteSize</key>
@@ -737,6 +737,429 @@
 						<integer>0</integer>
 						<key>TextureOffset</key>
 						<string>{0, 0.25}</string>
+						<key>UsesBatchRendering</key>
+						<true/>
+						<key>ZOrder</key>
+						<integer>0</integer>
+					</dict>
+				</dict>
+				<key>dashedCircle</key>
+				<dict>
+					<key>DocumentSecurityImageBookmark</key>
+					<data>
+					Ym9va9QDAAAAAAQQMAAAAAAAAAAAAAAAAAAA
+					AAAAAAAAAAAAAAAAAAAAAAAAAAAArAIAAAUA
+					AAABAQAAVXNlcnMAAAAKAAAAAQEAAGpvaG53
+					aWxzb24AAAcAAAABAQAARHJvcGJveAAIAAAA
+					AQEAAEpvdXN0ZXJGEAAAAAEBAABkYXNoZWRD
+					aXJjbGUucG5nFAAAAAEGAAAEAAAAFAAAACgA
+					AAA4AAAASAAAAAgAAAAEAwAAn5EAAAAAAAAI
+					AAAABAMAAJ6rBQAAAAAACAAAAAQDAAAtldoK
+					AAAAAAgAAAAEAwAAd1gaCwAAAAAIAAAABAMA
+					ADCdOwsAAAAAFAAAAAEGAAB8AAAAjAAAAJwA
+					AACsAAAAvAAAAAgAAAAABAAAQbgNy7cAAAAY
+					AAAAAQIAAAEAAAAAAAAADwAAAAAAAAAAAAAA
+					AAAAAAAAAAABBQAABAAAAAMDAAAFAAAABAAA
+					AAMDAAADAAAACAAAAAQDAAADAAAAAAAAAAQA
+					AAADAwAA9QEAAAYAAAABAQAATWFjIEhEAAAI
+					AAAABAMAAAAAdAU6AAAACAAAAAAEAABBsy/f
+					vAAAACQAAAABAQAAOTVDNjEzMDYtMUE1Mi0z
+					ODUwLUI2NjgtMDExNDg1NERGRjVFGAAAAAEC
+					AACBAAAAAQAIAO8/AAABAAgAAAAAAAAAAAAB
+					AAAAAQEAAC8AAAAEAAAAAwMAAAABAAC7AAAA
+					AQIAAGEzNGE5YzU4NmE4ZTcwM2YzMzhhNDg5
+					NWQwZGFjYzUwMjZmOTJkYTI7MDAwMDAwMDA7
+					MDAwMDAwMDAwMDAwMDAyMDtjb20uYXBwbGUu
+					YXBwLXNhbmRib3gucmVhZC13cml0ZTswMDAw
+					MDAwMTswMTAwMDAwMTswMDAwMDAwMDBiM2I5
+					ZDMwOy91c2Vycy9qb2hud2lsc29uL2Ryb3Bi
+					b3gvam91c3RlcmYvZGFzaGVkY2lyY2xlLnBu
+					ZwAA8AAAAP7///8BAAAAAAAAABMAAAAEEAAA
+					YAAAAAAAAAAFEAAAzAAAAAAAAAAQEAAA+AAA
+					AAAAAABAEAAA6AAAAAAAAABUEAAAIAEAAAAA
+					AABVEAAALAEAAAAAAABWEAAAGAEAAAAAAAAC
+					IAAA0AEAAAAAAAAQIAAAVAEAAAAAAAARIAAA
+					hAEAAAAAAAASIAAAZAEAAAAAAAATIAAAdAEA
+					AAAAAAAgIAAAsAEAAAAAAAAwIAAAGAEAAAAA
+					AAABwAAAOAEAAAAAAAARwAAAFAAAAAAAAAAS
+					wAAASAEAAAAAAAAQ0AAA3AEAAAAAAACA8AAA
+					6AEAAAAAAAA=
+					</data>
+					<key>IsSHSprite</key>
+					<true/>
+					<key>PhysicProperties</key>
+					<dict>
+						<key>AngularDamping</key>
+						<real>0.0</real>
+						<key>AngularVelocity</key>
+						<real>0.0</real>
+						<key>CanSleep</key>
+						<true/>
+						<key>FixedRot</key>
+						<false/>
+						<key>GravityScale</key>
+						<real>1</real>
+						<key>HandledBySH</key>
+						<true/>
+						<key>IsBullet</key>
+						<false/>
+						<key>LinearDamping</key>
+						<real>0.0</real>
+						<key>LinearVelocity</key>
+						<string>{0, 0}</string>
+						<key>SH_ComplexShapes</key>
+						<array/>
+						<key>Type</key>
+						<integer>3</integer>
+					</dict>
+					<key>SHSheetName</key>
+					<string>JoustF</string>
+					<key>SHSpriteName</key>
+					<string>dashedCircle</string>
+					<key>SheetImage</key>
+					<string>JoustF_JoustF.png</string>
+					<key>SheetImage-HD</key>
+					<string>JoustF_JoustF-ipadhd.png</string>
+					<key>TextureProperties</key>
+					<dict>
+						<key>Angle</key>
+						<integer>0</integer>
+						<key>Border</key>
+						<integer>0</integer>
+						<key>CanBeTrimmed</key>
+						<true/>
+						<key>Color</key>
+						<string>{{1, 1}, {1, 1}}</string>
+						<key>ConvertedFromOldFormat</key>
+						<false/>
+						<key>CustomClassName</key>
+						<string></string>
+						<key>FlipX</key>
+						<false/>
+						<key>FlipY</key>
+						<false/>
+						<key>Frame</key>
+						<string>{{940, 124}, {50, 50.5}}</string>
+						<key>Frame-HD</key>
+						<string>{{1880, 248}, {100, 101}}</string>
+						<key>Image</key>
+						<string>JoustF_JoustF.png</string>
+						<key>Image-HD</key>
+						<string>JoustF_JoustF-ipadhd.png</string>
+						<key>IsCropped</key>
+						<false/>
+						<key>IsDrawable</key>
+						<true/>
+						<key>IsRotated</key>
+						<true/>
+						<key>IsTrimmed</key>
+						<true/>
+						<key>Name</key>
+						<string>dashedCircle</string>
+						<key>Opacity</key>
+						<real>1</real>
+						<key>OriginalImage</key>
+						<string>/Users/johnwilson/Dropbox/JousterF/dashedCircle.png</string>
+						<key>OriginalImage_RelativePath</key>
+						<string>../../../../Dropbox/JousterF/dashedCircle.png/</string>
+						<key>OriginalRect</key>
+						<string>{{6, 5}, {100, 101}}</string>
+						<key>OriginalSize</key>
+						<string>{113, 112}</string>
+						<key>Position</key>
+						<string>{1880, 248}</string>
+						<key>Scale</key>
+						<string>{1, 1}</string>
+						<key>SpriteSize</key>
+						<string>{56.5, 56}</string>
+						<key>SpriteWasBreaked</key>
+						<false/>
+						<key>Tag</key>
+						<integer>0</integer>
+						<key>TextureOffset</key>
+						<string>{-0.25, 0.25}</string>
+						<key>UsesBatchRendering</key>
+						<true/>
+						<key>ZOrder</key>
+						<integer>0</integer>
+					</dict>
+				</dict>
+				<key>dashedCircleFiller</key>
+				<dict>
+					<key>DocumentSecurityImageBookmark</key>
+					<data>
+					Ym9va+QDAAAAAAQQMAAAAAAAAAAAAAAAAAAA
+					AAAAAAAAAAAAAAAAAAAAAAAAAAAAvAIAAAUA
+					AAABAQAAVXNlcnMAAAAKAAAAAQEAAGpvaG53
+					aWxzb24AAAcAAAABAQAARHJvcGJveAAIAAAA
+					AQEAAEpvdXN0ZXJGFgAAAAEBAABkYXNoZWRD
+					aXJjbGVGaWxsZXIucG5nAAAUAAAAAQYAAAQA
+					AAAUAAAAKAAAADgAAABIAAAACAAAAAQDAACf
+					kQAAAAAAAAgAAAAEAwAAnqsFAAAAAAAIAAAA
+					BAMAAC2V2goAAAAACAAAAAQDAAB3WBoLAAAA
+					AAgAAAAEAwAAbp07CwAAAAAUAAAAAQYAAIQA
+					AACUAAAApAAAALQAAADEAAAACAAAAAAEAABB
+					uA3OxgAAABgAAAABAgAAAQAAAAAAAAAPAAAA
+					AAAAAAAAAAAAAAAAAAAAAAEFAAAEAAAAAwMA
+					AAUAAAAEAAAAAwMAAAMAAAAIAAAABAMAAAMA
+					AAAAAAAABAAAAAMDAAD1AQAABgAAAAEBAABN
+					YWMgSEQAAAgAAAAEAwAAAAB0BToAAAAIAAAA
+					AAQAAEGzL9+8AAAAJAAAAAEBAAA5NUM2MTMw
+					Ni0xQTUyLTM4NTAtQjY2OC0wMTE0ODU0REZG
+					NUUYAAAAAQIAAIEAAAABAAgA7z8AAAEACAAA
+					AAAAAAAAAAEAAAABAQAALwAAAAQAAAADAwAA
+					AAEAAMEAAAABAgAAYTNjYmNjN2YxOTMyNDE0
+					NDE0NTFhZWZkZDUyYmRiZGZiMmUzNTA2NTsw
+					MDAwMDAwMDswMDAwMDAwMDAwMDAwMDIwO2Nv
+					bS5hcHBsZS5hcHAtc2FuZGJveC5yZWFkLXdy
+					aXRlOzAwMDAwMDAxOzAxMDAwMDAxOzAwMDAw
+					MDAwMGIzYjlkNmU7L3VzZXJzL2pvaG53aWxz
+					b24vZHJvcGJveC9qb3VzdGVyZi9kYXNoZWRj
+					aXJjbGVmaWxsZXIucG5nAAAAAPAAAAD+////
+					AQAAAAAAAAATAAAABBAAAGgAAAAAAAAABRAA
+					ANQAAAAAAAAAEBAAAAABAAAAAAAAQBAAAPAA
+					AAAAAAAAVBAAACgBAAAAAAAAVRAAADQBAAAA
+					AAAAVhAAACABAAAAAAAAAiAAANgBAAAAAAAA
+					ECAAAFwBAAAAAAAAESAAAIwBAAAAAAAAEiAA
+					AGwBAAAAAAAAEyAAAHwBAAAAAAAAICAAALgB
+					AAAAAAAAMCAAACABAAAAAAAAAcAAAEABAAAA
+					AAAAEcAAABQAAAAAAAAAEsAAAFABAAAAAAAA
+					ENAAAOQBAAAAAAAAgPAAAPABAAAAAAAA
+					</data>
+					<key>IsSHSprite</key>
+					<true/>
+					<key>PhysicProperties</key>
+					<dict>
+						<key>AngularDamping</key>
+						<real>0.0</real>
+						<key>AngularVelocity</key>
+						<real>0.0</real>
+						<key>CanSleep</key>
+						<true/>
+						<key>FixedRot</key>
+						<false/>
+						<key>GravityScale</key>
+						<real>1</real>
+						<key>HandledBySH</key>
+						<true/>
+						<key>IsBullet</key>
+						<false/>
+						<key>LinearDamping</key>
+						<real>0.0</real>
+						<key>LinearVelocity</key>
+						<string>{0, 0}</string>
+						<key>SH_ComplexShapes</key>
+						<array/>
+						<key>Type</key>
+						<integer>3</integer>
+					</dict>
+					<key>SHSheetName</key>
+					<string>JoustF</string>
+					<key>SHSpriteName</key>
+					<string>dashedCircleFiller</string>
+					<key>SheetImage</key>
+					<string>JoustF_JoustF.png</string>
+					<key>SheetImage-HD</key>
+					<string>JoustF_JoustF-ipadhd.png</string>
+					<key>TextureProperties</key>
+					<dict>
+						<key>Angle</key>
+						<integer>0</integer>
+						<key>Border</key>
+						<integer>0</integer>
+						<key>CanBeTrimmed</key>
+						<true/>
+						<key>Color</key>
+						<string>{{1, 1}, {1, 1}}</string>
+						<key>ConvertedFromOldFormat</key>
+						<false/>
+						<key>CustomClassName</key>
+						<string></string>
+						<key>FlipX</key>
+						<false/>
+						<key>FlipY</key>
+						<false/>
+						<key>Frame</key>
+						<string>{{940, 70}, {50.5, 50.5}}</string>
+						<key>Frame-HD</key>
+						<string>{{1880, 140}, {101, 101}}</string>
+						<key>Image</key>
+						<string>JoustF_JoustF.png</string>
+						<key>Image-HD</key>
+						<string>JoustF_JoustF-ipadhd.png</string>
+						<key>IsCropped</key>
+						<false/>
+						<key>IsDrawable</key>
+						<true/>
+						<key>IsRotated</key>
+						<false/>
+						<key>IsTrimmed</key>
+						<true/>
+						<key>Name</key>
+						<string>dashedCircleFiller</string>
+						<key>Opacity</key>
+						<real>1</real>
+						<key>OriginalImage</key>
+						<string>/Users/johnwilson/Dropbox/JousterF/dashedCircleFiller.png</string>
+						<key>OriginalImage_RelativePath</key>
+						<string>../../../../Dropbox/JousterF/dashedCircleFiller.png/</string>
+						<key>OriginalRect</key>
+						<string>{{6, 5}, {101, 101}}</string>
+						<key>OriginalSize</key>
+						<string>{113, 112}</string>
+						<key>Position</key>
+						<string>{1880, 140}</string>
+						<key>Scale</key>
+						<string>{1, 1}</string>
+						<key>SpriteSize</key>
+						<string>{56.5, 56}</string>
+						<key>SpriteWasBreaked</key>
+						<false/>
+						<key>Tag</key>
+						<integer>0</integer>
+						<key>TextureOffset</key>
+						<string>{0, 0.25}</string>
+						<key>UsesBatchRendering</key>
+						<true/>
+						<key>ZOrder</key>
+						<integer>0</integer>
+					</dict>
+				</dict>
+				<key>timerCircle</key>
+				<dict>
+					<key>DocumentSecurityImageBookmark</key>
+					<data>
+					Ym9va9QDAAAAAAQQMAAAAAAAAAAAAAAAAAAA
+					AAAAAAAAAAAAAAAAAAAAAAAAAAAArAIAAAUA
+					AAABAQAAVXNlcnMAAAAKAAAAAQEAAGpvaG53
+					aWxzb24AAAcAAAABAQAARHJvcGJveAAIAAAA
+					AQEAAEpvdXN0ZXJGDwAAAAEBAAB0aW1lckNp
+					cmNsZS5wbmcAFAAAAAEGAAAEAAAAFAAAACgA
+					AAA4AAAASAAAAAgAAAAEAwAAn5EAAAAAAAAI
+					AAAABAMAAJ6rBQAAAAAACAAAAAQDAAAtldoK
+					AAAAAAgAAAAEAwAAd1gaCwAAAAAIAAAABAMA
+					ADKdOwsAAAAAFAAAAAEGAAB8AAAAjAAAAJwA
+					AACsAAAAvAAAAAgAAAAABAAAQbgNzWQAAAAY
+					AAAAAQIAAAEAAAAAAAAADwAAAAAAAAAAAAAA
+					AAAAAAAAAAABBQAABAAAAAMDAAAFAAAABAAA
+					AAMDAAADAAAACAAAAAQDAAADAAAAAAAAAAQA
+					AAADAwAA9QEAAAYAAAABAQAATWFjIEhEAAAI
+					AAAABAMAAAAAdAU6AAAACAAAAAAEAABBsy/f
+					vAAAACQAAAABAQAAOTVDNjEzMDYtMUE1Mi0z
+					ODUwLUI2NjgtMDExNDg1NERGRjVFGAAAAAEC
+					AACBAAAAAQAIAO8/AAABAAgAAAAAAAAAAAAB
+					AAAAAQEAAC8AAAAEAAAAAwMAAAABAAC6AAAA
+					AQIAADIwNmM4NDllM2I5YjBlNDgwYWQ5ZTRj
+					YWUxNTI4YjdlMzRkZTMwNzE7MDAwMDAwMDA7
+					MDAwMDAwMDAwMDAwMDAyMDtjb20uYXBwbGUu
+					YXBwLXNhbmRib3gucmVhZC13cml0ZTswMDAw
+					MDAwMTswMTAwMDAwMTswMDAwMDAwMDBiM2I5
+					ZDMyOy91c2Vycy9qb2hud2lsc29uL2Ryb3Bi
+					b3gvam91c3RlcmYvdGltZXJjaXJjbGUucG5n
+					AAAA8AAAAP7///8BAAAAAAAAABMAAAAEEAAA
+					YAAAAAAAAAAFEAAAzAAAAAAAAAAQEAAA+AAA
+					AAAAAABAEAAA6AAAAAAAAABUEAAAIAEAAAAA
+					AABVEAAALAEAAAAAAABWEAAAGAEAAAAAAAAC
+					IAAA0AEAAAAAAAAQIAAAVAEAAAAAAAARIAAA
+					hAEAAAAAAAASIAAAZAEAAAAAAAATIAAAdAEA
+					AAAAAAAgIAAAsAEAAAAAAAAwIAAAGAEAAAAA
+					AAABwAAAOAEAAAAAAAARwAAAFAAAAAAAAAAS
+					wAAASAEAAAAAAAAQ0AAA3AEAAAAAAACA8AAA
+					6AEAAAAAAAA=
+					</data>
+					<key>IsSHSprite</key>
+					<true/>
+					<key>PhysicProperties</key>
+					<dict>
+						<key>AngularDamping</key>
+						<real>0.0</real>
+						<key>AngularVelocity</key>
+						<real>0.0</real>
+						<key>CanSleep</key>
+						<true/>
+						<key>FixedRot</key>
+						<false/>
+						<key>GravityScale</key>
+						<real>1</real>
+						<key>HandledBySH</key>
+						<true/>
+						<key>IsBullet</key>
+						<false/>
+						<key>LinearDamping</key>
+						<real>0.0</real>
+						<key>LinearVelocity</key>
+						<string>{0, 0}</string>
+						<key>SH_ComplexShapes</key>
+						<array/>
+						<key>Type</key>
+						<integer>3</integer>
+					</dict>
+					<key>SHSheetName</key>
+					<string>JoustF</string>
+					<key>SHSpriteName</key>
+					<string>timerCircle</string>
+					<key>SheetImage</key>
+					<string>JoustF_JoustF.png</string>
+					<key>SheetImage-HD</key>
+					<string>JoustF_JoustF-ipadhd.png</string>
+					<key>TextureProperties</key>
+					<dict>
+						<key>Angle</key>
+						<integer>0</integer>
+						<key>Border</key>
+						<integer>0</integer>
+						<key>CanBeTrimmed</key>
+						<true/>
+						<key>Color</key>
+						<string>{{1, 1}, {1, 1}}</string>
+						<key>ConvertedFromOldFormat</key>
+						<false/>
+						<key>CustomClassName</key>
+						<string></string>
+						<key>FlipX</key>
+						<false/>
+						<key>FlipY</key>
+						<false/>
+						<key>Frame</key>
+						<string>{{776, 168}, {128, 127.5}}</string>
+						<key>Frame-HD</key>
+						<string>{{1552, 336}, {256, 255}}</string>
+						<key>Image</key>
+						<string>JoustF_JoustF.png</string>
+						<key>Image-HD</key>
+						<string>JoustF_JoustF-ipadhd.png</string>
+						<key>IsCropped</key>
+						<false/>
+						<key>IsDrawable</key>
+						<true/>
+						<key>IsRotated</key>
+						<false/>
+						<key>IsTrimmed</key>
+						<true/>
+						<key>Name</key>
+						<string>timerCircle</string>
+						<key>Opacity</key>
+						<real>1</real>
+						<key>OriginalImage</key>
+						<string>/Users/johnwilson/Dropbox/JousterF/timerCircle.png</string>
+						<key>OriginalImage_RelativePath</key>
+						<string>../../../../Dropbox/JousterF/timerCircle.png/</string>
+						<key>OriginalRect</key>
+						<string>{{8, 9}, {256, 255}}</string>
+						<key>OriginalSize</key>
+						<string>{273, 271}</string>
+						<key>Position</key>
+						<string>{1552, 336}</string>
+						<key>Scale</key>
+						<string>{1, 1}</string>
+						<key>SpriteSize</key>
+						<string>{136.5, 135.5}</string>
+						<key>SpriteWasBreaked</key>
+						<false/>
+						<key>Tag</key>
+						<integer>0</integer>
+						<key>TextureOffset</key>
+						<string>{-0.25, -0.5}</string>
 						<key>UsesBatchRendering</key>
 						<true/>
 						<key>ZOrder</key>
@@ -914,7 +1337,7 @@
 		<key>PvrRemoveParent</key>
 		<true/>
 		<key>ResamplingAlgorithm</key>
-		<integer>0</integer>
+		<integer>12</integer>
 		<key>ResizingOptions</key>
 		<integer>1</integer>
 		<key>SaveStyle</key>

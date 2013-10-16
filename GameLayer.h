@@ -9,14 +9,23 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 
-#define COLOR_TOUCHAREA ccc3(223,214,195)
-#define COLOR_TOUCHAREA_B4 ccc4(223,214,195,255)
-#define COLOR_GAMEAREA ccc3(25,25,25)
-#define COLOR_GAMEAREA_B4 ccc4(25,25,25,255)
+//#define COLOR_TOUCHAREA ccc3(223,214,195)
+//#define COLOR_TOUCHAREA_B4 ccc4(223,214,195,255)
+//#define COLOR_GAMEAREA ccc3(25,25,25)
+//#define COLOR_GAMEAREA_B4 ccc4(25,25,25,255)
+
+#define COLOR_TOUCHAREA ccc3(66,66,66)
+#define COLOR_TOUCHAREA_B4 ccc4(111,111,111, 255)
+#define COLOR_GAMEAREA ccc3(133,133,155)
+#define COLOR_GAMEAREA_B4 ccc4(133,133,133,255)
+
+#define COLOR_GAMEBORDER ccc3(60,60,60)
+#define COLOR_GAMEBORDER_B4 ccc4(60,60,60,255)
 
 //#define CONTROL_OFFSET 286
-#define CONTROL_OFFSET 312
-#define EXTRA_CONTROL_OFFSET 370
+//#define CONTROL_OFFSET 312
+#define CONTROL_OFFSET 230
+#define EXTRA_CONTROL_OFFSET 280
 #define MIDDLEBAR_HEIGHT 60
 
 #define ROUND_TIME 20
@@ -45,7 +54,6 @@ typedef enum GameState
     
     
 
-    
     Jouster *redJouster;
     Jouster *blueJouster;
     
@@ -71,6 +79,7 @@ typedef enum GameState
     
     //center sprite
     CCSprite *centerSprite;
+    BOOL centerVisible;
     
     //state stuff
     int currentRound;
@@ -80,23 +89,15 @@ typedef enum GameState
     BOOL didRedWinRound;
     GameState currentState;
     
-    //victory count sprites
-    NSMutableArray *redVictoryArray;
-    NSMutableArray *blueVictoryArray;
-    CCMotionStreak *streak;
-    
-    CCParticleSystemQuad *redMotionStreak;
-    CCParticleSystemQuad *blueMotionStreak;
 }
 
-
+@property BOOL didRedWinRound;
+@property int blueWins, redWins;
 @property (retain, nonatomic) PowerStone *powerStone;
 @property (retain, nonatomic) NSMutableArray *vortexArray;
-@property (retain, nonatomic) NSMutableArray *redVictoryArray;
-@property (retain, nonatomic) NSMutableArray *blueVictoryArray;
+@property (nonatomic, assign) Jouster *redJouster;
+@property (nonatomic, assign) Jouster *blueJouster;
 
-
-@property (retain, nonatomic) SneakyJoystick *redJoystick;
 
 -(id) initWithPlayerOne:(int) characterOne playerTwo:(int) characterTwo;
 -(void) spawnVortexAtPoint:(CGPoint) point;
@@ -130,8 +131,8 @@ typedef enum GameState
 //special effects
 //-(void) clashEffect:(CGPoint) p1 otherPoint:(CGPoint) p2;
 -(void) clashEffect:(CGPoint) p1 otherPoint:(CGPoint) p2 withMagnitude:(float) magnitude withStun:(BOOL) stun;
+-(void) deathEffect:(Jouster*) deadJouster;
 -(CCParticleSystemQuad*) vortexEffect:(CGPoint) pt;
 
-#pragma mark - victory point stuff
--(void) refreshVictoryPoint;
+
 @end

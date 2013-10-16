@@ -8,16 +8,17 @@
 
 #import "UILayer.h"
 #import "GameLayer.h"
-
+#import "Jouster.h"
 
 
 
 @implementation UILayer
 
-@synthesize roundTimer, displayedTime, timerLabel;
+@synthesize roundTimer, displayedTime, timerLabel, redVictoryArray, blueVictoryArray;;
 
--(id) init{
+-(id) initWithGameLayer:(GameLayer*) gLayer{
     if(self = [super init]){
+        gameLayer = gLayer;
         CGSize winSize= [[CCDirector sharedDirector] winSize];
         redLayer = [CCLayerColor layerWithColor:COLOR_TOUCHAREA_B4 width:CONTROL_OFFSET height:winSize.height];
         redLayer.position = ccp(0, 0);
@@ -34,11 +35,11 @@
 //        [self addChild:blueBorderLayer];
         
         //top and bottom bar
-        topLayer = [CCLayerColor layerWithColor:ccc4(255, 255, 255, 255)
+        topLayer = [CCLayerColor layerWithColor:COLOR_GAMEBORDER_B4
                                                         width:winSize.width - 2*CONTROL_OFFSET
                                                        height:winSize.height/2];
         topLayer.position = ccp(CONTROL_OFFSET, -winSize.height/2);
-        bottomLayer = [CCLayerColor layerWithColor:ccc4(255, 255, 255, 255)
+        bottomLayer = [CCLayerColor layerWithColor:COLOR_GAMEBORDER_B4
                                                            width:winSize.width - 2*CONTROL_OFFSET
                                                           height:winSize.height/2];
         bottomLayer.position = ccp(CONTROL_OFFSET, winSize.height);
@@ -46,10 +47,12 @@
         [self addChild:bottomLayer];
         
         redOverlay = [[[CCSprite alloc] initWithSpriteFrameName:@"touchBorders"] autorelease];
+        redOverlay.color = COLOR_GAMEBORDER;
         redOverlay.position = ccp(redOverlay.contentSize.width/2, winSize.height/2 );
         [self addChild:redOverlay];
         
         blueOverlay = [[[CCSprite alloc] initWithSpriteFrameName:@"touchBorders"] autorelease];
+        blueOverlay.color = COLOR_GAMEBORDER;
         blueOverlay.scaleX = -1;
         blueOverlay.position = ccp(winSize.width - blueOverlay.contentSize.width/2, winSize.height/2 );
         [self addChild:blueOverlay];
@@ -62,8 +65,56 @@
         timerLabel.color = ccBLACK;
         [self addChild:timerLabel];
         
+        
+        //victory stuff
+        //holders for the victory spots
+
+        
+        self.redVictoryArray = [NSMutableArray array];
+        self.blueVictoryArray = [NSMutableArray array];
+        for(int i = 0; i < 3; i++){
+            CCSprite *victorySprite = [[[CCSprite alloc] initWithSpriteFrameName:@"dashedCircleFiller"] autorelease];
+            victorySprite.scale = .75;
+            [self addChild:victorySprite];
+            victorySprite.color = ccORANGE;
+            [self.redVictoryArray addObject:victorySprite];
+        }
+        for(int i = 0; i < 3; i++){
+            CCSprite *victorySprite = [[[CCSprite alloc] initWithSpriteFrameName:@"dashedCircleFiller"] autorelease];
+            victorySprite.scale = .75;
+            victorySprite.color = ccORANGE;
+            [self addChild:victorySprite];
+            
+            
+            [self.blueVictoryArray addObject:victorySprite];
+        }
+        
+        for(int i = 0; i < 3; i++){
+            CCSprite *victorySprite = [[[CCSprite alloc] initWithSpriteFrameName:@"dashedCircle"] autorelease];
+            victorySprite.scale = .75;
+            victorySprite.color = ccWHITE;
+            victorySprite.position = ccp(CONTROL_OFFSET + 35 + i*45, 25);
+            [self addChild:victorySprite];
+        }
+        for(int i = 0; i < 3; i++){
+            CCSprite *victorySprite = [[[CCSprite alloc] initWithSpriteFrameName:@"dashedCircle"] autorelease];
+            victorySprite.scale = .75;
+            victorySprite.color = ccWHITE;
+            victorySprite.position = ccp((winSize.width - CONTROL_OFFSET) - 35 - i*45, 25);
+            [self addChild:victorySprite];
+        }
+        
+        [self refreshVictoryPoint];
+
+        
     }
     return self;
+}
+
+-(void) dealloc{
+    [redVictoryArray release];
+    [blueVictoryArray release];
+    [super dealloc];
 }
 
 
@@ -73,9 +124,9 @@
     blueLayer.position = ccp(winSize.width, 0);
     redOverlay.position = ccp(-blueOverlay.contentSize.width/2, winSize.height/2);
     blueOverlay.position = ccp(winSize.width + blueOverlay.contentSize.width/2, winSize.height/2 );
-    
-    CCActionInterval *redMove = [CCMoveTo actionWithDuration:1 position:ccp(redOverlay.contentSize.width/2, winSize.height/2)];
-    CCActionInterval *blueMove = [CCMoveTo actionWithDuration:1 position:ccp(winSize.width - blueOverlay.contentSize.width/2, winSize.height/2)];
+    //
+    CCActionInterval *redMove = [CCMoveTo actionWithDuration:1 position:ccp(CONTROL_OFFSET - redOverlay.contentSize.width/2, winSize.height/2)];
+    CCActionInterval *blueMove = [CCMoveTo actionWithDuration:1 position:ccp((winSize.width - CONTROL_OFFSET) + blueOverlay.contentSize.width/2, winSize.height/2)];
     CCActionInterval *redLayerMove = [CCMoveTo actionWithDuration:1 position:ccp(0, 0)];
     CCActionInterval *blueLayerMove = [CCMoveTo actionWithDuration:1 position:ccp(winSize.width - blueLayer.contentSize.width, 0)];
     
@@ -88,8 +139,6 @@
     [blueOverlay runAction:blueElastic];
     [redLayer runAction:redLayerElastic];
     [blueLayer runAction:blueLayerElastic];
-    
-    
 }
 
 -(void) smashTopBottomAlreadyInPlace:(BOOL) inPlace{
@@ -105,20 +154,60 @@
     CCActionInterval *topMove = [CCMoveTo actionWithDuration:1 position:ccp(topLayer.position.x, 0)];
     CCActionInterval *bottomMove = [CCMoveTo actionWithDuration:1 position:ccp(bottomLayer.position.x, winSize.height/2)];
     
-    CCEaseIn *topEase = [CCEaseIn actionWithAction:topMove rate:3];
-    CCEaseIn *bottomEase = [CCEaseIn actionWithAction:bottomMove rate:3];
+    CCEaseIn *topEase = [CCEaseIn actionWithAction:topMove rate:2];
+    CCEaseIn *bottomEase = [CCEaseIn actionWithAction:bottomMove rate:2];
     
     CCActionInterval *topMoveBack = [CCMoveTo actionWithDuration:1 position:ccp(CONTROL_OFFSET, MIDDLEBAR_HEIGHT - winSize.height/2)];
     CCActionInterval *bottomMoveBack = [CCMoveTo actionWithDuration:1 position:ccp(CONTROL_OFFSET, winSize.height - MIDDLEBAR_HEIGHT)];
     
-    CCEaseOut *topEaseBack = [CCEaseOut actionWithAction:topMoveBack rate:3];
-    CCEaseOut *bottomEaseBack = [CCEaseOut actionWithAction:bottomMoveBack rate:3];
+    CCEaseIn *topEaseBack = [CCEaseIn actionWithAction:topMoveBack rate:2];
+    CCEaseIn *bottomEaseBack = [CCEaseIn actionWithAction:bottomMoveBack rate:2];
     
     CCSequence *topSeq = [CCSequence actionOne:topEase two:topEaseBack];
     CCSequence *bottomSeq = [CCSequence actionOne:bottomEase two:bottomEaseBack];
     
     [topLayer runAction:topSeq];
     [bottomLayer runAction:bottomSeq];
+}
+
+
+#pragma mark - victory point stuff
+
+-(void) refreshVictoryPoint{
+    CGSize winSize= [[CCDirector sharedDirector] winSize];
+    //red victory
+    for(int i = 0; i < self.redVictoryArray.count; ++i){
+        CCSprite *victorySprite = [self.redVictoryArray objectAtIndex:i];
+        victorySprite.position = ccp(CONTROL_OFFSET + 34 + i*45, 25);
+        if(i < gameLayer.redWins){
+            victorySprite.visible = YES;
+        }else{
+            victorySprite.visible = NO;
+        }
+        //animate new victory patch
+        if(gameLayer.didRedWinRound && i == gameLayer.redWins-1){
+            victorySprite.position = gameLayer.blueJouster.position;
+            CCMoveTo *move = [CCMoveTo actionWithDuration:.7 position:ccp(CONTROL_OFFSET + 34 + i*45, 25)];
+            [victorySprite runAction:move];
+        }
+    }
+    
+    //red victory
+    for(int i = 0; i < self.blueVictoryArray.count; ++i){
+        CCSprite *victorySprite = [self.blueVictoryArray objectAtIndex:i];
+        victorySprite.position = ccp((winSize.width - CONTROL_OFFSET) - 36 - i*45, 25);
+        if(i < gameLayer.blueWins){
+            victorySprite.visible = YES;
+        }else{
+            victorySprite.visible = NO;
+        }
+        //animate new victory patch
+        if(!gameLayer.didRedWinRound && i == gameLayer.blueWins-1){
+            victorySprite.position = gameLayer.redJouster.position;
+            CCMoveTo *move = [CCMoveTo actionWithDuration:.7 position:ccp((winSize.width - CONTROL_OFFSET) - 36 - i*45, 25)];
+            [victorySprite runAction:move];
+        }
+    }
 }
 
 @end

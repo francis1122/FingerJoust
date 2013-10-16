@@ -11,6 +11,7 @@
 
 @interface TitleLayer : CCLayerColor {
     int playerOneChoice, playerTwoChoice;
+    CCSprite *jousterBoxLeft, *jousterBoxRight;
     
 }
 -(void) setWinner:(NSString*) winner;
