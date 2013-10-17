@@ -14,7 +14,7 @@
 
 @implementation UILayer
 
-@synthesize roundTimer, displayedTime, timerLabel, redVictoryArray, blueVictoryArray;;
+@synthesize roundTimer, displayedTime, timerLabel, victoryArrays;
 
 -(id) initWithGameLayer:(GameLayer*) gLayer{
     if(self = [super init]){
@@ -68,27 +68,43 @@
         
         //victory stuff
         //holders for the victory spots
-
-        
-        self.redVictoryArray = [NSMutableArray array];
-        self.blueVictoryArray = [NSMutableArray array];
-        for(int i = 0; i < 3; i++){
-            CCSprite *victorySprite = [[[CCSprite alloc] initWithSpriteFrameName:@"dashedCircleFiller"] autorelease];
+        for(int i = 0; i < 4; i++)
+        for(int j = 0; j < 3; j++){
+            CGPoint pos = CGPointZero;
+            if(i == 0){
+                pos = ccp(CONTROL_OFFSET + 35 + j*45, winSize.height - 25);
+            }else if(i == 1){
+                pos = ccp((winSize.width - CONTROL_OFFSET) - 35 - j*45, winSize.height - 25);
+            }else if(i == 2){
+                pos = ccp((winSize.width - CONTROL_OFFSET) - 35 - j*45, 25);
+            }else if(i == 3){
+                pos = ccp(CONTROL_OFFSET + 35 + j*45, 25);
+            }
+            CCSprite *victorySprite = [[[CCSprite alloc] initWithSpriteFrameName:@"dashedCircle"] autorelease];
             victorySprite.scale = .75;
+            victorySprite.color = ccWHITE;
+            victorySprite.position = pos;
             [self addChild:victorySprite];
-            victorySprite.color = ccORANGE;
-            [self.redVictoryArray addObject:victorySprite];
-        }
-        for(int i = 0; i < 3; i++){
-            CCSprite *victorySprite = [[[CCSprite alloc] initWithSpriteFrameName:@"dashedCircleFiller"] autorelease];
-            victorySprite.scale = .75;
-            victorySprite.color = ccORANGE;
-            [self addChild:victorySprite];
-            
-            
-            [self.blueVictoryArray addObject:victorySprite];
         }
         
+        self.victoryArrays = [NSMutableArray array];
+        for(int i = 0; i < 4; i++){
+            NSMutableArray *victoryArray = [NSMutableArray array];
+            for(int i = 0; i < 3; i++){
+                CCSprite *victorySprite = [[[CCSprite alloc] initWithSpriteFrameName:@"dashedCircleFiller"] autorelease];
+                victorySprite.scale = .75;
+                [self addChild:victorySprite];
+                victorySprite.color = ccORANGE;
+                [victoryArray addObject:victorySprite];
+            }
+            [self.victoryArrays addObject:victoryArray];
+        }
+        //fixes the first round crash
+        gameLayer.lastWinner = 20020;
+        [self refreshVictoryPoint];
+        
+        
+        /*
         for(int i = 0; i < 3; i++){
             CCSprite *victorySprite = [[[CCSprite alloc] initWithSpriteFrameName:@"dashedCircle"] autorelease];
             victorySprite.scale = .75;
@@ -102,9 +118,9 @@
             victorySprite.color = ccWHITE;
             victorySprite.position = ccp((winSize.width - CONTROL_OFFSET) - 35 - i*45, 25);
             [self addChild:victorySprite];
-        }
+        }*/
         
-        [self refreshVictoryPoint];
+        //[self refreshVictoryPoint];
 
         
     }
@@ -112,8 +128,7 @@
 }
 
 -(void) dealloc{
-    [redVictoryArray release];
-    [blueVictoryArray release];
+    [victoryArrays release];
     [super dealloc];
 }
 
@@ -175,25 +190,49 @@
 
 -(void) refreshVictoryPoint{
     CGSize winSize= [[CCDirector sharedDirector] winSize];
+    
+    //check count
+    if(gameLayer.lastWinner <= [victoryArrays count]){
+
+    }else{
+        NSLog(@"some error happened");
+        return;
+    }
+    NSMutableArray *victoryArray = [self.victoryArrays objectAtIndex:gameLayer.lastWinner - 1];
+    
+    
     //red victory
-    for(int i = 0; i < self.redVictoryArray.count; ++i){
-        CCSprite *victorySprite = [self.redVictoryArray objectAtIndex:i];
-        victorySprite.position = ccp(CONTROL_OFFSET + 34 + i*45, 25);
-        if(i < gameLayer.redWins){
+    for(int i = 0; i < victoryArray.count; ++i){
+        CCSprite *victorySprite = [victoryArray objectAtIndex:i];
+        CGPoint pos = CGPointZero;
+        if(gameLayer.lastWinner - 1 == 0){
+            pos = ccp(CONTROL_OFFSET + 35 + i*45, winSize.height - 25);
+        }else if(gameLayer.lastWinner - 1 == 1){
+            pos = ccp((winSize.width - CONTROL_OFFSET) - 35 - i*45, winSize.height - 25);
+        }else if(gameLayer.lastWinner - 1 == 2){
+            pos = ccp((winSize.width - CONTROL_OFFSET) - 35 - i*45, 25);
+        }else if(gameLayer.lastWinner - 1 == 3){
+            pos = ccp(CONTROL_OFFSET + 35 + i*45, 25);
+        }
+        
+        victorySprite.position = pos;
+        Jouster * winningJouster = [gameLayer.jousterArray objectAtIndex:gameLayer.lastWinner - 1];
+        int wins = winningJouster.wins;
+        if(i < wins){
             victorySprite.visible = YES;
         }else{
             victorySprite.visible = NO;
         }
         //animate new victory patch
-        if(gameLayer.didRedWinRound && i == gameLayer.redWins-1){
+        /*if(i == wins - 1){
             victorySprite.position = gameLayer.blueJouster.position;
             CCMoveTo *move = [CCMoveTo actionWithDuration:.7 position:ccp(CONTROL_OFFSET + 34 + i*45, 25)];
             [victorySprite runAction:move];
-        }
+        }*/
     }
     
     //red victory
-    for(int i = 0; i < self.blueVictoryArray.count; ++i){
+    /*for(int i = 0; i < self.blueVictoryArray.count; ++i){
         CCSprite *victorySprite = [self.blueVictoryArray objectAtIndex:i];
         victorySprite.position = ccp((winSize.width - CONTROL_OFFSET) - 36 - i*45, 25);
         if(i < gameLayer.blueWins){
@@ -207,7 +246,8 @@
             CCMoveTo *move = [CCMoveTo actionWithDuration:.7 position:ccp((winSize.width - CONTROL_OFFSET) - 36 - i*45, 25)];
             [victorySprite runAction:move];
         }
-    }
+    }*/
 }
+
 
 @end

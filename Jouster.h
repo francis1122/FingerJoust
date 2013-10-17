@@ -36,6 +36,9 @@
     float aliveTicker;
     CGPoint joustPosition;
     
+    int wins;
+    BOOL isDead;
+    
     
     //powerStones collected
     int powerStones;
@@ -54,9 +57,9 @@
 
 
 @property int powerStones;
-@property int player;
+@property int player, wins;
 @property float bodyRadius, joustRadius, orbitalOffset;
-@property BOOL waitingForTouch;
+@property BOOL waitingForTouch, isDead;
 @property CGPoint velocity, joustPosition;
 @property CGPoint joustVelocity;
 

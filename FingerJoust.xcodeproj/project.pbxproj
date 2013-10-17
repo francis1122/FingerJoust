@@ -171,6 +171,7 @@
 		DE8F13B517C33C6200050E5E /* JousterD.m in Sources */ = {isa = PBXBuildFile; fileRef = DE8F13B417C33C6200050E5E /* JousterD.m */; };
 		DE91641917BB0929009817AD /* JousterB.m in Sources */ = {isa = PBXBuildFile; fileRef = DE91641817BB0929009817AD /* JousterB.m */; };
 		DE919A3F17B22CCD00DAA954 /* JousterA.m in Sources */ = {isa = PBXBuildFile; fileRef = DE919A3E17B22CCD00DAA954 /* JousterA.m */; };
+		DEA1B46D180FB6C7003AC1CC /* PlayerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DEA1B46C180FB6C7003AC1CC /* PlayerManager.m */; };
 		DEA6ADC01809DBBC000A4B0C /* BodyOuter.png in Resources */ = {isa = PBXBuildFile; fileRef = DEA6ADBF1809DBBC000A4B0C /* BodyOuter.png */; };
 		DEA6ADC21809DEE4000A4B0C /* MotionStreak.plist in Resources */ = {isa = PBXBuildFile; fileRef = DEA6ADC11809DEE4000A4B0C /* MotionStreak.plist */; };
 		DEA6ADC6180B6F9D000A4B0C /* UILayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DEA6ADC5180B6F9D000A4B0C /* UILayer.m */; };
@@ -507,6 +508,8 @@
 		DE91641817BB0929009817AD /* JousterB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JousterB.m; sourceTree = "<group>"; };
 		DE919A3D17B22CCD00DAA954 /* JousterA.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JousterA.h; sourceTree = "<group>"; };
 		DE919A3E17B22CCD00DAA954 /* JousterA.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JousterA.m; sourceTree = "<group>"; };
+		DEA1B46B180FB6C7003AC1CC /* PlayerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerManager.h; sourceTree = "<group>"; };
+		DEA1B46C180FB6C7003AC1CC /* PlayerManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerManager.m; sourceTree = "<group>"; };
 		DEA6ADBF1809DBBC000A4B0C /* BodyOuter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BodyOuter.png; sourceTree = "<group>"; };
 		DEA6ADC11809DEE4000A4B0C /* MotionStreak.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = MotionStreak.plist; sourceTree = "<group>"; };
 		DEA6ADC4180B6F9D000A4B0C /* UILayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UILayer.h; sourceTree = "<group>"; };
@@ -599,6 +602,8 @@
 				DE1CC953178FA31D00CB1C59 /* IntroLayer.m */,
 				DEBB5272178FAD7D006FEB1C /* TitleLayer.h */,
 				DEBB5273178FAD7D006FEB1C /* TitleLayer.m */,
+				DEA1B46B180FB6C7003AC1CC /* PlayerManager.h */,
+				DEA1B46C180FB6C7003AC1CC /* PlayerManager.m */,
 				DEA6ADC3180B6F73000A4B0C /* Game */,
 				DE85E53517C971C5002BCC79 /* MathHelper.h */,
 				DE85E53617C971C5002BCC79 /* MathHelper.m */,
@@ -1313,6 +1318,7 @@
 				DE1CC94E178FA31D00CB1C59 /* AppDelegate.m in Sources */,
 				DE1CC951178FA31D00CB1C59 /* HelloWorldLayer.m in Sources */,
 				DE1CC954178FA31D00CB1C59 /* IntroLayer.m in Sources */,
+				DEA1B46D180FB6C7003AC1CC /* PlayerManager.m in Sources */,
 				DEBB5274178FAD7D006FEB1C /* TitleLayer.m in Sources */,
 				DEBB5277178FAF12006FEB1C /* GameLayer.m in Sources */,
 				DEBB527A178FB212006FEB1C /* Jouster.m in Sources */,

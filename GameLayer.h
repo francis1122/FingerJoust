@@ -53,9 +53,7 @@ typedef enum GameState
     UILayer *uiLayer;
     
     
-
-    Jouster *redJouster;
-    Jouster *blueJouster;
+    NSMutableArray *jousterArray;
     
     CCLabelTTF *blueWinsLabel;
     CCLabelTTF *redWinsLabel;
@@ -83,20 +81,17 @@ typedef enum GameState
     
     //state stuff
     int currentRound;
-    int blueWins;
-    int redWins;
+    int lastWinner;
+    
     float timeBeforeNewRoundStarts;
     BOOL didRedWinRound;
     GameState currentState;
     
 }
 
-@property BOOL didRedWinRound;
-@property int blueWins, redWins;
+@property int lastWinner;
 @property (retain, nonatomic) PowerStone *powerStone;
-@property (retain, nonatomic) NSMutableArray *vortexArray;
-@property (nonatomic, assign) Jouster *redJouster;
-@property (nonatomic, assign) Jouster *blueJouster;
+@property (retain, nonatomic) NSMutableArray *vortexArray, *jousterArray;
 
 
 -(id) initWithPlayerOne:(int) characterOne playerTwo:(int) characterTwo;
@@ -104,19 +99,19 @@ typedef enum GameState
 -(Jouster*) createJouster:(int) character;
 -(void) refreshUI;
 -(void) resetJousters;
--(void) spawnPowerStone;
+//-(void) spawnPowerStone;
 //-(void) spawnVortexAtPoint:(CGPoint)point;
 
 -(void) updateTimer:(ccTime) dt;
 -(void) updateVortex:(ccTime)dt;
 
 -(void) checkClosestJousterToCenter;
--(void) checkBodyOnBodyStun;
+-(void) checkBodyOnBodyStun:(Jouster *) jouseterA otherJouster:(Jouster *)jousterB;
 //collision stuff
 -(void) collisionChecks:(ccTime) dt;
 -(void) powerStoneCollisionCheck;
--(BOOL) bodyOnBodyCheck;
--(BOOL) jousterOnBodyCheck;
+-(BOOL) bodyOnBodyCheck:(Jouster *) jouster;
+-(void) jousterOnBodyCheck;
 -(BOOL) jousterOnJousterCheck;
 
 

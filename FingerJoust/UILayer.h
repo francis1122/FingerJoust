@@ -30,15 +30,13 @@
     CCLayerColor *bottomLayer;
     
     //victory count sprites
-    NSMutableArray *redVictoryArray;
-    NSMutableArray *blueVictoryArray;
+    NSMutableArray *victoryArrays;
 }
 
 @property float roundTimer;
 @property int displayedTime;
 @property (nonatomic, assign) CCLabelTTF *timerLabel;
-@property (retain, nonatomic) NSMutableArray *redVictoryArray;
-@property (retain, nonatomic) NSMutableArray *blueVictoryArray;
+@property (retain, nonatomic) NSMutableArray *victoryArrays;
 
 -(id) initWithGameLayer:(GameLayer*) gLayer;
 

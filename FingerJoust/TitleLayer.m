@@ -131,7 +131,7 @@
 
 -(void) setWinner:(NSString*) winner{
     // create and initialize a Label
-    CCLabelTTF *label = [CCLabelTTF labelWithString:winner fontName:@"Marker Felt" fontSize:128];
+    CCLabelTTF *label = [CCLabelTTF labelWithString:@"someone" fontName:@"Marker Felt" fontSize:128];
     
     // ask director for the window size
     CGSize size = [[CCDirector sharedDirector] winSize];
