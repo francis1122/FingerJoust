@@ -48,7 +48,7 @@ typedef enum GameState
     GAME_START = 4,
 }GameState;
 
-@class Jouster, PowerStone, SneakyJoystick, UILayer;
+@class Jouster, PowerStone, SneakyJoystick, UILayer, Player;
 @interface GameLayer : CCLayerColor  {
     UILayer *uiLayer;
     
@@ -93,10 +93,10 @@ typedef enum GameState
 @property (retain, nonatomic) PowerStone *powerStone;
 @property (retain, nonatomic) NSMutableArray *vortexArray, *jousterArray;
 
+-(Jouster*) getJousterWithPlayerNumber:(int) playerNumber;
 
--(id) initWithPlayerOne:(int) characterOne playerTwo:(int) characterTwo;
 -(void) spawnVortexAtPoint:(CGPoint) point;
--(Jouster*) createJouster:(int) character;
+-(Jouster*) createJouster:(int) character WithPlayer:(Player*) player;
 -(void) refreshUI;
 -(void) resetJousters;
 //-(void) spawnPowerStone;

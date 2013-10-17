@@ -9,18 +9,17 @@
 #import "JousterD.h"
 #import "GameLayer.h"
 #import "MathHelper.h"
-
+#import "Player.h"
 
 @implementation JousterD
 
--(id) init{
-    if(self = [super init]){
+-(id) initWithPlayer:(Player *) p{
+    if(self = [super initWithPlayer:p]){
         self.velocity = CGPointZero;
         waitingForTouch = YES;
         bodyRadius = 30;
         joustRadius = 20;
         orbitalOffset = 0;
-        player = 1;
         joustPosition = ccp(0,100);
         velocity = ccp(1,0);
         previousVelocity = ccp(1,0);
@@ -35,10 +34,10 @@
 -(void) resetJouster{
     [super resetJouster];
 
-    if(player == 1){
-    joustPosition = ccp(0,100);
+    if(player.playerNumber == 1){
+        joustPosition = ccp(0,100);
     }else{
-    joustPosition = ccp(0,-100);
+        joustPosition = ccp(0,-100);
     }
     previousVelocity = ccp(1,0);
     joustVelocity = ccp(1,0);
@@ -47,7 +46,7 @@
 -(void) update:(ccTime)dt{
     [super update:dt];
     
-    if(player == 1){
+    if(player.playerNumber== 1){
         aliveTicker += dt/2 * (1 + ccpLength(velocity) * .02);
     }else{
         aliveTicker += dt/2 * (1 + ccpLength(velocity) * .02);

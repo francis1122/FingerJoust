@@ -172,6 +172,8 @@
 		DE91641917BB0929009817AD /* JousterB.m in Sources */ = {isa = PBXBuildFile; fileRef = DE91641817BB0929009817AD /* JousterB.m */; };
 		DE919A3F17B22CCD00DAA954 /* JousterA.m in Sources */ = {isa = PBXBuildFile; fileRef = DE919A3E17B22CCD00DAA954 /* JousterA.m */; };
 		DEA1B46D180FB6C7003AC1CC /* PlayerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DEA1B46C180FB6C7003AC1CC /* PlayerManager.m */; };
+		DEA1B470180FC051003AC1CC /* Player.m in Sources */ = {isa = PBXBuildFile; fileRef = DEA1B46F180FC051003AC1CC /* Player.m */; };
+		DEA1B474180FC8EB003AC1CC /* PlayerSelect.m in Sources */ = {isa = PBXBuildFile; fileRef = DEA1B473180FC8EB003AC1CC /* PlayerSelect.m */; };
 		DEA6ADC01809DBBC000A4B0C /* BodyOuter.png in Resources */ = {isa = PBXBuildFile; fileRef = DEA6ADBF1809DBBC000A4B0C /* BodyOuter.png */; };
 		DEA6ADC21809DEE4000A4B0C /* MotionStreak.plist in Resources */ = {isa = PBXBuildFile; fileRef = DEA6ADC11809DEE4000A4B0C /* MotionStreak.plist */; };
 		DEA6ADC6180B6F9D000A4B0C /* UILayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DEA6ADC5180B6F9D000A4B0C /* UILayer.m */; };
@@ -510,6 +512,10 @@
 		DE919A3E17B22CCD00DAA954 /* JousterA.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JousterA.m; sourceTree = "<group>"; };
 		DEA1B46B180FB6C7003AC1CC /* PlayerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerManager.h; sourceTree = "<group>"; };
 		DEA1B46C180FB6C7003AC1CC /* PlayerManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerManager.m; sourceTree = "<group>"; };
+		DEA1B46E180FC051003AC1CC /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
+		DEA1B46F180FC051003AC1CC /* Player.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Player.m; sourceTree = "<group>"; };
+		DEA1B472180FC8EB003AC1CC /* PlayerSelect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerSelect.h; sourceTree = "<group>"; };
+		DEA1B473180FC8EB003AC1CC /* PlayerSelect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerSelect.m; sourceTree = "<group>"; };
 		DEA6ADBF1809DBBC000A4B0C /* BodyOuter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BodyOuter.png; sourceTree = "<group>"; };
 		DEA6ADC11809DEE4000A4B0C /* MotionStreak.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = MotionStreak.plist; sourceTree = "<group>"; };
 		DEA6ADC4180B6F9D000A4B0C /* UILayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UILayer.h; sourceTree = "<group>"; };
@@ -600,10 +606,11 @@
 				DE1CC950178FA31D00CB1C59 /* HelloWorldLayer.m */,
 				DE1CC952178FA31D00CB1C59 /* IntroLayer.h */,
 				DE1CC953178FA31D00CB1C59 /* IntroLayer.m */,
-				DEBB5272178FAD7D006FEB1C /* TitleLayer.h */,
-				DEBB5273178FAD7D006FEB1C /* TitleLayer.m */,
+				DEA1B46E180FC051003AC1CC /* Player.h */,
+				DEA1B46F180FC051003AC1CC /* Player.m */,
 				DEA1B46B180FB6C7003AC1CC /* PlayerManager.h */,
 				DEA1B46C180FB6C7003AC1CC /* PlayerManager.m */,
+				DEA1B471180FC6E8003AC1CC /* CharacterSelect */,
 				DEA6ADC3180B6F73000A4B0C /* Game */,
 				DE85E53517C971C5002BCC79 /* MathHelper.h */,
 				DE85E53617C971C5002BCC79 /* MathHelper.m */,
@@ -1090,6 +1097,17 @@
 			name = Jousters;
 			sourceTree = "<group>";
 		};
+		DEA1B471180FC6E8003AC1CC /* CharacterSelect */ = {
+			isa = PBXGroup;
+			children = (
+				DEBB5272178FAD7D006FEB1C /* TitleLayer.h */,
+				DEBB5273178FAD7D006FEB1C /* TitleLayer.m */,
+				DEA1B472180FC8EB003AC1CC /* PlayerSelect.h */,
+				DEA1B473180FC8EB003AC1CC /* PlayerSelect.m */,
+			);
+			name = CharacterSelect;
+			sourceTree = "<group>";
+		};
 		DEA6ADC3180B6F73000A4B0C /* Game */ = {
 			isa = PBXGroup;
 			children = (
@@ -1278,6 +1296,7 @@
 				DE1CC8BE178FA31C00CB1C59 /* CCES2Renderer.m in Sources */,
 				DE1CC8C2178FA31C00CB1C59 /* CCGLView.m in Sources */,
 				DE1CC8C6178FA31C00CB1C59 /* CCTouchDispatcher.m in Sources */,
+				DEA1B470180FC051003AC1CC /* Player.m in Sources */,
 				DE1CC8C9178FA31C00CB1C59 /* CCTouchHandler.m in Sources */,
 				DE1CC8CD178FA31C00CB1C59 /* CCDirectorMac.m in Sources */,
 				DE1CC8D0178FA31C00CB1C59 /* CCEventDispatcher.m in Sources */,
@@ -1303,6 +1322,7 @@
 				DE1CC914178FA31D00CB1C59 /* SimpleAudioEngine.m in Sources */,
 				DE1CC92A178FA31D00CB1C59 /* aabb.c in Sources */,
 				DE1CC930178FA31D00CB1C59 /* mat4stack.c in Sources */,
+				DEA1B474180FC8EB003AC1CC /* PlayerSelect.m in Sources */,
 				DE1CC932178FA31D00CB1C59 /* matrix.c in Sources */,
 				DE1CC934178FA31D00CB1C59 /* mat3.c in Sources */,
 				DE1CC936178FA31D00CB1C59 /* mat4.c in Sources */,

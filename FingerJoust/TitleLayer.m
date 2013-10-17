@@ -8,7 +8,9 @@
 
 #import "TitleLayer.h"
 #import "GameLayer.h"
-
+#import "PlayerManager.h"
+#import "Player.h"
+#import "PlayerSelect.h"
 
 @implementation TitleLayer
 
@@ -31,7 +33,7 @@
         
         
 		CCMenuItem *playItem = [CCMenuItemFont itemWithString:@"Play" block:^(id sender) {
-            GameLayer *gLayer = [[GameLayer alloc] initWithPlayerOne:playerOneChoice playerTwo:playerTwoChoice];
+            GameLayer *gLayer = [[GameLayer alloc] init];
             [[CCDirector sharedDirector] replaceScene:gLayer];
             [gLayer release];
 		}];
@@ -46,7 +48,16 @@
 		// Add the menu to the layer
 		[self addChild:menu];
         
-        [self createChoosePlayerMenus];
+        
+        //create 4 player select things
+        for(Player *player in [PlayerManager sharedInstance].playerArray){
+            PlayerSelect *playerSelectLayer = [[[PlayerSelect alloc] initWithPlayer:player] autorelease];
+            [self addChild:playerSelectLayer];
+            
+        }
+        
+        
+        //[self createChoosePlayerMenus];
         
         
         

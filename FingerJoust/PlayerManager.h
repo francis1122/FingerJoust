@@ -8,7 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
-@interface PlayerManager : NSObject
+@interface PlayerManager : NSObject{
+    NSMutableArray *playerArray;
+}
+
+@property (nonatomic, retain) NSMutableArray *playerArray;
 
 + (PlayerManager*)sharedInstance;
 

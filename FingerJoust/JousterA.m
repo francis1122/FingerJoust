@@ -9,6 +9,7 @@
 #import "JousterA.h"
 #import "MathHelper.h"
 #import "CCWarpSprite.h"
+#import "Player.h"
 
 @implementation JousterA
 
@@ -24,7 +25,7 @@
     [super update:dt];
     
     
-    if(player == 1){
+    if(player.playerNumber == 1){
         aliveTicker += dt/2 * (1 + ccpLength(velocity) * .02);
     }else{
         aliveTicker += dt/2 * (1 + ccpLength(velocity) * .02);

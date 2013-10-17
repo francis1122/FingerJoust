@@ -22,11 +22,13 @@
 #import "SneakyJoystick.h"
 #import "SneakyJoystickSkinnedBase.h"
 #import "ColoredCircleSprite.h"
+#import "Player.h"
+#import "PlayerManager.h"
 
 @implementation GameLayer
 @synthesize powerStone, vortexArray, lastWinner, jousterArray;
 
--(id) initWithPlayerOne:(int) characterOne playerTwo:(int) characterTwo{
+-(id) init{
     if(self = [super initWithColor:COLOR_GAMEAREA_B4] ){
         CGSize winSize= [[CCDirector sharedDirector] winSize];
         self.vortexArray = [[NSMutableArray alloc] init];
@@ -43,14 +45,17 @@
         
         
         self.jousterArray = [[[NSMutableArray alloc] init] autorelease];
-        for(int i = 1; i < 5; i++){
-            Jouster *jouster = [self createJouster:characterOne];
-            jouster.player = i;
-            [jouster makeTail];
-            [self.jousterArray addObject:jouster];
-            [jouster resetJouster];
-            jouster.visible = NO;
-            [self addChild:jouster z:2];
+        PlayerManager *PM = [PlayerManager sharedInstance];
+        for(Player *player in PM.playerArray){
+            if(player.isActive){
+                Jouster *jouster = [self createJouster:0 WithPlayer:player];
+                jouster.player = player;
+                [jouster makeTail];
+                [self.jousterArray addObject:jouster];
+                [jouster resetJouster];
+                jouster.visible = NO;
+                [self addChild:jouster z:2];
+            }
         }
         
         //      self.powerStone = [[PowerStone alloc] init];
@@ -84,6 +89,15 @@
     [super dealloc];
 }
 
+
+-(Jouster*) getJousterWithPlayerNumber:(int) playerNumber{
+    for(Jouster *jouster in self.jousterArray){
+        if(jouster.player.playerNumber == playerNumber){
+            return jouster;
+        }
+    }
+    return nil;
+}
 /*
  -(void) spawnPowerStone{
  
@@ -117,21 +131,20 @@
 }
 
 
--(Jouster*) createJouster:(int) character{
+-(Jouster*) createJouster:(int) character WithPlayer:(Player*) player{
     if(character == 0 ){
-        return [[JousterA alloc] init];
+        return [[[JousterA alloc] initWithPlayer:player] autorelease];
     }else if(character == 1){
-        return [[JousterB alloc] init];
+        return [[[JousterB alloc] initWithPlayer:player] autorelease];
     }else if(character ==2 ){
-        return [[JousterC alloc] init];
+        return [[[JousterC alloc] initWithPlayer:player] autorelease];
     }else if(character == 3){
-        return [[JousterD alloc] init];
+        return [[[JousterD alloc] initWithPlayer:player] autorelease];
     }
     return [JousterB node];
 }
 
 -(void) resetJousters{
-    
     for(Jouster *jouster in self.jousterArray){
         [jouster removeFromParentAndCleanup:YES];
         [self addChild:jouster];
@@ -155,7 +168,7 @@
 -(void) refreshUI{
     //    [redWinsLabel setString:[NSString stringWithFormat:@"%d", redWins]];
     //    [blueWinsLabel setString:[NSString stringWithFormat:@"%d", blueWins]];
-        [uiLayer refreshVictoryPoint];
+    [uiLayer refreshVictoryPoint];
     //    [redPowerStonesLabel setString:[NSString stringWithFormat:@"%d", redJouster.powerStones]];
     //  [bluePowerStonesLabel setString:[NSString stringWithFormat:@"%d", blueJouster.powerStones]];
 }
@@ -287,7 +300,7 @@
             CCFadeIn *fadeIn = [CCFadeIn actionWithDuration:2];
             CCRotateBy *rotate = [CCRotateBy actionWithDuration:20 angle:1000];
             CCScaleTo *scale = [CCScaleTo actionWithDuration:5.0 scale:0];
-
+            
             CCSpawn *spawn = [CCSpawn actions:rotate, fadeIn, scale, nil];
             [centerSprite runAction:spawn];
         }
@@ -350,14 +363,14 @@
             float distance = ccpDistance(jouster.position, centerPoint);
             if(distance < shortestDistance){
                 shortestDistance = distance;
-                playerWithShortestDistance = jouster.player;
+                playerWithShortestDistance = jouster.player.playerNumber;
             }
         }
     }
     
     //kill all players that are not closest to the center
     for(Jouster *jouster in self.jousterArray){
-        if(jouster.player != playerWithShortestDistance){
+        if(jouster.player.playerNumber != playerWithShortestDistance){
             jouster.isDead = YES;
             [self deathEffect:jouster];
             [jouster removeFromParentAndCleanup:YES];
@@ -365,29 +378,29 @@
     }
     
     /*
-    float redDistance = ccpDistance(redJouster.position, centerPoint);
-    float blueDistance = ccpDistance(blueJouster.position, centerPoint);
-    if(redDistance < blueDistance){
-        didRedWinRound = YES;
-        redWins++;
-        winner = @"RED WINS";
-        if(redWins > 2){
-            [self transitionToGameOver];
-        }else{
-            [self transitionToEndRound];
-        }
-    }else{
-        didRedWinRound = NO;
-        blueWins++;
-        winner = @"BLUE WINS";
-        if(blueWins > 2){
-            [self transitionToGameOver];
-        }else{
-            [self transitionToEndRound];
-        }
-    }
-    [self refreshUI];
-    */
+     float redDistance = ccpDistance(redJouster.position, centerPoint);
+     float blueDistance = ccpDistance(blueJouster.position, centerPoint);
+     if(redDistance < blueDistance){
+     didRedWinRound = YES;
+     redWins++;
+     winner = @"RED WINS";
+     if(redWins > 2){
+     [self transitionToGameOver];
+     }else{
+     [self transitionToEndRound];
+     }
+     }else{
+     didRedWinRound = NO;
+     blueWins++;
+     winner = @"BLUE WINS";
+     if(blueWins > 2){
+     [self transitionToGameOver];
+     }else{
+     [self transitionToEndRound];
+     }
+     }
+     [self refreshUI];
+     */
 }
 
 
@@ -451,7 +464,7 @@
     //bodies hit
     
     for(Jouster *jousterB in self.jousterArray){
-        if(jousterB.player != jouster.player && !jousterB.isDead){
+        if(jousterB.player.playerNumber != jouster.player.playerNumber && !jousterB.isDead){
             if( [MathHelper circleCollisionPositionA:jouster.position raidusA:jouster.bodyRadius positionB:jousterB.position radiusB:jousterB.bodyRadius]){
                 [self checkBodyOnBodyStun:jouster otherJouster:jousterB];
                 return YES;
@@ -467,7 +480,7 @@
     for(Jouster *jousterA in self.jousterArray){
         if(!jousterA.isDead){
             for(Jouster *jousterB in self.jousterArray){
-                if(jousterA.player != jousterB.player && !jousterB.isDead){
+                if(jousterA.player.playerNumber != jousterB.player.playerNumber && !jousterB.isDead){
                     if([MathHelper circleCollisionPositionA:[jousterA getWorldPositionOfJoust]  raidusA:[jousterA joustRadius] positionB:jousterB.position radiusB:jousterB.bodyRadius] ){
                         
                         //jousterA got a kill
@@ -517,7 +530,7 @@
 -(BOOL) jousterOnJousterCheck:(Jouster*) jouster{
     
     for(Jouster *jousterB in self.jousterArray){
-        if(jousterB.player != jouster.player && !jousterB.isDead){
+        if(jousterB.player.playerNumber != jouster.player.playerNumber && !jousterB.isDead){
             //jousters hitting
             if( [MathHelper circleCollisionPositionA:[jouster getWorldPositionOfJoust]  raidusA:[jouster joustRadius] positionB:[jousterB getWorldPositionOfJoust] radiusB: [jousterB joustRadius]]){
                 //bounce off eachother
@@ -537,7 +550,7 @@
         if(!jousterA.isDead){
             BOOL didWin= YES;
             for(Jouster *jousterB in self.jousterArray){
-                if(jousterA.player != jousterB.player){
+                if(jousterA.player.playerNumber != jousterB.player.playerNumber){
                     if(!jousterB.isDead){
                         //if another player is alive, then the game goes on
                         didWin = NO;
@@ -546,10 +559,10 @@
             }
             if(didWin){
                 //the game is over jousterA won
-                winner = [NSString stringWithFormat:@"player %i won", jousterA.player];
+                winner = [NSString stringWithFormat:@"player %i won", jousterA.player.playerNumber];
                 jousterA.wins++;
                 //TODO, figure out wtf this does
-                lastWinner = jousterA.player;
+                lastWinner = jousterA.player.playerNumber;
                 if(jousterA.wins > 2){
                     [self transitionToGameOver];
                 }else{
@@ -580,13 +593,13 @@
         BOOL alreadyChosen = NO;
         
         CGRect touchArea;
-        if(jouster.player == 1){
+        if(jouster.player.playerNumber == 0){
             touchArea = CGRectMake(0, winSize.height/2, EXTRA_CONTROL_OFFSET, winSize.height/2);
-        }else if(jouster.player == 2){
+        }else if(jouster.player.playerNumber == 1){
             touchArea = CGRectMake(winSize.width - EXTRA_CONTROL_OFFSET, winSize.height/2, EXTRA_CONTROL_OFFSET, winSize.height/2);
-        }else if(jouster.player == 3){
+        }else if(jouster.player.playerNumber == 2){
             touchArea = CGRectMake(winSize.width - EXTRA_CONTROL_OFFSET, 0, EXTRA_CONTROL_OFFSET, winSize.height/2);
-        }else if(jouster.player == 4){
+        }else if(jouster.player.playerNumber == 3){
             touchArea = CGRectMake(0, 0, EXTRA_CONTROL_OFFSET, winSize.height/2);
         }
         
@@ -641,16 +654,16 @@
         BOOL alreadyChosen = NO;
         
         CGRect touchArea;
-        if(jouster.player == 1){
+        if(jouster.player.playerNumber == 0){
             touchArea = CGRectMake(0, winSize.height/2, EXTRA_CONTROL_OFFSET, winSize.height/2);
-        }else if(jouster.player == 2){
+        }else if(jouster.player.playerNumber == 1){
             touchArea = CGRectMake(winSize.width - EXTRA_CONTROL_OFFSET, 0, EXTRA_CONTROL_OFFSET, winSize.height/2);
-        }else if(jouster.player == 3){
+        }else if(jouster.player.playerNumber == 2){
             touchArea = CGRectMake(winSize.width - EXTRA_CONTROL_OFFSET, winSize.height/2, EXTRA_CONTROL_OFFSET, winSize.height/2);
-        }else if(jouster.player == 4){
+        }else if(jouster.player.playerNumber == 3){
             touchArea = CGRectMake(0, winSize.height/2, EXTRA_CONTROL_OFFSET, winSize.height/2);
         }
-                [jouster resetTouch];
+        [jouster resetTouch];
         for(UITouch* touch in touches){
             CGPoint location = [touch locationInView: [touch view]];
             location = [[CCDirector sharedDirector] convertToGL:location];
@@ -694,17 +707,17 @@
         BOOL alreadyChosen = NO;
         
         CGRect touchArea;
-        if(jouster.player == 1){
+        if(jouster.player.playerNumber == 0){
             touchArea = CGRectMake(0, winSize.height/2, EXTRA_CONTROL_OFFSET, winSize.height/2);
-        }else if(jouster.player == 2){
+        }else if(jouster.player.playerNumber == 1){
             touchArea = CGRectMake(winSize.width - EXTRA_CONTROL_OFFSET, 0, EXTRA_CONTROL_OFFSET, winSize.height/2);
-        }else if(jouster.player == 3){
+        }else if(jouster.player.playerNumber == 2){
             touchArea = CGRectMake(winSize.width - EXTRA_CONTROL_OFFSET, winSize.height/2, EXTRA_CONTROL_OFFSET, winSize.height/2);
-        }else if(jouster.player == 4){
+        }else if(jouster.player.playerNumber == 3){
             touchArea = CGRectMake(0, winSize.height/2, EXTRA_CONTROL_OFFSET, winSize.height/2);
         }
         
-                [jouster resetTouch];
+        [jouster resetTouch];
         for(UITouch* touch in touches){
             CGPoint location = [touch locationInView: [touch view]];
             location = [[CCDirector sharedDirector] convertToGL:location];

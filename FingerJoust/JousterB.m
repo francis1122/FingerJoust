@@ -8,6 +8,7 @@
 
 #import "JousterB.h"
 #import "MathHelper.h"
+#import "Player.h"
 
 
 @implementation JousterB
@@ -21,7 +22,7 @@
 -(void) update:(ccTime)dt{
 
 
-    if(player == 1){
+    if(player.playerNumber == 1){
         aliveTicker += dt * 2.8;
     }else{
         aliveTicker += dt * 2.0;

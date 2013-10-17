@@ -9,18 +9,18 @@
 #import "JousterC.h"
 #import "MathHelper.h"
 #import "CCWarpSprite.h"
+#import "Player.h"
 
 
 @implementation JousterC
 
--(id) init{
-    if(self = [super init]){
+-(id) initWithPlayer:(Player *) p{
+    if(self = [super initWithPlayer:p]){
         self.velocity = CGPointZero;
         waitingForTouch = YES;
         bodyRadius = 30;
         joustRadius = 20;
         orbitalOffset = 0;
-        player = 1;
         joustPosition = ccp(1,0);
         velocity = ccp(1,0);
         previousVelocity = ccp(1,0);
@@ -32,7 +32,7 @@
 -(void) resetJouster{
     [super resetJouster];
     //offset the growing and shrinking of circle
-    if(player == 1){
+    if(player.playerNumber == 1){
         aliveTicker = 3.14/2;
     }else{
         aliveTicker = 0;
@@ -77,7 +77,7 @@
 }
 
 - (void) draw{
-    if(player == 1){
+    if(player.playerNumber == 1){
         ccDrawColor4F(1.0f, 0.0f, 0.0f, 1.0f);
     }else{
         ccDrawColor4F(0.0f, 0.0f, 1.0f, 1.0f);

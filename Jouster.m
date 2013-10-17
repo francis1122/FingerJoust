@@ -10,13 +10,15 @@
 #import "GameLayer.h"
 #import "CCWarpSprite.h"
 #import "GameLayer.h"
+#import "Player.h"
 
 @implementation Jouster
 
 @synthesize velocity, waitingForTouch, bodyRadius, joustRadius, orbitalOffset,joustPosition, player, powerStones, jousterSprite, joustVelocity, motionStreak, isDead, wins;
 
--(id) init{
+-(id) initWithPlayer:(Player *) p{
     if(self = [super init]){
+        self.player = p;
         self.velocity = CGPointZero;
         waitingForTouch = YES;
         joustPosition = ccp(1,0);
@@ -81,17 +83,17 @@
         self.motionStreak = nil;
     }
     self.motionStreak = [[CCParticleSystemQuad alloc] initWithFile: @"MotionStreak.plist"];
-    if(player == 1){
+    if(player.playerNumber == 0){
         [motionStreak setStartColor:ccc4f(0.7, 0.0, 0.7, 1.0)];
         [motionStreak setEndColor:ccc4f(0.7, 0.0, 1.0, 1.0)];
 
-    }else if(player == 2){
+    }else if(player.playerNumber == 1){
         [motionStreak setStartColor:ccc4f(0.0, 0.0, 1.0, 1.0)];
         [motionStreak setEndColor:ccc4f(0.0, 0.0, 1.0, 1.0)];
-    } else if(player == 3){
+    } else if(player.playerNumber == 2){
             [motionStreak setStartColor:ccc4f(0.0, 0.0, 1.0, 1.0)];
             [motionStreak setEndColor:ccc4f(0.0, 0.0, 1.0, 1.0)];
-    } else if(player == 4){
+    } else if(player.playerNumber == 3){
         [motionStreak setStartColor:ccc4f(0.0, 0.0, 1.0, 1.0)];
         [motionStreak setEndColor:ccc4f(0.0, 0.0, 1.0, 1.0)];
     }
@@ -119,28 +121,28 @@
     [stunParticles resetSystem];
     [stunParticles updateWithNoTime];
     [stunParticles stopSystem];
-    if(player == 1){
+    if(player.playerNumber == 0){
         pos = ccp(250, winSize.height/2 + 200);
         bodyOuterSprite.color = ccWHITE;
         bodyInnerSprite.color = ccORANGE;
         jousterSprite.color = ccWHITE;
         jousterInnerSprite.color = ccc3(255, 190, 70);
 
-    }else if(player == 2){
+    }else if(player.playerNumber == 1){
         pos = ccp(winSize.width - 250, winSize.height/2 + 200);
         bodyOuterSprite.color = ccWHITE;
         bodyInnerSprite.color = ccRED;
         jousterSprite.color = ccWHITE;
         jousterInnerSprite.color = ccc3(255, 100, 100);
 
-    }else if(player == 3){
+    }else if(player.playerNumber == 2){
         pos = ccp(winSize.width - 250, winSize.height/2 - 200);
         bodyOuterSprite.color = ccWHITE;
         bodyInnerSprite.color = ccGREEN;
         jousterSprite.color = ccWHITE;
         jousterInnerSprite.color = ccGREEN;
         
-    }else if(player == 4){
+    }else if(player.playerNumber == 3){
         pos = ccp(250, winSize.height/2 - 200);
         bodyOuterSprite.color = ccWHITE;
         bodyInnerSprite.color = ccMAGENTA;

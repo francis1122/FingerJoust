@@ -11,9 +11,9 @@
 
 #define JOUSTER_BODY_MAXSPEED 500
 
-@class CCWarpSprite;
+@class CCWarpSprite, Player;
 @interface Jouster : CCSprite {
-    int player;
+    Player *player;
     
     CCWarpSprite *jousterSprite;
     CCWarpSprite *jousterInnerSprite;
@@ -57,15 +57,18 @@
 
 
 @property int powerStones;
-@property int player, wins;
+@property int wins;
 @property float bodyRadius, joustRadius, orbitalOffset;
 @property BOOL waitingForTouch, isDead;
 @property CGPoint velocity, joustPosition;
 @property CGPoint joustVelocity;
 
+@property (nonatomic, assign) Player *player;
 @property (nonatomic, retain) CCParticleSystemQuad *motionStreak;
 @property (nonatomic, assign) CCWarpSprite *jousterSprite;
 
+
+-(id) initWithPlayer:(Player *) p;
 -(void) makeTail;
 
 -(void) setWorldPositionOfJoust:(CGPoint) pos;

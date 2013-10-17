@@ -198,25 +198,25 @@
         NSLog(@"some error happened");
         return;
     }
-    NSMutableArray *victoryArray = [self.victoryArrays objectAtIndex:gameLayer.lastWinner - 1];
+    NSMutableArray *victoryArray = [self.victoryArrays objectAtIndex:gameLayer.lastWinner];
     
     
     //red victory
     for(int i = 0; i < victoryArray.count; ++i){
         CCSprite *victorySprite = [victoryArray objectAtIndex:i];
         CGPoint pos = CGPointZero;
-        if(gameLayer.lastWinner - 1 == 0){
+        if(gameLayer.lastWinner == 0){
             pos = ccp(CONTROL_OFFSET + 35 + i*45, winSize.height - 25);
-        }else if(gameLayer.lastWinner - 1 == 1){
+        }else if(gameLayer.lastWinner == 1){
             pos = ccp((winSize.width - CONTROL_OFFSET) - 35 - i*45, winSize.height - 25);
-        }else if(gameLayer.lastWinner - 1 == 2){
+        }else if(gameLayer.lastWinner == 2){
             pos = ccp((winSize.width - CONTROL_OFFSET) - 35 - i*45, 25);
-        }else if(gameLayer.lastWinner - 1 == 3){
+        }else if(gameLayer.lastWinner == 3){
             pos = ccp(CONTROL_OFFSET + 35 + i*45, 25);
         }
         
         victorySprite.position = pos;
-        Jouster * winningJouster = [gameLayer.jousterArray objectAtIndex:gameLayer.lastWinner - 1];
+        Jouster * winningJouster = [gameLayer getJousterWithPlayerNumber:gameLayer.lastWinner];
         int wins = winningJouster.wins;
         if(i < wins){
             victorySprite.visible = YES;
