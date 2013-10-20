@@ -48,7 +48,7 @@
         PlayerManager *PM = [PlayerManager sharedInstance];
         for(Player *player in PM.playerArray){
             if(player.isActive){
-                Jouster *jouster = [self createJouster:0 WithPlayer:player];
+                Jouster *jouster = [self createJouster:player.jousterType WithPlayer:player];
                 jouster.player = player;
                 [jouster makeTail];
                 [self.jousterArray addObject:jouster];
@@ -161,16 +161,14 @@
         [vortex removeFromParent];
     }
     [self.vortexArray removeAllObjects];
+    [uiLayer refreshUI];
     
     
 }
 
 -(void) refreshUI{
-    //    [redWinsLabel setString:[NSString stringWithFormat:@"%d", redWins]];
-    //    [blueWinsLabel setString:[NSString stringWithFormat:@"%d", blueWins]];
     [uiLayer refreshVictoryPoint];
-    //    [redPowerStonesLabel setString:[NSString stringWithFormat:@"%d", redJouster.powerStones]];
-    //  [bluePowerStonesLabel setString:[NSString stringWithFormat:@"%d", blueJouster.powerStones]];
+    [uiLayer refreshUI];
 }
 
 -(void) update:(ccTime)dt{
@@ -329,22 +327,20 @@
                 float redPullPower = maxDistance - redDistance;
                 redPullPower = redPullPower * redPullPower;
                 // adjust the strength of the vortex
-                redPullPower = redPullPower/70;
+                redPullPower = redPullPower/110;
                 CGPoint redVortexVel = ccpMult(redToVortex, redPullPower);
                 
                 //add vortex velocity to jouster's velocity
                 jouster.velocity = ccpAdd(jouster.velocity,ccpMult(redVortexVel, dt));
-                
             }
-            [vortex update:dt];
-            
         }
+            [vortex update:dt];
     }
     
     //delete old vortex
     for(int i = [self.vortexArray count] - 1; i >= 0; i-- ){
         Vortex *vortex = [self.vortexArray objectAtIndex:i];
-        if(vortex.timeAlive > 4.0){
+        if(vortex.timeAlive > VORTEX_LIFE){
             [vortex.pEffect stopSystem];
             [vortex removeFromParent];
             [self.vortexArray removeObject:vortex];
@@ -374,9 +370,10 @@
             jouster.isDead = YES;
             [self deathEffect:jouster];
             [jouster removeFromParentAndCleanup:YES];
+            [uiLayer refreshUI];
         }
     }
-    
+
     /*
      float redDistance = ccpDistance(redJouster.position, centerPoint);
      float blueDistance = ccpDistance(blueJouster.position, centerPoint);
@@ -403,47 +400,70 @@
      */
 }
 
-
--(void) checkBodyOnBodyStun:(Jouster *) jousterA otherJouster:(Jouster *)jousterB{
-    //get normalized vector pointing at enemy
-    CGPoint redToBlue = ccpNormalize(ccpSub(jousterA.position, jousterB.position));
-    CGPoint blueToRed = ccpMult(redToBlue, -1);
-    
-    //multiply normalized vector by bodies velocity
-    CGPoint redRelativeVelocity = ccp(redToBlue.x * jousterA.velocity.x, redToBlue.y * jousterA.velocity.y);
-    CGPoint blueRelativeVelocity = ccp(blueToRed.x * jousterB.velocity.x, blueToRed.y * jousterB.velocity.y);
-    
-    //check if magnitude of that number is high enough to cause stun damage
-    float redMagnitude = ccpLength(redRelativeVelocity);
-    float blueMagnitude = ccpLength(blueRelativeVelocity);
-    BOOL isStun = NO;
-    if(redMagnitude > STUN_CONTRAINT){
-        // stun blue
-        [jousterB stunBody];
-        isStun = YES;
+-(void) incrementWinsForTeam:(int) team{
+    for(Jouster *jouster in self.jousterArray){
+        if(jouster.player.team == team){
+            jouster.wins++;
+        }
     }
-    if(blueMagnitude > STUN_CONTRAINT){
-        // stun red
-        [jousterA stunBody];
-        isStun = YES;
-    }
-    
-    //bounce off eachother
-    //get direction
-    CGPoint offset = ccpSub(jousterA.position, jousterB.position);
-    offset = [MathHelper normalize:offset];
-    CGPoint redKnock = ccpMult(offset, blueMagnitude + 350);
-    jousterA.velocity = redKnock;
-    offset = ccpMult(offset, -1);
-    CGPoint blueKnock = ccpMult(offset, redMagnitude + 350);
-    jousterB.velocity = blueKnock;
-    
-    [self clashEffect:jousterA.position otherPoint:jousterB.position withMagnitude:blueMagnitude + redMagnitude + 500 withStun:isStun];
-    
-    
-    //    NSLog(@"redMag :%f", redMagnitude);
-    //    NSLog(@"blueMag :%f", blueMagnitude);
 }
+
+-(int) getWinsForTeam:(int) team{
+    for(Jouster *jouster in self.jousterArray){
+        if(jouster.player.team == team){
+            return jouster.wins;
+        }
+    }
+    NSLog(@"super bug here");
+    return 0;
+}
+
+-(void) testForVictory{
+    for(Jouster *jousterA in self.jousterArray){
+        if(!jousterA.isDead){
+            BOOL didWin= YES;
+            for(Jouster *jousterB in self.jousterArray){
+                //test for team
+                BOOL isTeammate = NO;
+                if([PlayerManager sharedInstance].isTeamPlay){
+                    if(jousterA.player.team == jousterB.player.team){
+                        isTeammate = YES;
+                    }
+                }
+                
+                if(jousterA.player.playerNumber != jousterB.player.playerNumber && !isTeammate){
+                    if(!jousterB.isDead){
+                        //if another player is alive, then the game goes on
+                        didWin = NO;
+                    }
+                }
+            }
+            
+            if(didWin){
+                //the game is over jousterA won
+
+                if([PlayerManager sharedInstance].isTeamPlay){
+                    [self incrementWinsForTeam:jousterA.player.team];
+                    lastWinner = jousterA.player.team;
+                }else{
+                    jousterA.wins++;
+                    lastWinner = jousterA.player.playerNumber;
+                }
+                winner = [NSString stringWithFormat:@"player %i won", lastWinner];
+
+                if(jousterA.wins > 2){
+                    [self transitionToGameOver];
+                }else{
+                    [self transitionToEndRound];
+                }
+                [self refreshUI];
+                //stop doing stuff here
+                return;
+            }
+        }
+    }
+}
+
 
 #pragma mark - collision functions
 /*-(void) powerStoneCollisionCheck{
@@ -489,6 +509,7 @@
                         jousterB.isDead = YES;
                         [self deathEffect:jousterB];
                         [jousterB removeFromParentAndCleanup:YES];
+                        [uiLayer refreshUI];
                     }
                     
                 }
@@ -545,33 +566,47 @@
     return NO;
 }
 
--(void) testForVictory{
-    for(Jouster *jousterA in self.jousterArray){
-        if(!jousterA.isDead){
-            BOOL didWin= YES;
-            for(Jouster *jousterB in self.jousterArray){
-                if(jousterA.player.playerNumber != jousterB.player.playerNumber){
-                    if(!jousterB.isDead){
-                        //if another player is alive, then the game goes on
-                        didWin = NO;
-                    }
-                }
-            }
-            if(didWin){
-                //the game is over jousterA won
-                winner = [NSString stringWithFormat:@"player %i won", jousterA.player.playerNumber];
-                jousterA.wins++;
-                //TODO, figure out wtf this does
-                lastWinner = jousterA.player.playerNumber;
-                if(jousterA.wins > 2){
-                    [self transitionToGameOver];
-                }else{
-                    [self transitionToEndRound];
-                }
-                [self refreshUI];
-            }
-        }
+
+
+-(void) checkBodyOnBodyStun:(Jouster *) jousterA otherJouster:(Jouster *)jousterB{
+    //get normalized vector pointing at enemy
+    CGPoint redToBlue = ccpNormalize(ccpSub(jousterA.position, jousterB.position));
+    CGPoint blueToRed = ccpMult(redToBlue, -1);
+    
+    //multiply normalized vector by bodies velocity
+    CGPoint redRelativeVelocity = ccp(redToBlue.x * jousterA.velocity.x, redToBlue.y * jousterA.velocity.y);
+    CGPoint blueRelativeVelocity = ccp(blueToRed.x * jousterB.velocity.x, blueToRed.y * jousterB.velocity.y);
+    
+    //check if magnitude of that number is high enough to cause stun damage
+    float redMagnitude = ccpLength(redRelativeVelocity);
+    float blueMagnitude = ccpLength(blueRelativeVelocity);
+    BOOL isStun = NO;
+    if(redMagnitude > STUN_CONTRAINT){
+        // stun blue
+        [jousterB stunBody];
+        isStun = YES;
     }
+    if(blueMagnitude > STUN_CONTRAINT){
+        // stun red
+        [jousterA stunBody];
+        isStun = YES;
+    }
+    
+    //bounce off eachother
+    //get direction
+    CGPoint offset = ccpSub(jousterA.position, jousterB.position);
+    offset = [MathHelper normalize:offset];
+    CGPoint redKnock = ccpMult(offset, blueMagnitude + 350);
+    jousterA.velocity = redKnock;
+    offset = ccpMult(offset, -1);
+    CGPoint blueKnock = ccpMult(offset, redMagnitude + 350);
+    jousterB.velocity = blueKnock;
+    
+    [self clashEffect:jousterA.position otherPoint:jousterB.position withMagnitude:blueMagnitude + redMagnitude + 500 withStun:isStun];
+    
+    
+    //    NSLog(@"redMag :%f", redMagnitude);
+    //    NSLog(@"blueMag :%f", blueMagnitude);
 }
 
 
@@ -591,16 +626,18 @@
     for(Jouster *jouster in self.jousterArray){
         
         BOOL alreadyChosen = NO;
-        
+        float reducedSpace = 60;
         CGRect touchArea;
+        CGRect strictFirstTouchArea;
         if(jouster.player.playerNumber == 0){
             touchArea = CGRectMake(0, winSize.height/2, EXTRA_CONTROL_OFFSET, winSize.height/2);
+            strictFirstTouchArea = CGRectMake(0, winSize.height/2 +reducedSpace, EXTRA_CONTROL_OFFSET, winSize.height/2);
         }else if(jouster.player.playerNumber == 1){
-            touchArea = CGRectMake(winSize.width - EXTRA_CONTROL_OFFSET, winSize.height/2, EXTRA_CONTROL_OFFSET, winSize.height/2);
+            touchArea = CGRectMake(winSize.width - EXTRA_CONTROL_OFFSET, winSize.height/2 + reducedSpace, EXTRA_CONTROL_OFFSET, winSize.height/2);
         }else if(jouster.player.playerNumber == 2){
-            touchArea = CGRectMake(winSize.width - EXTRA_CONTROL_OFFSET, 0, EXTRA_CONTROL_OFFSET, winSize.height/2);
+            touchArea = CGRectMake(winSize.width - EXTRA_CONTROL_OFFSET, 0, EXTRA_CONTROL_OFFSET, winSize.height/2 - reducedSpace);
         }else if(jouster.player.playerNumber == 3){
-            touchArea = CGRectMake(0, 0, EXTRA_CONTROL_OFFSET, winSize.height/2);
+            touchArea = CGRectMake(0, 0, EXTRA_CONTROL_OFFSET, winSize.height/2 - reducedSpace);
         }
         
         for(UITouch* touch in touches){
@@ -608,8 +645,10 @@
             location = [[CCDirector sharedDirector] convertToGL:location];
             
             if(CGRectContainsPoint(touchArea, location) && !alreadyChosen){
-                [jouster touch:location];
-                alreadyChosen = YES;
+                if([jouster doesTouchDeltaMakeSense:location]){
+                    [jouster touch:location];
+                    alreadyChosen = YES;
+                }
             }
         }
         if(!alreadyChosen){
@@ -811,7 +850,7 @@
     //   gameStartLabel.position = ccp(winSize.width/2, winSize.height/2);
     //    [self addChild:gameStartLabel];
     //timeBeforeNewRoundStarts = TRANSITION_TIME;
-    CCDelayTime *delay = [CCDelayTime actionWithDuration:.1];
+    CCDelayTime *delay = [CCDelayTime actionWithDuration:0.8];
     CCCallBlock *block = [CCCallBlock actionWithBlock:^{
         //      [self removeChild:gameStartLabel];
         [self transitionToGamePlay];
@@ -822,6 +861,7 @@
 }
 
 -(void) transitionToGamePlay{
+    [self refreshUI];
     currentState = GAMEPLAY;
 }
 

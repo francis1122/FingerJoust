@@ -11,6 +11,7 @@
 #import "CCWarpSprite.h"
 #import "GameLayer.h"
 #import "Player.h"
+#import "PlayerManager.h"
 
 @implementation Jouster
 
@@ -83,19 +84,24 @@
         self.motionStreak = nil;
     }
     self.motionStreak = [[CCParticleSystemQuad alloc] initWithFile: @"MotionStreak.plist"];
-    if(player.playerNumber == 0){
-        [motionStreak setStartColor:ccc4f(0.7, 0.0, 0.7, 1.0)];
-        [motionStreak setEndColor:ccc4f(0.7, 0.0, 1.0, 1.0)];
+    int choice = player.playerNumber;
+    if([[PlayerManager sharedInstance] isTeamPlay]){
+        choice = player.team;
+    }
+    
+    if(choice == 0){
+        [motionStreak setStartColor:COLOR_PLAYER_ONE_LIGHT_F4];
+        [motionStreak setEndColor:COLOR_PLAYER_ONE_LIGHT_F4];
 
-    }else if(player.playerNumber == 1){
-        [motionStreak setStartColor:ccc4f(0.0, 0.0, 1.0, 1.0)];
-        [motionStreak setEndColor:ccc4f(0.0, 0.0, 1.0, 1.0)];
-    } else if(player.playerNumber == 2){
-            [motionStreak setStartColor:ccc4f(0.0, 0.0, 1.0, 1.0)];
-            [motionStreak setEndColor:ccc4f(0.0, 0.0, 1.0, 1.0)];
-    } else if(player.playerNumber == 3){
-        [motionStreak setStartColor:ccc4f(0.0, 0.0, 1.0, 1.0)];
-        [motionStreak setEndColor:ccc4f(0.0, 0.0, 1.0, 1.0)];
+    }else if(choice == 1){
+        [motionStreak setStartColor:COLOR_PLAYER_TWO_LIGHT_F4];
+        [motionStreak setEndColor:COLOR_PLAYER_TWO_LIGHT_F4];
+    } else if(choice == 2){
+        [motionStreak setStartColor:COLOR_PLAYER_THREE_LIGHT_F4];
+        [motionStreak setEndColor:COLOR_PLAYER_THREE_LIGHT_F4];
+    } else if(choice == 3){
+        [motionStreak setStartColor:COLOR_PLAYER_FOUR_LIGHT_F4];
+        [motionStreak setEndColor:COLOR_PLAYER_FOUR_LIGHT_F4];
     }
 
     
@@ -122,32 +128,32 @@
     [stunParticles updateWithNoTime];
     [stunParticles stopSystem];
     if(player.playerNumber == 0){
-        pos = ccp(250, winSize.height/2 + 200);
+        pos = ccp(290, winSize.height/2 + 200);
         bodyOuterSprite.color = ccWHITE;
-        bodyInnerSprite.color = ccORANGE;
+        bodyInnerSprite.color = COLOR_PLAYER_ONE;
         jousterSprite.color = ccWHITE;
-        jousterInnerSprite.color = ccc3(255, 190, 70);
+        jousterInnerSprite.color = COLOR_PLAYER_ONE;
 
     }else if(player.playerNumber == 1){
-        pos = ccp(winSize.width - 250, winSize.height/2 + 200);
+        pos = ccp(winSize.width - 290, winSize.height/2 + 200);
         bodyOuterSprite.color = ccWHITE;
-        bodyInnerSprite.color = ccRED;
+        bodyInnerSprite.color = COLOR_PLAYER_TWO;
         jousterSprite.color = ccWHITE;
-        jousterInnerSprite.color = ccc3(255, 100, 100);
+        jousterInnerSprite.color = COLOR_PLAYER_TWO;
 
     }else if(player.playerNumber == 2){
-        pos = ccp(winSize.width - 250, winSize.height/2 - 200);
+        pos = ccp(winSize.width - 290, winSize.height/2 - 200);
         bodyOuterSprite.color = ccWHITE;
-        bodyInnerSprite.color = ccGREEN;
+        bodyInnerSprite.color = COLOR_PLAYER_THREE;
         jousterSprite.color = ccWHITE;
-        jousterInnerSprite.color = ccGREEN;
+        jousterInnerSprite.color = COLOR_PLAYER_THREE;
         
     }else if(player.playerNumber == 3){
-        pos = ccp(250, winSize.height/2 - 200);
+        pos = ccp(290, winSize.height/2 - 200);
         bodyOuterSprite.color = ccWHITE;
-        bodyInnerSprite.color = ccMAGENTA;
+        bodyInnerSprite.color = COLOR_PLAYER_FOUR;
         jousterSprite.color = ccWHITE;
-        jousterInnerSprite.color = ccMAGENTA;
+        jousterInnerSprite.color = COLOR_PLAYER_FOUR;
         
     }
     [self makeTail];
@@ -177,7 +183,7 @@
 -(void) stunBody{
 
     isStunned = YES;
-    stunTimer = 5.0;
+    stunTimer = STUN_TIME;
     bodyOuterSprite.color = ccBLACK;
 
 }
@@ -304,13 +310,10 @@
 
     CGPoint difference = ccpSub(touch, previousTouch);
 
-    //NSLog(@"diffference : %f, %f", difference.x, difference.y);
-    
-
     if(isSuperMode){
         difference = ccp(difference.x * 5.5, difference.y *4.1);
     }else if(isStunned){
-        difference = ccp(difference.x * 1.6, difference.y *1.4);
+        difference = ccp(difference.x * 2.0, difference.y *1.7);
     }else{
         
 //        difference = ccp(difference.x * 2.7, difference.y *2.2);
@@ -320,22 +323,19 @@
 
     }
     self.velocity = ccpAdd(velocity, difference);
-
-    
-    //tweaked movement
-    
-    //normalize direction
-/*    CGPoint normalizedDifference = ccpNormalize(difference);
-    
-    //get magnitude of swipe
-    float speed = ccpLength(difference);
-    speed = log2f(1 +speed*speed);
-    CGPoint newVelocity = ccp(normalizedDifference.x * speed, normalizedDifference.y *speed);
-    self.velocity = ccpAdd(velocity, newVelocity);
-    */
-    
     previousTouch = touch;
-    
+}
+
+-(BOOL) doesTouchDeltaMakeSense:(CGPoint) touch{
+    if(ccpLength(previousTouch) == 0){
+        return YES;
+    }
+    CGPoint difference = ccpSub(touch, previousTouch);
+    float mag = ccpLength(difference);
+    if(mag < 50 ){
+        return YES;
+    }
+    return NO;
 }
 
 

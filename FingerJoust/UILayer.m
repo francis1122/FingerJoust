@@ -9,6 +9,8 @@
 #import "UILayer.h"
 #import "GameLayer.h"
 #import "Jouster.h"
+#import "Player.h"
+#import "PlayerManager.h"
 
 
 
@@ -20,43 +22,60 @@
     if(self = [super init]){
         gameLayer = gLayer;
         CGSize winSize= [[CCDirector sharedDirector] winSize];
-        redLayer = [CCLayerColor layerWithColor:COLOR_TOUCHAREA_B4 width:CONTROL_OFFSET height:winSize.height];
-        redLayer.position = ccp(0, 0);
-        [self addChild: redLayer];
-        blueLayer = [CCLayerColor layerWithColor:COLOR_TOUCHAREA_B4 width:CONTROL_OFFSET height:winSize.height];
-        blueLayer.position = ccp(winSize.width - blueLayer.contentSize.width, 0);
-        [self addChild:blueLayer];
         
-//        redBorderLayer = [CCLayerColor layerWithColor:ccc4(255, 255, 255, 255) width:40 height:winSize.height];
-  //      redBorderLayer.position = ccp(CONTROL_OFFSET - redBorderLayer.contentSize.width, 0);
-  //      [self addChild:redBorderLayer];
-      //  blueBorderLayer = [CCLayerColor layerWithColor:ccc4(255, 255, 255, 255) width:40 height:winSize.height];
-    //    blueBorderLayer.position = ccp(winSize.width - CONTROL_OFFSET, 0);
-//        [self addChild:blueBorderLayer];
         
         //top and bottom bar
         topLayer = [CCLayerColor layerWithColor:COLOR_GAMEBORDER_B4
-                                                        width:winSize.width - 2*CONTROL_OFFSET
-                                                       height:winSize.height/2];
+                                          width:winSize.width - 2*CONTROL_OFFSET
+                                         height:winSize.height/2];
         topLayer.position = ccp(CONTROL_OFFSET, -winSize.height/2);
         bottomLayer = [CCLayerColor layerWithColor:COLOR_GAMEBORDER_B4
-                                                           width:winSize.width - 2*CONTROL_OFFSET
-                                                          height:winSize.height/2];
+                                             width:winSize.width - 2*CONTROL_OFFSET
+                                            height:winSize.height/2];
         bottomLayer.position = ccp(CONTROL_OFFSET, winSize.height);
         [self addChild:topLayer];
         [self addChild:bottomLayer];
         
-        redOverlay = [[[CCSprite alloc] initWithSpriteFrameName:@"touchBorders"] autorelease];
-        redOverlay.color = COLOR_GAMEBORDER;
-        redOverlay.position = ccp(redOverlay.contentSize.width/2, winSize.height/2 );
-        [self addChild:redOverlay];
         
-        blueOverlay = [[[CCSprite alloc] initWithSpriteFrameName:@"touchBorders"] autorelease];
-        blueOverlay.color = COLOR_GAMEBORDER;
+        
+        redLayer = [CCLayerColor layerWithColor:COLOR_PLAYER_NON_LIGHT_B4 width:CONTROL_OFFSET height:winSize.height/2];
+        redLayer.position = ccp(0, winSize.height/2);
+        [self addChild: redLayer];
+        blueLayer = [CCLayerColor layerWithColor:COLOR_PLAYER_NON_LIGHT_B4 width:CONTROL_OFFSET height:winSize.height/2];
+        blueLayer.position = ccp(winSize.width - blueLayer.contentSize.width, winSize.height/2);
+        [self addChild:blueLayer];
+        greenLayer = [CCLayerColor layerWithColor:COLOR_PLAYER_NON_LIGHT_B4 width:CONTROL_OFFSET height:winSize.height/2];
+        greenLayer.position = ccp(0, 0);
+        [self addChild: greenLayer];
+        blackLayer = [CCLayerColor layerWithColor:COLOR_PLAYER_NON_LIGHT_B4 width:CONTROL_OFFSET height:winSize.height/2];
+        blackLayer.position = ccp(winSize.width - blackLayer.contentSize.width, 0);
+        [self addChild:blackLayer];
+        
+        
+        
+        
+        redOverlay = [[[CCSprite alloc] initWithSpriteFrameName:@"touchBordersContainer"] autorelease];
+        redOverlay.position = ccp(CONTROL_OFFSET/2 - 30, redOverlay.contentSize.height/2 );
+        redOverlay.color = COLOR_PLAYER_NON;
+        [redLayer addChild:redOverlay];
+        
+        blueOverlay = [[[CCSprite alloc] initWithSpriteFrameName:@"touchBordersContainer"] autorelease];
         blueOverlay.scaleX = -1;
-        blueOverlay.position = ccp(winSize.width - blueOverlay.contentSize.width/2, winSize.height/2 );
-        [self addChild:blueOverlay];
-
+        blueOverlay.position = ccp(146, blueOverlay.contentSize.height/2 );
+        blueOverlay.color = COLOR_PLAYER_NON;
+        [blueLayer addChild:blueOverlay];
+        
+        greenOverlay = [[[CCSprite alloc] initWithSpriteFrameName:@"touchBordersContainer"] autorelease];
+        greenOverlay.scaleX = -1;
+        greenOverlay.position = ccp(146, blueOverlay.contentSize.height/2 );
+        greenOverlay.color = COLOR_PLAYER_NON;
+        [greenLayer addChild:greenOverlay];
+        
+        blackOverlay = [[[CCSprite alloc] initWithSpriteFrameName:@"touchBordersContainer"] autorelease];
+        blackOverlay.position = ccp(CONTROL_OFFSET/2 - 30, redOverlay.contentSize.height/2 );
+        blackOverlay.color = COLOR_PLAYER_NON;
+        [blackLayer addChild:blackOverlay];
+        
         
         displayedTime = ROUND_TIME;
         roundTimer = ROUND_TIME;
@@ -69,23 +88,23 @@
         //victory stuff
         //holders for the victory spots
         for(int i = 0; i < 4; i++)
-        for(int j = 0; j < 3; j++){
-            CGPoint pos = CGPointZero;
-            if(i == 0){
-                pos = ccp(CONTROL_OFFSET + 35 + j*45, winSize.height - 25);
-            }else if(i == 1){
-                pos = ccp((winSize.width - CONTROL_OFFSET) - 35 - j*45, winSize.height - 25);
-            }else if(i == 2){
-                pos = ccp((winSize.width - CONTROL_OFFSET) - 35 - j*45, 25);
-            }else if(i == 3){
-                pos = ccp(CONTROL_OFFSET + 35 + j*45, 25);
+            for(int j = 0; j < 3; j++){
+                CGPoint pos = CGPointZero;
+                if(i == 0){
+                    pos = ccp(CONTROL_OFFSET + 35 + j*45, winSize.height - 25);
+                }else if(i == 1){
+                    pos = ccp((winSize.width - CONTROL_OFFSET) - 35 - j*45, winSize.height - 25);
+                }else if(i == 2){
+                    pos = ccp((winSize.width - CONTROL_OFFSET) - 35 - j*45, 25);
+                }else if(i == 3){
+                    pos = ccp(CONTROL_OFFSET + 35 + j*45, 25);
+                }
+                CCSprite *victorySprite = [[[CCSprite alloc] initWithSpriteFrameName:@"dashedCircle"] autorelease];
+                victorySprite.scale = .75;
+                victorySprite.color = ccWHITE;
+                victorySprite.position = pos;
+                [self addChild:victorySprite];
             }
-            CCSprite *victorySprite = [[[CCSprite alloc] initWithSpriteFrameName:@"dashedCircle"] autorelease];
-            victorySprite.scale = .75;
-            victorySprite.color = ccWHITE;
-            victorySprite.position = pos;
-            [self addChild:victorySprite];
-        }
         
         self.victoryArrays = [NSMutableArray array];
         for(int i = 0; i < 4; i++){
@@ -105,24 +124,24 @@
         
         
         /*
-        for(int i = 0; i < 3; i++){
-            CCSprite *victorySprite = [[[CCSprite alloc] initWithSpriteFrameName:@"dashedCircle"] autorelease];
-            victorySprite.scale = .75;
-            victorySprite.color = ccWHITE;
-            victorySprite.position = ccp(CONTROL_OFFSET + 35 + i*45, 25);
-            [self addChild:victorySprite];
-        }
-        for(int i = 0; i < 3; i++){
-            CCSprite *victorySprite = [[[CCSprite alloc] initWithSpriteFrameName:@"dashedCircle"] autorelease];
-            victorySprite.scale = .75;
-            victorySprite.color = ccWHITE;
-            victorySprite.position = ccp((winSize.width - CONTROL_OFFSET) - 35 - i*45, 25);
-            [self addChild:victorySprite];
-        }*/
+         for(int i = 0; i < 3; i++){
+         CCSprite *victorySprite = [[[CCSprite alloc] initWithSpriteFrameName:@"dashedCircle"] autorelease];
+         victorySprite.scale = .75;
+         victorySprite.color = ccWHITE;
+         victorySprite.position = ccp(CONTROL_OFFSET + 35 + i*45, 25);
+         [self addChild:victorySprite];
+         }
+         for(int i = 0; i < 3; i++){
+         CCSprite *victorySprite = [[[CCSprite alloc] initWithSpriteFrameName:@"dashedCircle"] autorelease];
+         victorySprite.scale = .75;
+         victorySprite.color = ccWHITE;
+         victorySprite.position = ccp((winSize.width - CONTROL_OFFSET) - 35 - i*45, 25);
+         [self addChild:victorySprite];
+         }*/
         
         //[self refreshVictoryPoint];
-
         
+        [self refreshUI];
     }
     return self;
 }
@@ -133,27 +152,139 @@
 }
 
 
+
+-(void) refreshUI{
+    for(Jouster *jouster in gameLayer.jousterArray){
+        int playerOrTeam;
+        if([PlayerManager sharedInstance].isTeamPlay){
+            playerOrTeam = jouster.player.team;
+            if(!jouster.isDead){
+               //figure out what slot
+                int playerNumber = jouster.player.playerNumber;
+                CCSprite *overlay;
+                CCLayerColor *layer;
+                if(playerNumber == 0){
+                    overlay = redOverlay;
+                    layer = redLayer;
+                }else if(playerNumber == 1){
+                    overlay = blueOverlay;
+                    layer = blueLayer;
+                }else if(playerNumber == 2){
+                    overlay = greenOverlay;
+                    layer = greenLayer;
+                }else if(playerNumber == 3){
+                    overlay = blackOverlay;
+                    layer = blackLayer;
+                }
+                
+
+                if(playerOrTeam == 0){
+                    overlay.color = COLOR_PLAYER_ONE;
+                    layer.color = COLOR_PLAYER_ONE_LIGHT;
+                }else if(playerOrTeam == 1){
+                    overlay.color = COLOR_PLAYER_TWO;
+                    layer.color = COLOR_PLAYER_TWO_LIGHT;
+                }else if(playerOrTeam == 2){
+                    overlay.color = COLOR_PLAYER_THREE;
+                    layer.color = COLOR_PLAYER_THREE_LIGHT;
+                }else if(playerOrTeam == 3){
+                    overlay.color = COLOR_PLAYER_FOUR;
+                    layer.color = COLOR_PLAYER_FOUR_LIGHT;
+                }
+            }else{
+                //figure out what slot
+                int playerNumber = jouster.player.playerNumber;
+                CCSprite *overlay;
+                CCLayerColor *layer;
+                if(playerNumber == 0){
+                    overlay = redOverlay;
+                    layer = redLayer;
+                }else if(playerNumber == 1){
+                    overlay = blueOverlay;
+                    layer = blueLayer;
+                }else if(playerNumber == 2){
+                    overlay = greenOverlay;
+                    layer = greenLayer;
+                }else if(playerNumber == 3){
+                    overlay = blackOverlay;
+                    layer = blackLayer;
+                }
+                
+                
+                if(playerOrTeam == 0){
+                    overlay.color = COLOR_PLAYER_NON;
+                    layer.color = COLOR_PLAYER_NON_LIGHT;
+                }else if(playerOrTeam == 1){
+                    overlay.color = COLOR_PLAYER_NON;
+                    layer.color = COLOR_PLAYER_NON_LIGHT;
+                }else if(playerOrTeam == 2){
+                    overlay.color = COLOR_PLAYER_NON;
+                    layer.color = COLOR_PLAYER_NON_LIGHT;
+                }else if(playerOrTeam == 3){
+                    overlay.color = COLOR_PLAYER_NON;
+                    layer.color = COLOR_PLAYER_NON_LIGHT;
+                }
+            }
+            
+            
+            
+        }else{
+            playerOrTeam = jouster.player.playerNumber;
+            if(!jouster.isDead){
+                if(playerOrTeam == 0){
+                    redOverlay.color = COLOR_PLAYER_ONE;
+                    redLayer.color = COLOR_PLAYER_ONE_LIGHT;
+                }else if(playerOrTeam == 1){
+                    blueOverlay.color = COLOR_PLAYER_TWO;
+                    blueLayer.color = COLOR_PLAYER_TWO_LIGHT;
+                }else if(playerOrTeam == 2){
+                    greenOverlay.color = COLOR_PLAYER_THREE;
+                    greenLayer.color = COLOR_PLAYER_THREE_LIGHT;
+                }else if(playerOrTeam == 3){
+                    blackOverlay.color = COLOR_PLAYER_FOUR;
+                    blackLayer.color = COLOR_PLAYER_FOUR_LIGHT;
+                }
+            }else{
+                if(playerOrTeam == 0){
+                    redOverlay.color = COLOR_PLAYER_NON;
+                    redLayer.color = COLOR_PLAYER_NON_LIGHT;
+                }else if(playerOrTeam == 1){
+                    blueOverlay.color = COLOR_PLAYER_NON;
+                    blueLayer.color = COLOR_PLAYER_NON_LIGHT;
+                }else if(playerOrTeam == 2){
+                    greenOverlay.color = COLOR_PLAYER_NON;
+                    greenLayer.color = COLOR_PLAYER_NON_LIGHT;
+                }else if(playerOrTeam == 3){
+                    blackOverlay.color = COLOR_PLAYER_NON;
+                    blackLayer.color = COLOR_PLAYER_NON_LIGHT;
+                }
+            }
+        }
+
+    }
+}
+
 -(void) animateTouchAreasIn{
     CGSize winSize= [[CCDirector sharedDirector] winSize];
-    redLayer.position = ccp(-redLayer.contentSize.width, 0);
-    blueLayer.position = ccp(winSize.width, 0);
-    redOverlay.position = ccp(-blueOverlay.contentSize.width/2, winSize.height/2);
-    blueOverlay.position = ccp(winSize.width + blueOverlay.contentSize.width/2, winSize.height/2 );
-    //
-    CCActionInterval *redMove = [CCMoveTo actionWithDuration:1 position:ccp(CONTROL_OFFSET - redOverlay.contentSize.width/2, winSize.height/2)];
-    CCActionInterval *blueMove = [CCMoveTo actionWithDuration:1 position:ccp((winSize.width - CONTROL_OFFSET) + blueOverlay.contentSize.width/2, winSize.height/2)];
-    CCActionInterval *redLayerMove = [CCMoveTo actionWithDuration:1 position:ccp(0, 0)];
-    CCActionInterval *blueLayerMove = [CCMoveTo actionWithDuration:1 position:ccp(winSize.width - blueLayer.contentSize.width, 0)];
+    redLayer.position = ccp(-redLayer.contentSize.width, winSize.height/2);
+    blueLayer.position = ccp(winSize.width, winSize.height/2);
+    blackLayer.position = ccp(-redLayer.contentSize.width, 0);
+    greenLayer.position = ccp(winSize.width, 0);
     
-    CCEaseIn *redElastic = [CCEaseIn actionWithAction:redMove rate:2];
-    CCEaseIn *blueElastic = [CCEaseIn actionWithAction:blueMove rate:2];
+    CCActionInterval *redLayerMove = [CCMoveTo actionWithDuration:1.2 - arc4random()%4/10.0 position:ccp(0, winSize.height/2)];
+    CCActionInterval *blueLayerMove = [CCMoveTo actionWithDuration:1.2 - arc4random()%4/10.0 position:ccp(winSize.width - blueLayer.contentSize.width, winSize.height/2)];
+    CCActionInterval *greenLayerMove = [CCMoveTo actionWithDuration:1.2 - arc4random()%4/10.0 position:ccp(winSize.width - blueLayer.contentSize.width, 0)];
+    CCActionInterval *blackLayerMove = [CCMoveTo actionWithDuration:1.2 - arc4random()%4/10.0 position:ccp(0, 0)];
+    
     CCEaseIn *redLayerElastic = [CCEaseIn actionWithAction:redLayerMove rate:2];
     CCEaseIn *blueLayerElastic = [CCEaseIn actionWithAction:blueLayerMove rate:2];
+    CCEaseIn *greenLayerElastic = [CCEaseIn actionWithAction:greenLayerMove rate:2];
+    CCEaseIn *blackLayerElastic = [CCEaseIn actionWithAction:blackLayerMove rate:2];
     
-    [redOverlay runAction:redElastic];
-    [blueOverlay runAction:blueElastic];
     [redLayer runAction:redLayerElastic];
     [blueLayer runAction:blueLayerElastic];
+    [blackLayer runAction:blackLayerElastic];
+    [greenLayer runAction:greenLayerElastic];
 }
 
 -(void) smashTopBottomAlreadyInPlace:(BOOL) inPlace{
@@ -193,7 +324,7 @@
     
     //check count
     if(gameLayer.lastWinner <= [victoryArrays count]){
-
+        
     }else{
         NSLog(@"some error happened");
         return;
@@ -218,6 +349,9 @@
         victorySprite.position = pos;
         Jouster * winningJouster = [gameLayer getJousterWithPlayerNumber:gameLayer.lastWinner];
         int wins = winningJouster.wins;
+        if([[PlayerManager sharedInstance] isTeamPlay]){
+            wins = [gameLayer getWinsForTeam:gameLayer.lastWinner];
+        }
         if(i < wins){
             victorySprite.visible = YES;
         }else{
@@ -225,28 +359,13 @@
         }
         //animate new victory patch
         /*if(i == wins - 1){
-            victorySprite.position = gameLayer.blueJouster.position;
-            CCMoveTo *move = [CCMoveTo actionWithDuration:.7 position:ccp(CONTROL_OFFSET + 34 + i*45, 25)];
-            [victorySprite runAction:move];
-        }*/
+         victorySprite.position = gameLayer.blueJouster.position;
+         CCMoveTo *move = [CCMoveTo actionWithDuration:.7 position:ccp(CONTROL_OFFSET + 34 + i*45, 25)];
+         [victorySprite runAction:move];
+         }*/
     }
     
-    //red victory
-    /*for(int i = 0; i < self.blueVictoryArray.count; ++i){
-        CCSprite *victorySprite = [self.blueVictoryArray objectAtIndex:i];
-        victorySprite.position = ccp((winSize.width - CONTROL_OFFSET) - 36 - i*45, 25);
-        if(i < gameLayer.blueWins){
-            victorySprite.visible = YES;
-        }else{
-            victorySprite.visible = NO;
-        }
-        //animate new victory patch
-        if(!gameLayer.didRedWinRound && i == gameLayer.blueWins-1){
-            victorySprite.position = gameLayer.redJouster.position;
-            CCMoveTo *move = [CCMoveTo actionWithDuration:.7 position:ccp((winSize.width - CONTROL_OFFSET) - 36 - i*45, 25)];
-            [victorySprite runAction:move];
-        }
-    }*/
+    
 }
 
 

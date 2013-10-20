@@ -10,9 +10,13 @@
 #import "cocos2d.h"
 
 @interface TitleLayer : CCLayerColor {
-    int playerOneChoice, playerTwoChoice;
     CCSprite *jousterBoxLeft, *jousterBoxRight;
     
+    NSMutableArray *playerSelectArray;
+    
 }
+
+@property (nonatomic, retain) NSMutableArray *playerSelectArray;
+
 -(void) setWinner:(NSString*) winner;
 @end

@@ -10,8 +10,10 @@
 
 @interface PlayerManager : NSObject{
     NSMutableArray *playerArray;
+    BOOL isTeamPlay;
 }
 
+@property BOOL isTeamPlay;
 @property (nonatomic, retain) NSMutableArray *playerArray;
 
 + (PlayerManager*)sharedInstance;

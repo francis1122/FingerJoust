@@ -14,13 +14,50 @@
 //#define COLOR_GAMEAREA ccc3(25,25,25)
 //#define COLOR_GAMEAREA_B4 ccc4(25,25,25,255)
 
-#define COLOR_TOUCHAREA ccc3(66,66,66)
-#define COLOR_TOUCHAREA_B4 ccc4(111,111,111, 255)
-#define COLOR_GAMEAREA ccc3(133,133,155)
-#define COLOR_GAMEAREA_B4 ccc4(133,133,133,255)
+#define COLOR_TOUCHAREA ccc3(195,211,223)
+#define COLOR_TOUCHAREA_B4 ccc4(195,211, 223, 255)
+#define COLOR_GAMEAREA ccc3(223,214,195)
+#define COLOR_GAMEAREA_B4 ccc4(223,214,194,255)
 
 #define COLOR_GAMEBORDER ccc3(60,60,60)
 #define COLOR_GAMEBORDER_B4 ccc4(60,60,60,255)
+
+
+
+
+//player colors
+#define COLOR_DISABLED ccc4(115, 115,115, 255)
+
+#define COLOR_PLAYER_NON ccc3(155,155,155)
+#define COLOR_PLAYER_NON_LIGHT ccc3(211,211,211)
+#define COLOR_PLAYER_NON_B4 ccc4(155,155,155, 255)
+#define COLOR_PLAYER_NON_LIGHT_B4 ccc4(211,211,211, 255)
+#define COLOR_PLAYER_NON_LIGHT_F4 ccc4f(211.0/255.0,211.0/255.0,211.0/255.0, 255.0/255.0)
+
+#define COLOR_PLAYER_ONE ccc3(255,0,0)
+#define COLOR_PLAYER_ONE_LIGHT ccc3(255,120,120)
+#define COLOR_PLAYER_ONE_B4 ccc4(255,0,0,255)
+#define COLOR_PLAYER_ONE_LIGHT_B4 ccc4(255,120,120, 255)
+#define COLOR_PLAYER_ONE_LIGHT_F4 ccc4f(255.0/255.0,120.0/255.0,120.0/255.0, 255.0/255.0)
+
+#define COLOR_PLAYER_TWO ccc3(0,0,255)
+#define COLOR_PLAYER_TWO_LIGHT ccc3(120,120,255)
+#define COLOR_PLAYER_TWO_B4 ccc3(0,0,255, 255)
+#define COLOR_PLAYER_TWO_LIGHT_B4 ccc4(120,120,255, 255)
+#define COLOR_PLAYER_TWO_LIGHT_F4 ccc4f(120.0/255.0,120.0/255.0,255.0/255.0, 255.0/255.0)
+
+#define COLOR_PLAYER_THREE ccc3(0,255,0)
+#define COLOR_PLAYER_THREE_LIGHT ccc3(120,255,120)
+#define COLOR_PLAYER_THREE_B4 ccc4(0,255,0, 255)
+#define COLOR_PLAYER_THREE_LIGHT_B4 ccc4(120,255,120, 255)
+#define COLOR_PLAYER_THREE_LIGHT_F4 ccc4f(120.0/255.0,255.0/255.0,120.0/255.0, 255.0/255.0)
+
+#define COLOR_PLAYER_FOUR ccc3(255,255,0)
+#define COLOR_PLAYER_FOUR_LIGHT ccc3(255,255,120)
+#define COLOR_PLAYER_FOUR_B4 ccc4(255,255,0,255)
+#define COLOR_PLAYER_FOUR_LIGHT_B4 ccc4(255,255,120,255)
+#define COLOR_PLAYER_FOUR_LIGHT_F4 ccc4f(255.0/255.0,255.0/255.0,120.0/255.0,255.0/255.0)
+
 
 //#define CONTROL_OFFSET 286
 //#define CONTROL_OFFSET 312
@@ -28,11 +65,14 @@
 #define EXTRA_CONTROL_OFFSET 280
 #define MIDDLEBAR_HEIGHT 60
 
+#define STUN_TIME 4.0
+
 #define ROUND_TIME 20
-#define VORTEX_DISTANCE 350
+#define VORTEX_DISTANCE 300
+#define VORTEX_LIFE 2.0
 #define STUN_CONTRAINT 340
 
-#define COLLISION_STEPS 10
+#define COLLISION_STEPS 6
 #define TRANSITION_TIME 2.0
 
 
@@ -104,6 +144,8 @@ typedef enum GameState
 
 -(void) updateTimer:(ccTime) dt;
 -(void) updateVortex:(ccTime)dt;
+-(void) incrementWinsForTeam:(int) team;
+-(int) getWinsForTeam:(int) team;
 
 -(void) checkClosestJousterToCenter;
 -(void) checkBodyOnBodyStun:(Jouster *) jouseterA otherJouster:(Jouster *)jousterB;

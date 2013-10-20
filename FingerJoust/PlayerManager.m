@@ -13,7 +13,7 @@
 
 static PlayerManager *sharedInstance = nil;
 
-@synthesize playerArray;
+@synthesize playerArray, isTeamPlay;
 
 + (PlayerManager*)sharedInstance {
     @synchronized(self) {

@@ -28,7 +28,7 @@
         aliveTicker += dt * 2.0;
     }
 
-    CGPoint desiredLocation = ccpMult( ccp(cos(aliveTicker), sin(aliveTicker)), bodyRadius * 3.0);
+    CGPoint desiredLocation = ccpMult( ccp(cos(aliveTicker), sin(aliveTicker)), bodyRadius * 1.5);
     joustVelocity = ccpSub(joustPosition, desiredLocation);
     joustPosition = desiredLocation;
     //normalize velocity

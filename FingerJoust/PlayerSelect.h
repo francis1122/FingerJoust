@@ -12,10 +12,24 @@
 @class Player;
 @interface PlayerSelect : CCLayerColor {
     CCSprite *isActiveSprite;
+    CCLabelTTF * characterLabel;
+    CCNode *isActiveNode;
+    CCMenu *teamPlayMenu;
+    CCMenuItemSprite *teamPlayItem;
+    CCSprite *border;
 }
 
 @property (nonatomic, assign) Player *player;
 
 -(id) initWithPlayer:(Player *)p;
+
+
+-(void) playerColorChangedToTeam:(int)team;
+-(void) setBorderColorForPlayer;
+-(void) playerCharacterChangedTo:(int) character;
+-(void) activatePlayer;
+-(void) deactivatePlayer;
+-(void) turnOnTeamPlay;
+-(void) turnOffTeamPlay;
 
 @end

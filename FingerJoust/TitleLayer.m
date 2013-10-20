@@ -15,7 +15,7 @@
 @implementation TitleLayer
 
 
-
+@synthesize playerSelectArray;
 
 -(id) init{
     if(self = [super initWithColor:COLOR_GAMEAREA_B4] ){
@@ -33,43 +33,73 @@
         
         
 		CCMenuItem *playItem = [CCMenuItemFont itemWithString:@"Play" block:^(id sender) {
-            GameLayer *gLayer = [[GameLayer alloc] init];
-            [[CCDirector sharedDirector] replaceScene:gLayer];
-            [gLayer release];
+            int activeCount = 0;
+            for(Player *player in [[PlayerManager sharedInstance] playerArray]){
+                if(player.isActive){
+                    activeCount++;
+                }
+            }
+            if(activeCount > 1){
+                GameLayer *gLayer = [[GameLayer alloc] init];
+                [[CCDirector sharedDirector] replaceScene:gLayer];
+                [gLayer release];
+            }
 		}];
-		
+
+        CCMenuItemFont *teamPlayToggle = [CCMenuItemFont itemWithString:@"Team Play Off" block:^(CCMenuItemFont *sender) {
+            [PlayerManager sharedInstance].isTeamPlay = ![PlayerManager sharedInstance].isTeamPlay;
+            if([PlayerManager sharedInstance].isTeamPlay){
+                for(PlayerSelect *selectLayer in self.playerSelectArray){
+                    [selectLayer turnOnTeamPlay];
+                }
+                [sender setString:@"Team Play On"];
+            }else{
+                for(PlayerSelect *selectLayer in self.playerSelectArray){
+                    [selectLayer turnOffTeamPlay];
+                }
+                [sender setString:@"Team Play Off"];
+            }
+		}];
         
 		
-		CCMenu *menu = [CCMenu menuWithItems:playItem, nil];
+		CCMenu *menu = [CCMenu menuWithItems:playItem, teamPlayToggle, nil];
 		
-		[menu alignItemsHorizontallyWithPadding:20];
+//		[menu alignItemsHorizontallyWithPadding:20];
+        [menu alignItemsVerticallyWithPadding:50];
 		[menu setPosition:ccp( size.width/2, size.height/2 - 50)];
 		
+        
+        
 		// Add the menu to the layer
 		[self addChild:menu];
         
-        
+        self.playerSelectArray = [NSMutableArray array];
         //create 4 player select things
         for(Player *player in [PlayerManager sharedInstance].playerArray){
             PlayerSelect *playerSelectLayer = [[[PlayerSelect alloc] initWithPlayer:player] autorelease];
+            [self.playerSelectArray addObject:playerSelectLayer];
             [self addChild:playerSelectLayer];
-            
         }
-        
-        
-        //[self createChoosePlayerMenus];
-        
-        
-        
     }
+    
+    
+    
+    
     return self;
 }
+
+
+-(void) dealloc{
+    [playerSelectArray release];
+    [super dealloc];
+}
+
 
 -(void) createChoosePlayerMenus{
     // ask director for the window size
 
     //player 1 select
-    CGSize size = [[CCDirector sharedDirector] winSize];
+/*    CGSize size = [[CCDirector sharedDirector] winSize];
     CCMenu *playerChoiceMenu = [[CCMenu alloc] init];
     for(int i = 0; i < 4 ;i++){
         CCSprite *normalSprite = [CCSprite spriteWithSpriteFrameName:@"BodyOuter"];
@@ -103,21 +133,7 @@
                                                                           playerTwoChoice = sender.tag;
                 }];
         
-        /*CCMenuItem *playItem = [CCMenuItemFont itemWithString: [NSString stringWithFormat:@"%d", i]  block:^(CCMenuItemFont* sender) {
-            for(CCMenuItem *m in playerTwoChoiceMenu.children) {
-                if (m != sender) {
-                    [m unselected];
-                    [m setColor:ccGRAY];
-                }else{
-                    if(!sender.isSelected){
-                        [sender selected];
-                        [sender setColor:ccRED];
-                        playerTwoChoice = sender.tag;
-                    }
-                }
-            }
-        }];
-         */
+    
         playItem.tag = i;
         [playerTwoChoiceMenu addChild:playItem];
     }
@@ -132,7 +148,7 @@
     jousterBoxRight.color = ccRED;
     [self addChild:jousterBoxLeft];
     [self addChild:jousterBoxRight];
-    
+    */
     
     
 

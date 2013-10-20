@@ -21,11 +21,15 @@
     
     CCLayerColor *redLayer;
     CCLayerColor *blueLayer;
-    CCLayerColor *redBorderLayer;
-    CCLayerColor *blueBorderLayer;
+    CCLayerColor *greenLayer;
+    CCLayerColor *blackLayer;
+    
+    
     
     CCSprite *redOverlay;
     CCSprite *blueOverlay;
+    CCSprite *greenOverlay;
+    CCSprite *blackOverlay;
     CCLayerColor *topLayer;
     CCLayerColor *bottomLayer;
     
@@ -39,7 +43,7 @@
 @property (retain, nonatomic) NSMutableArray *victoryArrays;
 
 -(id) initWithGameLayer:(GameLayer*) gLayer;
-
+-(void) refreshUI;
 -(void) animateTouchAreasIn;
 -(void) smashTopBottomAlreadyInPlace:(BOOL) inPlace;
 

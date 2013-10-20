@@ -85,5 +85,6 @@
 -(void) joustCollision:(CGPoint) joustPos withRadius:(float) radius;
 -(void) resetTouch;
 -(void) touch:(CGPoint) touch;
+-(BOOL) doesTouchDeltaMakeSense:(CGPoint) touch;
 -(void) checkBoundaries;
 @end
