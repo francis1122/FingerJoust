@@ -23,8 +23,9 @@
 #define COLOR_GAMEBORDER_B4 ccc4(60,60,60,255)
 
 
+//font names
 
-
+extern NSString *const MAIN_FONT;
 //player colors
 #define COLOR_DISABLED ccc4(115, 115,115, 255)
 
@@ -107,6 +108,7 @@ typedef enum GameState
     
     //vortex array
     NSMutableArray *vortexArray;
+    NSMutableArray *touchParticleArray;
     
     
     //death clock
@@ -131,7 +133,7 @@ typedef enum GameState
 
 @property int lastWinner;
 @property (retain, nonatomic) PowerStone *powerStone;
-@property (retain, nonatomic) NSMutableArray *vortexArray, *jousterArray;
+@property (retain, nonatomic) NSMutableArray *vortexArray, *jousterArray, *touchParticleArray;
 
 -(Jouster*) getJousterWithPlayerNumber:(int) playerNumber;
 

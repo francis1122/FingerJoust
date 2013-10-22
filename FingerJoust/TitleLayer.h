@@ -19,4 +19,6 @@
 @property (nonatomic, retain) NSMutableArray *playerSelectArray;
 
 -(void) setWinner:(NSString*) winner;
+
+-(void) animateOut;
 @end

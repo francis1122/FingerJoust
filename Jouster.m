@@ -15,7 +15,7 @@
 
 @implementation Jouster
 
-@synthesize velocity, waitingForTouch, bodyRadius, joustRadius, orbitalOffset,joustPosition, player, powerStones, jousterSprite, joustVelocity, motionStreak, isDead, wins;
+@synthesize velocity, waitingForTouch, bodyRadius, joustRadius, orbitalOffset,joustPosition, player, powerStones, jousterSprite, joustVelocity, motionStreak, isDead, wins, jousterMotionStreak, gameLayer;
 
 -(id) initWithPlayer:(Player *) p{
     if(self = [super init]){
@@ -24,7 +24,8 @@
         waitingForTouch = YES;
         joustPosition = ccp(1,0);
         [self resetJouster];
-        
+        bodyRadius = 30;
+        joustRadius = 20;
         bodyOuterSprite = [CCWarpSprite spriteWithSpriteFrameName:@"BodyOuter"];
         bodyOuterSprite.isWarping = NO;
         bodyInnerSprite = [CCWarpSprite spriteWithSpriteFrameName:@"BodyInner"];
@@ -50,7 +51,7 @@
         [self addChild:stunParticles z:-1];
         
     
-
+        maxSpeed = JOUSTER_BODY_MAXSPEED;
         
         
         /*
@@ -83,6 +84,15 @@
         [self.motionStreak release];
         self.motionStreak = nil;
     }
+    
+    if(self.jousterMotionStreak){
+        [self.jousterMotionStreak removeFromParentAndCleanup:YES];
+        [self.jousterMotionStreak release];
+        self.jousterMotionStreak = nil;
+    }
+    
+    self.jousterMotionStreak = [[CCParticleSystemQuad alloc] initWithFile: @"MotionStreak.plist"];
+    self.jousterMotionStreak.startSize = 70;
     self.motionStreak = [[CCParticleSystemQuad alloc] initWithFile: @"MotionStreak.plist"];
     int choice = player.playerNumber;
     if([[PlayerManager sharedInstance] isTeamPlay]){
@@ -92,25 +102,36 @@
     if(choice == 0){
         [motionStreak setStartColor:COLOR_PLAYER_ONE_LIGHT_F4];
         [motionStreak setEndColor:COLOR_PLAYER_ONE_LIGHT_F4];
-
+        [jousterMotionStreak setStartColor:COLOR_PLAYER_ONE_LIGHT_F4];
+        [jousterMotionStreak setEndColor:COLOR_PLAYER_ONE_LIGHT_F4];
     }else if(choice == 1){
         [motionStreak setStartColor:COLOR_PLAYER_TWO_LIGHT_F4];
         [motionStreak setEndColor:COLOR_PLAYER_TWO_LIGHT_F4];
+        [jousterMotionStreak setStartColor:COLOR_PLAYER_TWO_LIGHT_F4];
+        [jousterMotionStreak setEndColor:COLOR_PLAYER_TWO_LIGHT_F4];
     } else if(choice == 2){
         [motionStreak setStartColor:COLOR_PLAYER_THREE_LIGHT_F4];
         [motionStreak setEndColor:COLOR_PLAYER_THREE_LIGHT_F4];
+        [jousterMotionStreak setStartColor:COLOR_PLAYER_THREE_LIGHT_F4];
+        [jousterMotionStreak setEndColor:COLOR_PLAYER_THREE_LIGHT_F4];
     } else if(choice == 3){
         [motionStreak setStartColor:COLOR_PLAYER_FOUR_LIGHT_F4];
         [motionStreak setEndColor:COLOR_PLAYER_FOUR_LIGHT_F4];
+        [jousterMotionStreak setStartColor:COLOR_PLAYER_FOUR_LIGHT_F4];
+        [jousterMotionStreak setEndColor:COLOR_PLAYER_FOUR_LIGHT_F4];
     }
 
     
     motionStreak.positionType = kCCPositionTypeFree;
-    [self addChild:motionStreak z:-1];
+    [gameLayer addChild:motionStreak z:0];
+    [gameLayer addChild:jousterMotionStreak z:0];
+    motionStreak.visible = NO;
+    jousterMotionStreak.visible = NO;
 }
 
 -(void) dealloc{
     [motionStreak release];
+    [jousterMotionStreak release];
     [super dealloc];
 }
 
@@ -120,8 +141,6 @@
     self.visible = YES;
     isDead = NO;
     powerStones = 0;
-    bodyRadius = 30;
-    joustRadius = 20;
     orbitalOffset = 0;
     CGPoint pos;
     [stunParticles resetSystem];
@@ -190,9 +209,9 @@
 
 -(void) clampMaxSpeed{
     float speed = ccpLength(self.velocity);
-    if(speed > JOUSTER_BODY_MAXSPEED){
+    if(speed > maxSpeed){
         CGPoint normal = ccpNormalize(self.velocity);
-        self.velocity = ccpMult(normal, JOUSTER_BODY_MAXSPEED);
+        self.velocity = ccpMult(normal, maxSpeed);
     }
 }
 
@@ -201,6 +220,15 @@
         [self engageSuperMode];
     }
     
+    if(self.parent && self.visible){
+        jousterMotionStreak.visible = YES;
+        motionStreak.visible = YES;
+    }else{
+        jousterMotionStreak.visible = NO;
+        motionStreak.visible = NO;
+    }
+    jousterMotionStreak.position = ccpAdd(joustPosition,self.position);
+    motionStreak.position = self.position;
     //velocity and position
     //reduce velocity
     [self clampMaxSpeed];

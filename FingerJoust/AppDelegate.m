@@ -12,6 +12,7 @@
 #import "IntroLayer.h"
 #import "TitleLayer.h"
 #import "PlayerManager.h"
+#import "GameLayer.h"
 
 @implementation MyNavigationController
 
@@ -147,6 +148,13 @@
 	// make main window visible
 	[window_ makeKeyAndVisible];
 
+    
+    
+    //font check
+//    @"SourceSansPro-ExtraLight"
+//    NSArray *names = [UIFont fontNamesForFamilyName:@"Source Sans Pro"];
+    
+    
 	
 	return YES;
 }

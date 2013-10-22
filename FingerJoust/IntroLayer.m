@@ -41,9 +41,9 @@
             CGSize winSize = [[CCDirector sharedDirector] winSize];
             self.touchEnabled = YES;
             // create and initialize a Label
-            ballLabel = [CCLabelTTF labelWithString:@"Ball" fontName:@"Marker Felt" fontSize:128];
-            busterLabel = [CCLabelTTF labelWithString:@"Buster" fontName:@"Marker Felt" fontSize:128];
-            tapToPlayLabel = [CCLabelTTF labelWithString:@"Tap to Play" fontName:@"Marker Felt" fontSize:32];
+            ballLabel = [CCLabelTTF labelWithString:@"Ball" fontName:MAIN_FONT fontSize:128];
+            busterLabel = [CCLabelTTF labelWithString:@"Buster" fontName:MAIN_FONT fontSize:128];
+            tapToPlayLabel = [CCLabelTTF labelWithString:@"Tap to Play" fontName:MAIN_FONT fontSize:32];
             tapToPlayLabel.position =ccp( winSize.width/2, winSize.height/2 - 300);
             tapToPlayLabel.visible = NO;
             [self addChild:tapToPlayLabel];

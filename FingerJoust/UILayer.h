@@ -46,6 +46,7 @@
 -(void) refreshUI;
 -(void) animateTouchAreasIn;
 -(void) smashTopBottomAlreadyInPlace:(BOOL) inPlace;
+-(void) animateTouchAreasOut;
 
 #pragma mark - victory point stuff
 -(void) refreshVictoryPoint;

@@ -33,13 +33,13 @@
         //set position based on plapyer number
         CGPoint pos = CGPointZero;
         if(self.player.playerNumber == 0){
-            pos = ccp(0, size.height/2);
+            pos = ccp(-self.contentSize.width, size.height/2);
         }else if(self.player.playerNumber == 1){
-            pos = ccp(size.width - width, size.height/2);
+            pos = ccp(size.width, size.height/2);
         }else if(self.player.playerNumber == 2){
-            pos = ccp(size.width - width, 0);
+            pos = ccp(size.width, 0);
         }else if(self.player.playerNumber == 3){
-            pos = ccp(0, 0);
+            pos = ccp(-self.contentSize.width, 0);
         }
         self.position = pos;
         
@@ -136,7 +136,7 @@
                                                                                  //cycle between 4 teams
                                                                                  int jousterType = player.jousterType;
                                                                                  jousterType++;
-                                                                                 if(jousterType > 2){
+                                                                                 if(jousterType > 3){
                                                                                      jousterType = 0;
                                                                                  }
                                                                                  player.jousterType = jousterType;
@@ -158,7 +158,7 @@
         jousterMenu.position = pos;
         [isActiveNode addChild:jousterMenu];
         
-        characterLabel = [CCLabelTTF labelWithString:@"" fontName:@"Marker Felt" fontSize:32];
+        characterLabel = [CCLabelTTF labelWithString:@"" fontName:MAIN_FONT fontSize:32];
         characterLabel.position = ccp(200, 100);
         [isActiveNode addChild:characterLabel];
         
@@ -264,6 +264,8 @@
         characterString = @"Orbit";
     }else if(character == 2){
         characterString = @"Grower";
+    }else if(character == 3){
+        characterString = @"Bouncer";
     }
     [characterLabel setString:characterString];
 }

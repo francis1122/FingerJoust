@@ -11,9 +11,10 @@
 
 #define JOUSTER_BODY_MAXSPEED 500
 
-@class CCWarpSprite, Player;
+@class CCWarpSprite, Player, GameLayer;
 @interface Jouster : CCSprite {
     Player *player;
+    GameLayer *gameLayer;
     
     CCWarpSprite *jousterSprite;
     CCWarpSprite *jousterInnerSprite;
@@ -51,8 +52,11 @@
     BOOL isStunned;
     float stunTimer;
     
+    float maxSpeed;
+    
     CCParticleSystemQuad *stunParticles;
     CCParticleSystemQuad *motionStreak;
+    CCParticleSystemQuad *jousterMotionStreak;
 }
 
 
@@ -63,8 +67,9 @@
 @property CGPoint velocity, joustPosition;
 @property CGPoint joustVelocity;
 
+@property (nonatomic, assign) GameLayer *gameLayer;
 @property (nonatomic, assign) Player *player;
-@property (nonatomic, retain) CCParticleSystemQuad *motionStreak;
+@property (nonatomic, retain) CCParticleSystemQuad *motionStreak, *jousterMotionStreak;
 @property (nonatomic, assign) CCWarpSprite *jousterSprite;
 
 

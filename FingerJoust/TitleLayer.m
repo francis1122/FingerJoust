@@ -11,6 +11,7 @@
 #import "PlayerManager.h"
 #import "Player.h"
 #import "PlayerSelect.h"
+#import "GameLayer.h"
 
 @implementation TitleLayer
 
@@ -20,7 +21,7 @@
 -(id) init{
     if(self = [super initWithColor:COLOR_GAMEAREA_B4] ){
         // create and initialize a Label
-		CCLabelTTF *label = [CCLabelTTF labelWithString:@"Ball Buster" fontName:@"Marker Felt" fontSize:64];
+		CCLabelTTF *label = [CCLabelTTF labelWithString:@"Ball Buster" fontName:MAIN_FONT fontSize:64];
         
 		// ask director for the window size
 		CGSize size = [[CCDirector sharedDirector] winSize];
@@ -32,19 +33,19 @@
 		[self addChild: label];
         
         
-		CCMenuItem *playItem = [CCMenuItemFont itemWithString:@"Play" block:^(id sender) {
+		CCMenuItemFont *playItem = [CCMenuItemFont itemWithString:@"Play" block:^(id sender) {
             int activeCount = 0;
             for(Player *player in [[PlayerManager sharedInstance] playerArray]){
                 if(player.isActive){
                     activeCount++;
+                    
                 }
             }
             if(activeCount > 1){
-                GameLayer *gLayer = [[GameLayer alloc] init];
-                [[CCDirector sharedDirector] replaceScene:gLayer];
-                [gLayer release];
+                [self animateOut];
             }
 		}];
+        [playItem setFontName:MAIN_FONT];
 
         CCMenuItemFont *teamPlayToggle = [CCMenuItemFont itemWithString:@"Team Play Off" block:^(CCMenuItemFont *sender) {
             [PlayerManager sharedInstance].isTeamPlay = ![PlayerManager sharedInstance].isTeamPlay;
@@ -60,6 +61,7 @@
                 [sender setString:@"Team Play Off"];
             }
 		}];
+        [teamPlayToggle setFontName:MAIN_FONT];
         
 		
 		CCMenu *menu = [CCMenu menuWithItems:playItem, teamPlayToggle, nil];
@@ -80,6 +82,8 @@
             [self.playerSelectArray addObject:playerSelectLayer];
             [self addChild:playerSelectLayer];
         }
+        
+        [self animateIn];
     }
     
     
@@ -158,7 +162,7 @@
 
 -(void) setWinner:(NSString*) winner{
     // create and initialize a Label
-    CCLabelTTF *label = [CCLabelTTF labelWithString:@"someone" fontName:@"Marker Felt" fontSize:128];
+    CCLabelTTF *label = [CCLabelTTF labelWithString:@"" fontName:MAIN_FONT fontSize:128];
     
     // ask director for the window size
     CGSize size = [[CCDirector sharedDirector] winSize];
@@ -169,5 +173,61 @@
     // add the label as a child to this Layer
     [self addChild: label];
 }
+
+#pragma mark - animations
+
+-(void) animateOut{
+    CGSize size = [[CCDirector sharedDirector] winSize];
+    
+    for(PlayerSelect *selectionScreen in self.playerSelectArray){
+        [selectionScreen stopAllActions];
+        CGPoint pos;
+        if(selectionScreen.player.playerNumber == 0){
+            pos = ccp(-selectionScreen.contentSize.width, size.height/2);
+        }else if(selectionScreen.player.playerNumber == 1){
+            pos = ccp(size.width, size.height/2);
+        }else if(selectionScreen.player.playerNumber == 2){
+            pos = ccp(size.width, 0);
+        }else if(selectionScreen.player.playerNumber == 3){
+            pos = ccp(-selectionScreen.contentSize.width, 0);
+        }
+        CCMoveTo *moveTo = [CCMoveTo actionWithDuration:0.8 position:pos];
+        CCEaseIn *easeIn = [CCEaseIn actionWithAction:moveTo rate:2];
+        [selectionScreen runAction:easeIn];
+    }
+    
+    CCDelayTime *delay = [CCDelayTime actionWithDuration:1.0];
+    CCCallBlock *block = [CCCallBlock actionWithBlock:^{
+        GameLayer *gLayer = [[GameLayer alloc] init];
+        [[CCDirector sharedDirector] replaceScene:gLayer];
+        [gLayer release];
+
+    }];
+    CCSequence *seq = [CCSequence actionOne:delay two:block];
+    [self runAction:seq];
+    
+}
+
+-(void) animateIn{
+    CGSize size = [[CCDirector sharedDirector] winSize];
+    for(PlayerSelect *selectionScreen in self.playerSelectArray){
+        [selectionScreen stopAllActions];
+        float width = 315;
+        CGPoint pos = CGPointZero;
+        if(selectionScreen.player.playerNumber == 0){
+            pos = ccp(0, size.height/2);
+        }else if(selectionScreen.player.playerNumber == 1){
+            pos = ccp(size.width - width, size.height/2);
+        }else if(selectionScreen.player.playerNumber == 2){
+            pos = ccp(size.width - width, 0);
+        }else if(selectionScreen.player.playerNumber == 3){
+            pos = ccp(0, 0);
+        }
+        CCMoveTo *moveTo = [CCMoveTo actionWithDuration:0.8 position:pos];
+        CCEaseIn *easeIn = [CCEaseIn actionWithAction:moveTo rate:2];
+        [selectionScreen runAction:easeIn];
+    }
+}
+
 
 @end

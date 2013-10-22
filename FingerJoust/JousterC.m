@@ -18,13 +18,14 @@
     if(self = [super initWithPlayer:p]){
         self.velocity = CGPointZero;
         waitingForTouch = YES;
-        bodyRadius = 30;
-        joustRadius = 20;
+        self.scale = .8;
+        bodyRadius = 25;
+        joustRadius = 17;
         orbitalOffset = 0;
         joustPosition = ccp(1,0);
         velocity = ccp(1,0);
         previousVelocity = ccp(1,0);
-        
+        maxSpeed = 400;
     }
     return self;
 }
@@ -32,20 +33,24 @@
 -(void) resetJouster{
     [super resetJouster];
     //offset the growing and shrinking of circle
-    if(player.playerNumber == 1){
-        aliveTicker = 3.14/2;
-    }else{
+    if(player.playerNumber == 0){
+        aliveTicker = 3.14/4;
+    }else if(player.playerNumber == 1){
         aliveTicker = 0;
+    }else if(player.playerNumber == 2){
+        aliveTicker = 3.14/2;
+    }else if(player.playerNumber == 3){
+        aliveTicker = 3.14/4 + 3.14/2;
     }
 }
 
 -(void) update:(ccTime)dt{
     [super update:dt];
-    aliveTicker += dt;
-    joustRadius = 21 * (1.2 + cos(aliveTicker));
+    aliveTicker += dt * 1.4;
+    joustRadius = 25 * (1.2 + cos(aliveTicker));
     
 //    jousterInnerSprite.scale = joustRadius/28.0;
-    jousterSprite.scale = joustRadius/20.0;
+    jousterSprite.scale = joustRadius/17.0;
     joustVelocity = CGPointZero;
 //    joustPosition = ccpMult( ccp(cos(aliveTicker), sin(aliveTicker)), bodyRadius);
     //normalize velocity
@@ -108,7 +113,7 @@
     //knock body
     CGPoint offset = ccpSub([self getWorldPositionOfJoust] , joustPos);
     offset = [MathHelper normalize:offset];
-    offset = ccpMult(offset, 640);
+    offset = ccpMult(offset, 1640);
     velocity = offset;
 }
 

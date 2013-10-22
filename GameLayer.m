@@ -12,6 +12,7 @@
 #import "JousterB.h"
 #import "JousterC.h"
 #import "JousterD.h"
+#import "JousterE.h"
 #import "TitleLayer.h"
 #import "MathHelper.h"
 #import "PowerStone.h"
@@ -24,14 +25,20 @@
 #import "ColoredCircleSprite.h"
 #import "Player.h"
 #import "PlayerManager.h"
+#import "JousterParticle.h"
 
 @implementation GameLayer
-@synthesize powerStone, vortexArray, lastWinner, jousterArray;
+
+
+NSString *const MAIN_FONT = @"SourceSansPro-ExtraLight";
+
+@synthesize powerStone, vortexArray, lastWinner, jousterArray, touchParticleArray;
 
 -(id) init{
     if(self = [super initWithColor:COLOR_GAMEAREA_B4] ){
         CGSize winSize= [[CCDirector sharedDirector] winSize];
-        self.vortexArray = [[NSMutableArray alloc] init];
+        self.vortexArray = [[[NSMutableArray alloc] init] autorelease];
+        self.touchParticleArray = [[[NSMutableArray alloc] init] autorelease];
         
         uiLayer = [[[UILayer alloc] initWithGameLayer:self] autorelease];
         [self addChild:uiLayer z:10];
@@ -49,6 +56,7 @@
         for(Player *player in PM.playerArray){
             if(player.isActive){
                 Jouster *jouster = [self createJouster:player.jousterType WithPlayer:player];
+                jouster.gameLayer = self;
                 jouster.player = player;
                 [jouster makeTail];
                 [self.jousterArray addObject:jouster];
@@ -75,7 +83,13 @@
         centerSprite.opacity = 0;
         [self addChild:centerSprite];
         
-        
+        for(int i = 0; i < 4; i++){
+            JousterParticle *touchParticle = [[JousterParticle alloc] initWithFile: @"touchStreak.plist"];
+            touchParticle.startSize = 70;
+            [touchParticle stopSystem];
+            [uiLayer addChild:touchParticle];
+            [self.touchParticleArray addObject:touchParticle];
+        }
         
         [self gameIntro];
     }
@@ -86,6 +100,7 @@
 -(void) dealloc{
     [vortexArray release];
     [jousterArray release];
+    [touchParticleArray release];
     [super dealloc];
 }
 
@@ -125,7 +140,7 @@
     Vortex *vortex = [[Vortex alloc] init];
     
     vortex.position = point;
-    [self addChild:vortex];
+    [self addChild:vortex z:-1];
     [self.vortexArray addObject:vortex];
     vortex.pEffect = [self vortexEffect:point];
 }
@@ -139,7 +154,7 @@
     }else if(character ==2 ){
         return [[[JousterC alloc] initWithPlayer:player] autorelease];
     }else if(character == 3){
-        return [[[JousterD alloc] initWithPlayer:player] autorelease];
+        return [[[JousterE alloc] initWithPlayer:player] autorelease];
     }
     return [JousterB node];
 }
@@ -169,6 +184,7 @@
 -(void) refreshUI{
     [uiLayer refreshVictoryPoint];
     [uiLayer refreshUI];
+    centerSprite.scale = 1;
 }
 
 -(void) update:(ccTime)dt{
@@ -184,66 +200,39 @@
         [self testForVictory];
         
     }else if(currentState == ROUND_START){
-        /*timeBeforeNewRoundStarts -= dt;
-         //some transitions don't allow movement
-         if(timeBeforeNewRoundStarts <= 0.0) timeBeforeNewRoundStarts = .01;
-         //take care of starting game round timer increase
-         float timeScale = (TRANSITION_TIME - timeBeforeNewRoundStarts)/TRANSITION_TIME;
-         dt = dt * timeScale;
-         */
         
-        for(Jouster *jouster in self.jousterArray){
+/*        for(Jouster *jouster in self.jousterArray){
             [jouster update:dt];
+            jouster.position = ccpAdd(jouster.position, ccpMult(jouster.velocity, dt));
+            jouster.jousterSprite.position = ccpAdd(jouster.joustPosition,  ccpMult(jouster.joustVelocity, dt));
+            [jouster checkBoundaries];
         }
-        //slow motion, no deaths allowed
-        /*redJouster.position = ccpAdd(redJouster.position, ccpMult(redJouster.velocity, dt));
-         blueJouster.position = ccpAdd(blueJouster.position, ccpMult(blueJouster.velocity, dt));
-         redJouster.jousterSprite.position = ccpAdd(redJouster.joustPosition,  ccpMult(redJouster.joustVelocity, dt));
-         blueJouster.jousterSprite.position = ccpAdd(blueJouster.joustPosition,  ccpMult(blueJouster.joustVelocity, dt));
-         [redJouster checkBoundaries];
-         [blueJouster checkBoundaries];
-         */
+ */
+        
     }else if(currentState == ROUND_END){
-        dt = dt/6;
+        dt = dt/5;
         for(Jouster *jouster in self.jousterArray){
             [jouster update:dt];
+            jouster.position = ccpAdd(jouster.position, ccpMult(jouster.velocity, dt));
+            jouster.jousterSprite.position = ccpAdd(jouster.joustPosition,  ccpMult(jouster.joustVelocity, dt));
+            [jouster checkBoundaries];
         }
-        //slow motion, no deaths allowed
-        /*
-         redJouster.position = ccpAdd(redJouster.position, ccpMult(redJouster.velocity, dt));
-         blueJouster.position = ccpAdd(blueJouster.position, ccpMult(blueJouster.velocity, dt));
-         redJouster.jousterSprite.position = ccpAdd(redJouster.joustPosition,  ccpMult(redJouster.joustVelocity, dt));
-         blueJouster.jousterSprite.position = ccpAdd(blueJouster.joustPosition,  ccpMult(blueJouster.joustVelocity, dt));
-         [redJouster checkBoundaries];
-         [blueJouster checkBoundaries];
-         */
     }else if(currentState == GAME_OVER){
-        dt = dt/6;
+        dt = dt/5;
         for(Jouster *jouster in self.jousterArray){
             [jouster update:dt];
+            jouster.position = ccpAdd(jouster.position, ccpMult(jouster.velocity, dt));
+            jouster.jousterSprite.position = ccpAdd(jouster.joustPosition,  ccpMult(jouster.joustVelocity, dt));
+            [jouster checkBoundaries];
         }
-        /*
-         //slow motion, no deaths allowed
-         redJouster.position = ccpAdd(redJouster.position, ccpMult(redJouster.velocity, dt));
-         blueJouster.position = ccpAdd(blueJouster.position, ccpMult(blueJouster.velocity, dt));
-         redJouster.jousterSprite.position = ccpAdd(redJouster.joustPosition,  ccpMult(redJouster.joustVelocity, dt));
-         blueJouster.jousterSprite.position = ccpAdd(blueJouster.joustPosition,  ccpMult(blueJouster.joustVelocity, dt));
-         [redJouster checkBoundaries];
-         [blueJouster checkBoundaries];
-         */
     }else if(currentState == GAME_START){
-        dt = dt/10;
+        dt = dt/5;
         for(Jouster *jouster in self.jousterArray){
             [jouster update:dt];
+            jouster.position = ccpAdd(jouster.position, ccpMult(jouster.velocity, dt));
+            jouster.jousterSprite.position = ccpAdd(jouster.joustPosition,  ccpMult(jouster.joustVelocity, dt));
+            [jouster checkBoundaries];
         }
-        //slow motion, no deaths allowed
-        /* redJouster.position = ccpAdd(redJouster.position, ccpMult(redJouster.velocity, dt));
-         blueJouster.position = ccpAdd(blueJouster.position, ccpMult(blueJouster.velocity, dt));
-         redJouster.jousterSprite.position = ccpAdd(redJouster.joustPosition,  ccpMult(redJouster.joustVelocity, dt));
-         blueJouster.jousterSprite.position = ccpAdd(blueJouster.joustPosition,  ccpMult(blueJouster.joustVelocity, dt));
-         [redJouster checkBoundaries];
-         [blueJouster checkBoundaries];
-         */
     }
     
 }
@@ -430,7 +419,6 @@
                         isTeammate = YES;
                     }
                 }
-                
                 if(jousterA.player.playerNumber != jousterB.player.playerNumber && !isTeammate){
                     if(!jousterB.isDead){
                         //if another player is alive, then the game goes on
@@ -438,7 +426,6 @@
                     }
                 }
             }
-            
             if(didWin){
                 //the game is over jousterA won
 
@@ -496,19 +483,17 @@
 }
 
 -(void) jousterOnBodyCheck{
-    
     for(Jouster *jousterA in self.jousterArray){
         if(!jousterA.isDead){
             for(Jouster *jousterB in self.jousterArray){
                 if(jousterA.player.playerNumber != jousterB.player.playerNumber && !jousterB.isDead){
                     if([MathHelper circleCollisionPositionA:[jousterA getWorldPositionOfJoust]  raidusA:[jousterA joustRadius] positionB:jousterB.position radiusB:jousterB.bodyRadius] ){
-                        
                         //jousterA got a kill
-                        
                         //kill jousterB
                         jousterB.isDead = YES;
                         [self deathEffect:jousterB];
                         [jousterB removeFromParentAndCleanup:YES];
+                        [jousterB update:0.001];
                         [uiLayer refreshUI];
                     }
                     
@@ -612,9 +597,9 @@
 
 #pragma mark - touch code
 -(BOOL) ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event{
-    /*if(currentState != GAMEPLAY){
+    if(currentState == GAME_OVER || currentState == GAME_START){
      return NO;
-     }*/
+     }
     return YES;
 }
 
@@ -629,9 +614,11 @@
         float reducedSpace = 60;
         CGRect touchArea;
         CGRect strictFirstTouchArea;
+        JousterParticle *touchParticle = [self.touchParticleArray objectAtIndex:jouster.player.playerNumber];
         if(jouster.player.playerNumber == 0){
             touchArea = CGRectMake(0, winSize.height/2, EXTRA_CONTROL_OFFSET, winSize.height/2);
             strictFirstTouchArea = CGRectMake(0, winSize.height/2 +reducedSpace, EXTRA_CONTROL_OFFSET, winSize.height/2);
+
         }else if(jouster.player.playerNumber == 1){
             touchArea = CGRectMake(winSize.width - EXTRA_CONTROL_OFFSET, winSize.height/2 + reducedSpace, EXTRA_CONTROL_OFFSET, winSize.height/2);
         }else if(jouster.player.playerNumber == 2){
@@ -647,39 +634,20 @@
             if(CGRectContainsPoint(touchArea, location) && !alreadyChosen){
                 if([jouster doesTouchDeltaMakeSense:location]){
                     [jouster touch:location];
+                    touchParticle.position = location;
+                    if(!touchParticle.active){
+                        [touchParticle resetSystem];
+                    }
                     alreadyChosen = YES;
                 }
             }
         }
         if(!alreadyChosen){
             [jouster resetTouch];
+          //  [touchParticle stopSystem];
         }
     }
-    /*
-     BOOL redAlreadyChosen = NO;
-     BOOL blueAlreadyChosen = NO;
-     for(UITouch* touch in touches){
-     CGPoint location = [touch locationInView: [touch view]];
-     location = [[CCDirector sharedDirector] convertToGL:location];
-     CGSize winSize= [[CCDirector sharedDirector] winSize];
-     CGRect redSide = CGRectMake(0, 0, EXTRA_CONTROL_OFFSET, winSize.height);
-     CGRect blueSide = CGRectMake(winSize.width - EXTRA_CONTROL_OFFSET, 0, EXTRA_CONTROL_OFFSET, winSize.height);
-     if(CGRectContainsPoint(redSide, location) && !redAlreadyChosen){
-     [redJouster touch:location];
-     redAlreadyChosen = YES;
-     }
-     if(CGRectContainsPoint(blueSide, location) && !blueAlreadyChosen){
-     [blueJouster touch:location];
-     blueAlreadyChosen = YES;
-     }
-     }
-     if(!redAlreadyChosen){
-     [redJouster resetTouch];
-     }
-     if(!blueAlreadyChosen){
-     [blueJouster resetTouch];
-     }
-     */
+
 }
 
 - (void) ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{
@@ -688,10 +656,11 @@
      }*/
     
     CGSize winSize= [[CCDirector sharedDirector] winSize];
+   // BOOL areaOne, areaTwo, areaThree, areaFour;
     for(Jouster *jouster in self.jousterArray){
         
         BOOL alreadyChosen = NO;
-        
+        CCParticleSystemQuad *touchParticle = [self.touchParticleArray objectAtIndex:jouster.player.playerNumber];
         CGRect touchArea;
         if(jouster.player.playerNumber == 0){
             touchArea = CGRectMake(0, winSize.height/2, EXTRA_CONTROL_OFFSET, winSize.height/2);
@@ -708,33 +677,27 @@
             location = [[CCDirector sharedDirector] convertToGL:location];
             
             if(CGRectContainsPoint(touchArea, location) && !alreadyChosen){
-                [jouster resetTouch];
                 alreadyChosen = YES;
+                //[touchParticle stopSystem];
+               /* if(jouster.player.playerNumber == 0){
+                    areaOne = YES;
+                }else if(jouster.player.playerNumber == 1){
+                    areaTwo = YES;
+                }else if(jouster.player.playerNumber == 2){
+                    areaThree = YES;
+                }else if(jouster.player.playerNumber == 3){
+                    areaFour = YES;
+                }
+                */
             }
+        }
+        if(!alreadyChosen){
+       //     [touchParticle stopSystem];
         }
     }
     
     
-    
-    /*BOOL redAlreadyChosen = NO;
-     BOOL blueAlreadyChosen = NO;
-     for(UITouch* touch in touches){
-     CGPoint location = [touch locationInView: [touch view]];
-     location = [[CCDirector sharedDirector] convertToGL:location];
-     CGSize winSize= [[CCDirector sharedDirector] winSize];
-     CGRect redSide = CGRectMake(0, 0, EXTRA_CONTROL_OFFSET, winSize.height);
-     CGRect blueSide = CGRectMake(winSize.width - EXTRA_CONTROL_OFFSET, 0, EXTRA_CONTROL_OFFSET, winSize.height);
-     if(CGRectContainsPoint(redSide, location) && !redAlreadyChosen){
-     [redJouster resetTouch];
-     redAlreadyChosen = YES;
-     }
-     if(CGRectContainsPoint(blueSide, location) && !blueAlreadyChosen){
-     [blueJouster resetTouch];
-     blueAlreadyChosen = YES;
-     }
-     }
-     */
-}
+    }
 
 - (void) ccTouchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event{
     /*if(currentState != GAMEPLAY){
@@ -744,7 +707,7 @@
     for(Jouster *jouster in self.jousterArray){
         
         BOOL alreadyChosen = NO;
-        
+        CCParticleSystemQuad *touchParticle = [self.touchParticleArray objectAtIndex:jouster.player.playerNumber];
         CGRect touchArea;
         if(jouster.player.playerNumber == 0){
             touchArea = CGRectMake(0, winSize.height/2, EXTRA_CONTROL_OFFSET, winSize.height/2);
@@ -762,34 +725,16 @@
             location = [[CCDirector sharedDirector] convertToGL:location];
             
             if(CGRectContainsPoint(touchArea, location) && !alreadyChosen){
-                [jouster resetTouch];
+  //              [jouster resetTouch];
                 alreadyChosen = YES;
+//                [touchParticle stopSystem];
             }
         }
+        if(!alreadyChosen){
+         //   [touchParticle stopSystem];
+        }
     }
-    
-    /*
-     BOOL redAlreadyChosen = NO;
-     BOOL blueAlreadyChosen = NO;
-     for(UITouch* touch in touches){
-     CGPoint location = [touch locationInView: [touch view]];
-     location = [[CCDirector sharedDirector] convertToGL:location];
-     
-     CGSize winSize= [[CCDirector sharedDirector] winSize];
-     CGRect redSide = CGRectMake(0, 0, CONTROL_OFFSET, winSize.height);
-     CGRect blueSide = CGRectMake(winSize.width - CONTROL_OFFSET, 0, CONTROL_OFFSET, winSize.height);
-     
-     if(CGRectContainsPoint(redSide, location) && !redAlreadyChosen){
-     [redJouster resetTouch];
-     redAlreadyChosen = YES;
-     }
-     
-     if(CGRectContainsPoint(blueSide, location) && !blueAlreadyChosen){
-     [blueJouster resetTouch];
-     blueAlreadyChosen = YES;
-     }
-     }
-     */
+  
 }
 
 -(void) registerWithTouchDispatcher
@@ -803,7 +748,7 @@
     currentState = GAME_START;
     //show names of fighters
     CGSize winSize= [[CCDirector sharedDirector] winSize];
-    CCLabelTTF *gameStartLabel = [[[CCLabelTTF alloc] initWithString:@"Blue vs Red" fontName:@"Marker Felt" fontSize:32] autorelease];
+    CCLabelTTF *gameStartLabel = [[[CCLabelTTF alloc] initWithString:@"" fontName:MAIN_FONT fontSize:32] autorelease];
     gameStartLabel.position = ccp(winSize.width/2, winSize.height/2);
     [self addChild:gameStartLabel];
     //run actions
@@ -836,6 +781,7 @@
     //reset the center sprite
     [centerSprite stopAllActions];
     centerSprite.opacity = 0;
+    centerSprite.scale = 1;
     centerVisible = NO;
     if(currentState == GAME_START){
         for(Jouster *jouster in self.jousterArray){
@@ -869,7 +815,7 @@
     currentState = ROUND_END;
     //show names of fighters
     CGSize winSize= [[CCDirector sharedDirector] winSize];
-    CCLabelTTF *gameStartLabel = [[[CCLabelTTF alloc] initWithString:[NSString stringWithFormat:@"%@ Round", winner] fontName:@"Marker Felt" fontSize:32] autorelease];
+    CCLabelTTF *gameStartLabel = [[[CCLabelTTF alloc] initWithString:[NSString stringWithFormat:@"%@ Round", winner] fontName:@"MAIN_FONT" fontSize:32] autorelease];
     gameStartLabel.position = ccp(winSize.width/2, winSize.height/2);
     [self addChild:gameStartLabel];
     
@@ -895,10 +841,11 @@
     currentState = GAME_OVER;
     //say who won
     CGSize winSize= [[CCDirector sharedDirector] winSize];
-    CCLabelTTF *gameStartLabel = [[[CCLabelTTF alloc] initWithString:[NSString stringWithFormat:@"%@ Game", winner] fontName:@"Marker Felt" fontSize:32] autorelease];
+    CCLabelTTF *gameStartLabel = [[[CCLabelTTF alloc] initWithString:[NSString stringWithFormat:@"%@ Game", winner] fontName:MAIN_FONT fontSize:32] autorelease];
     gameStartLabel.position = ccp(winSize.width/2, winSize.height/2);
     [self addChild:gameStartLabel];
     
+    [uiLayer animateTouchAreasOut];
     CCDelayTime *delay = [CCDelayTime actionWithDuration:TRANSITION_TIME + 1];
     CCCallBlock *block = [CCCallBlock actionWithBlock:^{
         //transition to titleLayer

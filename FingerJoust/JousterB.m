@@ -9,9 +9,21 @@
 #import "JousterB.h"
 #import "MathHelper.h"
 #import "Player.h"
+#import "CCWarpSprite.h"
 
 
 @implementation JousterB
+
+-(id) initWithPlayer:(Player *) p{
+    if(self = [super initWithPlayer:p]){
+        self.scale = 1.4;
+        bodyRadius = bodyRadius * 1.5;
+        joustRadius = joustRadius * 1.5;
+        maxSpeed = 350;
+        
+    }
+    return self;
+}
 
 -(void) resetJouster{
     [super resetJouster];
@@ -23,9 +35,9 @@
 
 
     if(player.playerNumber == 1){
-        aliveTicker += dt * 2.8;
+        aliveTicker += dt * 4.6;
     }else{
-        aliveTicker += dt * 2.0;
+        aliveTicker += dt * 4.6;
     }
 
     CGPoint desiredLocation = ccpMult( ccp(cos(aliveTicker), sin(aliveTicker)), bodyRadius * 1.5);
@@ -61,41 +73,36 @@
     joustPosition = ccpMult(spot, joustRadius * 2);
 }
 
-- (void) draw{
-    /*
-    if(player == 1){
-        ccDrawColor4F(1.0f, 0.0f, 0.0f, 1.0f);
-    }else{
-        ccDrawColor4F(0.0f, 0.0f, 1.0f, 1.0f);
-    }
-    ccDrawCircle(CGPointZero, bodyRadius, 0, 30, NO);
-    //joust
-    ccDrawCircle(joustPosition, joustRadius, 0, 30, NO);
-    */
-    [super draw];
-}
-/*
-
 -(void) touch:(CGPoint) touch{
     if(waitingForTouch){
         previousTouch = touch;
         waitingForTouch = NO;
         return;
     }
-    // [self calculateJoustPositionB:touch];
-    CGPoint difference = ccpSub(touch, previousTouch);
-    //    difference = ccpMult(difference, 2.0);
-    difference = ccp(difference.x * 2.9, difference.y *2.0);
-    self.velocity = ccpAdd(velocity, difference);
     
+    CGPoint difference = ccpSub(touch, previousTouch);
+    
+    if(isSuperMode){
+        difference = ccp(difference.x * 5.5, difference.y *4.1);
+    }else if(isStunned){
+        difference = ccp(difference.x * 2.0, difference.y *1.7);
+    }else{
+        
+        //        difference = ccp(difference.x * 2.7, difference.y *2.2);
+        difference = ccp(difference.x * 7, difference.y *7);
+        //        difference = ccp(difference.x * 2.0, difference.y *1.6);
+        //        difference = ccp(difference.x * 6, difference.y *6);
+        
+    }
+    self.velocity = ccpAdd(velocity, difference);
     previousTouch = touch;
-}*/
+}
 
 -(void) joustCollision:(CGPoint) joustPos withRadius:(float) radius{
     //knock body
     CGPoint offset = ccpSub([self getWorldPositionOfJoust] , joustPos);
     offset = [MathHelper normalize:offset];
-    offset = ccpMult(offset, 640);
+    offset = ccpMult(offset, 1400);
     velocity = offset;
 }
 
