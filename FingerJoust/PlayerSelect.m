@@ -105,7 +105,7 @@
                                                             //cycle between 4 teams
                                                             int team = player.team;
                                                             team++;
-                                                            if(team > 4){
+                                                            if(team > 3){
                                                                 team = 0;
                                                             }
                                                             player.team = team;
@@ -136,7 +136,7 @@
                                                                                  //cycle between 4 teams
                                                                                  int jousterType = player.jousterType;
                                                                                  jousterType++;
-                                                                                 if(jousterType > 3){
+                                                                                 if(jousterType > 4){
                                                                                      jousterType = 0;
                                                                                  }
                                                                                  player.jousterType = jousterType;

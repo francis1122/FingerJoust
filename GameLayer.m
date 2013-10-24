@@ -95,6 +95,16 @@ NSString *const MAIN_FONT = @"SourceSansPro-ExtraLight";
             [self.touchParticleArray addObject:touchParticle];
         }
         
+        //gameSpeed
+        if(PM.gameSpeed == 0){
+            gameSpeed = .5;
+        }else if(PM.gameSpeed == 1){
+            gameSpeed = 1;
+        }else if(PM.gameSpeed == 2){
+            gameSpeed = 1.5;
+        }
+        
+        
         [self gameIntro];
     }
     return self;
@@ -196,6 +206,7 @@ NSString *const MAIN_FONT = @"SourceSansPro-ExtraLight";
 
 -(void) update:(ccTime)dt{
     if(currentState == GAMEPLAY){
+        dt *= gameSpeed;
         [hazardLayer update: dt];
         for(Jouster *jouster in self.jousterArray){
             if(!jouster.isDead){

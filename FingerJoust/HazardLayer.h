@@ -22,6 +22,8 @@
     float lastMissile;
     float lastBomb;
     NSMutableArray *validEvents;
+    
+    float frequency;
 }
 
 @property (nonatomic, retain) NSMutableArray *validEvents;

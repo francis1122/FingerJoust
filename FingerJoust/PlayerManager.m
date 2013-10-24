@@ -13,7 +13,7 @@
 
 static PlayerManager *sharedInstance = nil;
 
-@synthesize playerArray, isTeamPlay, windEvent, bombEvent, hurricaneEvent, spikeEvent, missileEvent;
+@synthesize playerArray, isTeamPlay, windEvent, bombEvent, hurricaneEvent, spikeEvent, missileEvent, frequencyEvent, gameSpeed;
 
 + (PlayerManager*)sharedInstance {
     @synchronized(self) {
@@ -31,6 +31,8 @@ static PlayerManager *sharedInstance = nil;
         hurricaneEvent = EventOn;
         spikeEvent = EventOn;
         missileEvent = EventOn;
+        gameSpeed = 1;
+        frequencyEvent = 1;
         
         for(int i = 0; i < 4; i++){
             Player *player = [[[Player alloc] init] autorelease];

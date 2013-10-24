@@ -18,6 +18,8 @@
 -(id) initWithPlayer:(Player *) p{
     if(self = [super initWithPlayer:p]){
         joustRadius = .5;
+        jousterSprite.visible = NO;
+        jousterInnerSprite.visible = NO;
     }
     return self;
 }

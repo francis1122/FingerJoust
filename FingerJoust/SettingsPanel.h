@@ -12,7 +12,7 @@
 @interface SettingsPanel : CCLayerColor {
     BOOL isActive;
     CCMenuItemFont *menuToggle;
-    CCSprite *windActive, *bombActive, *hurricaneActive, *spikeActive, *missileActive;
+    CCSprite *windActive, *bombActive, *hurricaneActive, *spikeActive, *missileActive, *gameSpeedActive, *frequencyActive;
 }
 
 -(void) resolve;

@@ -35,7 +35,7 @@
     
         PlayerManager *PM = [PlayerManager sharedInstance];
     //event items
-    float offset = 150;
+    float offset = 70;
     float spacing = 60;
     float xPos = 145;
 
@@ -56,7 +56,82 @@
     offset += spacing;
     
     
-    //currentActive stuff
+    //game speed
+    CGPoint position = ccp(xPos, offset);
+    int state = PM.gameSpeed;
+    gameSpeedActive  = [CCSprite spriteWithSpriteFrameName:@"BodyOuter"];
+    CCLabelTTF *label = [CCLabelTTF labelWithString:@"Game Speed" fontName:MAIN_FONT fontSize:32];
+    [label setFontName:MAIN_FONT];
+    [label setHorizontalAlignment:kCCTextAlignmentLeft];
+    label.position = position;
+
+    CCMenuItemFont *onItem = [CCMenuItemFont itemWithString:@"Normal" target:self selector:@selector(gameSpeed:)];
+    [onItem setFontName:MAIN_FONT];
+    onItem.tag = 1;
+    CCMenuItemFont *offItem = [CCMenuItemFont itemWithString:@"Slow" target:self selector:@selector(gameSpeed:)];
+    [offItem setFontName:MAIN_FONT];
+    offItem.tag = 0;
+    CCMenuItemFont *alwaysItem = [CCMenuItemFont itemWithString:@"Fast" target:self selector:@selector(gameSpeed:)];
+    [alwaysItem setFontName:MAIN_FONT];
+    alwaysItem.tag = 2;
+    
+    CCMenu *menua = [CCMenu menuWithItems:alwaysItem, onItem, offItem, nil];
+    menua.position = ccp(position.x + 200, position.y);
+    [menua alignItemsHorizontallyWithPadding:20];
+    
+    if(state == 0){
+        gameSpeedActive.position =  ccp(position.x + 200 + offItem.position.x, position.y);
+    }else if(state == 1){
+        gameSpeedActive.position =  ccp(position.x + 200 + onItem.position.x, position.y);
+    }else if(state == 2){
+        gameSpeedActive.position =  ccp(position.x + 200 + alwaysItem.position.x, position.y);
+    }
+    gameSpeedActive.color = ccORANGE;
+    [self addChild:gameSpeedActive];
+    [self addChild:menua];
+    [self addChild:label];
+    offset += spacing;
+    
+
+    
+    
+    
+    
+    //frequency of items
+    position = ccp(xPos, offset);
+//    state = PM.frequencyEvent;
+    frequencyActive  = [CCSprite spriteWithSpriteFrameName:@"BodyOuter"];
+    label = [CCLabelTTF labelWithString:@"Frequency" fontName:MAIN_FONT fontSize:32];
+    [label setFontName:MAIN_FONT];
+    [label setHorizontalAlignment:kCCTextAlignmentLeft];
+    label.position = position;
+
+    
+    onItem = [CCMenuItemFont itemWithString:@"Normal" target:self selector:@selector(frequencyCallback:)];
+    [onItem setFontName:MAIN_FONT];
+    onItem.tag = 1;
+    offItem = [CCMenuItemFont itemWithString:@"Low" target:self selector:@selector(frequencyCallback:)];
+    [offItem setFontName:MAIN_FONT];
+    offItem.tag = 0;
+    alwaysItem = [CCMenuItemFont itemWithString:@"High" target:self selector:@selector(frequencyCallback:)];
+    [alwaysItem setFontName:MAIN_FONT];
+    alwaysItem.tag = 2;
+    
+    menua = [CCMenu menuWithItems:alwaysItem, onItem, offItem, nil];
+    menua.position = ccp(position.x + 200, position.y);
+    [menua alignItemsHorizontallyWithPadding:20];
+    
+    if(state == 0){
+        frequencyActive.position =  ccp(position.x + 200 + offItem.position.x, position.y);
+    }else if(state == 1){
+        frequencyActive.position =  ccp(position.x + 200 + onItem.position.x, position.y);
+    }else if(state == 2){
+        frequencyActive.position =  ccp(position.x + 200 + alwaysItem.position.x, position.y);
+    }
+    frequencyActive.color = ccORANGE;
+    [self addChild:frequencyActive];
+    [self addChild:menua];
+    [self addChild:label];
 
     
 
@@ -95,7 +170,6 @@
     [self addChild:activeSprite];
     [self addChild:menu];
     [self addChild:label];
-    
 }
 
 #pragma mark - callbacks
@@ -128,6 +202,19 @@
     PlayerManager *PM = [PlayerManager sharedInstance];
     PM.spikeEvent = sender.tag;
     spikeActive.position = ccp(sender.parent.position.x + sender.position.x, sender.parent.position.y);
+}
+
+-(void) gameSpeed:(CCMenuItemFont*) sender{
+    PlayerManager *PM = [PlayerManager sharedInstance];
+    PM.gameSpeed = sender.tag;
+    gameSpeedActive.position = ccp(sender.parent.position.x + sender.position.x, sender.parent.position.y);
+}
+
+-(void) frequencyCallback:(CCMenuItemFont*) sender{
+    PlayerManager *PM = [PlayerManager sharedInstance];
+    PM.frequencyEvent = sender.tag;
+    frequencyActive.position = ccp(sender.parent.position.x + sender.position.x, sender.parent.position.y);
+    
 }
 
 @end

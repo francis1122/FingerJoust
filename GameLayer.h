@@ -94,7 +94,7 @@ typedef enum GameState
     UILayer *uiLayer;
     HazardLayer *hazardLayer;
     
-    
+    float gameSpeed;
     NSMutableArray *jousterArray;
     
     CCLabelTTF *blueWinsLabel;
