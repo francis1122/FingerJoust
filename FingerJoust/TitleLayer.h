@@ -9,9 +9,10 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 
+@class SettingsPanel;
 @interface TitleLayer : CCLayerColor {
     CCSprite *jousterBoxLeft, *jousterBoxRight;
-    
+    SettingsPanel *settingsMenu;
     NSMutableArray *playerSelectArray;
     
 }

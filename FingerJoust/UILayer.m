@@ -36,8 +36,6 @@
         [self addChild:topLayer];
         [self addChild:bottomLayer];
         
-        
-        
         redLayer = [CCLayerColor layerWithColor:COLOR_PLAYER_NON_LIGHT_B4 width:CONTROL_OFFSET height:winSize.height/2];
         redLayer.position = ccp(0, winSize.height/2);
         [self addChild: redLayer];
@@ -51,37 +49,34 @@
         blackLayer.position = ccp(winSize.width - blackLayer.contentSize.width, 0);
         [self addChild:blackLayer];
         
-        
-        
-        
         redOverlay = [[[CCSprite alloc] initWithSpriteFrameName:@"touchBordersContainer"] autorelease];
         redOverlay.position = ccp(CONTROL_OFFSET/2 - 30, redOverlay.contentSize.height/2 );
-        redOverlay.color = COLOR_PLAYER_NON;
+        redOverlay.color = COLOR_GAMEBORDER;
         [redLayer addChild:redOverlay];
         
         blueOverlay = [[[CCSprite alloc] initWithSpriteFrameName:@"touchBordersContainer"] autorelease];
         blueOverlay.scaleX = -1;
         blueOverlay.position = ccp(146, blueOverlay.contentSize.height/2 );
-        blueOverlay.color = COLOR_PLAYER_NON;
+        blueOverlay.color = COLOR_GAMEBORDER;
         [blueLayer addChild:blueOverlay];
         
         greenOverlay = [[[CCSprite alloc] initWithSpriteFrameName:@"touchBordersContainer"] autorelease];
         greenOverlay.scaleX = -1;
         greenOverlay.position = ccp(146, blueOverlay.contentSize.height/2 );
-        greenOverlay.color = COLOR_PLAYER_NON;
+        greenOverlay.color = COLOR_GAMEBORDER;
         [greenLayer addChild:greenOverlay];
         
         blackOverlay = [[[CCSprite alloc] initWithSpriteFrameName:@"touchBordersContainer"] autorelease];
         blackOverlay.position = ccp(CONTROL_OFFSET/2 - 30, redOverlay.contentSize.height/2 );
-        blackOverlay.color = COLOR_PLAYER_NON;
+        blackOverlay.color = COLOR_GAMEBORDER;
         [blackLayer addChild:blackOverlay];
         
         
         displayedTime = ROUND_TIME;
         roundTimer = ROUND_TIME;
-        self.timerLabel = [CCLabelTTF labelWithString:@"20" fontName:MAIN_FONT fontSize:32];
+        self.timerLabel = [CCLabelTTF labelWithString:@"20" fontName:MAIN_FONT fontSize:40];
         self.timerLabel.color = ccWHITE;
-        timerLabel.position = ccp(topLayer.contentSize.width/2, 25);
+        timerLabel.position = ccp(topLayer.contentSize.width/2, 30);
         [bottomLayer addChild:timerLabel z:1];
         
         
@@ -195,16 +190,16 @@
                 
                 
                 if(playerOrTeam == 0){
-                    overlay.color = COLOR_PLAYER_ONE;
+                    overlay.color = COLOR_GAMEBORDER;
                     layer.color = COLOR_PLAYER_ONE_LIGHT;
                 }else if(playerOrTeam == 1){
-                    overlay.color = COLOR_PLAYER_TWO;
+                    overlay.color = COLOR_GAMEBORDER;
                     layer.color = COLOR_PLAYER_TWO_LIGHT;
                 }else if(playerOrTeam == 2){
-                    overlay.color = COLOR_PLAYER_THREE;
+                    overlay.color = COLOR_GAMEBORDER;
                     layer.color = COLOR_PLAYER_THREE_LIGHT;
                 }else if(playerOrTeam == 3){
-                    overlay.color = COLOR_PLAYER_FOUR;
+                    overlay.color = COLOR_GAMEBORDER;
                     layer.color = COLOR_PLAYER_FOUR_LIGHT;
                 }
             }else{
@@ -228,16 +223,16 @@
                 
                 
                 if(playerOrTeam == 0){
-                    overlay.color = COLOR_PLAYER_NON;
+                    overlay.color = COLOR_GAMEBORDER;
                     layer.color = COLOR_PLAYER_NON_LIGHT;
                 }else if(playerOrTeam == 1){
-                    overlay.color = COLOR_PLAYER_NON;
+                    overlay.color = COLOR_GAMEBORDER;
                     layer.color = COLOR_PLAYER_NON_LIGHT;
                 }else if(playerOrTeam == 2){
-                    overlay.color = COLOR_PLAYER_NON;
+                    overlay.color = COLOR_GAMEBORDER;
                     layer.color = COLOR_PLAYER_NON_LIGHT;
                 }else if(playerOrTeam == 3){
-                    overlay.color = COLOR_PLAYER_NON;
+                    overlay.color = COLOR_GAMEBORDER;
                     layer.color = COLOR_PLAYER_NON_LIGHT;
                 }
             }
@@ -248,30 +243,30 @@
             playerOrTeam = jouster.player.playerNumber;
             if(!jouster.isDead){
                 if(playerOrTeam == 0){
-                    redOverlay.color = COLOR_PLAYER_ONE;
+                    redOverlay.color = COLOR_GAMEBORDER;
                     redLayer.color = COLOR_PLAYER_ONE_LIGHT;
                 }else if(playerOrTeam == 1){
-                    blueOverlay.color = COLOR_PLAYER_TWO;
+                    blueOverlay.color = COLOR_GAMEBORDER;
                     blueLayer.color = COLOR_PLAYER_TWO_LIGHT;
                 }else if(playerOrTeam == 2){
-                    greenOverlay.color = COLOR_PLAYER_THREE;
+                    greenOverlay.color = COLOR_GAMEBORDER;
                     greenLayer.color = COLOR_PLAYER_THREE_LIGHT;
                 }else if(playerOrTeam == 3){
-                    blackOverlay.color = COLOR_PLAYER_FOUR;
+                    blackOverlay.color = COLOR_GAMEBORDER;
                     blackLayer.color = COLOR_PLAYER_FOUR_LIGHT;
                 }
             }else{
                 if(playerOrTeam == 0){
-                    redOverlay.color = COLOR_PLAYER_NON;
+                    redOverlay.color = COLOR_GAMEBORDER;
                     redLayer.color = COLOR_PLAYER_NON_LIGHT;
                 }else if(playerOrTeam == 1){
-                    blueOverlay.color = COLOR_PLAYER_NON;
+                    blueOverlay.color = COLOR_GAMEBORDER;
                     blueLayer.color = COLOR_PLAYER_NON_LIGHT;
                 }else if(playerOrTeam == 2){
-                    greenOverlay.color = COLOR_PLAYER_NON;
+                    greenOverlay.color = COLOR_GAMEBORDER;
                     greenLayer.color = COLOR_PLAYER_NON_LIGHT;
                 }else if(playerOrTeam == 3){
-                    blackOverlay.color = COLOR_PLAYER_NON;
+                    blackOverlay.color = COLOR_GAMEBORDER;
                     blackLayer.color = COLOR_PLAYER_NON_LIGHT;
                 }
             }

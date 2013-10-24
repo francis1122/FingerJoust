@@ -183,12 +183,24 @@
 		DEA6ADC8180BAAB1000A4B0C /* StunParticles.plist in Resources */ = {isa = PBXBuildFile; fileRef = DEA6ADC7180BAAB1000A4B0C /* StunParticles.plist */; };
 		DEA6ADCA180C8593000A4B0C /* jousterDeathParticle.plist in Resources */ = {isa = PBXBuildFile; fileRef = DEA6ADC9180C8593000A4B0C /* jousterDeathParticle.plist */; };
 		DEA6ADD1180CF4DA000A4B0C /* CCShake.m in Sources */ = {isa = PBXBuildFile; fileRef = DEA6ADD0180CF4DA000A4B0C /* CCShake.m */; };
+		DEACD5901817450700BCA1CB /* WindEffect.plist in Resources */ = {isa = PBXBuildFile; fileRef = DEACD58F1817450700BCA1CB /* WindEffect.plist */; };
+		DEACD5931817454600BCA1CB /* WindEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = DEACD5921817454600BCA1CB /* WindEvent.m */; };
+		DEACD596181762A500BCA1CB /* BombEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = DEACD595181762A500BCA1CB /* BombEvent.m */; };
+		DEACD599181763F700BCA1CB /* BombSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = DEACD598181763F700BCA1CB /* BombSprite.m */; };
+		DEACD59C18186A0000BCA1CB /* HurricaneEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = DEACD59B18186A0000BCA1CB /* HurricaneEvent.m */; };
+		DEACD59F1818723A00BCA1CB /* SpikeEdgeEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = DEACD59E1818723A00BCA1CB /* SpikeEdgeEvent.m */; };
+		DEACD5A218196C7B00BCA1CB /* SettingsPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = DEACD5A118196C7B00BCA1CB /* SettingsPanel.m */; };
+		DEACD5A51819A55500BCA1CB /* JousterF.m in Sources */ = {isa = PBXBuildFile; fileRef = DEACD5A41819A55500BCA1CB /* JousterF.m */; };
 		DEB525FE17D579A00010AFF9 /* CollisionEffect.plist in Resources */ = {isa = PBXBuildFile; fileRef = DEB525FD17D579A00010AFF9 /* CollisionEffect.plist */; };
 		DEB5260117D5B5C50010AFF9 /* CCWarpSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = DEB5260017D5B54D0010AFF9 /* CCWarpSprite.m */; };
 		DEBB5274178FAD7D006FEB1C /* TitleLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DEBB5273178FAD7D006FEB1C /* TitleLayer.m */; };
 		DEBB5277178FAF12006FEB1C /* GameLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DEBB5276178FAF12006FEB1C /* GameLayer.m */; };
 		DEBB527A178FB212006FEB1C /* Jouster.m in Sources */ = {isa = PBXBuildFile; fileRef = DEBB5279178FB212006FEB1C /* Jouster.m */; };
 		DEF61B0018165B5C00262094 /* JousterE.m in Sources */ = {isa = PBXBuildFile; fileRef = DEF61AFF18165B5C00262094 /* JousterE.m */; };
+		DEF61B031816FE4300262094 /* HazardLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DEF61B021816FE4300262094 /* HazardLayer.m */; };
+		DEF61B06181700C900262094 /* HazardEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = DEF61B05181700C900262094 /* HazardEvent.m */; };
+		DEF61B091817020800262094 /* MissileEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = DEF61B081817020800262094 /* MissileEvent.m */; };
+		DEF61B0D1817049400262094 /* MissileSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = DEF61B0C1817049400262094 /* MissileSprite.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -532,6 +544,21 @@
 		DEA6ADC9180C8593000A4B0C /* jousterDeathParticle.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = jousterDeathParticle.plist; sourceTree = "<group>"; };
 		DEA6ADCF180CF4DA000A4B0C /* CCShake.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCShake.h; sourceTree = "<group>"; };
 		DEA6ADD0180CF4DA000A4B0C /* CCShake.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCShake.m; sourceTree = "<group>"; };
+		DEACD58F1817450700BCA1CB /* WindEffect.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = WindEffect.plist; sourceTree = "<group>"; };
+		DEACD5911817454600BCA1CB /* WindEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WindEvent.h; sourceTree = "<group>"; };
+		DEACD5921817454600BCA1CB /* WindEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WindEvent.m; sourceTree = "<group>"; };
+		DEACD594181762A500BCA1CB /* BombEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BombEvent.h; sourceTree = "<group>"; };
+		DEACD595181762A500BCA1CB /* BombEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BombEvent.m; sourceTree = "<group>"; };
+		DEACD597181763F700BCA1CB /* BombSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BombSprite.h; sourceTree = "<group>"; };
+		DEACD598181763F700BCA1CB /* BombSprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BombSprite.m; sourceTree = "<group>"; };
+		DEACD59A18186A0000BCA1CB /* HurricaneEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HurricaneEvent.h; sourceTree = "<group>"; };
+		DEACD59B18186A0000BCA1CB /* HurricaneEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HurricaneEvent.m; sourceTree = "<group>"; };
+		DEACD59D1818723A00BCA1CB /* SpikeEdgeEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpikeEdgeEvent.h; sourceTree = "<group>"; };
+		DEACD59E1818723A00BCA1CB /* SpikeEdgeEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpikeEdgeEvent.m; sourceTree = "<group>"; };
+		DEACD5A018196C7B00BCA1CB /* SettingsPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsPanel.h; sourceTree = "<group>"; };
+		DEACD5A118196C7B00BCA1CB /* SettingsPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsPanel.m; sourceTree = "<group>"; };
+		DEACD5A31819A55500BCA1CB /* JousterF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JousterF.h; sourceTree = "<group>"; };
+		DEACD5A41819A55500BCA1CB /* JousterF.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JousterF.m; sourceTree = "<group>"; };
 		DEB525FD17D579A00010AFF9 /* CollisionEffect.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = CollisionEffect.plist; sourceTree = "<group>"; };
 		DEB525FF17D5B54D0010AFF9 /* CCWarpSprite.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CCWarpSprite.h; sourceTree = "<group>"; };
 		DEB5260017D5B54D0010AFF9 /* CCWarpSprite.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CCWarpSprite.m; sourceTree = "<group>"; };
@@ -543,6 +570,14 @@
 		DEBB5279178FB212006FEB1C /* Jouster.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Jouster.m; path = ../Jouster.m; sourceTree = "<group>"; };
 		DEF61AFE18165B5C00262094 /* JousterE.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JousterE.h; sourceTree = "<group>"; };
 		DEF61AFF18165B5C00262094 /* JousterE.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JousterE.m; sourceTree = "<group>"; };
+		DEF61B011816FE4300262094 /* HazardLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HazardLayer.h; sourceTree = "<group>"; };
+		DEF61B021816FE4300262094 /* HazardLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HazardLayer.m; sourceTree = "<group>"; };
+		DEF61B04181700C900262094 /* HazardEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HazardEvent.h; sourceTree = "<group>"; };
+		DEF61B05181700C900262094 /* HazardEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HazardEvent.m; sourceTree = "<group>"; };
+		DEF61B071817020800262094 /* MissileEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MissileEvent.h; sourceTree = "<group>"; };
+		DEF61B081817020800262094 /* MissileEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MissileEvent.m; sourceTree = "<group>"; };
+		DEF61B0B1817049400262094 /* MissileSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MissileSprite.h; sourceTree = "<group>"; };
+		DEF61B0C1817049400262094 /* MissileSprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MissileSprite.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1025,6 +1060,7 @@
 		DE6055B317D2E19300288F46 /* GameObjects */ = {
 			isa = PBXGroup;
 			children = (
+				DEF61B0A1817020C00262094 /* events */,
 				DE6055B417D2E20F00288F46 /* PowerStone.h */,
 				DE6055B517D2E20F00288F46 /* PowerStone.m */,
 				DE161B4B17D80F9B0004267C /* Vortex.h */,
@@ -1108,6 +1144,8 @@
 				DE8F13B417C33C6200050E5E /* JousterD.m */,
 				DEF61AFE18165B5C00262094 /* JousterE.h */,
 				DEF61AFF18165B5C00262094 /* JousterE.m */,
+				DEACD5A31819A55500BCA1CB /* JousterF.h */,
+				DEACD5A41819A55500BCA1CB /* JousterF.m */,
 			);
 			name = Jousters;
 			sourceTree = "<group>";
@@ -1119,6 +1157,8 @@
 				DEBB5273178FAD7D006FEB1C /* TitleLayer.m */,
 				DEA1B472180FC8EB003AC1CC /* PlayerSelect.h */,
 				DEA1B473180FC8EB003AC1CC /* PlayerSelect.m */,
+				DEACD5A018196C7B00BCA1CB /* SettingsPanel.h */,
+				DEACD5A118196C7B00BCA1CB /* SettingsPanel.m */,
 			);
 			name = CharacterSelect;
 			sourceTree = "<group>";
@@ -1130,6 +1170,8 @@
 				DEBB5276178FAF12006FEB1C /* GameLayer.m */,
 				DEA6ADC4180B6F9D000A4B0C /* UILayer.h */,
 				DEA6ADC5180B6F9D000A4B0C /* UILayer.m */,
+				DEF61B011816FE4300262094 /* HazardLayer.h */,
+				DEF61B021816FE4300262094 /* HazardLayer.m */,
 			);
 			name = Game;
 			sourceTree = "<group>";
@@ -1138,6 +1180,7 @@
 			isa = PBXGroup;
 			children = (
 				DEA6ADC9180C8593000A4B0C /* jousterDeathParticle.plist */,
+				DEACD58F1817450700BCA1CB /* WindEffect.plist */,
 				DEA6ADC7180BAAB1000A4B0C /* StunParticles.plist */,
 				DE4104401814DC2F000088F8 /* touchStreak.plist */,
 				DEA6ADC11809DEE4000A4B0C /* MotionStreak.plist */,
@@ -1145,6 +1188,29 @@
 				DEB525FD17D579A00010AFF9 /* CollisionEffect.plist */,
 			);
 			name = particles;
+			sourceTree = "<group>";
+		};
+		DEF61B0A1817020C00262094 /* events */ = {
+			isa = PBXGroup;
+			children = (
+				DEF61B04181700C900262094 /* HazardEvent.h */,
+				DEF61B05181700C900262094 /* HazardEvent.m */,
+				DEF61B071817020800262094 /* MissileEvent.h */,
+				DEF61B081817020800262094 /* MissileEvent.m */,
+				DEF61B0B1817049400262094 /* MissileSprite.h */,
+				DEF61B0C1817049400262094 /* MissileSprite.m */,
+				DEACD5911817454600BCA1CB /* WindEvent.h */,
+				DEACD5921817454600BCA1CB /* WindEvent.m */,
+				DEACD594181762A500BCA1CB /* BombEvent.h */,
+				DEACD595181762A500BCA1CB /* BombEvent.m */,
+				DEACD597181763F700BCA1CB /* BombSprite.h */,
+				DEACD598181763F700BCA1CB /* BombSprite.m */,
+				DEACD59A18186A0000BCA1CB /* HurricaneEvent.h */,
+				DEACD59B18186A0000BCA1CB /* HurricaneEvent.m */,
+				DEACD59D1818723A00BCA1CB /* SpikeEdgeEvent.h */,
+				DEACD59E1818723A00BCA1CB /* SpikeEdgeEvent.m */,
+			);
+			name = events;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1198,6 +1264,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DEACD5901817450700BCA1CB /* WindEffect.plist in Resources */,
 				DE41043F1814CFA5000088F8 /* SourceSansPro-ExtraLight.otf in Resources */,
 				DEA6ADC21809DEE4000A4B0C /* MotionStreak.plist in Resources */,
 				DE3987FF17D474DE00B155E7 /* Touch.vsh in Resources */,
@@ -1279,15 +1346,19 @@
 				DE1CC846178FA31A00CB1C59 /* CCNode+Debug.m in Sources */,
 				DE1CC849178FA31A00CB1C59 /* CCNode.m in Sources */,
 				DE1CC84C178FA31A00CB1C59 /* CCParallaxNode.m in Sources */,
+				DEACD599181763F700BCA1CB /* BombSprite.m in Sources */,
 				DE1CC84F178FA31A00CB1C59 /* CCParticleBatchNode.m in Sources */,
 				DEA6ADD1180CF4DA000A4B0C /* CCShake.m in Sources */,
+				DEF61B031816FE4300262094 /* HazardLayer.m in Sources */,
 				DE1CC852178FA31A00CB1C59 /* CCParticleExamples.m in Sources */,
 				DE1CC855178FA31A00CB1C59 /* CCParticleSystem.m in Sources */,
 				DE1CC858178FA31A00CB1C59 /* CCParticleSystemQuad.m in Sources */,
 				DE1CC85B178FA31A00CB1C59 /* CCPhysicsDebugNode.m in Sources */,
 				DE1CC85E178FA31A00CB1C59 /* CCPhysicsSprite.mm in Sources */,
+				DEACD59C18186A0000BCA1CB /* HurricaneEvent.m in Sources */,
 				DE1CC861178FA31A00CB1C59 /* CCProgressTimer.m in Sources */,
 				DE1CC865178FA31A00CB1C59 /* CCRenderTexture.m in Sources */,
+				DEACD5931817454600BCA1CB /* WindEvent.m in Sources */,
 				DE1CC868178FA31A00CB1C59 /* CCScene.m in Sources */,
 				DE1CC86B178FA31B00CB1C59 /* CCScheduler.m in Sources */,
 				DE1CC87D178FA31B00CB1C59 /* CCShaderCache.m in Sources */,
@@ -1304,6 +1375,7 @@
 				DE1CC89B178FA31B00CB1C59 /* CCTileMapAtlas.m in Sources */,
 				DE1CC89E178FA31B00CB1C59 /* CCTMXLayer.m in Sources */,
 				DEA6ADC6180B6F9D000A4B0C /* UILayer.m in Sources */,
+				DEF61B0D1817049400262094 /* MissileSprite.m in Sources */,
 				DE1CC8A1178FA31B00CB1C59 /* CCTMXObjectGroup.m in Sources */,
 				DE1CC8A4178FA31B00CB1C59 /* CCTMXTiledMap.m in Sources */,
 				DE1CC8A7178FA31B00CB1C59 /* CCTMXXMLParser.m in Sources */,
@@ -1311,9 +1383,11 @@
 				DE1CC8AD178FA31B00CB1C59 /* CCTransitionPageTurn.m in Sources */,
 				DE1CC8B0178FA31C00CB1C59 /* CCTransitionProgress.m in Sources */,
 				DE1CC8B4178FA31C00CB1C59 /* cocos2d.m in Sources */,
+				DEACD596181762A500BCA1CB /* BombEvent.m in Sources */,
 				DE1CC8BB178FA31C00CB1C59 /* CCDirectorIOS.m in Sources */,
 				DE1CC8BE178FA31C00CB1C59 /* CCES2Renderer.m in Sources */,
 				DE1CC8C2178FA31C00CB1C59 /* CCGLView.m in Sources */,
+				DEACD59F1818723A00BCA1CB /* SpikeEdgeEvent.m in Sources */,
 				DE1CC8C6178FA31C00CB1C59 /* CCTouchDispatcher.m in Sources */,
 				DEA1B470180FC051003AC1CC /* Player.m in Sources */,
 				DE1CC8C9178FA31C00CB1C59 /* CCTouchHandler.m in Sources */,
@@ -1321,6 +1395,8 @@
 				DE1CC8D0178FA31C00CB1C59 /* CCEventDispatcher.m in Sources */,
 				DE1CC8D3178FA31C00CB1C59 /* CCGLView.m in Sources */,
 				DE1CC8D6178FA31C00CB1C59 /* CCWindow.m in Sources */,
+				DEF61B06181700C900262094 /* HazardEvent.m in Sources */,
+				DEACD5A218196C7B00BCA1CB /* SettingsPanel.m in Sources */,
 				DE1CC8D9178FA31C00CB1C59 /* base64.c in Sources */,
 				DE1CC8DD178FA31C00CB1C59 /* CCArray.m in Sources */,
 				DE1CC8E0178FA31C00CB1C59 /* ccCArray.m in Sources */,
@@ -1354,6 +1430,7 @@
 				DE1CC942178FA31D00CB1C59 /* vec2.c in Sources */,
 				DE1CC944178FA31D00CB1C59 /* vec3.c in Sources */,
 				DE1CC946178FA31D00CB1C59 /* vec4.c in Sources */,
+				DEF61B091817020800262094 /* MissileEvent.m in Sources */,
 				DE1CC94B178FA31D00CB1C59 /* main.m in Sources */,
 				DE1CC94E178FA31D00CB1C59 /* AppDelegate.m in Sources */,
 				DE1CC951178FA31D00CB1C59 /* HelloWorldLayer.m in Sources */,
@@ -1370,6 +1447,7 @@
 				DE6055B617D2E20F00288F46 /* PowerStone.m in Sources */,
 				DE6055C717D4350A00288F46 /* Grain.fsh in Sources */,
 				DE6055CA17D4397500288F46 /* Grain.vsh in Sources */,
+				DEACD5A51819A55500BCA1CB /* JousterF.m in Sources */,
 				DE3987FC17D4745900B155E7 /* Touch.vsh in Sources */,
 				DE3987FE17D4746600B155E7 /* Touch.fsh in Sources */,
 				DE161B4D17D80F9B0004267C /* Vortex.m in Sources */,

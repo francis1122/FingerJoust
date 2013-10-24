@@ -12,6 +12,7 @@
 #import "Player.h"
 #import "PlayerSelect.h"
 #import "GameLayer.h"
+#import "SettingsPanel.h"
 
 @implementation TitleLayer
 
@@ -70,6 +71,14 @@
         [menu alignItemsVerticallyWithPadding:50];
 		[menu setPosition:ccp( size.width/2, size.height/2 - 50)];
 		
+        //settings menu
+        settingsMenu = [SettingsPanel layerWithColor:COLOR_GAMEBORDER_B4
+                                             width:size.width - 2*CONTROL_OFFSET
+                                            height:500];
+        settingsMenu.position = ccp(CONTROL_OFFSET, -settingsMenu.contentSize.height + 60);
+        [settingsMenu resolve];
+        [self addChild:settingsMenu z:9];
+        
         
         
 		// Add the menu to the layer
@@ -80,8 +89,14 @@
         for(Player *player in [PlayerManager sharedInstance].playerArray){
             PlayerSelect *playerSelectLayer = [[[PlayerSelect alloc] initWithPlayer:player] autorelease];
             [self.playerSelectArray addObject:playerSelectLayer];
-            [self addChild:playerSelectLayer];
+            [self addChild:playerSelectLayer z:10];
         }
+        
+        
+        
+        
+        
+        
         
         [self animateIn];
     }
@@ -91,7 +106,9 @@
     
     return self;
 }
-
+-(void) settingsSetup{
+    
+}
 
 -(void) dealloc{
     [playerSelectArray release];

@@ -16,10 +16,6 @@
 
 -(id) initWithPlayer:(Player *) p{
     if(self = [super initWithPlayer:p]){
-        self.scale = 1.4;
-        bodyRadius = bodyRadius * 1.5;
-        joustRadius = joustRadius * 1.5;
-        maxSpeed = 350;
         
     }
     return self;
@@ -102,7 +98,7 @@
     //knock body
     CGPoint offset = ccpSub([self getWorldPositionOfJoust] , joustPos);
     offset = [MathHelper normalize:offset];
-    offset = ccpMult(offset, 1400);
+    offset = ccpMult(offset, 3000);
     velocity = offset;
 }
 

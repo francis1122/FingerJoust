@@ -35,29 +35,29 @@ extern NSString *const MAIN_FONT;
 #define COLOR_PLAYER_NON_LIGHT_B4 ccc4(211,211,211, 255)
 #define COLOR_PLAYER_NON_LIGHT_F4 ccc4f(211.0/255.0,211.0/255.0,211.0/255.0, 255.0/255.0)
 
-#define COLOR_PLAYER_ONE ccc3(255,0,0)
-#define COLOR_PLAYER_ONE_LIGHT ccc3(255,120,120)
-#define COLOR_PLAYER_ONE_B4 ccc4(255,0,0,255)
-#define COLOR_PLAYER_ONE_LIGHT_B4 ccc4(255,120,120, 255)
-#define COLOR_PLAYER_ONE_LIGHT_F4 ccc4f(255.0/255.0,120.0/255.0,120.0/255.0, 255.0/255.0)
+#define COLOR_PLAYER_ONE ccc3(175,64,64)
+#define COLOR_PLAYER_ONE_LIGHT ccc3(175,64,64)
+#define COLOR_PLAYER_ONE_B4 ccc4(175,64,64,255)
+#define COLOR_PLAYER_ONE_LIGHT_B4 ccc4(175,64,64, 255)
+#define COLOR_PLAYER_ONE_LIGHT_F4 ccc4f(175.0/255.0,64.0/255.0,64.0/255.0, 255.0/255.0)
 
-#define COLOR_PLAYER_TWO ccc3(0,0,255)
-#define COLOR_PLAYER_TWO_LIGHT ccc3(120,120,255)
-#define COLOR_PLAYER_TWO_B4 ccc3(0,0,255, 255)
-#define COLOR_PLAYER_TWO_LIGHT_B4 ccc4(120,120,255, 255)
-#define COLOR_PLAYER_TWO_LIGHT_F4 ccc4f(120.0/255.0,120.0/255.0,255.0/255.0, 255.0/255.0)
+#define COLOR_PLAYER_TWO ccc3(64,175,64)
+#define COLOR_PLAYER_TWO_LIGHT ccc3(64,175,64)
+#define COLOR_PLAYER_TWO_B4 ccc3(64,175,64 255)
+#define COLOR_PLAYER_TWO_LIGHT_B4 ccc4(64,175,64, 255)
+#define COLOR_PLAYER_TWO_LIGHT_F4 ccc4f(64.0/255.0,175.0/255.0,64.0/255.0, 255.0/255.0)
 
-#define COLOR_PLAYER_THREE ccc3(0,255,0)
-#define COLOR_PLAYER_THREE_LIGHT ccc3(120,255,120)
-#define COLOR_PLAYER_THREE_B4 ccc4(0,255,0, 255)
-#define COLOR_PLAYER_THREE_LIGHT_B4 ccc4(120,255,120, 255)
-#define COLOR_PLAYER_THREE_LIGHT_F4 ccc4f(120.0/255.0,255.0/255.0,120.0/255.0, 255.0/255.0)
+#define COLOR_PLAYER_THREE ccc3(64,64,175)
+#define COLOR_PLAYER_THREE_LIGHT ccc3(64,64,175)
+#define COLOR_PLAYER_THREE_B4 ccc4(64,64,175 255)
+#define COLOR_PLAYER_THREE_LIGHT_B4 ccc4(64,64,175, 255)
+#define COLOR_PLAYER_THREE_LIGHT_F4 ccc4f(64.0/255.0,64.0/255.0,175.0/255.0, 255.0/255.0)
 
-#define COLOR_PLAYER_FOUR ccc3(255,255,0)
-#define COLOR_PLAYER_FOUR_LIGHT ccc3(255,255,120)
-#define COLOR_PLAYER_FOUR_B4 ccc4(255,255,0,255)
-#define COLOR_PLAYER_FOUR_LIGHT_B4 ccc4(255,255,120,255)
-#define COLOR_PLAYER_FOUR_LIGHT_F4 ccc4f(255.0/255.0,255.0/255.0,120.0/255.0,255.0/255.0)
+#define COLOR_PLAYER_FOUR ccc3(175,64,175)
+#define COLOR_PLAYER_FOUR_LIGHT ccc3(175,64,175)
+#define COLOR_PLAYER_FOUR_B4 ccc4(175,64,175,255)
+#define COLOR_PLAYER_FOUR_LIGHT_B4 ccc4(175,64,175,255)
+#define COLOR_PLAYER_FOUR_LIGHT_F4 ccc4f(175.0/255.0,64.0/255.0,175.0/255.0,255.0/255.0)
 
 
 //#define CONTROL_OFFSET 286
@@ -71,7 +71,7 @@ extern NSString *const MAIN_FONT;
 #define ROUND_TIME 20
 #define VORTEX_DISTANCE 300
 #define VORTEX_LIFE 2.0
-#define STUN_CONTRAINT 340
+#define STUN_CONTRAINT 360
 
 #define COLLISION_STEPS 6
 #define TRANSITION_TIME 2.0
@@ -89,9 +89,10 @@ typedef enum GameState
     GAME_START = 4,
 }GameState;
 
-@class Jouster, PowerStone, SneakyJoystick, UILayer, Player;
+@class Jouster, PowerStone, SneakyJoystick, UILayer, Player, HazardLayer;
 @interface GameLayer : CCLayerColor  {
     UILayer *uiLayer;
+    HazardLayer *hazardLayer;
     
     
     NSMutableArray *jousterArray;
@@ -133,6 +134,8 @@ typedef enum GameState
 
 @property int lastWinner;
 @property (retain, nonatomic) PowerStone *powerStone;
+@property (assign, nonatomic) HazardLayer *hazardLayer;
+@property (assign, nonatomic) UILayer *uiLayer;
 @property (retain, nonatomic) NSMutableArray *vortexArray, *jousterArray, *touchParticleArray;
 
 -(Jouster*) getJousterWithPlayerNumber:(int) playerNumber;

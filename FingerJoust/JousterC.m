@@ -18,14 +18,10 @@
     if(self = [super initWithPlayer:p]){
         self.velocity = CGPointZero;
         waitingForTouch = YES;
-        self.scale = .8;
-        bodyRadius = 25;
-        joustRadius = 17;
         orbitalOffset = 0;
         joustPosition = ccp(1,0);
         velocity = ccp(1,0);
         previousVelocity = ccp(1,0);
-        maxSpeed = 400;
     }
     return self;
 }
@@ -113,7 +109,7 @@
     //knock body
     CGPoint offset = ccpSub([self getWorldPositionOfJoust] , joustPos);
     offset = [MathHelper normalize:offset];
-    offset = ccpMult(offset, 1640);
+    offset = ccpMult(offset, 3040);
     velocity = offset;
 }
 

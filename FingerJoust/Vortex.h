@@ -13,6 +13,7 @@
     
 }
 
+@property CGPoint velocity;
 @property float bodyRadius;
 @property float timeAlive;
 @property (nonatomic, assign) CCParticleSystemQuad* pEffect;

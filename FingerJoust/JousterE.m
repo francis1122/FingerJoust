@@ -105,7 +105,7 @@
     //jouster gets knocked away
     CGPoint offset = ccpSub([self getWorldPositionOfJoust] , joustPos);
     offset = [MathHelper normalize:offset];
-    offset = ccpMult(offset, 2000);
+    offset = ccpMult(offset, 2500);
     joustVelocity = offset;
 }
 

@@ -13,6 +13,7 @@
 #import "JousterC.h"
 #import "JousterD.h"
 #import "JousterE.h"
+#import "JousterF.h"
 #import "TitleLayer.h"
 #import "MathHelper.h"
 #import "PowerStone.h"
@@ -24,6 +25,7 @@
 #import "SneakyJoystickSkinnedBase.h"
 #import "ColoredCircleSprite.h"
 #import "Player.h"
+#import "HazardLayer.h"
 #import "PlayerManager.h"
 #import "JousterParticle.h"
 
@@ -32,7 +34,7 @@
 
 NSString *const MAIN_FONT = @"SourceSansPro-ExtraLight";
 
-@synthesize powerStone, vortexArray, lastWinner, jousterArray, touchParticleArray;
+@synthesize powerStone, vortexArray, lastWinner, jousterArray, touchParticleArray, hazardLayer, uiLayer;
 
 -(id) init{
     if(self = [super initWithColor:COLOR_GAMEAREA_B4] ){
@@ -40,8 +42,10 @@ NSString *const MAIN_FONT = @"SourceSansPro-ExtraLight";
         self.vortexArray = [[[NSMutableArray alloc] init] autorelease];
         self.touchParticleArray = [[[NSMutableArray alloc] init] autorelease];
         
-        uiLayer = [[[UILayer alloc] initWithGameLayer:self] autorelease];
+        self.uiLayer = [[[UILayer alloc] initWithGameLayer:self] autorelease];
         [self addChild:uiLayer z:10];
+        self.hazardLayer = [[[HazardLayer alloc] initWithGameLayer:self] autorelease];
+        [self addChild:hazardLayer z:5];
         
         //labels to display who is winning
         
@@ -137,7 +141,7 @@ NSString *const MAIN_FONT = @"SourceSansPro-ExtraLight";
 
 
 -(void) spawnVortexAtPoint:(CGPoint) point{
-    Vortex *vortex = [[Vortex alloc] init];
+    Vortex *vortex = [[[Vortex alloc] init] autorelease];
     
     vortex.position = point;
     [self addChild:vortex z:-1];
@@ -155,6 +159,8 @@ NSString *const MAIN_FONT = @"SourceSansPro-ExtraLight";
         return [[[JousterC alloc] initWithPlayer:player] autorelease];
     }else if(character == 3){
         return [[[JousterE alloc] initWithPlayer:player] autorelease];
+    }else if(character == 4){
+        return [[[JousterF alloc] initWithPlayer:player] autorelease];
     }
     return [JousterB node];
 }
@@ -185,10 +191,12 @@ NSString *const MAIN_FONT = @"SourceSansPro-ExtraLight";
     [uiLayer refreshVictoryPoint];
     [uiLayer refreshUI];
     centerSprite.scale = 1;
+    [hazardLayer resetLayer];
 }
 
 -(void) update:(ccTime)dt{
     if(currentState == GAMEPLAY){
+        [hazardLayer update: dt];
         for(Jouster *jouster in self.jousterArray){
             if(!jouster.isDead){
                 [jouster update:dt];
@@ -408,6 +416,23 @@ NSString *const MAIN_FONT = @"SourceSansPro-ExtraLight";
 }
 
 -(void) testForVictory{
+    //test for Tie
+    int aliveCount = 0;
+    for(Jouster *jousterA in self.jousterArray){
+        if(!jousterA.isDead){
+            aliveCount++;
+        }
+    }
+    
+    //we have a tie
+    if(aliveCount < 1){
+        //the game is over jousterA won
+        winner = [NSString stringWithFormat:@"TIE"];
+        [self transitionToEndRound];
+        [self refreshUI];
+        return;
+        
+    }
     for(Jouster *jousterA in self.jousterArray){
         if(!jousterA.isDead){
             BOOL didWin= YES;
@@ -581,6 +606,7 @@ NSString *const MAIN_FONT = @"SourceSansPro-ExtraLight";
     //get direction
     CGPoint offset = ccpSub(jousterA.position, jousterB.position);
     offset = [MathHelper normalize:offset];
+    offset = ccpMult(offset, 2);
     CGPoint redKnock = ccpMult(offset, blueMagnitude + 350);
     jousterA.velocity = redKnock;
     offset = ccpMult(offset, -1);

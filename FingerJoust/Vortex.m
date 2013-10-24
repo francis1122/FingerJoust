@@ -11,7 +11,7 @@
 
 @implementation Vortex
 
-@synthesize pEffect;
+@synthesize pEffect, velocity;
 
 -(id) init{
     if(self = [super init]){
@@ -28,18 +28,7 @@
 
 -(void) update:(ccTime)dt{
     self.timeAlive += dt;
-    if(self.timeAlive > 4){
-        //kill yourself
-    }
 }
 
-- (void) draw{
-    
-    ccDrawColor4F(0.0f, 1.0f, 1.0f, 1.0f);
-    ccDrawSolidCircle( CGPointZero, self.bodyRadius, 30);
-    
-    [super draw];
-    
-}
 
 @end

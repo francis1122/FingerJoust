@@ -105,7 +105,7 @@
                                                             //cycle between 4 teams
                                                             int team = player.team;
                                                             team++;
-                                                            if(team > 3){
+                                                            if(team > 4){
                                                                 team = 0;
                                                             }
                                                             player.team = team;
@@ -169,18 +169,18 @@
         border = [[[CCSprite alloc] initWithSpriteFrameName:@"touchBordersContainer"] autorelease];
         if(self.player.playerNumber == 0){
             pos = ccp(border.contentSize.width/2, border.contentSize.height/2);
-            border.color = COLOR_PLAYER_ONE;
+            border.color = COLOR_GAMEBORDER;
         }else if(self.player.playerNumber == 1){
             pos = ccp(border.contentSize.width/2, border.contentSize.height/2);
             border.scaleX = -1;
-            border.color = COLOR_PLAYER_TWO;
+            border.color = COLOR_GAMEBORDER;
         }else if(self.player.playerNumber == 2){
             pos = ccp(border.contentSize.width/2, border.contentSize.height/2);
             border.scaleX = -1;
-            border.color = COLOR_PLAYER_THREE;
+            border.color = COLOR_GAMEBORDER;
         }else if(self.player.playerNumber == 3){
             pos = ccp(border.contentSize.width/2, border.contentSize.height/2);
-            border.color = COLOR_PLAYER_FOUR;
+            border.color = COLOR_GAMEBORDER;
         }
         border.position = pos;
         [self addChild:border];
@@ -211,24 +211,24 @@
 -(void) playerColorChangedToTeam:(int)team{
     if(player.isActive){
         if(team == 0){
-            border.color = COLOR_PLAYER_ONE;
+            border.color = COLOR_GAMEBORDER;
             teamPlayItem.color = COLOR_PLAYER_ONE;
             self.color = COLOR_PLAYER_ONE_LIGHT;
         }else if(team == 1){
-            border.color = COLOR_PLAYER_TWO;
+            border.color = COLOR_GAMEBORDER;
             teamPlayItem.color = COLOR_PLAYER_TWO;
             self.color = COLOR_PLAYER_TWO_LIGHT;
         }else if(team == 2){
-            border.color = COLOR_PLAYER_THREE;
+            border.color = COLOR_GAMEBORDER;
             teamPlayItem.color = COLOR_PLAYER_THREE;
             self.color = COLOR_PLAYER_THREE_LIGHT;
         }else if(team == 3){
-            border.color = COLOR_PLAYER_FOUR;
+            border.color = COLOR_GAMEBORDER;
             teamPlayItem.color = COLOR_PLAYER_FOUR;
             self.color = COLOR_PLAYER_FOUR_LIGHT;
         }
     }else{
-        border.color = COLOR_PLAYER_NON;
+        border.color = COLOR_GAMEBORDER;
         teamPlayItem.color = COLOR_PLAYER_NON;
         self.color = COLOR_PLAYER_NON_LIGHT;
     }
@@ -238,20 +238,20 @@
 -(void) setBorderColorForPlayer{
     if(player.isActive){
         if(self.player.playerNumber == 0){
-            border.color = COLOR_PLAYER_ONE;
+            border.color = COLOR_GAMEBORDER;
             self.color = COLOR_PLAYER_ONE_LIGHT;
         }else if(self.player.playerNumber == 1){
-            border.color = COLOR_PLAYER_TWO;
+            border.color = COLOR_GAMEBORDER;
             self.color = COLOR_PLAYER_TWO_LIGHT;
         }else if(self.player.playerNumber == 2){
-            border.color = COLOR_PLAYER_THREE;
+            border.color = COLOR_GAMEBORDER;
             self.color = COLOR_PLAYER_THREE_LIGHT;
         }else if(self.player.playerNumber == 3){
-            border.color = COLOR_PLAYER_FOUR;
+            border.color = COLOR_GAMEBORDER;
             self.color = COLOR_PLAYER_FOUR_LIGHT;
         }
     }else{
-        border.color = COLOR_PLAYER_NON;
+        border.color = COLOR_GAMEBORDER;
             self.color = COLOR_PLAYER_NON_LIGHT;
     }
 }
@@ -266,6 +266,8 @@
         characterString = @"Grower";
     }else if(character == 3){
         characterString = @"Bouncer";
+    }else if(character == 4){
+        characterString = @"Chump";
     }
     [characterLabel setString:characterString];
 }
