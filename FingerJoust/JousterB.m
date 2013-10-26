@@ -31,9 +31,9 @@
 
 
     if(player.playerNumber == 1){
-        aliveTicker += dt * 4.6;
+        aliveTicker += dt * 3.6;
     }else{
-        aliveTicker += dt * 4.6;
+        aliveTicker += dt * 3.6;
     }
 
     CGPoint desiredLocation = ccpMult( ccp(cos(aliveTicker), sin(aliveTicker)), bodyRadius * 1.5);
@@ -69,37 +69,14 @@
     joustPosition = ccpMult(spot, joustRadius * 2);
 }
 
--(void) touch:(CGPoint) touch{
-    if(waitingForTouch){
-        previousTouch = touch;
-        waitingForTouch = NO;
-        return;
-    }
-    
-    CGPoint difference = ccpSub(touch, previousTouch);
-    
-    if(isSuperMode){
-        difference = ccp(difference.x * 5.5, difference.y *4.1);
-    }else if(isStunned){
-        difference = ccp(difference.x * 2.0, difference.y *1.7);
-    }else{
-        
-        //        difference = ccp(difference.x * 2.7, difference.y *2.2);
-        difference = ccp(difference.x * 7, difference.y *7);
-        //        difference = ccp(difference.x * 2.0, difference.y *1.6);
-        //        difference = ccp(difference.x * 6, difference.y *6);
-        
-    }
-    self.velocity = ccpAdd(velocity, difference);
-    previousTouch = touch;
-}
 
 -(void) joustCollision:(CGPoint) joustPos withRadius:(float) radius{
     //knock body
     CGPoint offset = ccpSub([self getWorldPositionOfJoust] , joustPos);
     offset = [MathHelper normalize:offset];
-    offset = ccpMult(offset, 3000);
+    offset = ccpMult(offset, 400);
     velocity = offset;
+    outsideVelocity = offset;
 }
 
 

@@ -18,11 +18,11 @@
     menuToggle = [CCMenuItemFont itemWithString:@"Settings" block:^(CCMenuItemFont *sender) {
         if(isActive){
             isActive = NO;
-            CCMoveTo *moveTo = [CCMoveTo actionWithDuration:0.5 position:ccp(CONTROL_OFFSET, -self.contentSize.height + 60)];
+            CCMoveTo *moveTo = [CCMoveTo actionWithDuration:0.3 position:ccp(CONTROL_OFFSET, -self.contentSize.height + 60)];
             [self runAction:moveTo];
         }else{
             isActive = YES;
-            CCMoveTo *moveTo = [CCMoveTo actionWithDuration:0.5 position:ccp(CONTROL_OFFSET,0)];
+            CCMoveTo *moveTo = [CCMoveTo actionWithDuration:0.3 position:ccp(CONTROL_OFFSET,0)];
             [self runAction:moveTo];
         }
     }];
@@ -36,7 +36,7 @@
         PlayerManager *PM = [PlayerManager sharedInstance];
     //event items
     float offset = 70;
-    float spacing = 60;
+    float spacing = 70;
     float xPos = 145;
 
     windActive = [CCSprite spriteWithSpriteFrameName:@"BodyOuter"];

@@ -11,7 +11,8 @@
 #import "Jouster.h"
 
 @interface JousterF : Jouster {
-    
+
 }
+
 
 @end

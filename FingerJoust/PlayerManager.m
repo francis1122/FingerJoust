@@ -48,4 +48,26 @@ static PlayerManager *sharedInstance = nil;
     return self;
 }
 
+
+-(BOOL) isPlayerActive:(int) playerNumber{
+    for(Player *player in self.playerArray){
+        if(player.playerNumber == playerNumber){
+            return player.isActive;
+        }
+    }
+    return NO;
+}
+
+-(float) getGameSpeedScaler{
+    float scaler = 1;
+    if(gameSpeed == 0){
+        scaler = .6;
+    }else if(gameSpeed == 1){
+        scaler = 1;
+    }else if(gameSpeed == 2){
+        scaler = 1.5;
+    }
+    return scaler;
+}
+
 @end

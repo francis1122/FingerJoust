@@ -56,9 +56,9 @@
         
         if(PM.frequencyEvent == 0){
             frequency = -2;
-        }else if(PM.frequencyEvent ==1){
+        }else if(PM.frequencyEvent == 1){
             frequency = 1;
-        }else if(PM.frequencyEvent ==2){
+        }else if(PM.frequencyEvent == 2){
             frequency = 4;
         }
     }
@@ -76,7 +76,7 @@
     addAlways = NO;
     lastMissile = 0;
     lastBomb = 0;
-    sinceLastEvent = 2 + arc4random()%6;
+    sinceLastEvent = frequency + 2 + arc4random()%6;
     for(int i = 0; i < self.eventArray.count; i++){
         HazardEvent *hazardEvent = [self.eventArray objectAtIndex:i];
         [hazardEvent isFinished];
@@ -90,10 +90,10 @@
     sinceLastEvent += dt;
     [self chooseEvent];
     PlayerManager *PM = [PlayerManager sharedInstance];
-    if(!addAlways && roundTimerElapsed > 2){
+    if(!addAlways && roundTimerElapsed > 1.5){
         addAlways = YES;
         if(PM.windEvent == EventAlways){
-            WindEvent *windEvent = [[[WindEvent alloc] initWithTime:20 WithForce:10 GameLayer:gameLayer] autorelease];
+            WindEvent *windEvent = [[[WindEvent alloc] initWithTime:20 WithForce:18 GameLayer:gameLayer] autorelease];
             [windEvent onStart];
             [self.eventArray addObject:windEvent];
         }
@@ -111,7 +111,7 @@
         }
     }
     
-    if( roundTimerElapsed  >2 ){
+    if( roundTimerElapsed  > 1.5 ){
         if(PM.missileEvent == EventAlways){
             lastMissile -= dt;
             if(lastMissile < 0){
@@ -151,19 +151,19 @@
 -(void) chooseEvent{
     int validCount = self.validEvents.count;
 
-    if(validCount > 0 && roundTimerElapsed > 2 && sinceLastEvent > 8){
+    if(validCount > 0 && roundTimerElapsed > 1.5 && sinceLastEvent > 9){
         sinceLastEvent = frequency;
         NSNumber *num = [self.validEvents objectAtIndex:(arc4random()%validCount)];
         int stu = [num intValue];
         if(stu == WindEvents){
             sinceLastEvent += arc4random()%3;
-            WindEvent *windEvent = [[[WindEvent alloc] initWithTime:4 WithForce:10 GameLayer:gameLayer] autorelease];
+            WindEvent *windEvent = [[[WindEvent alloc] initWithTime:4 WithForce:18 GameLayer:gameLayer] autorelease];
             [windEvent onStart];
             [self.eventArray addObject:windEvent];
         }else if(stu == MissileEvents){
             sinceLastEvent += arc4random()%2;
-            int missileCount = 1 + arc4random()%2;
-            MissileEvent *missileEvent = [[[MissileEvent alloc] initWithTime:6 MissileAmount:missileCount GameLayer:gameLayer] autorelease];
+            int missileCount = 1 + arc4random()%3;
+            MissileEvent *missileEvent = [[[MissileEvent alloc] initWithTime:7 MissileAmount:missileCount GameLayer:gameLayer] autorelease];
             [missileEvent onStart];
             [self.eventArray addObject:missileEvent];
         }else if(stu == BombEvents){

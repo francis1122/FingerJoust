@@ -43,7 +43,7 @@
     for(Jouster *jouster in gameLayer.jousterArray){
         CGPoint vel = ccp(cos(angle*(M_PI / 180)), sin(angle*(M_PI / 180)));
         vel = ccpMult(vel, windForce);
-        jouster.velocity = ccpAdd(jouster.velocity, vel);
+        jouster.outsideVelocity = ccpAdd(jouster.outsideVelocity, vel);
     }
 
 }

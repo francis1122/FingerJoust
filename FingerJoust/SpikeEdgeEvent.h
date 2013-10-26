@@ -11,6 +11,8 @@
 @class Jouster;
 @interface SpikeEdgeEvent : HazardEvent{
     NSMutableArray *spikeArray;
+    CCSprite *rightSpike, *leftSpike, *bottomSpike, *topSpike;
+    BOOL isRetracting;
 }
 
 @property (nonatomic, retain) NSMutableArray *spikeArray;

@@ -44,6 +44,8 @@ typedef enum {
 @property int frequencyEvent, gameSpeed;
 
 + (PlayerManager*)sharedInstance;
+-(BOOL) isPlayerActive:(int) playerNumber;
+-(float) getGameSpeedScaler;
 
 
 @end

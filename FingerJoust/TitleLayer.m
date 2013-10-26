@@ -64,7 +64,6 @@
 		}];
         [teamPlayToggle setFontName:MAIN_FONT];
         
-		
 		CCMenu *menu = [CCMenu menuWithItems:playItem, teamPlayToggle, nil];
 		
 //		[menu alignItemsHorizontallyWithPadding:20];
@@ -74,7 +73,7 @@
         //settings menu
         settingsMenu = [SettingsPanel layerWithColor:COLOR_GAMEBORDER_B4
                                              width:size.width - 2*CONTROL_OFFSET
-                                            height:500];
+                                            height:650];
         settingsMenu.position = ccp(CONTROL_OFFSET, -settingsMenu.contentSize.height + 60);
         [settingsMenu resolve];
         [self addChild:settingsMenu z:9];

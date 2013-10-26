@@ -41,6 +41,8 @@
 -(void) calculateJoustPosition:(ccTime) dt{
     //have the joust position move towards the center of the body
     joustPosition = ccpSub(self.joustPosition, ccpMult(self.velocity, dt));
+    joustPosition = ccpSub(self.joustPosition, ccpMult(self.outsideVelocity, dt));
+    
     //slows down the joust
     joustVelocity = ccpMult(joustVelocity, .985);
     float distance = ccpLength(self.joustPosition);
@@ -88,8 +90,9 @@
     //jouster gets knocked away
     CGPoint offset = ccpSub([self getWorldPositionOfJoust] , joustPos);
     offset = [MathHelper normalize:offset];
-    offset = ccpMult(offset, 2500);
+    offset = ccpMult(offset, 500);
     joustVelocity = offset;
+    joustOutsideVelocity = offset;
 }
 
 @end

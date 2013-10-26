@@ -50,12 +50,29 @@
         for(Jouster *jouster in gameLayer.jousterArray){
                 //collisions tuff
                 if( [MathHelper circleCollisionPositionA:jouster.position raidusA:jouster.bodyRadius positionB:bomb.position radiusB:20]){
+                    
+                    //
+                    
+                    //get normalized vector pointing at enemy
+                    CGPoint jousterToBomb = ccpNormalize(ccpSub(jouster.position, bomb.position));
+                    CGPoint bombToJouster = ccpMult(jousterToBomb, -1);
+                    
+                    //multiply normalized vector by bodies velocity
+                    CGPoint jousterRelativeVelocity = ccp(jousterToBomb.x * jouster.velocity.x, jousterToBomb.y * jouster.velocity.y);
+                    CGPoint bombRelativeVelocity = ccp(bombToJouster.x * bomb.velocity.x, bombToJouster.y * bomb.velocity.y);
+                    
+                    //check if magnitude of that number is high enough to cause stun damage
+                    float jousterMagnitude = ccpLength(jousterRelativeVelocity);
+                    float bombMagnitude = ccpLength(bombRelativeVelocity);
+                    
+                    
+                    
                     //missile hit the thing
                     CGPoint offset = ccpSub(bomb.position, jouster.position);
                     offset = [MathHelper normalize:offset];
-                    CGPoint bombKnock = ccpMult(offset, 800);
+                    CGPoint bombKnock = ccpMult(offset, jousterMagnitude + 400);
                     bomb.velocity = bombKnock;
-                    CGPoint jouserKnock = ccpMult(offset, -800);
+                    CGPoint jouserKnock = ccpMult(offset, -(bombMagnitude + 300));
                     jouster.velocity = jouserKnock;
                     
                     
@@ -65,9 +82,9 @@
                     //bounce off eachother
                     [jouster joustCollision:bomb.position withRadius:20];
                     
-                    CGPoint offset = ccpSub(bomb.position, jouster.position);
+                    CGPoint offset = ccpSub(bomb.position, [jouster getWorldPositionOfJoust]);
                     offset = [MathHelper normalize:offset];
-                    CGPoint redKnock = ccpMult(offset, 800);
+                    CGPoint redKnock = ccpMult(offset, 700);
                     bomb.velocity = redKnock;
 
                 }
@@ -78,7 +95,7 @@
             //leave explosion thing for a few seconds
             CCSprite *explosion = [CCSprite spriteWithSpriteFrameName:@"explosion"];
             explosion.position = bomb.position;
-            explosion.scale = 1.2;
+            explosion.scale = 1.5;
             [gameLayer.hazardLayer addChild:explosion];
             CCDelayTime *delayAnim = [CCDelayTime actionWithDuration:0.2];
             CCCallBlock *blockAnim = [CCCallBlock actionWithBlock:^{
@@ -90,7 +107,7 @@
             
             //kill things in blast radius
             for(Jouster *jouster in gameLayer.jousterArray){
-                if( [MathHelper circleCollisionPositionA:jouster.position raidusA:jouster.bodyRadius positionB:bomb.position radiusB:100]){
+                if( [MathHelper circleCollisionPositionA:jouster.position raidusA:jouster.bodyRadius positionB:bomb.position radiusB:130]){
                     //missile hit the thing
                     jouster.isDead = YES;
                     [gameLayer deathEffect:jouster];

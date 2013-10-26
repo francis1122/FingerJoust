@@ -59,7 +59,9 @@
         
         //put
         //collision has happened
-        joustVelocity = ccpMult(awayFromCenter, 450);
+        CGPoint newVel = ccpMult(awayFromCenter, 450);
+        joustVelocity = newVel;
+        joustOutsideVelocity = newVel;
     }
 }
 
@@ -83,9 +85,10 @@
     joustVelocity = ccpAdd(joustVelocity, ccpMult( ccpMult(someVec, distance) , dt));
     //make sure velocity isn't too high
     float speed = ccpLength(joustVelocity);
-    if(speed > 450){
+    if(speed > 500){
         joustVelocity = ccpNormalize(joustVelocity);
-        joustVelocity = ccpMult(joustVelocity, 450);
+        joustVelocity = ccpMult(joustVelocity, 500);
+        
     }
     
     //set position of joust according to joust velocity
@@ -112,7 +115,7 @@
     //jouster gets knocked away
     CGPoint offset = ccpSub([self getWorldPositionOfJoust] , joustPos);
     offset = [MathHelper normalize:offset];
-    offset = ccpMult(offset, 2500);
+    offset = ccpMult(offset, 350);
     joustVelocity = offset;
 }
 

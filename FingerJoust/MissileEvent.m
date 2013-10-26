@@ -13,6 +13,7 @@
 #import "UILayer.h"
 #import "Jouster.h"
 #import "MathHelper.h"
+#import "PlayerManager.h"
 
 @implementation MissileEvent
 
@@ -35,7 +36,7 @@
             for(int i = 0; i <missileAmount; i++){
                 [self createMissile];
             }
-            CCDelayTime *delayAnim = [CCDelayTime actionWithDuration:2.0];
+            CCDelayTime *delayAnim = [CCDelayTime actionWithDuration:2.5];
             CCCallBlock *blockAnim = [CCCallBlock actionWithBlock:^{
                 for(int i = 0; i <missileAmount; i++){
                     [self createMissile];
@@ -44,7 +45,7 @@
             CCSequence *seqAnim = [CCSequence actionOne:delayAnim two:blockAnim];
             [gameLayer runAction:seqAnim];
         }else{
-            CCDelayTime *delayAnim = [CCDelayTime actionWithDuration:2.0];
+            CCDelayTime *delayAnim = [CCDelayTime actionWithDuration:2.5];
             CCCallBlock *blockAnim = [CCCallBlock actionWithBlock:^{
                 for(int i = 0; i <missileAmount; i++){
                     [self createMissile];

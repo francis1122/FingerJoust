@@ -9,6 +9,7 @@
 #import "MissileSprite.h"
 #import "GameLayer.h"
 #import "Jouster.h"
+#import "PlayerManager.h"
 
 @implementation MissileSprite
 
@@ -26,11 +27,12 @@
 
 -(void)resolve{
     CGSize winSize= [[CCDirector sharedDirector] winSize];
-    
+    PlayerManager *PM = [PlayerManager sharedInstance];
+    float gameSpeed = [PM getGameSpeedScaler];
     warningSprite = [CCSprite spriteWithSpriteFrameName:@"warning"];
     warningSprite.color = ccBLUE;
     [self.parent addChild:warningSprite];
-    CCDelayTime *delayAnim = [CCDelayTime actionWithDuration:1.5];
+    CCDelayTime *delayAnim = [CCDelayTime actionWithDuration:1.5 * (1/gameSpeed)];
     CCCallBlock *blockAnim = [CCCallBlock actionWithBlock:^{
         [warningSprite removeFromParentAndCleanup:YES];
         warningSprite = nil;
@@ -46,50 +48,42 @@
         //left
         pos = ccp(CONTROL_OFFSET - 540, 150 + (arc4random()%((int)winSize.height - 300)) );
         warningPos = ccp(pos.x + 600, pos.y);
-        velocity = ccp(350,0);
+        velocity = ccp(400,0);
         warningSprite.rotation = 90;
     }else if(spot == 1){
         //right
         pos = ccp(winSize.width - CONTROL_OFFSET + 540, 150 + (arc4random()%((int)winSize.height - 300)) );
         warningPos = ccp(pos.x - 600, pos.y);
-        velocity = ccp(-350,0);
+        velocity = ccp(-400,0);
         warningSprite.rotation = -90;
     }else if(spot == 2){
         //top
         pos = ccp( CONTROL_OFFSET + 100 + (arc4random()%((int)winSize.width - 2*CONTROL_OFFSET - 200)) ,-600);
         warningPos = ccp(pos.x , pos.y + 710);
-        velocity = ccp(0,350);
+        velocity = ccp(0,400);
 
     }else if(spot == 3){
         //bottom
         pos = ccp( CONTROL_OFFSET + 100 + (arc4random()%((int)winSize.width - 2*CONTROL_OFFSET - 200)) , winSize.height + 600);
         warningPos = ccp(pos.x , pos.y - 710);
-        velocity = ccp(0,-350);
+        velocity = ccp(0,-400);
         warningSprite.rotation = 180;
     }
     warningSprite.position = warningPos;
     self.position = pos;
-    
 }
+
 
 -(void) update:(ccTime)dt{
     self.position = ccpAdd(self.position,  ccpMult(velocity, dt));
     ticka++;
     if(warningSprite && ticka%4 == 0){
         ccColor3B col;
-        int ran = arc4random()%6;
+        int ran = arc4random()%2;
         if(ran == 0){
-            col = ccRED;
+            col = ccBLACK;
         }else if(ran == 1){
-            col = ccBLUE;
-        }else if(ran == 2){
-            col = ccYELLOW;
-        }else if(ran == 3){
-            col = ccGREEN;
-        }else if(ran == 4){
-            col = ccORANGE;
-        }else if(ran == 5){
-            col = ccMAGENTA;
+            col = ccWHITE;
         }
         warningSprite.color = col;
     }

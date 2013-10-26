@@ -16,13 +16,13 @@
 
 @implementation UILayer
 
-@synthesize roundTimer, displayedTime, timerLabel, victoryArrays;
+@synthesize roundTimer, displayedTime, timerLabel, victoryArrays, leftPlayer, rightPlayer, isLeftSingle, isRightSingle;
 
 -(id) initWithGameLayer:(GameLayer*) gLayer{
     if(self = [super init]){
         gameLayer = gLayer;
         CGSize winSize= [[CCDirector sharedDirector] winSize];
-        
+        PlayerManager *PM = [PlayerManager sharedInstance];
         
         //top and bottom bar
         topLayer = [CCLayerColor layerWithColor:COLOR_GAMEBORDER_B4
@@ -36,37 +36,108 @@
         [self addChild:topLayer];
         [self addChild:bottomLayer];
         
+        //set colors
+        if([PM isPlayerActive:0] && ![PM isPlayerActive:3]){
+            isLeftSingle = YES;
+            leftColor = COLOR_PLAYER_ONE_LIGHT;
+            leftPlayer = 0;
+        }
+        
+        if([PM isPlayerActive:3] && ![PM isPlayerActive:0]){
+            isLeftSingle = YES;
+            leftColor = COLOR_PLAYER_FOUR_LIGHT;
+            leftPlayer = 3;
+        }
+        
+        if([PM isPlayerActive:1] && ![PM isPlayerActive:2]){
+            isRightSingle = YES;
+            rightColor = COLOR_PLAYER_TWO_LIGHT;
+            rightPlayer = 1;
+        }
+        
+        if([PM isPlayerActive:2] && ![PM isPlayerActive:1]){
+            isRightSingle = YES;
+            rightColor = COLOR_PLAYER_THREE_LIGHT;
+            rightPlayer = 2;
+        }
+        if(isRightSingle){
+            rightLayer = [CCLayerColor layerWithColor:COLOR_PLAYER_NON_LIGHT_B4 width:CONTROL_OFFSET height:winSize.height];
+            [self addChild: rightLayer z:0];
+        }
+        
+        if(isLeftSingle){
+            leftLayer = [CCLayerColor layerWithColor:COLOR_PLAYER_NON_LIGHT_B4 width:CONTROL_OFFSET height:winSize.height];
+            [self addChild:leftLayer z:0];
+            
+        }
+        
+        
         redLayer = [CCLayerColor layerWithColor:COLOR_PLAYER_NON_LIGHT_B4 width:CONTROL_OFFSET height:winSize.height/2];
-        redLayer.position = ccp(0, winSize.height/2);
-        [self addChild: redLayer];
+        if(isLeftSingle){
+            redLayer.opacity = 0;
+        }
+        [self addChild: redLayer z:0];
+        
         blueLayer = [CCLayerColor layerWithColor:COLOR_PLAYER_NON_LIGHT_B4 width:CONTROL_OFFSET height:winSize.height/2];
-        blueLayer.position = ccp(winSize.width - blueLayer.contentSize.width, winSize.height/2);
+        if(isRightSingle){
+            blueLayer.opacity = 0;
+        }
         [self addChild:blueLayer];
+        
         greenLayer = [CCLayerColor layerWithColor:COLOR_PLAYER_NON_LIGHT_B4 width:CONTROL_OFFSET height:winSize.height/2];
-        greenLayer.position = ccp(0, 0);
+        if(isRightSingle){
+            greenLayer.opacity = 0;
+        }
         [self addChild: greenLayer];
+        
         blackLayer = [CCLayerColor layerWithColor:COLOR_PLAYER_NON_LIGHT_B4 width:CONTROL_OFFSET height:winSize.height/2];
-        blackLayer.position = ccp(winSize.width - blackLayer.contentSize.width, 0);
+        if(isLeftSingle){
+            blackLayer.opacity = 0;
+        }
         [self addChild:blackLayer];
         
-        redOverlay = [[[CCSprite alloc] initWithSpriteFrameName:@"touchBordersContainer"] autorelease];
+        //borders
+        if([PM isPlayerActive:0] && [PM isPlayerActive:3]){
+            redOverlay = [[[CCSprite alloc] initWithSpriteFrameName:@"touchBordersContainer"] autorelease];
+        }else{
+            redOverlay = [[[CCSprite alloc] initWithSpriteFrameName:@"semitouchBorders"] autorelease];
+        }
+        
         redOverlay.position = ccp(CONTROL_OFFSET/2 - 30, redOverlay.contentSize.height/2 );
         redOverlay.color = COLOR_GAMEBORDER;
         [redLayer addChild:redOverlay];
         
-        blueOverlay = [[[CCSprite alloc] initWithSpriteFrameName:@"touchBordersContainer"] autorelease];
+        if([PM isPlayerActive:1] && [PM isPlayerActive:2]){
+            blueOverlay = [[[CCSprite alloc] initWithSpriteFrameName:@"touchBordersContainer"] autorelease];
+        }else{
+            blueOverlay = [[[CCSprite alloc] initWithSpriteFrameName:@"semitouchBorders"] autorelease];
+        }
+        
         blueOverlay.scaleX = -1;
         blueOverlay.position = ccp(146, blueOverlay.contentSize.height/2 );
         blueOverlay.color = COLOR_GAMEBORDER;
         [blueLayer addChild:blueOverlay];
         
-        greenOverlay = [[[CCSprite alloc] initWithSpriteFrameName:@"touchBordersContainer"] autorelease];
+        
+        if([PM isPlayerActive:1] && [PM isPlayerActive:2]){
+            greenOverlay = [[[CCSprite alloc] initWithSpriteFrameName:@"touchBordersContainer"] autorelease];
+        }else{
+            greenOverlay = [[[CCSprite alloc] initWithSpriteFrameName:@"semitouchBorders"] autorelease];
+            greenLayer.scaleY = -1;
+        }
+        
         greenOverlay.scaleX = -1;
         greenOverlay.position = ccp(146, blueOverlay.contentSize.height/2 );
         greenOverlay.color = COLOR_GAMEBORDER;
         [greenLayer addChild:greenOverlay];
         
-        blackOverlay = [[[CCSprite alloc] initWithSpriteFrameName:@"touchBordersContainer"] autorelease];
+        if([PM isPlayerActive:0] && [PM isPlayerActive:3]){
+            blackOverlay = [[[CCSprite alloc] initWithSpriteFrameName:@"touchBordersContainer"] autorelease];
+        }else{
+            blackOverlay = [[[CCSprite alloc] initWithSpriteFrameName:@"semitouchBorders"] autorelease];
+            blackOverlay.scaleY = -1;
+        }
+        
         blackOverlay.position = ccp(CONTROL_OFFSET/2 - 30, redOverlay.contentSize.height/2 );
         blackOverlay.color = COLOR_GAMEBORDER;
         [blackLayer addChild:blackOverlay];
@@ -77,7 +148,7 @@
         self.timerLabel = [CCLabelTTF labelWithString:@"20" fontName:MAIN_FONT fontSize:40];
         self.timerLabel.color = ccWHITE;
         timerLabel.position = ccp(topLayer.contentSize.width/2, 30);
-        [bottomLayer addChild:timerLabel z:1];
+        [bottomLayer addChild:timerLabel z:4];
         
         
         //victory stuff
@@ -187,7 +258,17 @@
                     overlay = blackOverlay;
                     layer = blackLayer;
                 }
-                
+                if(isLeftSingle){
+                    if(playerNumber == leftPlayer){
+                        layer = leftLayer;
+                    }
+                }
+                if(isRightSingle){
+                    if(playerNumber == rightPlayer){
+                        layer = rightLayer;
+                    }
+                }
+
                 
                 if(playerOrTeam == 0){
                     overlay.color = COLOR_GAMEBORDER;
@@ -202,6 +283,7 @@
                     overlay.color = COLOR_GAMEBORDER;
                     layer.color = COLOR_PLAYER_FOUR_LIGHT;
                 }
+                
             }else{
                 //figure out what slot
                 int playerNumber = jouster.player.playerNumber;
@@ -220,7 +302,16 @@
                     overlay = blackOverlay;
                     layer = blackLayer;
                 }
-                
+                if(isLeftSingle){
+                    if(playerOrTeam == leftPlayer){
+                        layer = leftLayer;
+                    }
+                }
+                if(isRightSingle){
+                    if(playerOrTeam == rightPlayer){
+                        layer = rightLayer;
+                    }
+                }
                 
                 if(playerOrTeam == 0){
                     overlay.color = COLOR_GAMEBORDER;
@@ -235,6 +326,7 @@
                     overlay.color = COLOR_GAMEBORDER;
                     layer.color = COLOR_PLAYER_NON_LIGHT;
                 }
+                
             }
             
             
@@ -255,6 +347,18 @@
                     blackOverlay.color = COLOR_GAMEBORDER;
                     blackLayer.color = COLOR_PLAYER_FOUR_LIGHT;
                 }
+                
+                if(isLeftSingle){
+                    if(playerOrTeam == leftPlayer){
+                        leftLayer.color = leftColor;
+                    }
+                }
+                if(isRightSingle){
+                    if(playerOrTeam == rightPlayer){
+                        rightLayer.color = rightColor;
+                    }
+                }
+                
             }else{
                 if(playerOrTeam == 0){
                     redOverlay.color = COLOR_GAMEBORDER;
@@ -269,11 +373,22 @@
                     blackOverlay.color = COLOR_GAMEBORDER;
                     blackLayer.color = COLOR_PLAYER_NON_LIGHT;
                 }
+                
+                if(isLeftSingle){
+                    if(playerOrTeam == leftPlayer){
+                        leftLayer.color = COLOR_PLAYER_NON_LIGHT;
+                    }
+                }
+                if(isRightSingle){
+                    if(playerOrTeam == rightPlayer){
+                        rightLayer.color = COLOR_PLAYER_NON_LIGHT;
+                    }
+                }
             }
         }
-        
     }
 }
+
 
 -(void) animateTouchAreasIn{
     CGSize winSize= [[CCDirector sharedDirector] winSize];
@@ -281,21 +396,33 @@
     blueLayer.position = ccp(winSize.width + 20, winSize.height/2);
     blackLayer.position = ccp(-redLayer.contentSize.width - 20, 0);
     greenLayer.position = ccp(winSize.width + 20, 0);
+    leftLayer.position = ccp(-redLayer.contentSize.width - 20, 0);
+    rightLayer.position = ccp(winSize.width + 20, 0);;
     
-    CCActionInterval *redLayerMove = [CCMoveTo actionWithDuration:1.2 - arc4random()%4/10.0 position:ccp(0, winSize.height/2)];
-    CCActionInterval *blueLayerMove = [CCMoveTo actionWithDuration:1.2 - arc4random()%4/10.0 position:ccp(winSize.width - blueLayer.contentSize.width, winSize.height/2)];
-    CCActionInterval *greenLayerMove = [CCMoveTo actionWithDuration:1.2 - arc4random()%4/10.0 position:ccp(winSize.width - blueLayer.contentSize.width, 0)];
-    CCActionInterval *blackLayerMove = [CCMoveTo actionWithDuration:1.2 - arc4random()%4/10.0 position:ccp(0, 0)];
+    CCActionInterval *redLayerMove = [CCMoveTo actionWithDuration:1.2 position:ccp(0, winSize.height/2)];
+    CCActionInterval *blueLayerMove = [CCMoveTo actionWithDuration:1.2 position:ccp(winSize.width - blueLayer.contentSize.width, winSize.height/2)];
+    CCActionInterval *greenLayerMove = [CCMoveTo actionWithDuration:1.2 position:ccp(winSize.width - blueLayer.contentSize.width, 0)];
+    CCActionInterval *blackLayerMove = [CCMoveTo actionWithDuration:1.2 position:ccp(0, 0)];
+    CCActionInterval *leftLayerMove = [CCMoveTo actionWithDuration:1.2 position:ccp(0,0)];
+    CCActionInterval *rightLayerMove = [CCMoveTo actionWithDuration:1.2 position:ccp(winSize.width - blueLayer.contentSize.width,0)];
     
     CCEaseIn *redLayerElastic = [CCEaseIn actionWithAction:redLayerMove rate:3];
     CCEaseIn *blueLayerElastic = [CCEaseIn actionWithAction:blueLayerMove rate:3];
     CCEaseIn *greenLayerElastic = [CCEaseIn actionWithAction:greenLayerMove rate:3];
     CCEaseIn *blackLayerElastic = [CCEaseIn actionWithAction:blackLayerMove rate:3];
+    CCEaseIn *leftLayerElastic = [CCEaseIn actionWithAction:leftLayerMove rate:3];
+    CCEaseIn *rightLayerElastic = [CCEaseIn actionWithAction:rightLayerMove rate:3];
     
     [redLayer runAction:redLayerElastic];
     [blueLayer runAction:blueLayerElastic];
     [blackLayer runAction:blackLayerElastic];
     [greenLayer runAction:greenLayerElastic];
+    if(isLeftSingle){
+        [leftLayer runAction:leftLayerElastic];
+    }
+    if(isRightSingle){
+        [rightLayer runAction:rightLayerElastic];
+    }
 }
 
 -(void) smashTopBottomAlreadyInPlace:(BOOL) inPlace{
@@ -334,23 +461,33 @@
     //    blackLayer.position = ccp(-redLayer.contentSize.width, 0);
     //    greenLayer.position = ccp(winSize.width, 0);
     
-    CCActionInterval *redLayerMove = [CCMoveTo actionWithDuration:1.2 - arc4random()%4/10.0 position:ccp(-redLayer.contentSize.width -30, winSize.height/2)];
-    CCActionInterval *blueLayerMove = [CCMoveTo actionWithDuration:1.2 - arc4random()%4/10.0 position:ccp(winSize.width + 30, winSize.height/2)];
-    CCActionInterval *greenLayerMove = [CCMoveTo actionWithDuration:1.2 - arc4random()%4/10.0 position:ccp(winSize.width + 30, 0)];
-    CCActionInterval *blackLayerMove = [CCMoveTo actionWithDuration:1.2 - arc4random()%4/10.0 position:ccp(-redLayer.contentSize.width - 30, 0)];
+    CCActionInterval *redLayerMove = [CCMoveTo actionWithDuration:1.2 position:ccp(-redLayer.contentSize.width -30, winSize.height/2)];
+    CCActionInterval *blueLayerMove = [CCMoveTo actionWithDuration:1.2 position:ccp(winSize.width + 30, winSize.height/2)];
+    CCActionInterval *greenLayerMove = [CCMoveTo actionWithDuration:1.2 position:ccp(winSize.width + 30, 0)];
+    CCActionInterval *blackLayerMove = [CCMoveTo actionWithDuration:1.2 position:ccp(-redLayer.contentSize.width - 30, 0)];
+    CCActionInterval *rightLayerMove = [CCMoveTo actionWithDuration:1.2 position:ccp(winSize.width + 30, 0)];
+    CCActionInterval *leftLayerMove = [CCMoveTo actionWithDuration:1.2 position:ccp(-redLayer.contentSize.width - 30, 0)];
+    
     
     CCEaseIn *redLayerElastic = [CCEaseIn actionWithAction:redLayerMove rate:3];
     CCEaseIn *blueLayerElastic = [CCEaseIn actionWithAction:blueLayerMove rate:3];
     CCEaseIn *greenLayerElastic = [CCEaseIn actionWithAction:greenLayerMove rate:3];
     CCEaseIn *blackLayerElastic = [CCEaseIn actionWithAction:blackLayerMove rate:3];
+    CCEaseIn *rightLayerElastic = [CCEaseIn actionWithAction:rightLayerMove rate:3];
+    CCEaseIn *leftLayerElastic = [CCEaseIn actionWithAction:leftLayerMove rate:3];
     
     [redLayer runAction:redLayerElastic];
     [blueLayer runAction:blueLayerElastic];
     [blackLayer runAction:blackLayerElastic];
     [greenLayer runAction:greenLayerElastic];
+    if(isRightSingle){
+        [rightLayer runAction:rightLayerElastic];
+    }
+    if(isLeftSingle){
+        [leftLayer runAction:leftLayerElastic];
+    }
     
     //top and bottom bars
-    
     
     CCMoveTo *topMove = [CCMoveTo actionWithDuration:1 position:ccp(CONTROL_OFFSET, -winSize.height/2)];
     CCMoveTo *bottomMove = [CCMoveTo actionWithDuration:1 position:ccp(CONTROL_OFFSET, winSize.height)];

@@ -24,8 +24,9 @@
     
     CGPoint previousVelocity;
     CGPoint velocity;
-    
+    CGPoint outsideVelocity;
     CGPoint joustVelocity;
+    CGPoint joustOutsideVelocity;
     
     BOOL waitingForTouch;
     CGPoint previousTouch;
@@ -65,12 +66,13 @@
 @property float bodyRadius, joustRadius, orbitalOffset;
 @property BOOL waitingForTouch, isDead;
 @property CGPoint velocity, joustPosition;
-@property CGPoint joustVelocity;
+@property CGPoint joustVelocity, outsideVelocity;
 
 @property (nonatomic, assign) GameLayer *gameLayer;
 @property (nonatomic, assign) Player *player;
 @property (nonatomic, retain) CCParticleSystemQuad *motionStreak, *jousterMotionStreak;
 @property (nonatomic, assign) CCWarpSprite *jousterSprite;
+@property CGPoint joustOutsideVelocity;
 
 
 -(id) initWithPlayer:(Player *) p;

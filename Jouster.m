@@ -15,7 +15,7 @@
 
 @implementation Jouster
 
-@synthesize velocity, waitingForTouch, bodyRadius, joustRadius, orbitalOffset,joustPosition, player, powerStones, jousterSprite, joustVelocity, motionStreak, isDead, wins, jousterMotionStreak, gameLayer;
+@synthesize velocity, waitingForTouch, bodyRadius, joustRadius, orbitalOffset,joustPosition, player, powerStones, jousterSprite, joustVelocity, motionStreak, isDead, wins, jousterMotionStreak, gameLayer, outsideVelocity, joustOutsideVelocity;
 
 -(id) initWithPlayer:(Player *) p{
     if(self = [super init]){
@@ -179,6 +179,8 @@
     
     velocity = ccp(1,0);
     previousVelocity = ccp(1,0);
+    outsideVelocity = ccp(1,0);
+    joustOutsideVelocity = ccp(1,0);
     self.position = pos;
     [self update:0.05];
     [self resetTouch];
@@ -195,16 +197,13 @@
 -(void) disengateSuperMode{
     superModeTimer = 0;
     powerStones = 0;
-  //  joustRadius = 20;
     isSuperMode = NO;
 }
 
 -(void) stunBody{
-
     isStunned = YES;
     stunTimer = STUN_TIME;
     bodyOuterSprite.color = ccBLACK;
-
 }
 
 -(void) clampMaxSpeed{
@@ -233,6 +232,8 @@
     //reduce velocity
     [self clampMaxSpeed];
     velocity = ccpMult(velocity, .96);
+    outsideVelocity = ccpMult(outsideVelocity, .92);
+    joustOutsideVelocity = ccpMult(joustOutsideVelocity, .92);
     
     //update velocity
 //    self.position = ccpAdd(self.position, ccpMult(self.velocity, dt));
@@ -341,7 +342,7 @@
     if(isSuperMode){
         difference = ccp(difference.x * 5.5, difference.y *4.1);
     }else if(isStunned){
-        difference = ccp(difference.x * 2.0, difference.y *1.7);
+        difference = ccp(difference.x * 2.3, difference.y *2.0);
     }else{
         
 //        difference = ccp(difference.x * 2.7, difference.y *2.2);
@@ -371,33 +372,36 @@
     CGSize winSize= [[CCDirector sharedDirector] winSize];
     CGPoint pos = [self getWorldPositionOfJoust];
     float radius = joustRadius;
-    GameLayer *gameLayer =(GameLayer*)self.parent;
     //check north side
     if((pos.y + radius) > winSize.height - MIDDLEBAR_HEIGHT){
         [self setWorldPositionOfJoust:ccp(pos.x, winSize.height - joustRadius - MIDDLEBAR_HEIGHT)];
         joustVelocity = ccp(joustVelocity.x, joustVelocity.y * -1);
-        [gameLayer clashEffect:ccp(pos.x, winSize.height - MIDDLEBAR_HEIGHT - 1) otherPoint:ccp(pos.x, winSize.height - MIDDLEBAR_HEIGHT) withMagnitude:500 withStun:NO];
+        joustOutsideVelocity = ccp(joustOutsideVelocity.x, joustOutsideVelocity.y * -1);
+        [gameLayer clashWeakEffect:ccp(pos.x, winSize.height - MIDDLEBAR_HEIGHT - 1) otherPoint:ccp(pos.x, winSize.height - MIDDLEBAR_HEIGHT) withMagnitude:250 withStun:NO];
     }
     
     //check south side
     if( (pos.y - joustRadius) < MIDDLEBAR_HEIGHT ){
         [self setWorldPositionOfJoust:ccp(pos.x, MIDDLEBAR_HEIGHT + joustRadius)];
         joustVelocity = ccp(joustVelocity.x, joustVelocity.y * -1);
-        [gameLayer clashEffect:ccp(pos.x, MIDDLEBAR_HEIGHT - 1) otherPoint:ccp(pos.x, MIDDLEBAR_HEIGHT) withMagnitude:500 withStun:NO];
+        joustOutsideVelocity = ccp(joustOutsideVelocity.x, joustOutsideVelocity.y * -1);
+        [gameLayer clashWeakEffect:ccp(pos.x, MIDDLEBAR_HEIGHT - 1) otherPoint:ccp(pos.x, MIDDLEBAR_HEIGHT) withMagnitude:250 withStun:NO];
     }
     
     //left side
     if((pos.x - joustRadius) < CONTROL_OFFSET){
         [self setWorldPositionOfJoust:ccp(CONTROL_OFFSET + joustRadius, pos.y)];
         joustVelocity = ccp(joustVelocity.x *  -1, joustVelocity.y);
-        [gameLayer clashEffect:ccp(CONTROL_OFFSET, pos.y) otherPoint:ccp(CONTROL_OFFSET - 1, pos.y) withMagnitude:500 withStun:NO];
+        joustOutsideVelocity = ccp(joustOutsideVelocity.x * -1, joustOutsideVelocity.y);
+        [gameLayer clashWeakEffect:ccp(CONTROL_OFFSET, pos.y) otherPoint:ccp(CONTROL_OFFSET - 1, pos.y) withMagnitude:250 withStun:NO];
     }
     
     //right side
     if((pos.x + joustRadius) >  (winSize.width - CONTROL_OFFSET)){
         [self setWorldPositionOfJoust:ccp(winSize.width - CONTROL_OFFSET - joustRadius, pos.y)];
         joustVelocity = ccp(joustVelocity.x * -1, joustVelocity.y);
-        [gameLayer clashEffect:ccp(winSize.width - CONTROL_OFFSET, pos.y) otherPoint:ccp(winSize.width - CONTROL_OFFSET - 1, pos.y) withMagnitude:500 withStun:NO];
+        joustOutsideVelocity = ccp(joustOutsideVelocity.x * -1, joustOutsideVelocity.y);
+        [gameLayer clashWeakEffect:ccp(winSize.width - CONTROL_OFFSET, pos.y) otherPoint:ccp(winSize.width - CONTROL_OFFSET - 1, pos.y) withMagnitude:250 withStun:NO];
     }
     
 }
@@ -407,27 +411,29 @@
     
     CGPoint pos = self.position;
     float radius = self.bodyRadius;
-    
-    GameLayer *gameLayer =(GameLayer*)self.parent;
+
     //check north side
     if((pos.y + radius) > winSize.height - MIDDLEBAR_HEIGHT){
         self.position = ccp(self.position.x, winSize.height - radius - MIDDLEBAR_HEIGHT);
         self.velocity = ccp(self.velocity.x, self.velocity.y * -.8);
-        [gameLayer clashEffect:ccp(pos.x, winSize.height - MIDDLEBAR_HEIGHT - 1) otherPoint:ccp(pos.x, winSize.height - MIDDLEBAR_HEIGHT) withMagnitude:500 withStun:NO];
+        outsideVelocity = ccp(self.outsideVelocity.x, self.outsideVelocity.y * -.8);
+        [gameLayer clashWeakEffect:ccp(pos.x, winSize.height - MIDDLEBAR_HEIGHT - 1) otherPoint:ccp(pos.x, winSize.height - MIDDLEBAR_HEIGHT) withMagnitude:250 withStun:NO];
     }
     
     //check south side
     if( (pos.y - radius) < MIDDLEBAR_HEIGHT ){
         self.position = ccp(self.position.x, MIDDLEBAR_HEIGHT + radius);
         self.velocity = ccp(self.velocity.x, self.velocity.y * -.8);
-        [gameLayer clashEffect:ccp(pos.x, MIDDLEBAR_HEIGHT - 1) otherPoint:ccp(pos.x, MIDDLEBAR_HEIGHT) withMagnitude:500 withStun:NO];
+        outsideVelocity = ccp(self.outsideVelocity.x, self.outsideVelocity.y * -.8);
+        [gameLayer clashWeakEffect:ccp(pos.x, MIDDLEBAR_HEIGHT - 1) otherPoint:ccp(pos.x, MIDDLEBAR_HEIGHT) withMagnitude:250 withStun:NO];
     }
     
     //left side
     if((pos.x - radius) < CONTROL_OFFSET){
         self.position = ccp(CONTROL_OFFSET + radius, self.position.y);
         self.velocity = ccp(self.velocity.x *  -.8, self.velocity.y);
-        [gameLayer clashEffect:ccp(CONTROL_OFFSET, pos.y) otherPoint:ccp(CONTROL_OFFSET - 1, pos.y) withMagnitude:500 withStun:NO];
+        outsideVelocity = ccp(self.outsideVelocity.x * -.8, self.outsideVelocity.y);
+        [gameLayer clashWeakEffect:ccp(CONTROL_OFFSET, pos.y) otherPoint:ccp(CONTROL_OFFSET - 1, pos.y) withMagnitude:250 withStun:NO];
     }
     
     
@@ -435,7 +441,8 @@
     if((pos.x + radius) >  (winSize.width - CONTROL_OFFSET)){
         self.position = ccp(winSize.width - CONTROL_OFFSET - radius, self.position.y);
         self.velocity = ccp(self.velocity.x * -.8, self.velocity.y);
-        [gameLayer clashEffect:ccp(winSize.width - CONTROL_OFFSET, pos.y) otherPoint:ccp(winSize.width - CONTROL_OFFSET - 1, pos.y) withMagnitude:500 withStun:NO];
+        outsideVelocity = ccp(self.outsideVelocity.x * -.8, self.outsideVelocity.y);
+        [gameLayer clashWeakEffect:ccp(winSize.width - CONTROL_OFFSET, pos.y) otherPoint:ccp(winSize.width - CONTROL_OFFSET - 1, pos.y) withMagnitude:250 withStun:NO];
     }
 }
 

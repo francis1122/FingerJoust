@@ -42,11 +42,11 @@
 
 -(void) update:(ccTime)dt{
     [super update:dt];
-    aliveTicker += dt * 1.4;
-    joustRadius = 25 * (1.2 + cos(aliveTicker));
+    aliveTicker += dt * 1.3;
+    joustRadius = 5 + 17 * (1.1 + cos(aliveTicker));
     
 //    jousterInnerSprite.scale = joustRadius/28.0;
-    jousterSprite.scale = joustRadius/17.0;
+    jousterSprite.scale = joustRadius/23.0;
     joustVelocity = CGPointZero;
 //    joustPosition = ccpMult( ccp(cos(aliveTicker), sin(aliveTicker)), bodyRadius);
     //normalize velocity
@@ -109,8 +109,9 @@
     //knock body
     CGPoint offset = ccpSub([self getWorldPositionOfJoust] , joustPos);
     offset = [MathHelper normalize:offset];
-    offset = ccpMult(offset, 3040);
+    offset = ccpMult(offset, 400);
     velocity = offset;
+    outsideVelocity = offset;
 }
 
 @end

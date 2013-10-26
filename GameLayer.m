@@ -95,14 +95,7 @@ NSString *const MAIN_FONT = @"SourceSansPro-ExtraLight";
             [self.touchParticleArray addObject:touchParticle];
         }
         
-        //gameSpeed
-        if(PM.gameSpeed == 0){
-            gameSpeed = .5;
-        }else if(PM.gameSpeed == 1){
-            gameSpeed = 1;
-        }else if(PM.gameSpeed == 2){
-            gameSpeed = 1.5;
-        }
+        gameSpeed = [PM getGameSpeedScaler];
         
         
         [self gameIntro];
@@ -267,7 +260,7 @@ NSString *const MAIN_FONT = @"SourceSansPro-ExtraLight";
         if(!bodyHit){
             for(Jouster *jouster in self.jousterArray){
                 if(!jouster.isDead){
-                    jouster.position = ccpAdd(jouster.position, ccpMult(jouster.velocity, dt/COLLISION_STEPS));
+                    jouster.position = ccpAdd(jouster.position, ccpMult(ccpAdd(jouster.velocity, jouster.outsideVelocity), dt/COLLISION_STEPS));
                     bodyHit = [self bodyOnBodyCheck:jouster];
                     [jouster checkBoundaries];
                 }
@@ -280,7 +273,7 @@ NSString *const MAIN_FONT = @"SourceSansPro-ExtraLight";
             
             for(Jouster *jouster in self.jousterArray){
                 if(!jouster.isDead){
-                    jouster.jousterSprite.position = ccpAdd(jouster.joustPosition,  ccpMult(jouster.joustVelocity, dt/COLLISION_STEPS));
+                    jouster.jousterSprite.position = ccpAdd(jouster.joustPosition,  ccpMult(ccpAdd(jouster.joustVelocity, jouster.joustOutsideVelocity), dt/COLLISION_STEPS));
                     joustersHit = [self jousterOnJousterCheck:jouster];
                 }
             }
@@ -303,9 +296,9 @@ NSString *const MAIN_FONT = @"SourceSansPro-ExtraLight";
         if(uiLayer.displayedTime < 6 && !centerVisible){
             centerVisible = YES;
             
-            CCFadeIn *fadeIn = [CCFadeIn actionWithDuration:2];
-            CCRotateBy *rotate = [CCRotateBy actionWithDuration:20 angle:1000];
-            CCScaleTo *scale = [CCScaleTo actionWithDuration:5.0 scale:0];
+            CCFadeIn *fadeIn = [CCFadeIn actionWithDuration:2 * 1/gameSpeed];
+            CCRotateBy *rotate = [CCRotateBy actionWithDuration:20 * 1/gameSpeed angle:1000];
+            CCScaleTo *scale = [CCScaleTo actionWithDuration:5.0 * 1/gameSpeed scale:0];
             
             CCSpawn *spawn = [CCSpawn actions:rotate, fadeIn, scale, nil];
             [centerSprite runAction:spawn];
@@ -335,11 +328,11 @@ NSString *const MAIN_FONT = @"SourceSansPro-ExtraLight";
                 float redPullPower = maxDistance - redDistance;
                 redPullPower = redPullPower * redPullPower;
                 // adjust the strength of the vortex
-                redPullPower = redPullPower/110;
+                redPullPower = redPullPower/77;
                 CGPoint redVortexVel = ccpMult(redToVortex, redPullPower);
                 
                 //add vortex velocity to jouster's velocity
-                jouster.velocity = ccpAdd(jouster.velocity,ccpMult(redVortexVel, dt));
+                jouster.outsideVelocity = ccpAdd(jouster.outsideVelocity,ccpMult(redVortexVel, dt));
             }
         }
             [vortex update:dt];
@@ -617,12 +610,14 @@ NSString *const MAIN_FONT = @"SourceSansPro-ExtraLight";
     //get direction
     CGPoint offset = ccpSub(jousterA.position, jousterB.position);
     offset = [MathHelper normalize:offset];
-    offset = ccpMult(offset, 2);
-    CGPoint redKnock = ccpMult(offset, blueMagnitude + 350);
+    offset = ccpMult(offset, 1.3);
+    CGPoint redKnock = ccpMult(offset, blueMagnitude);
     jousterA.velocity = redKnock;
+    jousterA.outsideVelocity = redKnock;
     offset = ccpMult(offset, -1);
-    CGPoint blueKnock = ccpMult(offset, redMagnitude + 350);
+    CGPoint blueKnock = ccpMult(offset, redMagnitude);
     jousterB.velocity = blueKnock;
+    jousterB.outsideVelocity = blueKnock;
     
     [self clashEffect:jousterA.position otherPoint:jousterB.position withMagnitude:blueMagnitude + redMagnitude + 500 withStun:isStun];
     
@@ -641,27 +636,31 @@ NSString *const MAIN_FONT = @"SourceSansPro-ExtraLight";
 }
 
 -(void)ccTouchesMoved:(NSSet *)touches withEvent:(UIEvent *)event{
-    /*if(currentState != GAMEPLAY){
-     return;
-     }*/
     CGSize winSize= [[CCDirector sharedDirector] winSize];
     for(Jouster *jouster in self.jousterArray){
-        
         BOOL alreadyChosen = NO;
-        float reducedSpace = 60;
+        float reducedSpace = 30;
         CGRect touchArea;
-        CGRect strictFirstTouchArea;
         JousterParticle *touchParticle = [self.touchParticleArray objectAtIndex:jouster.player.playerNumber];
         if(jouster.player.playerNumber == 0){
-            touchArea = CGRectMake(0, winSize.height/2, EXTRA_CONTROL_OFFSET, winSize.height/2);
-            strictFirstTouchArea = CGRectMake(0, winSize.height/2 +reducedSpace, EXTRA_CONTROL_OFFSET, winSize.height/2);
-
+            touchArea = CGRectMake(0, winSize.height/2 + reducedSpace, EXTRA_CONTROL_OFFSET, winSize.height/2);
         }else if(jouster.player.playerNumber == 1){
             touchArea = CGRectMake(winSize.width - EXTRA_CONTROL_OFFSET, winSize.height/2 + reducedSpace, EXTRA_CONTROL_OFFSET, winSize.height/2);
         }else if(jouster.player.playerNumber == 2){
             touchArea = CGRectMake(winSize.width - EXTRA_CONTROL_OFFSET, 0, EXTRA_CONTROL_OFFSET, winSize.height/2 - reducedSpace);
         }else if(jouster.player.playerNumber == 3){
             touchArea = CGRectMake(0, 0, EXTRA_CONTROL_OFFSET, winSize.height/2 - reducedSpace);
+        }
+        if(uiLayer.isLeftSingle){
+            if(jouster.player.playerNumber == uiLayer.leftPlayer){
+                touchArea =CGRectMake(0, 0, EXTRA_CONTROL_OFFSET, winSize.height);
+            }
+        }
+        
+        if(uiLayer.isRightSingle){
+            if(jouster.player.playerNumber == uiLayer.rightPlayer){
+                touchArea =CGRectMake(winSize.width - EXTRA_CONTROL_OFFSET, 0, EXTRA_CONTROL_OFFSET, winSize.height);
+            }
         }
         
         for(UITouch* touch in touches){
@@ -681,33 +680,41 @@ NSString *const MAIN_FONT = @"SourceSansPro-ExtraLight";
         }
         if(!alreadyChosen){
             [jouster resetTouch];
-          //  [touchParticle stopSystem];
         }
     }
 
 }
 
 - (void) ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{
-    /*if(currentState != GAMEPLAY){
-     return;
-     }*/
-    
     CGSize winSize= [[CCDirector sharedDirector] winSize];
-   // BOOL areaOne, areaTwo, areaThree, areaFour;
     for(Jouster *jouster in self.jousterArray){
         
         BOOL alreadyChosen = NO;
-        CCParticleSystemQuad *touchParticle = [self.touchParticleArray objectAtIndex:jouster.player.playerNumber];
+
+        float reducedSpace = 30;
         CGRect touchArea;
+        //        CGRect strictFirstTouchArea;
         if(jouster.player.playerNumber == 0){
-            touchArea = CGRectMake(0, winSize.height/2, EXTRA_CONTROL_OFFSET, winSize.height/2);
+            touchArea = CGRectMake(0, winSize.height/2 + reducedSpace, EXTRA_CONTROL_OFFSET, winSize.height/2);
         }else if(jouster.player.playerNumber == 1){
-            touchArea = CGRectMake(winSize.width - EXTRA_CONTROL_OFFSET, 0, EXTRA_CONTROL_OFFSET, winSize.height/2);
+            touchArea = CGRectMake(winSize.width - EXTRA_CONTROL_OFFSET, winSize.height/2 + reducedSpace, EXTRA_CONTROL_OFFSET, winSize.height/2);
         }else if(jouster.player.playerNumber == 2){
-            touchArea = CGRectMake(winSize.width - EXTRA_CONTROL_OFFSET, winSize.height/2, EXTRA_CONTROL_OFFSET, winSize.height/2);
+            touchArea = CGRectMake(winSize.width - EXTRA_CONTROL_OFFSET, 0, EXTRA_CONTROL_OFFSET, winSize.height/2 - reducedSpace);
         }else if(jouster.player.playerNumber == 3){
-            touchArea = CGRectMake(0, winSize.height/2, EXTRA_CONTROL_OFFSET, winSize.height/2);
+            touchArea = CGRectMake(0, 0, EXTRA_CONTROL_OFFSET, winSize.height/2 - reducedSpace);
         }
+        if(uiLayer.isLeftSingle){
+            if(jouster.player.playerNumber == uiLayer.leftPlayer){
+                touchArea =CGRectMake(0, 0, EXTRA_CONTROL_OFFSET, winSize.height);
+            }
+        }
+        
+        if(uiLayer.isRightSingle){
+            if(jouster.player.playerNumber == uiLayer.rightPlayer){
+                touchArea =CGRectMake(winSize.width - EXTRA_CONTROL_OFFSET, 0, EXTRA_CONTROL_OFFSET, winSize.height);
+            }
+        }
+
         [jouster resetTouch];
         for(UITouch* touch in touches){
             CGPoint location = [touch locationInView: [touch view]];
@@ -715,60 +722,50 @@ NSString *const MAIN_FONT = @"SourceSansPro-ExtraLight";
             
             if(CGRectContainsPoint(touchArea, location) && !alreadyChosen){
                 alreadyChosen = YES;
-                //[touchParticle stopSystem];
-               /* if(jouster.player.playerNumber == 0){
-                    areaOne = YES;
-                }else if(jouster.player.playerNumber == 1){
-                    areaTwo = YES;
-                }else if(jouster.player.playerNumber == 2){
-                    areaThree = YES;
-                }else if(jouster.player.playerNumber == 3){
-                    areaFour = YES;
-                }
-                */
             }
         }
-        if(!alreadyChosen){
-       //     [touchParticle stopSystem];
-        }
     }
-    
-    
-    }
+}
 
 - (void) ccTouchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event{
-    /*if(currentState != GAMEPLAY){
-     return;
-     }*/
+
     CGSize winSize= [[CCDirector sharedDirector] winSize];
     for(Jouster *jouster in self.jousterArray){
         
         BOOL alreadyChosen = NO;
-        CCParticleSystemQuad *touchParticle = [self.touchParticleArray objectAtIndex:jouster.player.playerNumber];
+
+        float reducedSpace = 30;
         CGRect touchArea;
+        //        CGRect strictFirstTouchArea;
         if(jouster.player.playerNumber == 0){
-            touchArea = CGRectMake(0, winSize.height/2, EXTRA_CONTROL_OFFSET, winSize.height/2);
+            touchArea = CGRectMake(0, winSize.height/2 + reducedSpace, EXTRA_CONTROL_OFFSET, winSize.height/2);
         }else if(jouster.player.playerNumber == 1){
-            touchArea = CGRectMake(winSize.width - EXTRA_CONTROL_OFFSET, 0, EXTRA_CONTROL_OFFSET, winSize.height/2);
+            touchArea = CGRectMake(winSize.width - EXTRA_CONTROL_OFFSET, winSize.height/2 + reducedSpace, EXTRA_CONTROL_OFFSET, winSize.height/2);
         }else if(jouster.player.playerNumber == 2){
-            touchArea = CGRectMake(winSize.width - EXTRA_CONTROL_OFFSET, winSize.height/2, EXTRA_CONTROL_OFFSET, winSize.height/2);
+            touchArea = CGRectMake(winSize.width - EXTRA_CONTROL_OFFSET, 0, EXTRA_CONTROL_OFFSET, winSize.height/2 - reducedSpace);
         }else if(jouster.player.playerNumber == 3){
-            touchArea = CGRectMake(0, winSize.height/2, EXTRA_CONTROL_OFFSET, winSize.height/2);
+            touchArea = CGRectMake(0, 0, EXTRA_CONTROL_OFFSET, winSize.height/2 - reducedSpace);
+        }
+        if(uiLayer.isLeftSingle){
+            if(jouster.player.playerNumber == uiLayer.leftPlayer){
+                touchArea =CGRectMake(0, 0, EXTRA_CONTROL_OFFSET, winSize.height);
+            }
         }
         
+        if(uiLayer.isRightSingle){
+            if(jouster.player.playerNumber == uiLayer.rightPlayer){
+                touchArea =CGRectMake(winSize.width - EXTRA_CONTROL_OFFSET, 0, EXTRA_CONTROL_OFFSET, winSize.height);
+            }
+        }
+
         [jouster resetTouch];
         for(UITouch* touch in touches){
             CGPoint location = [touch locationInView: [touch view]];
             location = [[CCDirector sharedDirector] convertToGL:location];
             
             if(CGRectContainsPoint(touchArea, location) && !alreadyChosen){
-  //              [jouster resetTouch];
                 alreadyChosen = YES;
-//                [touchParticle stopSystem];
             }
-        }
-        if(!alreadyChosen){
-         //   [touchParticle stopSystem];
         }
     }
   
@@ -798,7 +795,6 @@ NSString *const MAIN_FONT = @"SourceSansPro-ExtraLight";
     [gameStartLabel runAction:seqAnim];
     
     
-    
     CCDelayTime *delay = [CCDelayTime actionWithDuration:TRANSITION_TIME];
     CCCallBlock *block = [CCCallBlock actionWithBlock:^{
         [self removeChild:gameStartLabel];
@@ -807,7 +803,6 @@ NSString *const MAIN_FONT = @"SourceSansPro-ExtraLight";
     }];
     CCSequence *seq = [CCSequence actionOne:delay two:block];
     [gameStartLabel runAction:seq];
-    
 }
 
 
@@ -932,6 +927,42 @@ NSString *const MAIN_FONT = @"SourceSansPro-ExtraLight";
     collisionEffect.position = midPoint;
     [self addChild:collisionEffect];
     [self runAction:[CCShake actionWithDuration:.17f amplitude:ccp(10, 10) dampening:true shakes:0]];
+}
+
+-(void) clashWeakEffect:(CGPoint) p1 otherPoint:(CGPoint) p2 withMagnitude:(float) magnitude withStun:(BOOL) stun{
+    
+    ccColor4F effectColor = ccc4f(1, 1, 1, 1);
+    if(stun){
+        effectColor = ccc4f(1.0, 1.0, 0, 1);
+    }
+    //how fast the particles move
+    float particleSpeed = magnitude/2;
+    
+    //collision effect
+    CCParticleSystemQuad *collisionEffect = [[CCParticleSystemQuad alloc] initWithFile: @"CollisionEffect.plist"];
+    collisionEffect.startColor = effectColor;
+    collisionEffect.endColor = effectColor;
+    collisionEffect.speed = particleSpeed;
+    collisionEffect.autoRemoveOnFinish = YES;
+    CGPoint midPoint = ccpMidpoint(p1, p2);
+    float rotation = [MathHelper degreeAngleBetween:p1 and:p2];
+    
+    collisionEffect.rotation = -rotation - 90;
+    collisionEffect.position = midPoint;
+    [self addChild:collisionEffect];
+    
+    collisionEffect = [[CCParticleSystemQuad alloc] initWithFile: @"CollisionEffect.plist"];
+    collisionEffect.autoRemoveOnFinish = YES;
+    collisionEffect.startColor = effectColor;
+    collisionEffect.endColor = effectColor;
+    collisionEffect.speed = particleSpeed;
+    midPoint = ccpMidpoint(p1, p2);
+    rotation = [MathHelper degreeAngleBetween:p1 and:p2];
+    
+    collisionEffect.rotation = -rotation + 90;
+    collisionEffect.position = midPoint;
+    [self addChild:collisionEffect];
+    [self runAction:[CCShake actionWithDuration:.11f amplitude:ccp(5, 5) dampening:true shakes:0]];
 }
 
 -(void) deathEffect:(Jouster*) deadJouster{

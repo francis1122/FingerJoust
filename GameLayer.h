@@ -16,8 +16,13 @@
 
 #define COLOR_TOUCHAREA ccc3(195,211,223)
 #define COLOR_TOUCHAREA_B4 ccc4(195,211, 223, 255)
-#define COLOR_GAMEAREA ccc3(223,214,195)
-#define COLOR_GAMEAREA_B4 ccc4(223,214,194,255)
+//tan
+#define COLOR_GAMEAREA ccc3(193,184,175)
+#define COLOR_GAMEAREA_B4 ccc4(193,184,175,255)
+//#define COLOR_GAMEAREA ccc3(40,110,203)
+//#define COLOR_GAMEAREA_B4 ccc4(110,180,223,255)
+
+
 
 #define COLOR_GAMEBORDER ccc3(60,60,60)
 #define COLOR_GAMEBORDER_B4 ccc4(60,60,60,255)
@@ -66,11 +71,11 @@ extern NSString *const MAIN_FONT;
 #define EXTRA_CONTROL_OFFSET 280
 #define MIDDLEBAR_HEIGHT 60
 
-#define STUN_TIME 4.0
+#define STUN_TIME 3.0
 
 #define ROUND_TIME 20
 #define VORTEX_DISTANCE 300
-#define VORTEX_LIFE 2.0
+#define VORTEX_LIFE 3.0
 #define STUN_CONTRAINT 360
 
 #define COLLISION_STEPS 6
@@ -117,7 +122,6 @@ typedef enum GameState
     float deathClock;
     
 
-    
     //center sprite
     CCSprite *centerSprite;
     BOOL centerVisible;
@@ -173,6 +177,7 @@ typedef enum GameState
 //special effects
 //-(void) clashEffect:(CGPoint) p1 otherPoint:(CGPoint) p2;
 -(void) clashEffect:(CGPoint) p1 otherPoint:(CGPoint) p2 withMagnitude:(float) magnitude withStun:(BOOL) stun;
+-(void) clashWeakEffect:(CGPoint) p1 otherPoint:(CGPoint) p2 withMagnitude:(float) magnitude withStun:(BOOL) stun;
 -(void) deathEffect:(Jouster*) deadJouster;
 -(CCParticleSystemQuad*) vortexEffect:(CGPoint) pt;
 

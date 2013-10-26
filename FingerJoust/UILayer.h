@@ -20,11 +20,26 @@
     GameLayer *gameLayer;
     
     CCLayerColor *redLayer;
+    ccColor3B redColor;
+    
     CCLayerColor *blueLayer;
+    ccColor3B blueColor;
+    
     CCLayerColor *greenLayer;
+    ccColor3B greenColor;
+    
     CCLayerColor *blackLayer;
+    ccColor3B blackColor;
+
     
-    
+    CCLayerColor *leftLayer;
+    CCLayerColor *rightLayer;
+    int leftPlayer;
+    int rightPlayer;
+    BOOL isLeftSingle;
+    BOOL isRightSingle;
+    ccColor3B leftColor;
+    ccColor3B rightColor;
     
     CCSprite *redOverlay;
     CCSprite *blueOverlay;
@@ -41,6 +56,8 @@
 @property int displayedTime;
 @property (nonatomic, assign) CCLabelTTF *timerLabel;
 @property (retain, nonatomic) NSMutableArray *victoryArrays;
+@property int leftPlayer, rightPlayer;
+@property BOOL isLeftSingle, isRightSingle;
 
 -(id) initWithGameLayer:(GameLayer*) gLayer;
 -(void) refreshUI;

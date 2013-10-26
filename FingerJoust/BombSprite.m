@@ -8,6 +8,7 @@
 
 #import "BombSprite.h"
 #import "GameLayer.h"
+#import "PlayerManager.h"
 
 
 @implementation BombSprite
@@ -24,13 +25,15 @@
         self.position = ccp( CONTROL_OFFSET + 100 + arc4random()%((int)(winSize.width - CONTROL_OFFSET * 2 - 200)),150 + arc4random()%((int)(winSize.height - 300)));
         
         blastRadius = [CCSprite spriteWithSpriteFrameName:@"timerCircle"];
+        blastRadius.scale = 1.35;
         bomb = [CCSprite spriteWithSpriteFrameName:@"BodyOuter"];
         bomb.color = ccGRAY;
         countDown = [CCLabelTTF labelWithString:@"4" fontName:MAIN_FONT fontSize:40];
         countDown.color = ccWHITE;
 
-        
-        CCRotateBy *rotate = [CCRotateBy actionWithDuration:5 angle:1000];
+        PlayerManager *PM = [PlayerManager sharedInstance];
+        float gameSpeed = [PM getGameSpeedScaler];
+        CCRotateBy *rotate = [CCRotateBy actionWithDuration:5 * 1/gameSpeed angle:1000];
         CCEaseIn *ease = [CCEaseIn actionWithAction:rotate rate:2.4];
         [blastRadius runAction:ease];
         
@@ -44,7 +47,7 @@
 -(void) update:(ccTime) dt{
     //update timer
     count -= dt;
-    velocity = ccpMult(velocity, 0.98);
+    velocity = ccpMult(velocity, 0.975);
     self.position = ccpAdd(self.position, ccpMult(velocity, dt));
     
     if(count < displayTime){
