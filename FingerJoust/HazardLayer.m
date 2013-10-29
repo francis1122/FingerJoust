@@ -60,6 +60,8 @@
             frequency = 1;
         }else if(PM.frequencyEvent == 2){
             frequency = 4;
+        }else if(PM.frequencyEvent ==3){
+            noEvents = YES;
         }
     }
     return self;
@@ -88,7 +90,9 @@
 -(void) update:(ccTime) dt{
     roundTimerElapsed += dt;
     sinceLastEvent += dt;
-    [self chooseEvent];
+    if(!noEvents){
+        [self chooseEvent];
+    }
     PlayerManager *PM = [PlayerManager sharedInstance];
     if(!addAlways && roundTimerElapsed > 1.5){
         addAlways = YES;
@@ -157,7 +161,7 @@
         int stu = [num intValue];
         if(stu == WindEvents){
             sinceLastEvent += arc4random()%3;
-            WindEvent *windEvent = [[[WindEvent alloc] initWithTime:4 WithForce:18 GameLayer:gameLayer] autorelease];
+            WindEvent *windEvent = [[[WindEvent alloc] initWithTime:6 WithForce:19 GameLayer:gameLayer] autorelease];
             [windEvent onStart];
             [self.eventArray addObject:windEvent];
         }else if(stu == MissileEvents){
@@ -175,7 +179,7 @@
         }else if(stu == HurricaneEvents){
             sinceLastEvent += arc4random()%2;
             int hurricaneCount = 1+ arc4random()%2;
-            HurricaneEvent *hurEvent = [[[HurricaneEvent alloc] initWithTime:5 WithHurricaneAmount:hurricaneCount GameLayer:gameLayer] autorelease];
+            HurricaneEvent *hurEvent = [[[HurricaneEvent alloc] initWithTime:6 WithHurricaneAmount:hurricaneCount GameLayer:gameLayer] autorelease];
             [hurEvent onStart];
             [self.eventArray addObject:hurEvent];
         }else if(stu == SpikeEvents){

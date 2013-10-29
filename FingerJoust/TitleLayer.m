@@ -17,7 +17,7 @@
 @implementation TitleLayer
 
 
-@synthesize playerSelectArray;
+@synthesize playerSelectArray, menu;
 
 -(id) init{
     if(self = [super initWithColor:COLOR_GAMEAREA_B4] ){
@@ -33,13 +33,11 @@
 		// add the label as a child to this Layer
 		[self addChild: label];
         
-        
 		CCMenuItemFont *playItem = [CCMenuItemFont itemWithString:@"Play" block:^(id sender) {
             int activeCount = 0;
             for(Player *player in [[PlayerManager sharedInstance] playerArray]){
                 if(player.isActive){
                     activeCount++;
-                    
                 }
             }
             if(activeCount > 1){
@@ -64,7 +62,7 @@
 		}];
         [teamPlayToggle setFontName:MAIN_FONT];
         
-		CCMenu *menu = [CCMenu menuWithItems:playItem, teamPlayToggle, nil];
+		menu = [CCMenu menuWithItems:playItem, teamPlayToggle, nil];
 		
 //		[menu alignItemsHorizontallyWithPadding:20];
         [menu alignItemsVerticallyWithPadding:50];
@@ -73,12 +71,11 @@
         //settings menu
         settingsMenu = [SettingsPanel layerWithColor:COLOR_GAMEBORDER_B4
                                              width:size.width - 2*CONTROL_OFFSET
-                                            height:650];
+                                            height:700];
         settingsMenu.position = ccp(CONTROL_OFFSET, -settingsMenu.contentSize.height + 60);
+        settingsMenu.titleLayer = self;
         [settingsMenu resolve];
         [self addChild:settingsMenu z:9];
-        
-        
         
 		// Add the menu to the layer
 		[self addChild:menu];
@@ -90,19 +87,8 @@
             [self.playerSelectArray addObject:playerSelectLayer];
             [self addChild:playerSelectLayer z:10];
         }
-        
-        
-        
-        
-        
-        
-        
         [self animateIn];
     }
-    
-    
-    
-    
     return self;
 }
 -(void) settingsSetup{

@@ -24,7 +24,7 @@
 			<key>MaxSheetSize</key>
 			<integer>4096</integer>
 			<key>NpotSize</key>
-			<string>{2040, 2028}</string>
+			<string>{1532, 2036}</string>
 			<key>Padding</key>
 			<integer>8</integer>
 			<key>PixelFormat</key>
@@ -135,9 +135,9 @@
 						<key>FlipY</key>
 						<false/>
 						<key>Frame</key>
-						<string>{{868, 320}, {48.5, 49}}</string>
+						<string>{{460, 700}, {65, 64}}</string>
 						<key>Frame-HD</key>
-						<string>{{1736, 640}, {97, 98}}</string>
+						<string>{{920, 1400}, {130, 128}}</string>
 						<key>Image</key>
 						<string>JoustF_JoustF.png</string>
 						<key>Image-HD</key>
@@ -149,7 +149,7 @@
 						<key>IsRotated</key>
 						<true/>
 						<key>IsTrimmed</key>
-						<true/>
+						<false/>
 						<key>Name</key>
 						<string>BodyInner</string>
 						<key>Opacity</key>
@@ -159,11 +159,11 @@
 						<key>OriginalImage_RelativePath</key>
 						<string>../../../../Dropbox/JousterF/BodyInner.png/</string>
 						<key>OriginalRect</key>
-						<string>{{17, 15}, {97, 98}}</string>
+						<string>{{0, 0}, {130, 128}}</string>
 						<key>OriginalSize</key>
 						<string>{130, 128}</string>
 						<key>Position</key>
-						<string>{1736, 640}</string>
+						<string>{920, 1400}</string>
 						<key>Scale</key>
 						<string>{1, 1}</string>
 						<key>SpriteSize</key>
@@ -173,7 +173,7 @@
 						<key>Tag</key>
 						<integer>0</integer>
 						<key>TextureOffset</key>
-						<string>{0.25, -0}</string>
+						<string>{0, 0}</string>
 						<key>UsesBatchRendering</key>
 						<true/>
 						<key>ZOrder</key>
@@ -276,9 +276,9 @@
 						<key>FlipY</key>
 						<false/>
 						<key>Frame</key>
-						<string>{{922, 364}, {48.5, 49}}</string>
+						<string>{{324, 700}, {65, 64}}</string>
 						<key>Frame-HD</key>
-						<string>{{1844, 728}, {97, 98}}</string>
+						<string>{{648, 1400}, {130, 128}}</string>
 						<key>Image</key>
 						<string>JoustF_JoustF.png</string>
 						<key>Image-HD</key>
@@ -290,7 +290,7 @@
 						<key>IsRotated</key>
 						<true/>
 						<key>IsTrimmed</key>
-						<true/>
+						<false/>
 						<key>Name</key>
 						<string>BodyInnerGradient</string>
 						<key>Opacity</key>
@@ -300,11 +300,11 @@
 						<key>OriginalImage_RelativePath</key>
 						<string>../../../../Dropbox/JousterF/BodyInnerGradient.png/</string>
 						<key>OriginalRect</key>
-						<string>{{17, 15}, {97, 98}}</string>
+						<string>{{0, 0}, {130, 128}}</string>
 						<key>OriginalSize</key>
 						<string>{130, 128}</string>
 						<key>Position</key>
-						<string>{1844, 728}</string>
+						<string>{648, 1400}</string>
 						<key>Scale</key>
 						<string>{1, 1}</string>
 						<key>SpriteSize</key>
@@ -314,7 +314,7 @@
 						<key>Tag</key>
 						<integer>0</integer>
 						<key>TextureOffset</key>
-						<string>{0.25, -0}</string>
+						<string>{0, 0}</string>
 						<key>UsesBatchRendering</key>
 						<true/>
 						<key>ZOrder</key>
@@ -417,9 +417,9 @@
 						<key>FlipY</key>
 						<false/>
 						<key>Frame</key>
-						<string>{{868, 254}, {60.5, 61}}</string>
+						<string>{{392, 700}, {65, 64}}</string>
 						<key>Frame-HD</key>
-						<string>{{1736, 508}, {121, 122}}</string>
+						<string>{{784, 1400}, {130, 128}}</string>
 						<key>Image</key>
 						<string>JoustF_JoustF.png</string>
 						<key>Image-HD</key>
@@ -431,7 +431,7 @@
 						<key>IsRotated</key>
 						<true/>
 						<key>IsTrimmed</key>
-						<true/>
+						<false/>
 						<key>Name</key>
 						<string>BodyOuter</string>
 						<key>Opacity</key>
@@ -441,11 +441,11 @@
 						<key>OriginalImage_RelativePath</key>
 						<string>../../../../Dropbox/JousterF/BodyOuter.png/</string>
 						<key>OriginalRect</key>
-						<string>{{5, 3}, {121, 122}}</string>
+						<string>{{0, 0}, {130, 128}}</string>
 						<key>OriginalSize</key>
 						<string>{130, 128}</string>
 						<key>Position</key>
-						<string>{1736, 508}</string>
+						<string>{784, 1400}</string>
 						<key>Scale</key>
 						<string>{1, 1}</string>
 						<key>SpriteSize</key>
@@ -455,7 +455,148 @@
 						<key>Tag</key>
 						<integer>0</integer>
 						<key>TextureOffset</key>
-						<string>{0.25, -0}</string>
+						<string>{0, 0}</string>
+						<key>UsesBatchRendering</key>
+						<true/>
+						<key>ZOrder</key>
+						<integer>0</integer>
+					</dict>
+				</dict>
+				<key>HurricanearningSigns</key>
+				<dict>
+					<key>DocumentSecurityImageBookmark</key>
+					<data>
+					Ym9va+QDAAAAAAQQMAAAAAAAAAAAAAAAAAAA
+					AAAAAAAAAAAAAAAAAAAAAAAAAAAAvAIAAAUA
+					AAABAQAAVXNlcnMAAAAKAAAAAQEAAGpvaG53
+					aWxzb24AAAcAAAABAQAARHJvcGJveAAIAAAA
+					AQEAAEpvdXN0ZXJGGAAAAAEBAABIdXJyaWNh
+					bmVhcm5pbmdTaWducy5wbmcUAAAAAQYAAAQA
+					AAAUAAAAKAAAADgAAABIAAAACAAAAAQDAACf
+					kQAAAAAAAAgAAAAEAwAAnqsFAAAAAAAIAAAA
+					BAMAAC2V2goAAAAACAAAAAQDAAB3WBoLAAAA
+					AAgAAAAEAwAAqSZBCwAAAAAUAAAAAQYAAIQA
+					AACUAAAApAAAALQAAADEAAAACAAAAAAEAABB
+					uB7uwAAAABgAAAABAgAAAQAAAAAAAAAPAAAA
+					AAAAAAAAAAAAAAAAAAAAAAEFAAAEAAAAAwMA
+					AAUAAAAEAAAAAwMAAAMAAAAIAAAABAMAAAMA
+					AAAAAAAABAAAAAMDAAD1AQAABgAAAAEBAABN
+					YWMgSEQAAAgAAAAEAwAAAAB0BToAAAAIAAAA
+					AAQAAEGzL9+8AAAAJAAAAAEBAAA5NUM2MTMw
+					Ni0xQTUyLTM4NTAtQjY2OC0wMTE0ODU0REZG
+					NUUYAAAAAQIAAIEAAAABAAgA7z8AAAEACAAA
+					AAAAAAAAAAEAAAABAQAALwAAAAQAAAADAwAA
+					AAEAAMMAAAABAgAANmU2YTU1NDcyOTBlY2Iw
+					ODFkZGYwMmRhZWI1ZWZmOWM5MmZiMjk3Mjsw
+					MDAwMDAwMDswMDAwMDAwMDAwMDAwMDIwO2Nv
+					bS5hcHBsZS5hcHAtc2FuZGJveC5yZWFkLXdy
+					aXRlOzAwMDAwMDAxOzAxMDAwMDAyOzAwMDAw
+					MDAwMGI0MTI2YTk7L3VzZXJzL2pvaG53aWxz
+					b24vZHJvcGJveC9qb3VzdGVyZi9odXJyaWNh
+					bmVhcm5pbmdzaWducy5wbmcAAPAAAAD+////
+					AQAAAAAAAAATAAAABBAAAGgAAAAAAAAABRAA
+					ANQAAAAAAAAAEBAAAAABAAAAAAAAQBAAAPAA
+					AAAAAAAAVBAAACgBAAAAAAAAVRAAADQBAAAA
+					AAAAVhAAACABAAAAAAAAAiAAANgBAAAAAAAA
+					ECAAAFwBAAAAAAAAESAAAIwBAAAAAAAAEiAA
+					AGwBAAAAAAAAEyAAAHwBAAAAAAAAICAAALgB
+					AAAAAAAAMCAAACABAAAAAAAAAcAAAEABAAAA
+					AAAAEcAAABQAAAAAAAAAEsAAAFABAAAAAAAA
+					ENAAAOQBAAAAAAAAgPAAAPABAAAAAAAA
+					</data>
+					<key>IsSHSprite</key>
+					<true/>
+					<key>PhysicProperties</key>
+					<dict>
+						<key>AngularDamping</key>
+						<real>0.0</real>
+						<key>AngularVelocity</key>
+						<real>0.0</real>
+						<key>CanSleep</key>
+						<true/>
+						<key>FixedRot</key>
+						<false/>
+						<key>GravityScale</key>
+						<real>1</real>
+						<key>HandledBySH</key>
+						<true/>
+						<key>IsBullet</key>
+						<false/>
+						<key>LinearDamping</key>
+						<real>0.0</real>
+						<key>LinearVelocity</key>
+						<string>{0, 0}</string>
+						<key>SH_ComplexShapes</key>
+						<array/>
+						<key>Type</key>
+						<integer>3</integer>
+					</dict>
+					<key>SHSheetName</key>
+					<string>JoustF</string>
+					<key>SHSpriteName</key>
+					<string>HurricanearningSigns</string>
+					<key>SheetImage</key>
+					<string>JoustF_JoustF.png</string>
+					<key>SheetImage-HD</key>
+					<string>JoustF_JoustF-ipadhd.png</string>
+					<key>TextureProperties</key>
+					<dict>
+						<key>Angle</key>
+						<integer>0</integer>
+						<key>Border</key>
+						<integer>0</integer>
+						<key>CanBeTrimmed</key>
+						<true/>
+						<key>Color</key>
+						<string>{{1, 1}, {1, 1}}</string>
+						<key>ConvertedFromOldFormat</key>
+						<false/>
+						<key>CustomClassName</key>
+						<string></string>
+						<key>FlipX</key>
+						<false/>
+						<key>FlipY</key>
+						<false/>
+						<key>Frame</key>
+						<string>{{324, 4}, {300, 250}}</string>
+						<key>Frame-HD</key>
+						<string>{{648, 8}, {600, 500}}</string>
+						<key>Image</key>
+						<string>JoustF_JoustF.png</string>
+						<key>Image-HD</key>
+						<string>JoustF_JoustF-ipadhd.png</string>
+						<key>IsCropped</key>
+						<false/>
+						<key>IsDrawable</key>
+						<true/>
+						<key>IsRotated</key>
+						<true/>
+						<key>IsTrimmed</key>
+						<false/>
+						<key>Name</key>
+						<string>HurricanearningSigns</string>
+						<key>Opacity</key>
+						<real>1</real>
+						<key>OriginalImage</key>
+						<string>/Users/johnwilson/Dropbox/JousterF/HurricanearningSigns.png</string>
+						<key>OriginalImage_RelativePath</key>
+						<string>../../../../Dropbox/JousterF/HurricanearningSigns.png/</string>
+						<key>OriginalRect</key>
+						<string>{{0, 0}, {600, 500}}</string>
+						<key>OriginalSize</key>
+						<string>{600, 500}</string>
+						<key>Position</key>
+						<string>{648, 8}</string>
+						<key>Scale</key>
+						<string>{1, 1}</string>
+						<key>SpriteSize</key>
+						<string>{300, 250}</string>
+						<key>SpriteWasBreaked</key>
+						<false/>
+						<key>Tag</key>
+						<integer>0</integer>
+						<key>TextureOffset</key>
+						<string>{0, 0}</string>
 						<key>UsesBatchRendering</key>
 						<true/>
 						<key>ZOrder</key>
@@ -557,9 +698,9 @@
 						<key>FlipY</key>
 						<false/>
 						<key>Frame</key>
-						<string>{{200, 786}, {158.5, 159}}</string>
+						<string>{{578, 4}, {175, 165.5}}</string>
 						<key>Frame-HD</key>
-						<string>{{400, 1572}, {317, 318}}</string>
+						<string>{{1156, 8}, {350, 331}}</string>
 						<key>Image</key>
 						<string>JoustF_JoustF.png</string>
 						<key>Image-HD</key>
@@ -569,9 +710,9 @@
 						<key>IsDrawable</key>
 						<true/>
 						<key>IsRotated</key>
-						<false/>
-						<key>IsTrimmed</key>
 						<true/>
+						<key>IsTrimmed</key>
+						<false/>
 						<key>Name</key>
 						<string>Jouster</string>
 						<key>Opacity</key>
@@ -581,11 +722,11 @@
 						<key>OriginalImage_RelativePath</key>
 						<string>../../../../Dropbox/JousterF/Jouster.png/</string>
 						<key>OriginalRect</key>
-						<string>{{16, 6}, {317, 318}}</string>
+						<string>{{0, 0}, {350, 331}}</string>
 						<key>OriginalSize</key>
 						<string>{350, 331}</string>
 						<key>Position</key>
-						<string>{400, 1572}</string>
+						<string>{1156, 8}</string>
 						<key>Scale</key>
 						<string>{1, 1}</string>
 						<key>SpriteSize</key>
@@ -595,7 +736,7 @@
 						<key>Tag</key>
 						<integer>0</integer>
 						<key>TextureOffset</key>
-						<string>{-0.25, 0.25}</string>
+						<string>{0, 0}</string>
 						<key>UsesBatchRendering</key>
 						<true/>
 						<key>ZOrder</key>
@@ -698,9 +839,9 @@
 						<key>FlipY</key>
 						<false/>
 						<key>Frame</key>
-						<string>{{974, 408}, {37, 37}}</string>
+						<string>{{578, 184}, {50, 47.5}}</string>
 						<key>Frame-HD</key>
-						<string>{{1948, 816}, {74, 74}}</string>
+						<string>{{1156, 368}, {100, 95}}</string>
 						<key>Image</key>
 						<string>JoustF_JoustF.png</string>
 						<key>Image-HD</key>
@@ -710,9 +851,9 @@
 						<key>IsDrawable</key>
 						<true/>
 						<key>IsRotated</key>
-						<false/>
-						<key>IsTrimmed</key>
 						<true/>
+						<key>IsTrimmed</key>
+						<false/>
 						<key>Name</key>
 						<string>JousterInner</string>
 						<key>Opacity</key>
@@ -722,11 +863,11 @@
 						<key>OriginalImage_RelativePath</key>
 						<string>../../../../Dropbox/JousterF/JousterInner.png/</string>
 						<key>OriginalRect</key>
-						<string>{{13, 10}, {74, 74}}</string>
+						<string>{{0, 0}, {100, 95}}</string>
 						<key>OriginalSize</key>
 						<string>{100, 95}</string>
 						<key>Position</key>
-						<string>{1948, 816}</string>
+						<string>{1156, 368}</string>
 						<key>Scale</key>
 						<string>{1, 1}</string>
 						<key>SpriteSize</key>
@@ -736,7 +877,7 @@
 						<key>Tag</key>
 						<integer>0</integer>
 						<key>TextureOffset</key>
-						<string>{0, 0.25}</string>
+						<string>{0, 0}</string>
 						<key>UsesBatchRendering</key>
 						<true/>
 						<key>ZOrder</key>
@@ -839,9 +980,9 @@
 						<key>FlipY</key>
 						<false/>
 						<key>Frame</key>
-						<string>{{868, 372}, {46, 46}}</string>
+						<string>{{552, 308}, {50, 47.5}}</string>
 						<key>Frame-HD</key>
-						<string>{{1736, 744}, {92, 92}}</string>
+						<string>{{1104, 616}, {100, 95}}</string>
 						<key>Image</key>
 						<string>JoustF_JoustF.png</string>
 						<key>Image-HD</key>
@@ -851,9 +992,9 @@
 						<key>IsDrawable</key>
 						<true/>
 						<key>IsRotated</key>
-						<false/>
-						<key>IsTrimmed</key>
 						<true/>
+						<key>IsTrimmed</key>
+						<false/>
 						<key>Name</key>
 						<string>JousterOuter</string>
 						<key>Opacity</key>
@@ -863,11 +1004,11 @@
 						<key>OriginalImage_RelativePath</key>
 						<string>../../../../Dropbox/JousterF/JousterOuter.png/</string>
 						<key>OriginalRect</key>
-						<string>{{4, 1}, {92, 92}}</string>
+						<string>{{0, 0}, {100, 95}}</string>
 						<key>OriginalSize</key>
 						<string>{100, 95}</string>
 						<key>Position</key>
-						<string>{1736, 744}</string>
+						<string>{1104, 616}</string>
 						<key>Scale</key>
 						<string>{1, 1}</string>
 						<key>SpriteSize</key>
@@ -877,7 +1018,147 @@
 						<key>Tag</key>
 						<integer>0</integer>
 						<key>TextureOffset</key>
-						<string>{0, 0.25}</string>
+						<string>{0, 0}</string>
+						<key>UsesBatchRendering</key>
+						<true/>
+						<key>ZOrder</key>
+						<integer>0</integer>
+					</dict>
+				</dict>
+				<key>bomb</key>
+				<dict>
+					<key>DocumentSecurityImageBookmark</key>
+					<data>
+					Ym9va8QDAAAAAAQQMAAAAAAAAAAAAAAAAAAA
+					AAAAAAAAAAAAAAAAAAAAAAAAAAAAnAIAAAUA
+					AAABAQAAVXNlcnMAAAAKAAAAAQEAAGpvaG53
+					aWxzb24AAAcAAAABAQAARHJvcGJveAAIAAAA
+					AQEAAEpvdXN0ZXJGCAAAAAEBAABib21iLnBu
+					ZxQAAAABBgAABAAAABQAAAAoAAAAOAAAAEgA
+					AAAIAAAABAMAAJ+RAAAAAAAACAAAAAQDAACe
+					qwUAAAAAAAgAAAAEAwAALZXaCgAAAAAIAAAA
+					BAMAAHdYGgsAAAAACAAAAAQDAAC6L0ELAAAA
+					ABQAAAABBgAAdAAAAIQAAACUAAAApAAAALQA
+					AAAIAAAAAAQAAEG4HvxXAAAAGAAAAAECAAAB
+					AAAAAAAAAA8AAAAAAAAAAAAAAAAAAAAAAAAA
+					AQUAAAQAAAADAwAABQAAAAQAAAADAwAAAwAA
+					AAgAAAAEAwAAAwAAAAAAAAAEAAAAAwMAAPUB
+					AAAGAAAAAQEAAE1hYyBIRAAACAAAAAQDAAAA
+					AHQFOgAAAAgAAAAABAAAQbMv37wAAAAkAAAA
+					AQEAADk1QzYxMzA2LTFBNTItMzg1MC1CNjY4
+					LTAxMTQ4NTRERkY1RRgAAAABAgAAgQAAAAEA
+					CADvPwAAAQAIAAAAAAAAAAAAAQAAAAEBAAAv
+					AAAABAAAAAMDAAAAAQAAswAAAAECAABjMzYw
+					MjU5MWQyOGVmMzUwNmQ4OTk2ODQ5NWZhNjFk
+					NDI1YTQ4Y2NkOzAwMDAwMDAwOzAwMDAwMDAw
+					MDAwMDAwMjA7Y29tLmFwcGxlLmFwcC1zYW5k
+					Ym94LnJlYWQtd3JpdGU7MDAwMDAwMDE7MDEw
+					MDAwMDI7MDAwMDAwMDAwYjQxMmZiYTsvdXNl
+					cnMvam9obndpbHNvbi9kcm9wYm94L2pvdXN0
+					ZXJmL2JvbWIucG5nAADwAAAA/v///wEAAAAA
+					AAAAEwAAAAQQAABYAAAAAAAAAAUQAADEAAAA
+					AAAAABAQAADwAAAAAAAAAEAQAADgAAAAAAAA
+					AFQQAAAYAQAAAAAAAFUQAAAkAQAAAAAAAFYQ
+					AAAQAQAAAAAAAAIgAADIAQAAAAAAABAgAABM
+					AQAAAAAAABEgAAB8AQAAAAAAABIgAABcAQAA
+					AAAAABMgAABsAQAAAAAAACAgAACoAQAAAAAA
+					ADAgAAAQAQAAAAAAAAHAAAAwAQAAAAAAABHA
+					AAAUAAAAAAAAABLAAABAAQAAAAAAABDQAADU
+					AQAAAAAAAIDwAADgAQAAAAAAAA==
+					</data>
+					<key>IsSHSprite</key>
+					<true/>
+					<key>PhysicProperties</key>
+					<dict>
+						<key>AngularDamping</key>
+						<real>0.0</real>
+						<key>AngularVelocity</key>
+						<real>0.0</real>
+						<key>CanSleep</key>
+						<true/>
+						<key>FixedRot</key>
+						<false/>
+						<key>GravityScale</key>
+						<real>1</real>
+						<key>HandledBySH</key>
+						<true/>
+						<key>IsBullet</key>
+						<false/>
+						<key>LinearDamping</key>
+						<real>0.0</real>
+						<key>LinearVelocity</key>
+						<string>{0, 0}</string>
+						<key>SH_ComplexShapes</key>
+						<array/>
+						<key>Type</key>
+						<integer>3</integer>
+					</dict>
+					<key>SHSheetName</key>
+					<string>JoustF</string>
+					<key>SHSpriteName</key>
+					<string>bomb</string>
+					<key>SheetImage</key>
+					<string>JoustF_JoustF.png</string>
+					<key>SheetImage-HD</key>
+					<string>JoustF_JoustF-ipadhd.png</string>
+					<key>TextureProperties</key>
+					<dict>
+						<key>Angle</key>
+						<integer>0</integer>
+						<key>Border</key>
+						<integer>0</integer>
+						<key>CanBeTrimmed</key>
+						<true/>
+						<key>Color</key>
+						<string>{{1, 1}, {1, 1}}</string>
+						<key>ConvertedFromOldFormat</key>
+						<false/>
+						<key>CustomClassName</key>
+						<string></string>
+						<key>FlipX</key>
+						<false/>
+						<key>FlipY</key>
+						<false/>
+						<key>Frame</key>
+						<string>{{384, 308}, {56.5, 56}}</string>
+						<key>Frame-HD</key>
+						<string>{{768, 616}, {113, 112}}</string>
+						<key>Image</key>
+						<string>JoustF_JoustF.png</string>
+						<key>Image-HD</key>
+						<string>JoustF_JoustF-ipadhd.png</string>
+						<key>IsCropped</key>
+						<false/>
+						<key>IsDrawable</key>
+						<true/>
+						<key>IsRotated</key>
+						<true/>
+						<key>IsTrimmed</key>
+						<false/>
+						<key>Name</key>
+						<string>bomb</string>
+						<key>Opacity</key>
+						<real>1</real>
+						<key>OriginalImage</key>
+						<string>/Users/johnwilson/Dropbox/JousterF/bomb.png</string>
+						<key>OriginalImage_RelativePath</key>
+						<string>../../../../Dropbox/JousterF/bomb.png/</string>
+						<key>OriginalRect</key>
+						<string>{{0, 0}, {113, 112}}</string>
+						<key>OriginalSize</key>
+						<string>{113, 112}</string>
+						<key>Position</key>
+						<string>{768, 616}</string>
+						<key>Scale</key>
+						<string>{1, 1}</string>
+						<key>SpriteSize</key>
+						<string>{56.5, 56}</string>
+						<key>SpriteWasBreaked</key>
+						<false/>
+						<key>Tag</key>
+						<integer>0</integer>
+						<key>TextureOffset</key>
+						<string>{0, 0}</string>
 						<key>UsesBatchRendering</key>
 						<true/>
 						<key>ZOrder</key>
@@ -980,9 +1261,9 @@
 						<key>FlipY</key>
 						<false/>
 						<key>Frame</key>
-						<string>{{934, 310}, {50, 50.5}}</string>
+						<string>{{528, 700}, {56.5, 56}}</string>
 						<key>Frame-HD</key>
-						<string>{{1868, 620}, {100, 101}}</string>
+						<string>{{1056, 1400}, {113, 112}}</string>
 						<key>Image</key>
 						<string>JoustF_JoustF.png</string>
 						<key>Image-HD</key>
@@ -994,7 +1275,7 @@
 						<key>IsRotated</key>
 						<true/>
 						<key>IsTrimmed</key>
-						<true/>
+						<false/>
 						<key>Name</key>
 						<string>dashedCircle</string>
 						<key>Opacity</key>
@@ -1004,11 +1285,11 @@
 						<key>OriginalImage_RelativePath</key>
 						<string>../../../../Dropbox/JousterF/dashedCircle.png/</string>
 						<key>OriginalRect</key>
-						<string>{{6, 5}, {100, 101}}</string>
+						<string>{{0, 0}, {113, 112}}</string>
 						<key>OriginalSize</key>
 						<string>{113, 112}</string>
 						<key>Position</key>
-						<string>{1868, 620}</string>
+						<string>{1056, 1400}</string>
 						<key>Scale</key>
 						<string>{1, 1}</string>
 						<key>SpriteSize</key>
@@ -1018,7 +1299,7 @@
 						<key>Tag</key>
 						<integer>0</integer>
 						<key>TextureOffset</key>
-						<string>{-0.25, 0.25}</string>
+						<string>{0, 0}</string>
 						<key>UsesBatchRendering</key>
 						<true/>
 						<key>ZOrder</key>
@@ -1121,9 +1402,9 @@
 						<key>FlipY</key>
 						<false/>
 						<key>Frame</key>
-						<string>{{934, 254}, {50.5, 50.5}}</string>
+						<string>{{324, 308}, {56.5, 56}}</string>
 						<key>Frame-HD</key>
-						<string>{{1868, 508}, {101, 101}}</string>
+						<string>{{648, 616}, {113, 112}}</string>
 						<key>Image</key>
 						<string>JoustF_JoustF.png</string>
 						<key>Image-HD</key>
@@ -1133,9 +1414,9 @@
 						<key>IsDrawable</key>
 						<true/>
 						<key>IsRotated</key>
-						<false/>
-						<key>IsTrimmed</key>
 						<true/>
+						<key>IsTrimmed</key>
+						<false/>
 						<key>Name</key>
 						<string>dashedCircleFiller</string>
 						<key>Opacity</key>
@@ -1145,11 +1426,11 @@
 						<key>OriginalImage_RelativePath</key>
 						<string>../../../../Dropbox/JousterF/dashedCircleFiller.png/</string>
 						<key>OriginalRect</key>
-						<string>{{6, 5}, {101, 101}}</string>
+						<string>{{0, 0}, {113, 112}}</string>
 						<key>OriginalSize</key>
 						<string>{113, 112}</string>
 						<key>Position</key>
-						<string>{1868, 508}</string>
+						<string>{648, 616}</string>
 						<key>Scale</key>
 						<string>{1, 1}</string>
 						<key>SpriteSize</key>
@@ -1159,7 +1440,7 @@
 						<key>Tag</key>
 						<integer>0</integer>
 						<key>TextureOffset</key>
-						<string>{0, 0.25}</string>
+						<string>{0, 0}</string>
 						<key>UsesBatchRendering</key>
 						<true/>
 						<key>ZOrder</key>
@@ -1262,9 +1543,9 @@
 						<key>FlipY</key>
 						<false/>
 						<key>Frame</key>
-						<string>{{708, 254}, {157, 157}}</string>
+						<string>{{208, 784}, {200, 200}}</string>
 						<key>Frame-HD</key>
-						<string>{{1416, 508}, {314, 314}}</string>
+						<string>{{416, 1568}, {400, 400}}</string>
 						<key>Image</key>
 						<string>JoustF_JoustF.png</string>
 						<key>Image-HD</key>
@@ -1276,7 +1557,7 @@
 						<key>IsRotated</key>
 						<false/>
 						<key>IsTrimmed</key>
-						<true/>
+						<false/>
 						<key>Name</key>
 						<string>explosion</string>
 						<key>Opacity</key>
@@ -1286,11 +1567,11 @@
 						<key>OriginalImage_RelativePath</key>
 						<string>../../../../Dropbox/JousterF/explosion.png/</string>
 						<key>OriginalRect</key>
-						<string>{{60, 41}, {314, 314}}</string>
+						<string>{{0, 0}, {400, 400}}</string>
 						<key>OriginalSize</key>
 						<string>{400, 400}</string>
 						<key>Position</key>
-						<string>{1416, 508}</string>
+						<string>{416, 1568}</string>
 						<key>Scale</key>
 						<string>{1, 1}</string>
 						<key>SpriteSize</key>
@@ -1300,7 +1581,148 @@
 						<key>Tag</key>
 						<integer>0</integer>
 						<key>TextureOffset</key>
-						<string>{8.5, 1}</string>
+						<string>{0, 0}</string>
+						<key>UsesBatchRendering</key>
+						<true/>
+						<key>ZOrder</key>
+						<integer>0</integer>
+					</dict>
+				</dict>
+				<key>hurricane</key>
+				<dict>
+					<key>DocumentSecurityImageBookmark</key>
+					<data>
+					Ym9va9ADAAAAAAQQMAAAAAAAAAAAAAAAAAAA
+					AAAAAAAAAAAAAAAAAAAAAAAAAAAAqAIAAAUA
+					AAABAQAAVXNlcnMAAAAKAAAAAQEAAGpvaG53
+					aWxzb24AAAcAAAABAQAARHJvcGJveAAIAAAA
+					AQEAAEpvdXN0ZXJGDQAAAAEBAABodXJyaWNh
+					bmUucG5nAAAAFAAAAAEGAAAEAAAAFAAAACgA
+					AAA4AAAASAAAAAgAAAAEAwAAn5EAAAAAAAAI
+					AAAABAMAAJ6rBQAAAAAACAAAAAQDAAAtldoK
+					AAAAAAgAAAAEAwAAd1gaCwAAAAAIAAAABAMA
+					AKcmQQsAAAAAFAAAAAEGAAB8AAAAjAAAAJwA
+					AACsAAAAvAAAAAgAAAAABAAAQbge7mQAAAAY
+					AAAAAQIAAAEAAAAAAAAADwAAAAAAAAAAAAAA
+					AAAAAAAAAAABBQAABAAAAAMDAAAFAAAABAAA
+					AAMDAAADAAAACAAAAAQDAAADAAAAAAAAAAQA
+					AAADAwAA9QEAAAYAAAABAQAATWFjIEhEAAAI
+					AAAABAMAAAAAdAU6AAAACAAAAAAEAABBsy/f
+					vAAAACQAAAABAQAAOTVDNjEzMDYtMUE1Mi0z
+					ODUwLUI2NjgtMDExNDg1NERGRjVFGAAAAAEC
+					AACBAAAAAQAIAO8/AAABAAgAAAAAAAAAAAAB
+					AAAAAQEAAC8AAAAEAAAAAwMAAAABAAC4AAAA
+					AQIAADczZTY3ZmE3NzFkNDJkYjQyOWMwYThh
+					YzliOTVkZGE4OWQzY2YyZjY7MDAwMDAwMDA7
+					MDAwMDAwMDAwMDAwMDAyMDtjb20uYXBwbGUu
+					YXBwLXNhbmRib3gucmVhZC13cml0ZTswMDAw
+					MDAwMTswMTAwMDAwMjswMDAwMDAwMDBiNDEy
+					NmE3Oy91c2Vycy9qb2hud2lsc29uL2Ryb3Bi
+					b3gvam91c3RlcmYvaHVycmljYW5lLnBuZwDw
+					AAAA/v///wEAAAAAAAAAEwAAAAQQAABgAAAA
+					AAAAAAUQAADMAAAAAAAAABAQAAD4AAAAAAAA
+					AEAQAADoAAAAAAAAAFQQAAAgAQAAAAAAAFUQ
+					AAAsAQAAAAAAAFYQAAAYAQAAAAAAAAIgAADQ
+					AQAAAAAAABAgAABUAQAAAAAAABEgAACEAQAA
+					AAAAABIgAABkAQAAAAAAABMgAAB0AQAAAAAA
+					ACAgAACwAQAAAAAAADAgAAAYAQAAAAAAAAHA
+					AAA4AQAAAAAAABHAAAAUAAAAAAAAABLAAABI
+					AQAAAAAAABDQAADcAQAAAAAAAIDwAADoAQAA
+					AAAAAA==
+					</data>
+					<key>IsSHSprite</key>
+					<true/>
+					<key>PhysicProperties</key>
+					<dict>
+						<key>AngularDamping</key>
+						<real>0.0</real>
+						<key>AngularVelocity</key>
+						<real>0.0</real>
+						<key>CanSleep</key>
+						<true/>
+						<key>FixedRot</key>
+						<false/>
+						<key>GravityScale</key>
+						<real>1</real>
+						<key>HandledBySH</key>
+						<true/>
+						<key>IsBullet</key>
+						<false/>
+						<key>LinearDamping</key>
+						<real>0.0</real>
+						<key>LinearVelocity</key>
+						<string>{0, 0}</string>
+						<key>SH_ComplexShapes</key>
+						<array/>
+						<key>Type</key>
+						<integer>3</integer>
+					</dict>
+					<key>SHSheetName</key>
+					<string>JoustF</string>
+					<key>SHSpriteName</key>
+					<string>hurricane</string>
+					<key>SheetImage</key>
+					<string>JoustF_JoustF.png</string>
+					<key>SheetImage-HD</key>
+					<string>JoustF_JoustF-ipadhd.png</string>
+					<key>TextureProperties</key>
+					<dict>
+						<key>Angle</key>
+						<integer>0</integer>
+						<key>Border</key>
+						<integer>0</integer>
+						<key>CanBeTrimmed</key>
+						<true/>
+						<key>Color</key>
+						<string>{{1, 1}, {1, 1}}</string>
+						<key>ConvertedFromOldFormat</key>
+						<false/>
+						<key>CustomClassName</key>
+						<string></string>
+						<key>FlipX</key>
+						<false/>
+						<key>FlipY</key>
+						<false/>
+						<key>Frame</key>
+						<string>{{498, 308}, {50, 50}}</string>
+						<key>Frame-HD</key>
+						<string>{{996, 616}, {100, 100}}</string>
+						<key>Image</key>
+						<string>JoustF_JoustF.png</string>
+						<key>Image-HD</key>
+						<string>JoustF_JoustF-ipadhd.png</string>
+						<key>IsCropped</key>
+						<false/>
+						<key>IsDrawable</key>
+						<true/>
+						<key>IsRotated</key>
+						<false/>
+						<key>IsTrimmed</key>
+						<false/>
+						<key>Name</key>
+						<string>hurricane</string>
+						<key>Opacity</key>
+						<real>1</real>
+						<key>OriginalImage</key>
+						<string>/Users/johnwilson/Dropbox/JousterF/hurricane.png</string>
+						<key>OriginalImage_RelativePath</key>
+						<string>../../../../Dropbox/JousterF/hurricane.png/</string>
+						<key>OriginalRect</key>
+						<string>{{0, 0}, {100, 100}}</string>
+						<key>OriginalSize</key>
+						<string>{100, 100}</string>
+						<key>Position</key>
+						<string>{996, 616}</string>
+						<key>Scale</key>
+						<string>{1, 1}</string>
+						<key>SpriteSize</key>
+						<string>{50, 50}</string>
+						<key>SpriteWasBreaked</key>
+						<false/>
+						<key>Tag</key>
+						<integer>0</integer>
+						<key>TextureOffset</key>
+						<string>{0, 0}</string>
 						<key>UsesBatchRendering</key>
 						<true/>
 						<key>ZOrder</key>
@@ -1320,8 +1742,8 @@
 					AAAoAAAAOAAAAEgAAAAIAAAABAMAAJ+RAAAA
 					AAAACAAAAAQDAACeqwUAAAAAAAgAAAAEAwAA
 					LZXaCgAAAAAIAAAABAMAAHdYGgsAAAAACAAA
-					AAQDAAC7cEALAAAAABQAAAABBgAAgAAAAJAA
-					AACgAAAAsAAAAMAAAAAIAAAAAAQAAEG4GzT4
+					AAQDAADYMUELAAAAABQAAAABBgAAgAAAAJAA
+					AACgAAAAsAAAAMAAAAAIAAAAAAQAAEG4HwCO
 					AAAAGAAAAAECAAABAAAAAAAAAA8AAAAAAAAA
 					AAAAAAAAAAAAAAAAAQUAAAQAAAADAwAABQAA
 					AAQAAAADAwAAAwAAAAgAAAAEAwAAAwAAAAAA
@@ -1331,12 +1753,12 @@
 					NTItMzg1MC1CNjY4LTAxMTQ4NTRERkY1RRgA
 					AAABAgAAgQAAAAEACADvPwAAAQAIAAAAAAAA
 					AAAAAQAAAAEBAAAvAAAABAAAAAMDAAAAAQAA
-					vwAAAAECAAAwNzQ5ZDIzMDNmZjlkOWJhZmYw
-					MjQ4NGVkYTQyODlmZjk5YTUxZDNmOzAwMDAw
+					vwAAAAECAAAwMzFiNmVlN2QyNDY1MTc4NTE4
+					MWU4YWIwYjZiOTE5ODQ3M2E3NTU4OzAwMDAw
 					MDAwOzAwMDAwMDAwMDAwMDAwMjA7Y29tLmFw
 					cGxlLmFwcC1zYW5kYm94LnJlYWQtd3JpdGU7
 					MDAwMDAwMDE7MDEwMDAwMDI7MDAwMDAwMDAw
-					YjQwNzBiYjsvdXNlcnMvam9obndpbHNvbi9k
+					YjQxMzFkODsvdXNlcnMvam9obndpbHNvbi9k
 					cm9wYm94L2pvdXN0ZXJmL3NlbWl0b3VjaGJv
 					cmRlcnMucG5nAADwAAAA/v///wEAAAAAAAAA
 					EwAAAAQQAABkAAAAAAAAAAUQAADQAAAAAAAA
@@ -1403,9 +1825,9 @@
 						<key>FlipY</key>
 						<false/>
 						<key>Frame</key>
-						<string>{{4, 396}, {316, 387}}</string>
+						<string>{{4, 396}, {314.5, 385}}</string>
 						<key>Frame-HD</key>
-						<string>{{8, 792}, {632, 774}}</string>
+						<string>{{8, 792}, {629, 770}}</string>
 						<key>Image</key>
 						<string>JoustF_JoustF.png</string>
 						<key>Image-HD</key>
@@ -1417,7 +1839,7 @@
 						<key>IsRotated</key>
 						<false/>
 						<key>IsTrimmed</key>
-						<true/>
+						<false/>
 						<key>Name</key>
 						<string>semitouchBorders</string>
 						<key>Opacity</key>
@@ -1427,21 +1849,21 @@
 						<key>OriginalImage_RelativePath</key>
 						<string>../../../../Dropbox/JousterF/semitouchBorders.png/</string>
 						<key>OriginalRect</key>
-						<string>{{0, 0}, {632, 774}}</string>
+						<string>{{0, 0}, {629, 770}}</string>
 						<key>OriginalSize</key>
-						<string>{632, 774}</string>
+						<string>{629, 770}</string>
 						<key>Position</key>
 						<string>{8, 792}</string>
 						<key>Scale</key>
 						<string>{1, 1}</string>
 						<key>SpriteSize</key>
-						<string>{316, 387}</string>
+						<string>{314.5, 385}</string>
 						<key>SpriteWasBreaked</key>
 						<false/>
 						<key>Tag</key>
 						<integer>0</integer>
 						<key>TextureOffset</key>
-						<string>{0, -0}</string>
+						<string>{0, 0}</string>
 						<key>UsesBatchRendering</key>
 						<true/>
 						<key>ZOrder</key>
@@ -1544,9 +1966,9 @@
 						<key>FlipY</key>
 						<false/>
 						<key>Frame</key>
-						<string>{{4, 982}, {30.5, 699}}</string>
+						<string>{{716, 184}, {49, 716}}</string>
 						<key>Frame-HD</key>
-						<string>{{8, 1964}, {61, 1398}}</string>
+						<string>{{1432, 368}, {98, 1432}}</string>
 						<key>Image</key>
 						<string>JoustF_JoustF.png</string>
 						<key>Image-HD</key>
@@ -1556,9 +1978,9 @@
 						<key>IsDrawable</key>
 						<true/>
 						<key>IsRotated</key>
-						<true/>
+						<false/>
 						<key>IsTrimmed</key>
-						<true/>
+						<false/>
 						<key>Name</key>
 						<string>spikeWall</string>
 						<key>Opacity</key>
@@ -1568,11 +1990,11 @@
 						<key>OriginalImage_RelativePath</key>
 						<string>../../../../Dropbox/JousterF/spikeWall.png/</string>
 						<key>OriginalRect</key>
-						<string>{{16, 12}, {61, 1398}}</string>
+						<string>{{0, 0}, {98, 1432}}</string>
 						<key>OriginalSize</key>
 						<string>{98, 1432}</string>
 						<key>Position</key>
-						<string>{8, 1964}</string>
+						<string>{1432, 368}</string>
 						<key>Scale</key>
 						<string>{1, 1}</string>
 						<key>SpriteSize</key>
@@ -1582,7 +2004,7 @@
 						<key>Tag</key>
 						<integer>0</integer>
 						<key>TextureOffset</key>
-						<string>{-1.25, 2.5}</string>
+						<string>{0, 0}</string>
 						<key>UsesBatchRendering</key>
 						<true/>
 						<key>ZOrder</key>
@@ -1685,9 +2107,9 @@
 						<key>FlipY</key>
 						<false/>
 						<key>Frame</key>
-						<string>{{4, 786}, {191.5, 191}}</string>
+						<string>{{4, 784}, {203, 199.5}}</string>
 						<key>Frame-HD</key>
-						<string>{{8, 1572}, {383, 382}}</string>
+						<string>{{8, 1568}, {406, 399}}</string>
 						<key>Image</key>
 						<string>JoustF_JoustF.png</string>
 						<key>Image-HD</key>
@@ -1699,7 +2121,7 @@
 						<key>IsRotated</key>
 						<true/>
 						<key>IsTrimmed</key>
-						<true/>
+						<false/>
 						<key>Name</key>
 						<string>timerCircle</string>
 						<key>Opacity</key>
@@ -1709,11 +2131,11 @@
 						<key>OriginalImage_RelativePath</key>
 						<string>../../../../Dropbox/JousterF/timerCircle.png/</string>
 						<key>OriginalRect</key>
-						<string>{{12, 7}, {383, 382}}</string>
+						<string>{{0, 0}, {406, 399}}</string>
 						<key>OriginalSize</key>
 						<string>{406, 399}</string>
 						<key>Position</key>
-						<string>{8, 1572}</string>
+						<string>{8, 1568}</string>
 						<key>Scale</key>
 						<string>{1, 1}</string>
 						<key>SpriteSize</key>
@@ -1723,7 +2145,7 @@
 						<key>Tag</key>
 						<integer>0</integer>
 						<key>TextureOffset</key>
-						<string>{0.25, 0.75}</string>
+						<string>{0, 0}</string>
 						<key>UsesBatchRendering</key>
 						<true/>
 						<key>ZOrder</key>
@@ -1743,9 +2165,9 @@
 					AAAEAAAAFAAAACgAAAA4AAAASAAAAAgAAAAE
 					AwAAn5EAAAAAAAAIAAAABAMAAJ6rBQAAAAAA
 					CAAAAAQDAAAtldoKAAAAAAgAAAAEAwAAd1ga
-					CwAAAAAIAAAABAMAAGRjPwsAAAAAFAAAAAEG
+					CwAAAAAIAAAABAMAAEExQQsAAAAAFAAAAAEG
 					AACIAAAAmAAAAKgAAAC4AAAAyAAAAAgAAAAA
-					BAAAQbgXWtMAAAAYAAAAAQIAAAEAAAAAAAAA
+					BAAAQbge/7cAAAAYAAAAAQIAAAEAAAAAAAAA
 					DwAAAAAAAAAAAAAAAAAAAAAAAAABBQAABAAA
 					AAMDAAAFAAAABAAAAAMDAAADAAAACAAAAAQD
 					AAADAAAAAAAAAAQAAAADAwAA9QEAAAYAAAAB
@@ -1754,12 +2176,12 @@
 					NjEzMDYtMUE1Mi0zODUwLUI2NjgtMDExNDg1
 					NERGRjVFGAAAAAECAACBAAAAAQAIAO8/AAAB
 					AAgAAAAAAAAAAAABAAAAAQEAAC8AAAAEAAAA
-					AwMAAAABAADEAAAAAQIAADQ1NTMxYWIwYTNh
-					ZTg2OGFiOWQ2NDBmYWQwMGM5MmQ2MzQ0MWU0
-					OGU7MDAwMDAwMDA7MDAwMDAwMDAwMDAwMDAy
+					AwMAAAABAADEAAAAAQIAADgyNDAxODQ2NjA1
+					OGQyNzkzZmU2ZDc4YWQ0NTBiNTlmOWY3M2Fk
+					OWQ7MDAwMDAwMDA7MDAwMDAwMDAwMDAwMDAy
 					MDtjb20uYXBwbGUuYXBwLXNhbmRib3gucmVh
 					ZC13cml0ZTswMDAwMDAwMTswMTAwMDAwMjsw
-					MDAwMDAwMDBiM2Y2MzY0Oy91c2Vycy9qb2hu
+					MDAwMDAwMDBiNDEzMTQxOy91c2Vycy9qb2hu
 					d2lsc29uL2Ryb3Bib3gvam91c3RlcmYvdG91
 					Y2hib3JkZXJzY29udGFpbmVyLnBuZwDwAAAA
 					/v///wEAAAAAAAAAEwAAAAQQAABsAAAAAAAA
@@ -1841,7 +2263,7 @@
 						<key>IsRotated</key>
 						<false/>
 						<key>IsTrimmed</key>
-						<true/>
+						<false/>
 						<key>Name</key>
 						<string>touchBordersContainer</string>
 						<key>Opacity</key>
@@ -1865,7 +2287,7 @@
 						<key>Tag</key>
 						<integer>0</integer>
 						<key>TextureOffset</key>
-						<string>{0, -0}</string>
+						<string>{0, 0}</string>
 						<key>UsesBatchRendering</key>
 						<true/>
 						<key>ZOrder</key>
@@ -1967,9 +2389,9 @@
 						<key>FlipY</key>
 						<false/>
 						<key>Frame</key>
-						<string>{{974, 364}, {46, 40.5}}</string>
+						<string>{{444, 308}, {50, 50}}</string>
 						<key>Frame-HD</key>
-						<string>{{1948, 728}, {92, 81}}</string>
+						<string>{{888, 616}, {100, 100}}</string>
 						<key>Image</key>
 						<string>JoustF_JoustF.png</string>
 						<key>Image-HD</key>
@@ -1981,7 +2403,7 @@
 						<key>IsRotated</key>
 						<false/>
 						<key>IsTrimmed</key>
-						<true/>
+						<false/>
 						<key>Name</key>
 						<string>warning</string>
 						<key>Opacity</key>
@@ -1991,11 +2413,11 @@
 						<key>OriginalImage_RelativePath</key>
 						<string>../../../../Dropbox/JousterF/warning.png/</string>
 						<key>OriginalRect</key>
-						<string>{{5, 9}, {92, 81}}</string>
+						<string>{{0, 0}, {100, 100}}</string>
 						<key>OriginalSize</key>
 						<string>{100, 100}</string>
 						<key>Position</key>
-						<string>{1948, 728}</string>
+						<string>{888, 616}</string>
 						<key>Scale</key>
 						<string>{1, 1}</string>
 						<key>SpriteSize</key>
@@ -2005,7 +2427,7 @@
 						<key>Tag</key>
 						<integer>0</integer>
 						<key>TextureOffset</key>
-						<string>{0.5, 0.25}</string>
+						<string>{0, 0}</string>
 						<key>UsesBatchRendering</key>
 						<true/>
 						<key>ZOrder</key>
@@ -2108,9 +2530,150 @@
 						<key>FlipY</key>
 						<false/>
 						<key>Frame</key>
-						<string>{{708, 4}, {294.5, 246}}</string>
+						<string>{{324, 396}, {300, 250}}</string>
 						<key>Frame-HD</key>
-						<string>{{1416, 8}, {589, 492}}</string>
+						<string>{{648, 792}, {600, 500}}</string>
+						<key>Image</key>
+						<string>JoustF_JoustF.png</string>
+						<key>Image-HD</key>
+						<string>JoustF_JoustF-ipadhd.png</string>
+						<key>IsCropped</key>
+						<false/>
+						<key>IsDrawable</key>
+						<true/>
+						<key>IsRotated</key>
+						<true/>
+						<key>IsTrimmed</key>
+						<false/>
+						<key>Name</key>
+						<string>warningSigns</string>
+						<key>Opacity</key>
+						<real>1</real>
+						<key>OriginalImage</key>
+						<string>/Users/johnwilson/Dropbox/JousterF/warningSigns.png</string>
+						<key>OriginalImage_RelativePath</key>
+						<string>../../../../Dropbox/JousterF/warningSigns.png/</string>
+						<key>OriginalRect</key>
+						<string>{{0, 0}, {600, 500}}</string>
+						<key>OriginalSize</key>
+						<string>{600, 500}</string>
+						<key>Position</key>
+						<string>{648, 792}</string>
+						<key>Scale</key>
+						<string>{1, 1}</string>
+						<key>SpriteSize</key>
+						<string>{300, 250}</string>
+						<key>SpriteWasBreaked</key>
+						<false/>
+						<key>Tag</key>
+						<integer>0</integer>
+						<key>TextureOffset</key>
+						<string>{0, 0}</string>
+						<key>UsesBatchRendering</key>
+						<true/>
+						<key>ZOrder</key>
+						<integer>0</integer>
+					</dict>
+				</dict>
+				<key>windWarningSigns</key>
+				<dict>
+					<key>DocumentSecurityImageBookmark</key>
+					<data>
+					Ym9va9wDAAAAAAQQMAAAAAAAAAAAAAAAAAAA
+					AAAAAAAAAAAAAAAAAAAAAAAAAAAAtAIAAAUA
+					AAABAQAAVXNlcnMAAAAKAAAAAQEAAGpvaG53
+					aWxzb24AAAcAAAABAQAARHJvcGJveAAIAAAA
+					AQEAAEpvdXN0ZXJGFAAAAAEBAAB3aW5kV2Fy
+					bmluZ1NpZ25zLnBuZxQAAAABBgAABAAAABQA
+					AAAoAAAAOAAAAEgAAAAIAAAABAMAAJ+RAAAA
+					AAAACAAAAAQDAACeqwUAAAAAAAgAAAAEAwAA
+					LZXaCgAAAAAIAAAABAMAAHdYGgsAAAAACAAA
+					AAQDAACrJkELAAAAABQAAAABBgAAgAAAAJAA
+					AACgAAAAsAAAAMAAAAAIAAAAAAQAAEG4Hu86
+					AAAAGAAAAAECAAABAAAAAAAAAA8AAAAAAAAA
+					AAAAAAAAAAAAAAAAAQUAAAQAAAADAwAABQAA
+					AAQAAAADAwAAAwAAAAgAAAAEAwAAAwAAAAAA
+					AAAEAAAAAwMAAPUBAAAGAAAAAQEAAE1hYyBI
+					RAAACAAAAAQDAAAAAHQFOgAAAAgAAAAABAAA
+					QbMv37wAAAAkAAAAAQEAADk1QzYxMzA2LTFB
+					NTItMzg1MC1CNjY4LTAxMTQ4NTRERkY1RRgA
+					AAABAgAAgQAAAAEACADvPwAAAQAIAAAAAAAA
+					AAAAAQAAAAEBAAAvAAAABAAAAAMDAAAAAQAA
+					vwAAAAECAABmMjk5ODY1ZmIxYjZkM2IwZDli
+					OWM3YmVmNWU1MWE4MWZiZDFlNjVmOzAwMDAw
+					MDAwOzAwMDAwMDAwMDAwMDAwMjA7Y29tLmFw
+					cGxlLmFwcC1zYW5kYm94LnJlYWQtd3JpdGU7
+					MDAwMDAwMDE7MDEwMDAwMDI7MDAwMDAwMDAw
+					YjQxMjZhYjsvdXNlcnMvam9obndpbHNvbi9k
+					cm9wYm94L2pvdXN0ZXJmL3dpbmR3YXJuaW5n
+					c2lnbnMucG5nAADwAAAA/v///wEAAAAAAAAA
+					EwAAAAQQAABkAAAAAAAAAAUQAADQAAAAAAAA
+					ABAQAAD8AAAAAAAAAEAQAADsAAAAAAAAAFQQ
+					AAAkAQAAAAAAAFUQAAAwAQAAAAAAAFYQAAAc
+					AQAAAAAAAAIgAADUAQAAAAAAABAgAABYAQAA
+					AAAAABEgAACIAQAAAAAAABIgAABoAQAAAAAA
+					ABMgAAB4AQAAAAAAACAgAAC0AQAAAAAAADAg
+					AAAcAQAAAAAAAAHAAAA8AQAAAAAAABHAAAAU
+					AAAAAAAAABLAAABMAQAAAAAAABDQAADgAQAA
+					AAAAAIDwAADsAQAAAAAAAA==
+					</data>
+					<key>IsSHSprite</key>
+					<true/>
+					<key>PhysicProperties</key>
+					<dict>
+						<key>AngularDamping</key>
+						<real>0.0</real>
+						<key>AngularVelocity</key>
+						<real>0.0</real>
+						<key>CanSleep</key>
+						<true/>
+						<key>FixedRot</key>
+						<false/>
+						<key>GravityScale</key>
+						<real>1</real>
+						<key>HandledBySH</key>
+						<true/>
+						<key>IsBullet</key>
+						<false/>
+						<key>LinearDamping</key>
+						<real>0.0</real>
+						<key>LinearVelocity</key>
+						<string>{0, 0}</string>
+						<key>SH_ComplexShapes</key>
+						<array/>
+						<key>Type</key>
+						<integer>3</integer>
+					</dict>
+					<key>SHSheetName</key>
+					<string>JoustF</string>
+					<key>SHSpriteName</key>
+					<string>windWarningSigns</string>
+					<key>SheetImage</key>
+					<string>JoustF_JoustF.png</string>
+					<key>SheetImage-HD</key>
+					<string>JoustF_JoustF-ipadhd.png</string>
+					<key>TextureProperties</key>
+					<dict>
+						<key>Angle</key>
+						<integer>0</integer>
+						<key>Border</key>
+						<integer>0</integer>
+						<key>CanBeTrimmed</key>
+						<true/>
+						<key>Color</key>
+						<string>{{1, 1}, {1, 1}}</string>
+						<key>ConvertedFromOldFormat</key>
+						<false/>
+						<key>CustomClassName</key>
+						<string></string>
+						<key>FlipX</key>
+						<false/>
+						<key>FlipY</key>
+						<false/>
+						<key>Frame</key>
+						<string>{{412, 768}, {300, 250}}</string>
+						<key>Frame-HD</key>
+						<string>{{824, 1536}, {600, 500}}</string>
 						<key>Image</key>
 						<string>JoustF_JoustF.png</string>
 						<key>Image-HD</key>
@@ -2122,21 +2685,21 @@
 						<key>IsRotated</key>
 						<false/>
 						<key>IsTrimmed</key>
-						<true/>
+						<false/>
 						<key>Name</key>
-						<string>warningSigns</string>
+						<string>windWarningSigns</string>
 						<key>Opacity</key>
 						<real>1</real>
 						<key>OriginalImage</key>
-						<string>/Users/johnwilson/Dropbox/JousterF/warningSigns.png</string>
+						<string>/Users/johnwilson/Dropbox/JousterF/windWarningSigns.png</string>
 						<key>OriginalImage_RelativePath</key>
-						<string>../../../../Dropbox/JousterF/warningSigns.png/</string>
+						<string>../../../../Dropbox/JousterF/windWarningSigns.png/</string>
 						<key>OriginalRect</key>
-						<string>{{7, 5}, {589, 492}}</string>
+						<string>{{0, 0}, {600, 500}}</string>
 						<key>OriginalSize</key>
 						<string>{600, 500}</string>
 						<key>Position</key>
-						<string>{1416, 8}</string>
+						<string>{824, 1536}</string>
 						<key>Scale</key>
 						<string>{1, 1}</string>
 						<key>SpriteSize</key>
@@ -2146,7 +2709,7 @@
 						<key>Tag</key>
 						<integer>0</integer>
 						<key>TextureOffset</key>
-						<string>{0.75, -0.5}</string>
+						<string>{0, 0}</string>
 						<key>UsesBatchRendering</key>
 						<true/>
 						<key>ZOrder</key>
@@ -2157,7 +2720,7 @@
 			<key>Size</key>
 			<string>{2048, 2048}</string>
 			<key>Trim</key>
-			<true/>
+			<false/>
 			<key>ZOrder</key>
 			<integer>0</integer>
 		</dict>

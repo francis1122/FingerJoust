@@ -10,6 +10,8 @@
 #import "Vortex.h"
 #import "GameLayer.h"
 #import "Jouster.h"
+#import "PlayerManager.h"
+
 
 @implementation HurricaneEvent
 
@@ -17,11 +19,24 @@
 
 -(id) initWithTime:(float) time WithHurricaneAmount:(float) hurricaneAmount GameLayer:(GameLayer*)gLayer{
     if(self = [super initWithGameLayer:gLayer]){
+        CGSize winSize = [[CCDirector sharedDirector] winSize];
+        PlayerManager *PM = [PlayerManager sharedInstance];
+        float gameSpeed = [PM getGameSpeedScaler];
+
+        CCSprite *warningSign = [CCSprite spriteWithSpriteFrameName:@"HurricanearningSigns"];
+        warningSign.opacity = 95;
+        warningSign.position = ccp(winSize.width/2, winSize.height/2);
+        [gameLayer addChild:warningSign];
+        CCDelayTime *delayAnim = [CCDelayTime actionWithDuration:1.4/gameSpeed];
+        CCCallBlock *blockAnim = [CCCallBlock actionWithBlock:^{
+            [warningSign removeFromParentAndCleanup:YES];
+        }];
+        CCSequence *seqAnim = [CCSequence actionOne:delayAnim two:blockAnim];
+        [warningSign runAction:seqAnim];
+        hurricanesAmount = hurricaneAmount;
         self.vortexArray = [NSMutableArray array];
         timeSpan = time;
-        for(int i = 0; i < hurricaneAmount; i++){
-            [self createVortex];
-        }
+
     }
     return self;
 }
@@ -35,7 +50,16 @@
 -(void) update:(ccTime) dt{
     [super update:dt];
     
+    if(!isWarningDone){
+        if(elapsedTime > 1.4){
+            isWarningDone = YES;
+            for(int i = 0; i < hurricanesAmount; i++){
+                [self createVortex];
+            }
+        }
+    }
     
+
     //take care of vortex affecting the jousters body
     for(Vortex *vortex in self.vortexArray){
         [vortex update:dt];

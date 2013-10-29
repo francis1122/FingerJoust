@@ -14,9 +14,11 @@
     CCSprite *jousterBoxLeft, *jousterBoxRight;
     SettingsPanel *settingsMenu;
     NSMutableArray *playerSelectArray;
+    CCMenu *menu;
     
 }
 
+@property (nonatomic, assign) CCMenu *menu;
 @property (nonatomic, retain) NSMutableArray *playerSelectArray;
 
 -(void) setWinner:(NSString*) winner;

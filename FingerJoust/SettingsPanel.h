@@ -9,11 +9,15 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 
+@class TitleLayer;
 @interface SettingsPanel : CCLayerColor {
     BOOL isActive;
     CCMenuItemFont *menuToggle;
+    TitleLayer *titleLayer;
     CCSprite *windActive, *bombActive, *hurricaneActive, *spikeActive, *missileActive, *gameSpeedActive, *frequencyActive;
 }
+
+@property (nonatomic, assign) TitleLayer *titleLayer;
 
 -(void) resolve;
 

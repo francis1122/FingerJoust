@@ -18,6 +18,7 @@
     NSMutableArray *eventArray;
     
     BOOL addAlways;
+    BOOL noEvents;
     
     float lastMissile;
     float lastBomb;

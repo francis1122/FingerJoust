@@ -5,6 +5,8 @@
 	<key>UIAppFonts</key>
 	<array>
 		<string>SourceSansPro-ExtraLight.otf</string>
+		<string>SourceSansPro-Light.otf</string>
+		<string>SourceSansPro-Regular.otf</string>
 	</array>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>English</string>

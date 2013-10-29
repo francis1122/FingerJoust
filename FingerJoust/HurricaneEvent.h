@@ -9,7 +9,8 @@
 #import "HazardEvent.h"
 
 @interface HurricaneEvent : HazardEvent{
-    
+    BOOL isWarningDone;
+    int hurricanesAmount;
 }
 
 @property (nonatomic, retain) NSMutableArray *vortexArray;

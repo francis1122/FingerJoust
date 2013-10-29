@@ -30,7 +30,6 @@
     PlayerManager *PM = [PlayerManager sharedInstance];
     float gameSpeed = [PM getGameSpeedScaler];
     warningSprite = [CCSprite spriteWithSpriteFrameName:@"warning"];
-    warningSprite.color = ccBLUE;
     [self.parent addChild:warningSprite];
     CCDelayTime *delayAnim = [CCDelayTime actionWithDuration:1.5 * (1/gameSpeed)];
     CCCallBlock *blockAnim = [CCCallBlock actionWithBlock:^{

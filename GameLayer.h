@@ -31,6 +31,7 @@
 //font names
 
 extern NSString *const MAIN_FONT;
+extern NSString *const SECOND_FONT;
 //player colors
 #define COLOR_DISABLED ccc4(115, 115,115, 255)
 

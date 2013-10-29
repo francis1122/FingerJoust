@@ -133,12 +133,14 @@
         
         if([PM isPlayerActive:0] && [PM isPlayerActive:3]){
             blackOverlay = [[[CCSprite alloc] initWithSpriteFrameName:@"touchBordersContainer"] autorelease];
+        blackOverlay.position = ccp(CONTROL_OFFSET/2 - 30, redOverlay.contentSize.height/2 );
         }else{
             blackOverlay = [[[CCSprite alloc] initWithSpriteFrameName:@"semitouchBorders"] autorelease];
+        blackOverlay.position = ccp(CONTROL_OFFSET/2 - 30, redOverlay.contentSize.height/2 -1 );
             blackOverlay.scaleY = -1;
         }
         
-        blackOverlay.position = ccp(CONTROL_OFFSET/2 - 30, redOverlay.contentSize.height/2 );
+
         blackOverlay.color = COLOR_GAMEBORDER;
         [blackLayer addChild:blackOverlay];
         
@@ -170,11 +172,11 @@
                     pos = ccp( 35 + j*45, bottomLayer.contentSize.height - 25);
                     layer = topLayer;
                 }
-                CCSprite *victorySprite = [[[CCSprite alloc] initWithSpriteFrameName:@"dashedCircle"] autorelease];
+                CCSprite *victorySprite = [[[CCSprite alloc] initWithSpriteFrameName:@"bomb"] autorelease];
                 victorySprite.scale = .75;
-                victorySprite.color = ccWHITE;
+                victorySprite.color = ccc3(125, 125, 125);
                 victorySprite.position = pos;
-                [layer addChild:victorySprite];
+                [layer addChild:victorySprite z:1];
             }
         }
         self.victoryArrays = [NSMutableArray array];
@@ -192,7 +194,7 @@
             NSMutableArray *victoryArray = [NSMutableArray array];
             for(int i = 0; i < 3; i++){
                 CCSprite *victorySprite = [[[CCSprite alloc] initWithSpriteFrameName:@"dashedCircleFiller"] autorelease];
-                victorySprite.scale = .75;
+                victorySprite.scale = .60;
                 victorySprite.visible = NO;
                 [layer addChild:victorySprite];
                 victorySprite.color = ccORANGE;
@@ -326,11 +328,7 @@
                     overlay.color = COLOR_GAMEBORDER;
                     layer.color = COLOR_PLAYER_NON_LIGHT;
                 }
-                
             }
-            
-            
-            
         }else{
             playerOrTeam = jouster.player.playerNumber;
             if(!jouster.isDead){
@@ -397,7 +395,7 @@
     blackLayer.position = ccp(-redLayer.contentSize.width - 20, 0);
     greenLayer.position = ccp(winSize.width + 20, 0);
     leftLayer.position = ccp(-redLayer.contentSize.width - 20, 0);
-    rightLayer.position = ccp(winSize.width + 20, 0);;
+    rightLayer.position = ccp(winSize.width + 20, 0);
     
     CCActionInterval *redLayerMove = [CCMoveTo actionWithDuration:1.2 position:ccp(0, winSize.height/2)];
     CCActionInterval *blueLayerMove = [CCMoveTo actionWithDuration:1.2 position:ccp(winSize.width - blueLayer.contentSize.width, winSize.height/2)];

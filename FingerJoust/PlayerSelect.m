@@ -16,6 +16,9 @@
 @synthesize player;
 
 -(id) initWithPlayer:(Player *) p{
+    
+
+    
     CGSize size = [[CCDirector sharedDirector] winSize];
     ccColor4B baop;
     self.player = p;
@@ -30,6 +33,8 @@
     }
     float width = 315;
     if(self = [super initWithColor:baop width:width height:size.height/2]){
+        _touchEnabled = YES;
+        _touchMode = NO;
         //set position based on plapyer number
         CGPoint pos = CGPointZero;
         if(self.player.playerNumber == 0){
@@ -43,22 +48,16 @@
         }
         self.position = pos;
         
-        
-        
         //activate button
-        CCMenu *playerChoiceMenu = [[[CCMenu alloc] init] autorelease];
+        playerChoiceMenu = [[[CCMenu alloc] init] autorelease];
         CCSprite *normalSprite = [CCSprite spriteWithSpriteFrameName:@"BodyOuter"];
         CCSprite *selectedSprite = [CCSprite spriteWithSpriteFrameName:@"BodyOuter"];
         selectedSprite.color = ccBLUE;
         CCMenuItemSprite *playItem = [CCMenuItemSprite itemWithNormalSprite:normalSprite
                                                              selectedSprite:selectedSprite
                                                                       block:^(CCMenuItemSprite *sender){
-                                                                          self.player.isActive = !self.player.isActive;
-                                                                          if(self.player.isActive){
-                                                                              [self activatePlayer];
-                                                                          }else{
-                                                                              [self deactivatePlayer];
-                                                                          }
+                                                                          self.player.isActive = NO;
+                                                                        [self deactivatePlayer];
                                                                       }];
         [playerChoiceMenu addChild:playItem];
         pos = CGPointZero;
@@ -76,19 +75,16 @@
         playerChoiceMenu.position = pos;
         [self addChild:playerChoiceMenu];
         
-        
-        isActiveSprite = [CCSprite spriteWithSpriteFrameName:@"JousterOuter"];
-        if(player.isActive){
-            isActiveSprite.visible = YES;
-        }else{
-            isActiveSprite.visible = NO;
-        }
-        isActiveSprite.position = playerChoiceMenu.position;
-        isActiveSprite.color = ccORANGE;
-        [self addChild:isActiveSprite];
-        
-        
-        
+//        isActiveSprite = [CCSprite spriteWithSpriteFrameName:@"JousterOuter"];
+//        if(player.isActive){
+//            isActiveSprite.visible = YES;
+//        }else{
+//            isActiveSprite.visible = NO;
+//        }
+//        isActiveSprite.position = playerChoiceMenu.position;
+//        isActiveSprite.color = ccORANGE;
+//        [self addChild:isActiveSprite];
+//
         
         //active stuff
         isActiveNode = [CCNode node];
@@ -112,6 +108,8 @@
                                                             [self playerColorChangedToTeam:team];
                                                         }];
         teamPlayMenu = [CCMenu menuWithItems:teamPlayItem, nil];
+        
+        
         pos = CGPointZero;
         if(self.player.playerNumber == 0){
             pos = ccp(width - edgeOffset,edgeOffset);
@@ -124,7 +122,12 @@
         }
         pos = pos;
         teamPlayMenu.position = pos;
-        [isActiveNode addChild:teamPlayMenu];
+        teamBG = [CCSprite spriteWithSpriteFrameName:@"BodyOuter"];
+        teamBG.scale = 1.2;
+        teamBG.position = pos;
+        [isActiveNode addChild:teamBG];
+        
+        [isActiveNode addChild:teamPlayMenu z:1];
         
         //character chooser
         normalSprite = [CCSprite spriteWithSpriteFrameName:@"BodyOuter"];
@@ -140,10 +143,27 @@
                                                                                      jousterType = 0;
                                                                                  }
                                                                                  player.jousterType = jousterType;
-                                                                                 [self playerCharacterChangedTo:player.jousterType];
+                                                                                 [self playerCharacterChangedTo:player.jousterType From:YES];
+                                                                                 //sender.color = [self playerColorChangedToTeam:team];
+                                                                             }];
+        
+        normalSprite = [CCSprite spriteWithSpriteFrameName:@"BodyOuter"];
+        selectedSprite = [CCSprite spriteWithSpriteFrameName:@"BodyOuter"];
+        selectedSprite.color = ccBLACK;
+        CCMenuItemSprite *rotatOthereCharacter = [CCMenuItemSprite itemWithNormalSprite:normalSprite
+                                                                    selectedSprite:selectedSprite
+                                                                             block:^(CCMenuItemSprite *sender){
+                                                                                 //cycle between 4 teams
+                                                                                 int jousterType = player.jousterType;
+                                                                                 jousterType--;
+                                                                                 if(jousterType < 0){
+                                                                                     jousterType = 4;
+                                                                                 }
+                                                                                 player.jousterType = jousterType;
+                                                                                 [self playerCharacterChangedTo:player.jousterType From:NO];
                                                                                  //                                                                              sender.color = [self playerColorChangedToTeam:team];
                                                                              }];
-        CCMenu *jousterMenu = [CCMenu menuWithItems:rotateCharacter, nil];
+        CCMenu *jousterMenu = [CCMenu menuWithItems:rotateCharacter, rotatOthereCharacter, nil];
         pos = CGPointZero;
         /*if(self.player.playerNumber == 0){
          pos = ccp(size.width/3 - 50, size.height/2 + 100);
@@ -154,16 +174,35 @@
          }else if(self.player.playerNumber == 3){
          pos = ccp(size.width/3 - 50, size.height/2 - 100);
          }*/
-        pos = ccp(200, 200);
+        pos = ccp(160, 210);
+        [jousterMenu alignItemsHorizontallyWithPadding:130];
         jousterMenu.position = pos;
         [isActiveNode addChild:jousterMenu];
         
-        characterLabel = [CCLabelTTF labelWithString:@"" fontName:MAIN_FONT fontSize:32];
-        characterLabel.position = ccp(200, 100);
+        characterLabel = [CCLabelTTF labelWithString:@"" fontName:SECOND_FONT fontSize:32];
+        if(player.playerNumber == 0){
+            characterLabel.position = ccp(170, 300);
+        }else if(player.playerNumber == 1){
+            characterLabel.position = ccp(170, 300);
+        }else{
+            characterLabel.position = ccp(170, 80);
+        }
         [isActiveNode addChild:characterLabel];
         
         
+        tapToJoinLabel = [CCLabelTTF labelWithString:@"Tap To Join" fontName:MAIN_FONT fontSize:32];
+        tapToJoinLabel.color = COLOR_GAMEBORDER;
+        CCFadeTo *fadeIn = [CCFadeTo actionWithDuration:1.0 opacity:255];
+//        CCEaseOut *ease = [CCEaseOut actionWithAction:fadeIn rate:1.0];
+        CCFadeTo *fadeOut = [CCFadeTo actionWithDuration:1.0 opacity:80];
+//        CCEaseIn *aa = [CCEaseIn actionWithAction:fadeOut rate:1.0];
+        CCSequence *seq = [CCSequence actionOne:fadeIn two:fadeOut];
+        CCRepeatForever *repeat = [CCRepeatForever actionWithAction:seq];
         
+        [tapToJoinLabel runAction:repeat];
+
+        tapToJoinLabel.position = ccp(155, 200);
+        [self addChild:tapToJoinLabel];
         
         //border
         border = [[[CCSprite alloc] initWithSpriteFrameName:@"touchBordersContainer"] autorelease];
@@ -185,13 +224,13 @@
         border.position = pos;
         [self addChild:border];
         
-        
-        
         //setup state of layer
         if([[PlayerManager sharedInstance] isTeamPlay] ){
             teamPlayMenu.visible = YES;
+            teamBG.visible = YES;
         }else{
             teamPlayMenu.visible = NO;
+            teamBG.visible = NO;
         }
         if(player.isActive){
             [self activatePlayer];
@@ -201,7 +240,7 @@
         if([[PlayerManager sharedInstance] isTeamPlay]){
             [self playerColorChangedToTeam:player.team];
         }
-        [self playerCharacterChangedTo:player.jousterType];
+        [self playerCharacterChangedTo:player.jousterType From:YES];
         
     }
     return self;
@@ -256,25 +295,55 @@
     }
 }
 
--(void) playerCharacterChangedTo:(int) character{
+-(void) playerCharacterChangedTo:(int) character From:(BOOL) leftSide{
+    CCSprite *oldJouster = currentJouster;
+    CCDelayTime *delayAnim = [CCDelayTime actionWithDuration:0.3];
+    CCCallBlock *blockAnim = [CCCallBlock actionWithBlock:^{
+        [oldJouster removeFromParentAndCleanup:YES];
+    }];
+    CCSequence *seqAnim = [CCSequence actionOne:delayAnim two:blockAnim];
+    [self runAction:seqAnim];
+    CCFadeOut *fadeOut = [CCFadeOut actionWithDuration:0.3];
+    float offset = 60;
+    if(leftSide){
+        offset = -60;
+    }
+    CCMoveBy *moveBy = [CCMoveBy actionWithDuration:0.3 position:ccp(offset, 0)];
+    CCSpawn *spawn = [CCSpawn actionOne:fadeOut two:moveBy];
+    [oldJouster runAction:spawn];
+
+    
+    
+    
     NSString *characterString = @"";
     if(character == 0){
         characterString = @"Ball and Chain";
+        currentJouster = [CCSprite spriteWithSpriteFrameName:@"BodyOuter"];
     }else if(character == 1){
         characterString = @"Orbit";
+        currentJouster = [CCSprite spriteWithSpriteFrameName:@"BodyOuter"];
     }else if(character == 2){
         characterString = @"Grower";
+        currentJouster = [CCSprite spriteWithSpriteFrameName:@"BodyOuter"];
     }else if(character == 3){
         characterString = @"Bouncer";
+        currentJouster = [CCSprite spriteWithSpriteFrameName:@"BodyOuter"];
     }else if(character == 4){
         characterString = @"Chump";
+        currentJouster = [CCSprite spriteWithSpriteFrameName:@"BodyOuter"];
     }
+    
+    currentJouster.position = ccp(153, 200);
+    [isActiveNode addChild: currentJouster z: 3];
+    
     [characterLabel setString:characterString];
 }
 
 -(void) activatePlayer{
+    tapToJoinLabel.visible = NO;
     isActiveNode.visible = YES;
     isActiveSprite.visible = YES;
+    playerChoiceMenu.visible = YES;
     if([PlayerManager sharedInstance].isTeamPlay){
         [self playerColorChangedToTeam:player.team];
     }else{
@@ -284,21 +353,61 @@
 }
 
 -(void) deactivatePlayer{
+    tapToJoinLabel.visible = YES;
     isActiveNode.visible = NO;
     isActiveSprite.visible = NO;
+    playerChoiceMenu.visible = NO;
     [self setBorderColorForPlayer];
 }
 
 
 -(void) turnOnTeamPlay{
     teamPlayMenu.visible = YES;
+    teamBG.visible = YES;
     [self playerColorChangedToTeam:player.team];
 }
 
 
 -(void) turnOffTeamPlay{
     teamPlayMenu.visible = NO;
+    teamBG.visible = NO;
     [self setBorderColorForPlayer];
 }
+
+
+#pragma mark - touch code
+-(BOOL) ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event{
+        return YES;
+}
+
+-(void)ccTouchesMoved:(NSSet *)touches withEvent:(UIEvent *)event{
+
+}
+
+- (void) ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{
+    CGRect touchArea =CGRectMake(self.position.x, self.position.y, self.contentSize.width, self.contentSize.height);
+    for(UITouch* touch in touches){
+        CGPoint location = [touch locationInView: [touch view]];
+        NSLog(@"touch point : %f, %f", location.x, location.y);
+        location = [[CCDirector sharedDirector] convertToGL:location];
+        
+        if(CGRectContainsPoint(touchArea, location)){
+            if(!player.isActive){
+                self.player.isActive = YES;
+                [self activatePlayer];
+            }
+        }
+    }
+}
+
+- (void) ccTouchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event{
+    
+}
+
+-(void) registerWithTouchDispatcher
+{
+    [[CCDirector sharedDirector].touchDispatcher addStandardDelegate:self priority:100  ];
+}
+
 
 @end

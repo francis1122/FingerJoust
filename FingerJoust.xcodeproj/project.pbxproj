@@ -191,6 +191,8 @@
 		DEACD59F1818723A00BCA1CB /* SpikeEdgeEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = DEACD59E1818723A00BCA1CB /* SpikeEdgeEvent.m */; };
 		DEACD5A218196C7B00BCA1CB /* SettingsPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = DEACD5A118196C7B00BCA1CB /* SettingsPanel.m */; };
 		DEACD5A51819A55500BCA1CB /* JousterF.m in Sources */ = {isa = PBXBuildFile; fileRef = DEACD5A41819A55500BCA1CB /* JousterF.m */; };
+		DEACD5A8181F081900BCA1CB /* SourceSansPro-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = DEACD5A7181F06F200BCA1CB /* SourceSansPro-Regular.otf */; };
+		DEACD5A9181F081900BCA1CB /* SourceSansPro-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = DEACD5A6181F06E700BCA1CB /* SourceSansPro-Light.otf */; };
 		DEB525FE17D579A00010AFF9 /* CollisionEffect.plist in Resources */ = {isa = PBXBuildFile; fileRef = DEB525FD17D579A00010AFF9 /* CollisionEffect.plist */; };
 		DEB5260117D5B5C50010AFF9 /* CCWarpSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = DEB5260017D5B54D0010AFF9 /* CCWarpSprite.m */; };
 		DEBB5274178FAD7D006FEB1C /* TitleLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DEBB5273178FAD7D006FEB1C /* TitleLayer.m */; };
@@ -559,6 +561,8 @@
 		DEACD5A118196C7B00BCA1CB /* SettingsPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsPanel.m; sourceTree = "<group>"; };
 		DEACD5A31819A55500BCA1CB /* JousterF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JousterF.h; sourceTree = "<group>"; };
 		DEACD5A41819A55500BCA1CB /* JousterF.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JousterF.m; sourceTree = "<group>"; };
+		DEACD5A6181F06E700BCA1CB /* SourceSansPro-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceSansPro-Light.otf"; sourceTree = "<group>"; };
+		DEACD5A7181F06F200BCA1CB /* SourceSansPro-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceSansPro-Regular.otf"; sourceTree = "<group>"; };
 		DEB525FD17D579A00010AFF9 /* CollisionEffect.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = CollisionEffect.plist; sourceTree = "<group>"; };
 		DEB525FF17D5B54D0010AFF9 /* CCWarpSprite.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CCWarpSprite.h; sourceTree = "<group>"; };
 		DEB5260017D5B54D0010AFF9 /* CCWarpSprite.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CCWarpSprite.m; sourceTree = "<group>"; };
@@ -689,6 +693,8 @@
 				DE1CC7CD178FA31800CB1C59 /* Icon.png */,
 				DE1CC7CF178FA31800CB1C59 /* Icon@2x.png */,
 				DE1CC7D1178FA31800CB1C59 /* Info.plist */,
+				DEACD5A7181F06F200BCA1CB /* SourceSansPro-Regular.otf */,
+				DEACD5A6181F06E700BCA1CB /* SourceSansPro-Light.otf */,
 				DE41043E1814CCFB000088F8 /* SourceSansPro-ExtraLight.otf */,
 				DE1CC7D2178FA31800CB1C59 /* iTunesArtwork */,
 			);
@@ -1264,6 +1270,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DEACD5A8181F081900BCA1CB /* SourceSansPro-Regular.otf in Resources */,
+				DEACD5A9181F081900BCA1CB /* SourceSansPro-Light.otf in Resources */,
 				DEACD5901817450700BCA1CB /* WindEffect.plist in Resources */,
 				DE41043F1814CFA5000088F8 /* SourceSansPro-ExtraLight.otf in Resources */,
 				DEA6ADC21809DEE4000A4B0C /* MotionStreak.plist in Resources */,

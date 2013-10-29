@@ -12,6 +12,7 @@
     float windForce;
     CCParticleSystemQuad *windEffect;
     float angle;
+    BOOL warningDone;
 }
 
 

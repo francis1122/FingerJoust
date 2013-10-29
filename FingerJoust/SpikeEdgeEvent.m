@@ -26,7 +26,7 @@
         CGSize winSize= [[CCDirector sharedDirector] winSize];
         
         CCSprite *warningSign = [CCSprite spriteWithSpriteFrameName:@"warningSigns"];
-        warningSign.opacity = 115;
+        warningSign.opacity = 95;
         warningSign.position = ccp(winSize.width/2, winSize.height/2);
         [gameLayer addChild:warningSign];
         CCDelayTime *delayAnim = [CCDelayTime actionWithDuration:1.4/gameSpeed];

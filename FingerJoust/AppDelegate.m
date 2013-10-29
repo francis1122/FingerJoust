@@ -152,8 +152,7 @@
     
     //font check
 //    @"SourceSansPro-ExtraLight"
-//    NSArray *names = [UIFont fontNamesForFamilyName:@"Source Sans Pro"];
-    
+    NSArray *names = [UIFont fontNamesForFamilyName:@"Source Sans Pro"];
     
 	
 	return YES;

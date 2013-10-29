@@ -32,7 +32,8 @@
 @implementation GameLayer
 
 
-NSString *const MAIN_FONT = @"SourceSansPro-ExtraLight";
+NSString *const MAIN_FONT = @"SourceSansPro-Light";
+NSString *const SECOND_FONT = @"SourceSansPro-Regular";
 
 @synthesize powerStone, vortexArray, lastWinner, jousterArray, touchParticleArray, hazardLayer, uiLayer;
 
@@ -147,7 +148,7 @@ NSString *const MAIN_FONT = @"SourceSansPro-ExtraLight";
     Vortex *vortex = [[[Vortex alloc] init] autorelease];
     
     vortex.position = point;
-    [self addChild:vortex z:-1];
+    [self addChild:vortex];
     [self.vortexArray addObject:vortex];
     vortex.pEffect = [self vortexEffect:point];
 }
@@ -610,20 +611,17 @@ NSString *const MAIN_FONT = @"SourceSansPro-ExtraLight";
     //get direction
     CGPoint offset = ccpSub(jousterA.position, jousterB.position);
     offset = [MathHelper normalize:offset];
-    offset = ccpMult(offset, 1.3);
-    CGPoint redKnock = ccpMult(offset, blueMagnitude);
+    offset = ccpMult(offset, 1.2);
+    CGPoint redKnock = ccpMult(offset, blueMagnitude + 30);
     jousterA.velocity = redKnock;
     jousterA.outsideVelocity = redKnock;
     offset = ccpMult(offset, -1);
-    CGPoint blueKnock = ccpMult(offset, redMagnitude);
+    CGPoint blueKnock = ccpMult(offset, redMagnitude + 30);
     jousterB.velocity = blueKnock;
     jousterB.outsideVelocity = blueKnock;
     
     [self clashEffect:jousterA.position otherPoint:jousterB.position withMagnitude:blueMagnitude + redMagnitude + 500 withStun:isStun];
     
-    
-    //    NSLog(@"redMag :%f", redMagnitude);
-    //    NSLog(@"blueMag :%f", blueMagnitude);
 }
 
 
@@ -728,12 +726,9 @@ NSString *const MAIN_FONT = @"SourceSansPro-ExtraLight";
 }
 
 - (void) ccTouchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event{
-
     CGSize winSize= [[CCDirector sharedDirector] winSize];
     for(Jouster *jouster in self.jousterArray){
-        
         BOOL alreadyChosen = NO;
-
         float reducedSpace = 30;
         CGRect touchArea;
         //        CGRect strictFirstTouchArea;

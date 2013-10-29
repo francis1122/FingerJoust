@@ -17,6 +17,13 @@
     CCMenu *teamPlayMenu;
     CCMenuItemSprite *teamPlayItem;
     CCSprite *border;
+    
+    CCSprite *currentJouster;
+    
+    CCMenu *playerChoiceMenu;
+    
+    CCLabelTTF *tapToJoinLabel;
+    CCSprite *teamBG;
 }
 
 @property (nonatomic, assign) Player *player;
@@ -26,7 +33,7 @@
 
 -(void) playerColorChangedToTeam:(int)team;
 -(void) setBorderColorForPlayer;
--(void) playerCharacterChangedTo:(int) character;
+-(void) playerCharacterChangedTo:(int) character From:(BOOL) leftSide;
 -(void) activatePlayer;
 -(void) deactivatePlayer;
 -(void) turnOnTeamPlay;
