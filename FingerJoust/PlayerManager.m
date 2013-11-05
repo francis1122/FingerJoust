@@ -13,7 +13,7 @@
 
 static PlayerManager *sharedInstance = nil;
 
-@synthesize playerArray, isTeamPlay, windEvent, bombEvent, hurricaneEvent, spikeEvent, missileEvent, frequencyEvent, gameSpeed;
+@synthesize playerArray, isTeamPlay, windEvent, bombEvent, hurricaneEvent, spikeEvent, missileEvent, frequencyEvent, gameSpeed, isGameUnlocked;
 
 + (PlayerManager*)sharedInstance {
     @synchronized(self) {
@@ -33,7 +33,6 @@ static PlayerManager *sharedInstance = nil;
         missileEvent = EventOn;
         gameSpeed = 1;
         frequencyEvent = 1;
-        
         for(int i = 0; i < 4; i++){
             Player *player = [[[Player alloc] init] autorelease];
             player.playerNumber = i;
@@ -44,10 +43,22 @@ static PlayerManager *sharedInstance = nil;
             }
             [self.playerArray addObject:player];
         }
+        
+        
+        if([[NSUserDefaults standardUserDefaults] boolForKey:@"unlockGame"]) {
+            self.isGameUnlocked = YES;
+        } else {
+            self.isGameUnlocked = NO;
+        }
+        
+        
     }
     return self;
 }
 
+-(void) unlockTheGame{
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"unlockGame"];
+}
 
 -(BOOL) isPlayerActive:(int) playerNumber{
     for(Player *player in self.playerArray){

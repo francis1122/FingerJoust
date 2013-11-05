@@ -174,6 +174,9 @@
 		DE8F13B517C33C6200050E5E /* JousterD.m in Sources */ = {isa = PBXBuildFile; fileRef = DE8F13B417C33C6200050E5E /* JousterD.m */; };
 		DE91641917BB0929009817AD /* JousterB.m in Sources */ = {isa = PBXBuildFile; fileRef = DE91641817BB0929009817AD /* JousterB.m */; };
 		DE919A3F17B22CCD00DAA954 /* JousterA.m in Sources */ = {isa = PBXBuildFile; fileRef = DE919A3E17B22CCD00DAA954 /* JousterA.m */; };
+		DE9C2F7218231A34004FC3C1 /* IAPHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = DE9C2F7118231A34004FC3C1 /* IAPHelper.m */; };
+		DE9C2F7518231A3E004FC3C1 /* ZRIAPHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = DE9C2F7418231A3E004FC3C1 /* ZRIAPHelper.m */; };
+		DE9C2F7718231BE3004FC3C1 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE9C2F7618231BE3004FC3C1 /* StoreKit.framework */; };
 		DEA1B46D180FB6C7003AC1CC /* PlayerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DEA1B46C180FB6C7003AC1CC /* PlayerManager.m */; };
 		DEA1B470180FC051003AC1CC /* Player.m in Sources */ = {isa = PBXBuildFile; fileRef = DEA1B46F180FC051003AC1CC /* Player.m */; };
 		DEA1B474180FC8EB003AC1CC /* PlayerSelect.m in Sources */ = {isa = PBXBuildFile; fileRef = DEA1B473180FC8EB003AC1CC /* PlayerSelect.m */; };
@@ -193,6 +196,7 @@
 		DEACD5A51819A55500BCA1CB /* JousterF.m in Sources */ = {isa = PBXBuildFile; fileRef = DEACD5A41819A55500BCA1CB /* JousterF.m */; };
 		DEACD5A8181F081900BCA1CB /* SourceSansPro-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = DEACD5A7181F06F200BCA1CB /* SourceSansPro-Regular.otf */; };
 		DEACD5A9181F081900BCA1CB /* SourceSansPro-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = DEACD5A6181F06E700BCA1CB /* SourceSansPro-Light.otf */; };
+		DEACD5AC181F71D700BCA1CB /* AboutPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = DEACD5AB181F71D700BCA1CB /* AboutPanel.m */; };
 		DEB525FE17D579A00010AFF9 /* CollisionEffect.plist in Resources */ = {isa = PBXBuildFile; fileRef = DEB525FD17D579A00010AFF9 /* CollisionEffect.plist */; };
 		DEB5260117D5B5C50010AFF9 /* CCWarpSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = DEB5260017D5B54D0010AFF9 /* CCWarpSprite.m */; };
 		DEBB5274178FAD7D006FEB1C /* TitleLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DEBB5273178FAD7D006FEB1C /* TitleLayer.m */; };
@@ -532,6 +536,11 @@
 		DE91641817BB0929009817AD /* JousterB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JousterB.m; sourceTree = "<group>"; };
 		DE919A3D17B22CCD00DAA954 /* JousterA.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JousterA.h; sourceTree = "<group>"; };
 		DE919A3E17B22CCD00DAA954 /* JousterA.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JousterA.m; sourceTree = "<group>"; };
+		DE9C2F7018231A34004FC3C1 /* IAPHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IAPHelper.h; sourceTree = "<group>"; };
+		DE9C2F7118231A34004FC3C1 /* IAPHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IAPHelper.m; sourceTree = "<group>"; };
+		DE9C2F7318231A3E004FC3C1 /* ZRIAPHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZRIAPHelper.h; sourceTree = "<group>"; };
+		DE9C2F7418231A3E004FC3C1 /* ZRIAPHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZRIAPHelper.m; sourceTree = "<group>"; };
+		DE9C2F7618231BE3004FC3C1 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		DEA1B46B180FB6C7003AC1CC /* PlayerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerManager.h; sourceTree = "<group>"; };
 		DEA1B46C180FB6C7003AC1CC /* PlayerManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerManager.m; sourceTree = "<group>"; };
 		DEA1B46E180FC051003AC1CC /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
@@ -563,6 +572,8 @@
 		DEACD5A41819A55500BCA1CB /* JousterF.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JousterF.m; sourceTree = "<group>"; };
 		DEACD5A6181F06E700BCA1CB /* SourceSansPro-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceSansPro-Light.otf"; sourceTree = "<group>"; };
 		DEACD5A7181F06F200BCA1CB /* SourceSansPro-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceSansPro-Regular.otf"; sourceTree = "<group>"; };
+		DEACD5AA181F71D700BCA1CB /* AboutPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutPanel.h; sourceTree = "<group>"; };
+		DEACD5AB181F71D700BCA1CB /* AboutPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutPanel.m; sourceTree = "<group>"; };
 		DEB525FD17D579A00010AFF9 /* CollisionEffect.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = CollisionEffect.plist; sourceTree = "<group>"; };
 		DEB525FF17D5B54D0010AFF9 /* CCWarpSprite.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CCWarpSprite.h; sourceTree = "<group>"; };
 		DEB5260017D5B54D0010AFF9 /* CCWarpSprite.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CCWarpSprite.m; sourceTree = "<group>"; };
@@ -589,6 +600,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DE9C2F7718231BE3004FC3C1 /* StoreKit.framework in Frameworks */,
 				DE1CC7A8178FA31700CB1C59 /* QuartzCore.framework in Frameworks */,
 				DE1CC7AA178FA31700CB1C59 /* OpenGLES.framework in Frameworks */,
 				DE1CC7AC178FA31700CB1C59 /* OpenAL.framework in Frameworks */,
@@ -625,6 +637,7 @@
 		DE1CC7A6178FA31700CB1C59 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				DE9C2F7618231BE3004FC3C1 /* StoreKit.framework */,
 				DE1CC7A7178FA31700CB1C59 /* QuartzCore.framework */,
 				DE1CC7A9178FA31700CB1C59 /* OpenGLES.framework */,
 				DE1CC7AB178FA31700CB1C59 /* OpenAL.framework */,
@@ -642,6 +655,7 @@
 		DE1CC7BB178FA31700CB1C59 /* FingerJoust */ = {
 			isa = PBXGroup;
 			children = (
+				DE9C2F69182319AD004FC3C1 /* gc */,
 				DEB525FF17D5B54D0010AFF9 /* CCWarpSprite.h */,
 				DEB5260017D5B54D0010AFF9 /* CCWarpSprite.m */,
 				DEA6ADCF180CF4DA000A4B0C /* CCShake.h */,
@@ -1156,6 +1170,17 @@
 			name = Jousters;
 			sourceTree = "<group>";
 		};
+		DE9C2F69182319AD004FC3C1 /* gc */ = {
+			isa = PBXGroup;
+			children = (
+				DE9C2F7318231A3E004FC3C1 /* ZRIAPHelper.h */,
+				DE9C2F7418231A3E004FC3C1 /* ZRIAPHelper.m */,
+				DE9C2F7018231A34004FC3C1 /* IAPHelper.h */,
+				DE9C2F7118231A34004FC3C1 /* IAPHelper.m */,
+			);
+			name = gc;
+			sourceTree = "<group>";
+		};
 		DEA1B471180FC6E8003AC1CC /* CharacterSelect */ = {
 			isa = PBXGroup;
 			children = (
@@ -1165,6 +1190,8 @@
 				DEA1B473180FC8EB003AC1CC /* PlayerSelect.m */,
 				DEACD5A018196C7B00BCA1CB /* SettingsPanel.h */,
 				DEACD5A118196C7B00BCA1CB /* SettingsPanel.m */,
+				DEACD5AA181F71D700BCA1CB /* AboutPanel.h */,
+				DEACD5AB181F71D700BCA1CB /* AboutPanel.m */,
 			);
 			name = CharacterSelect;
 			sourceTree = "<group>";
@@ -1343,6 +1370,7 @@
 				DE1CC824178FA31A00CB1C59 /* CCGLProgram.m in Sources */,
 				DE1CC827178FA31A00CB1C59 /* ccGLStateCache.m in Sources */,
 				DE1CC82A178FA31A00CB1C59 /* CCGrabber.m in Sources */,
+				DE9C2F7518231A3E004FC3C1 /* ZRIAPHelper.m in Sources */,
 				DE1CC82D178FA31A00CB1C59 /* CCGrid.m in Sources */,
 				DE1CC830178FA31A00CB1C59 /* CCLabelAtlas.m in Sources */,
 				DE1CC833178FA31A00CB1C59 /* CCLabelBMFont.m in Sources */,
@@ -1371,6 +1399,7 @@
 				DE1CC86B178FA31B00CB1C59 /* CCScheduler.m in Sources */,
 				DE1CC87D178FA31B00CB1C59 /* CCShaderCache.m in Sources */,
 				DE1CC880178FA31B00CB1C59 /* ccShaders.m in Sources */,
+				DEACD5AC181F71D700BCA1CB /* AboutPanel.m in Sources */,
 				DE1CC883178FA31B00CB1C59 /* CCSprite.m in Sources */,
 				DE1CC886178FA31B00CB1C59 /* CCSpriteBatchNode.m in Sources */,
 				DE1CC889178FA31B00CB1C59 /* CCSpriteFrame.m in Sources */,
@@ -1380,6 +1409,7 @@
 				DE1CC892178FA31B00CB1C59 /* CCTextureAtlas.m in Sources */,
 				DE1CC895178FA31B00CB1C59 /* CCTextureCache.m in Sources */,
 				DE1CC898178FA31B00CB1C59 /* CCTexturePVR.m in Sources */,
+				DE9C2F7218231A34004FC3C1 /* IAPHelper.m in Sources */,
 				DE1CC89B178FA31B00CB1C59 /* CCTileMapAtlas.m in Sources */,
 				DE1CC89E178FA31B00CB1C59 /* CCTMXLayer.m in Sources */,
 				DEA6ADC6180B6F9D000A4B0C /* UILayer.m in Sources */,

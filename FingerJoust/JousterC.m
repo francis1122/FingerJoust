@@ -76,7 +76,7 @@
     CGPoint spot = ccpNormalize(joining);
     joustPosition = ccpMult(spot, joustRadius * 2);
 }
-
+/*
 - (void) draw{
     if(player.playerNumber == 1){
         ccDrawColor4F(1.0f, 0.0f, 0.0f, 1.0f);
@@ -88,7 +88,7 @@
     ccDrawCircle(joustPosition, joustRadius, 0, 30, NO);
     [super draw];
 }
-
+*/
 /*
 -(void) touch:(CGPoint) touch{
     if(waitingForTouch){

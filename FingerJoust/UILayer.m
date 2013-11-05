@@ -172,7 +172,7 @@
                     pos = ccp( 35 + j*45, bottomLayer.contentSize.height - 25);
                     layer = topLayer;
                 }
-                CCSprite *victorySprite = [[[CCSprite alloc] initWithSpriteFrameName:@"bomb"] autorelease];
+                CCSprite *victorySprite = [[[CCSprite alloc] initWithSpriteFrameName:@"scoreHolder"] autorelease];
                 victorySprite.scale = .75;
                 victorySprite.color = ccc3(125, 125, 125);
                 victorySprite.position = pos;
@@ -487,8 +487,8 @@
     
     //top and bottom bars
     
-    CCMoveTo *topMove = [CCMoveTo actionWithDuration:1 position:ccp(CONTROL_OFFSET, -winSize.height/2)];
-    CCMoveTo *bottomMove = [CCMoveTo actionWithDuration:1 position:ccp(CONTROL_OFFSET, winSize.height)];
+    CCMoveTo *topMove = [CCMoveTo actionWithDuration:0.4 position:ccp(CONTROL_OFFSET, -winSize.height/2)];
+    CCMoveTo *bottomMove = [CCMoveTo actionWithDuration:0.4 position:ccp(CONTROL_OFFSET, winSize.height)];
     
     CCEaseIn *topEase = [CCEaseIn actionWithAction:topMove rate:2];
     CCEaseIn *bottomEase = [CCEaseIn actionWithAction:bottomMove rate:2];

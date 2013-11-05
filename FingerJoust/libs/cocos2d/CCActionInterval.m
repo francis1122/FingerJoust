@@ -209,6 +209,7 @@
 		[_actions[_last] stop];
 
 	[super stop];
+    
 }
 
 -(void) update: (ccTime) t

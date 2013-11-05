@@ -17,6 +17,7 @@
     CCSprite *windActive, *bombActive, *hurricaneActive, *spikeActive, *missileActive, *gameSpeedActive, *frequencyActive;
 }
 
+@property BOOL isActive;
 @property (nonatomic, assign) TitleLayer *titleLayer;
 
 -(void) resolve;

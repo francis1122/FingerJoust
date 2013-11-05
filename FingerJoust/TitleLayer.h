@@ -9,15 +9,18 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 
-@class SettingsPanel;
+@class SettingsPanel, AboutPanel;
 @interface TitleLayer : CCLayerColor {
     CCSprite *jousterBoxLeft, *jousterBoxRight;
     SettingsPanel *settingsMenu;
+    AboutPanel *aboutMenu;
     NSMutableArray *playerSelectArray;
     CCMenu *menu;
-    
+    CCSprite *logo;
 }
 
+@property (nonatomic, assign) SettingsPanel *settingsMenu;
+@property (nonatomic, assign) AboutPanel *aboutMenu;
 @property (nonatomic, assign) CCMenu *menu;
 @property (nonatomic, retain) NSMutableArray *playerSelectArray;
 

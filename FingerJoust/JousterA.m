@@ -15,9 +15,16 @@
 
 
 -(void) resetJouster{
-    self.joustPosition = ccp(1,0);
-    previousVelocity = ccp(1,0);
-    joustVelocity = ccp(1,0);
+        if(self.isDisplay){
+            self.joustPosition = ccp(100.0 - (arc4random()%200), 100.0 - (arc4random()%200));
+            previousVelocity = ccp(140,100);
+            joustVelocity = ccp(150,100);
+        }else{
+            self.joustPosition = ccp(1,0);
+            previousVelocity = ccp(1,0);
+            joustVelocity = ccp(1,0);
+        }
+
     [super resetJouster];
 }
 
@@ -35,7 +42,9 @@
     jousterSprite.velocity = joustVelocity;
     [jousterSprite update:dt];
     [jousterInnerSprite update:dt];
-    [self checkJoustBoundaries];
+    if(!self.isDisplay){
+        [self checkJoustBoundaries];
+    }
 }
 
 -(void) calculateJoustPosition:(ccTime) dt{
@@ -44,7 +53,11 @@
     joustPosition = ccpSub(self.joustPosition, ccpMult(self.outsideVelocity, dt));
     
     //slows down the joust
-    joustVelocity = ccpMult(joustVelocity, .985);
+    if(self.isDisplay){
+//        joustVelocity = ccpMult(joustVelocity, 1);
+    }else{
+        joustVelocity = ccpMult(joustVelocity, .985);
+    }
     float distance = ccpLength(self.joustPosition);
     //was 0.06
     distance = distance/.09;

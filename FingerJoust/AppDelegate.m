@@ -148,11 +148,11 @@
 	// make main window visible
 	[window_ makeKeyAndVisible];
 
-    
-    
     //font check
 //    @"SourceSansPro-ExtraLight"
-    NSArray *names = [UIFont fontNamesForFamilyName:@"Source Sans Pro"];
+//    NSArray *names = [UIFont fontNamesForFamilyName:@"Source Sans Pro"];
+
+    
     
 	
 	return YES;

@@ -26,9 +26,11 @@
         
         blastRadius = [CCSprite spriteWithSpriteFrameName:@"timerCircle"];
         blastRadius.scale = 1.35;
-        bomb = [CCSprite spriteWithSpriteFrameName:@"BodyOuter"];
+        bomb = [CCSprite spriteWithSpriteFrameName:@"bomb"];
         bomb.color = ccGRAY;
-        countDown = [CCLabelTTF labelWithString:@"4" fontName:MAIN_FONT fontSize:40];
+        bomb.scale = 1.25;
+        countDown = [CCLabelTTF labelWithString:@"4" fontName:MAIN_FONT fontSize:32];
+        countDown.position = ccp(2,-8);
         countDown.color = ccWHITE;
 
         PlayerManager *PM = [PlayerManager sharedInstance];

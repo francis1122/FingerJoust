@@ -10,14 +10,24 @@
 #import "PlayerManager.h"
 #import "TitleLayer.h"
 #import "GameLayer.h"
+#import "AboutPanel.h"
 
 @implementation SettingsPanel
 
-@synthesize titleLayer;
+@synthesize titleLayer, isActive;
 
 -(void) resolve{
 		CGSize size = [[CCDirector sharedDirector] winSize];
-    menuToggle = [CCMenuItemFont itemWithString:@"Settings" block:^(CCMenuItemFont *sender) {
+        menuToggle = [CCMenuItemFont itemWithString:@"Settings" block:^(CCMenuItemFont *sender) {
+            //check if about is open
+            if(titleLayer.aboutMenu.isActive){
+                titleLayer.aboutMenu.isActive = NO;
+                titleLayer.menu.enabled = YES;
+                CCMoveTo *moveTo = [CCMoveTo actionWithDuration:0.35 position:ccp(CONTROL_OFFSET, size.height - 60)];
+                [titleLayer.aboutMenu runAction:moveTo];
+                return;
+            }
+            
         if(isActive){
             isActive = NO;
                         titleLayer.menu.enabled = YES;
@@ -39,7 +49,7 @@
     
         PlayerManager *PM = [PlayerManager sharedInstance];
     //event items
-    float offset = 65;
+    float offset = 115;
     float spacing = 65;
     float xPos = 165;
     float fontSize = 24;
@@ -104,7 +114,7 @@
     }else if(state == 2){
         frequencyActive.position =  ccp(position.x + 110 + alwaysItem.position.x, position.y);
     }else if(state == 3){
-        frequencyActive.position =   ccp(position.x + 110 + alwaysItem.position.x, position.y);
+        frequencyActive.position =   ccp(position.x + 110 + neverItem.position.x, position.y);
     }
     frequencyActive.color = ccORANGE;
     [self addChild:frequencyActive];

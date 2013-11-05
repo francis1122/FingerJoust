@@ -49,7 +49,7 @@
         [self checkBombBoundaries:bomb];
         for(Jouster *jouster in gameLayer.jousterArray){
                 //collisions tuff
-                if( [MathHelper circleCollisionPositionA:jouster.position raidusA:jouster.bodyRadius positionB:bomb.position radiusB:20]){
+                if( [MathHelper circleCollisionPositionA:jouster.position raidusA:jouster.bodyRadius positionB:ccp(bomb.position.x, bomb.position.y - 4) radiusB:20]){
                     
                     //
                     
@@ -78,7 +78,7 @@
                     
                 }
             
-                if( [MathHelper circleCollisionPositionA:[jouster getWorldPositionOfJoust]  raidusA:[jouster joustRadius] positionB:bomb.position radiusB: 20]){
+                if( [MathHelper circleCollisionPositionA:[jouster getWorldPositionOfJoust]  raidusA:[jouster joustRadius] positionB:ccp(bomb.position.x, bomb.position.y - 4) radiusB: 20]){
                     //bounce off eachother
                     [jouster joustCollision:bomb.position withRadius:20];
                     

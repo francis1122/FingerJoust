@@ -40,7 +40,9 @@
     jousterSprite.velocity = joustVelocity;
     [jousterSprite update:dt];
     [jousterInnerSprite update:dt];
-    [self checkJoustBoundaries];
+    if(!self.isDisplay){
+        [self checkJoustBoundaries];
+    }
     [self checkJoustAndBodyTouching];
 }
 
@@ -49,8 +51,7 @@
     if(length < joustRadius + bodyRadius){
         CGPoint awayFromCenter = ccpNormalize(joustPosition);
         joustPosition = ccpMult(awayFromCenter, joustRadius + bodyRadius);
-        
-        //put
+
         //collision has happened
         CGPoint newVel = ccpMult(awayFromCenter, 550);
         joustVelocity = newVel;

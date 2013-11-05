@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 
-@class Player;
+@class Player, Jouster;
 @interface PlayerSelect : CCLayerColor {
     CCSprite *isActiveSprite;
     CCLabelTTF * characterLabel;
@@ -18,14 +18,17 @@
     CCMenuItemSprite *teamPlayItem;
     CCSprite *border;
     
-    CCSprite *currentJouster;
+    Jouster *currentJouster;
     
     CCMenu *playerChoiceMenu;
     
     CCLabelTTF *tapToJoinLabel;
     CCSprite *teamBG;
+    CCSprite *lock;
+    CCMenu *unlockMenu;
+    
 }
-
+@property BOOL isLocked;
 @property (nonatomic, assign) Player *player;
 
 -(id) initWithPlayer:(Player *)p;

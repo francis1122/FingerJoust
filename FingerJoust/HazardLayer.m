@@ -55,11 +55,11 @@
         }
         
         if(PM.frequencyEvent == 0){
-            frequency = -2;
+            frequency = -7;
         }else if(PM.frequencyEvent == 1){
-            frequency = 1;
+            frequency = -3;
         }else if(PM.frequencyEvent == 2){
-            frequency = 4;
+            frequency = 2;
         }else if(PM.frequencyEvent ==3){
             noEvents = YES;
         }
@@ -78,7 +78,7 @@
     addAlways = NO;
     lastMissile = 0;
     lastBomb = 0;
-    sinceLastEvent = frequency + 2 + arc4random()%6;
+    sinceLastEvent = frequency + 1 + arc4random()%9;
     for(int i = 0; i < self.eventArray.count; i++){
         HazardEvent *hazardEvent = [self.eventArray objectAtIndex:i];
         [hazardEvent isFinished];
@@ -155,35 +155,35 @@
 -(void) chooseEvent{
     int validCount = self.validEvents.count;
 
-    if(validCount > 0 && roundTimerElapsed > 1.5 && sinceLastEvent > 9){
+    if(validCount > 0 && roundTimerElapsed > 2.5 && sinceLastEvent > 8){
         sinceLastEvent = frequency;
         NSNumber *num = [self.validEvents objectAtIndex:(arc4random()%validCount)];
         int stu = [num intValue];
         if(stu == WindEvents){
-            sinceLastEvent += arc4random()%3;
+            sinceLastEvent += arc4random()%4;
             WindEvent *windEvent = [[[WindEvent alloc] initWithTime:6 WithForce:19 GameLayer:gameLayer] autorelease];
             [windEvent onStart];
             [self.eventArray addObject:windEvent];
         }else if(stu == MissileEvents){
-            sinceLastEvent += arc4random()%2;
+            sinceLastEvent += arc4random()%3;
             int missileCount = 1 + arc4random()%3;
             MissileEvent *missileEvent = [[[MissileEvent alloc] initWithTime:7 MissileAmount:missileCount GameLayer:gameLayer] autorelease];
             [missileEvent onStart];
             [self.eventArray addObject:missileEvent];
         }else if(stu == BombEvents){
-            sinceLastEvent += arc4random()%3;
+            sinceLastEvent += arc4random()%4;
             int bombCount = 1 + arc4random()%2;
             BombEvent *bombEvent = [[[BombEvent alloc] initWithTime:5 WithBombAmount:bombCount GameLayer:gameLayer] autorelease];
             [bombEvent onStart];
             [self.eventArray addObject:bombEvent];
         }else if(stu == HurricaneEvents){
-            sinceLastEvent += arc4random()%2;
+            sinceLastEvent += arc4random()%3;
             int hurricaneCount = 1+ arc4random()%2;
             HurricaneEvent *hurEvent = [[[HurricaneEvent alloc] initWithTime:6 WithHurricaneAmount:hurricaneCount GameLayer:gameLayer] autorelease];
             [hurEvent onStart];
             [self.eventArray addObject:hurEvent];
         }else if(stu == SpikeEvents){
-            sinceLastEvent += arc4random()%3;
+            sinceLastEvent += arc4random()%4;
             SpikeEdgeEvent *spikeEvent = [[[SpikeEdgeEvent alloc] initWithTime:6 GameLayer:gameLayer] autorelease];
             [spikeEvent onStart];
             [self.eventArray addObject:spikeEvent];

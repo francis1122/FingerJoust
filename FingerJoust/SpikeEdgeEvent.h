@@ -13,6 +13,7 @@
     NSMutableArray *spikeArray;
     CCSprite *rightSpike, *leftSpike, *bottomSpike, *topSpike;
     BOOL isRetracting;
+    CCSequence *startUp;
 }
 
 @property (nonatomic, retain) NSMutableArray *spikeArray;

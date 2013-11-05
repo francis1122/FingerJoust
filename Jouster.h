@@ -60,7 +60,7 @@
     CCParticleSystemQuad *jousterMotionStreak;
 }
 
-
+@property BOOL isDisplay;
 @property int powerStones;
 @property int wins;
 @property float bodyRadius, joustRadius, orbitalOffset;

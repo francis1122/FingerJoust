@@ -156,9 +156,9 @@ NSString *const SECOND_FONT = @"SourceSansPro-Regular";
 
 -(Jouster*) createJouster:(int) character WithPlayer:(Player*) player{
     if(character == 0 ){
-        return [[[JousterA alloc] initWithPlayer:player] autorelease];
-    }else if(character == 1){
         return [[[JousterB alloc] initWithPlayer:player] autorelease];
+    }else if(character == 1){
+        return [[[JousterA alloc] initWithPlayer:player] autorelease];
     }else if(character ==2 ){
         return [[[JousterC alloc] initWithPlayer:player] autorelease];
     }else if(character == 3){
@@ -267,7 +267,6 @@ NSString *const SECOND_FONT = @"SourceSansPro-Regular";
                 }
             }
         }
-        
         
         //step jouster position
         if(!joustersHit){
@@ -815,6 +814,10 @@ NSString *const SECOND_FONT = @"SourceSansPro-Regular";
             [jouster resetJouster];
         }
     }
+    [uiLayer refreshUI];
+    //hack to reset jousters visually
+    currentState = GAMEPLAY;
+    [self update:0.00];
     
     currentState = ROUND_START;
     //show names of fighters

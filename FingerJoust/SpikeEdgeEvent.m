@@ -39,6 +39,7 @@
         delayAnim = [CCDelayTime actionWithDuration:1.4 / gameSpeed];
         blockAnim = [CCCallBlock actionWithBlock:^{
             //spawn walls
+            startUp = nil;
             float durationMove = .4;
             topSpike = [CCSprite spriteWithSpriteFrameName:@"spikeWall"];
             topSpike.color = COLOR_GAMEBORDER;
@@ -76,20 +77,13 @@
             [gameLayer.hazardLayer addChild:leftSpike];
             [self.spikeArray addObject:leftSpike];
             
-            
-            
-            
-            
-            
-            
         }];
-        seqAnim = [CCSequence actionOne:delayAnim two:blockAnim];
-        [gameLayer runAction:seqAnim];
+        startUp = [CCSequence actionOne:delayAnim two:blockAnim];
+        [gameLayer runAction:startUp];
         
         
         
-        
-        
+    
         
     }
     return self;
@@ -135,6 +129,9 @@
 }
 
 -(void) isFinished{
+    if(startUp){
+        [gameLayer stopAction:startUp];
+    }
     for(int i = 0; i < [self.spikeArray count]; i++){
         CCSprite *spike = [self.spikeArray objectAtIndex:i];
 //        [spike stopAllActions];

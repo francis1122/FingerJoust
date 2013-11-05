@@ -36,9 +36,11 @@ typedef enum {
     
     //0 = slow, 1 = normal, 2 = fast
     int gameSpeed;
+    
 }
 
 @property BOOL isTeamPlay;
+@property BOOL isGameUnlocked;
 @property (nonatomic, retain) NSMutableArray *playerArray;
 @property EventSettingState windEvent, bombEvent, hurricaneEvent, spikeEvent, missileEvent;
 @property int frequencyEvent, gameSpeed;
@@ -46,6 +48,6 @@ typedef enum {
 + (PlayerManager*)sharedInstance;
 -(BOOL) isPlayerActive:(int) playerNumber;
 -(float) getGameSpeedScaler;
-
+-(void) unlockTheGame;
 
 @end
