@@ -34,9 +34,10 @@
 		// ask director for the window size
         
         
+        
 		// position the label on the center of the screen
-        CCSprite *normal = [CCSprite spriteWithSpriteFrameName:@"playGame"];
-        CCSprite *selected = [CCSprite spriteWithSpriteFrameName:@"playGame"];
+        CCSprite *normal = [CCSprite spriteWithSpriteFrameName:@"play"];
+        CCSprite *selected = [CCSprite spriteWithSpriteFrameName:@"play"];
 		CCMenuItemSprite *playItem = [CCMenuItemSprite itemWithNormalSprite:normal selectedSprite:selected block:^(id sender) {
             int activeCount = 0;
             NSMutableArray *teamArray  = [NSMutableArray array];
@@ -83,21 +84,25 @@
 		}];
         
         
-        CCMenuItemFont *teamPlayToggle = [CCMenuItemFont itemWithString:@"Team Play Off" block:^(CCMenuItemFont *sender) {
+        normal = [CCSprite spriteWithSpriteFrameName:@"teamPlay"];
+        selected = [CCSprite spriteWithSpriteFrameName:@"teamPlay"];
+		CCMenuItemSprite *teamPlayToggle = [CCMenuItemSprite itemWithNormalSprite:normal selectedSprite:selected block:^(CCMenuItemSprite *sender) {
+//        CCMenuItemFont *teamPlayToggle = [CCMenuItemFont itemWithString:@"Team Play Off" block:^(CCMenuItemFont *sender) {
             [PlayerManager sharedInstance].isTeamPlay = ![PlayerManager sharedInstance].isTeamPlay;
             if([PlayerManager sharedInstance].isTeamPlay){
                 for(PlayerSelect *selectLayer in self.playerSelectArray){
                     [selectLayer turnOnTeamPlay];
                 }
-                [sender setString:@"Team Play On"];
+                sender.color = ccBLACK;
+  //              [sender setString:@"Team Play On"];
             }else{
                 for(PlayerSelect *selectLayer in self.playerSelectArray){
                     [selectLayer turnOffTeamPlay];
                 }
-                [sender setString:@"Team Play Off"];
+                sender.color = ccWHITE;
+//                [sender setString:@"Team Play Off"];
             }
 		}];
-        [teamPlayToggle setFontName:MAIN_FONT];
         
 		menu = [CCMenu menuWithItems:playItem, teamPlayToggle, nil];
 		
@@ -106,7 +111,7 @@
 		
         //settings menu
         settingsMenu = [SettingsPanel layerWithColor:COLOR_GAMEBORDER_B4
-                                               width:size.width - 2*CONTROL_OFFSET
+                                               width:size.width - 2*CONTROL_OFFSET + 4
                                               height:self.contentSize.height - 60];
         settingsMenu.position = ccp(CONTROL_OFFSET, -settingsMenu.contentSize.height + 60);
         settingsMenu.titleLayer = self;
@@ -116,7 +121,7 @@
         
         //about panel
         aboutMenu = [AboutPanel layerWithColor:COLOR_GAMEBORDER_B4
-                                         width:size.width - 2*CONTROL_OFFSET
+                                         width:size.width - 2*CONTROL_OFFSET + 4
                                         height:self.contentSize.height - 60];
         aboutMenu.position = ccp(CONTROL_OFFSET, size.height - 60);
         aboutMenu.titleLayer = self;
@@ -283,13 +288,13 @@
         float width = 315;
         CGPoint pos = CGPointZero;
         if(selectionScreen.player.playerNumber == 0){
-            pos = ccp(0, size.height/2);
+            pos = ccp(-2, size.height/2);
         }else if(selectionScreen.player.playerNumber == 1){
             pos = ccp(size.width - width, size.height/2);
         }else if(selectionScreen.player.playerNumber == 2){
             pos = ccp(size.width - width, 0);
         }else if(selectionScreen.player.playerNumber == 3){
-            pos = ccp(0, 0);
+            pos = ccp(-2, 0);
         }
         CCMoveTo *moveTo = [CCMoveTo actionWithDuration:0.8 position:pos];
         CCEaseIn *easeIn = [CCEaseIn actionWithAction:moveTo rate:2];
@@ -304,8 +309,8 @@
     //animate to and bottom in
     CCDelayTime *delay = [CCDelayTime actionWithDuration:0.9];
     CCCallBlock *block = [CCCallBlock actionWithBlock:^{
-        CCMoveTo *settingsMove = [CCMoveTo actionWithDuration:.3 position:ccp(CONTROL_OFFSET, -settingsMenu.contentSize.height + 60)];
-        CCMoveTo *aboutMove = [CCMoveTo actionWithDuration:.3 position:ccp(CONTROL_OFFSET, size.height - 60)];
+        CCMoveTo *settingsMove = [CCMoveTo actionWithDuration:.3 position:ccp(CONTROL_OFFSET -2, -settingsMenu.contentSize.height + 60)];
+        CCMoveTo *aboutMove = [CCMoveTo actionWithDuration:.3 position:ccp(CONTROL_OFFSET - 2, size.height - 60)];
         CCFadeIn *menuFade = [CCFadeIn actionWithDuration:.4];
         CCFadeIn *logoFade = [CCFadeIn actionWithDuration:.4];
         

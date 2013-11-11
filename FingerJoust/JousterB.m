@@ -25,16 +25,14 @@
     [super resetJouster];
     previousVelocity = ccp(1,0);
     joustPosition = ccpMult( ccp(cos(aliveTicker), sin(aliveTicker)), bodyRadius);
+    aliveTicker = 0;
+    aliveTicker = 3 * (arc4random()%5)/10;
 }
 
 -(void) update:(ccTime)dt{
 
 
-    if(player.playerNumber == 1){
-        aliveTicker += dt * 3.6;
-    }else{
-        aliveTicker += dt * 3.6;
-    }
+    aliveTicker += dt * 3.6;
 
     CGPoint desiredLocation = ccpMult( ccp(cos(aliveTicker), sin(aliveTicker)), bodyRadius * 1.5);
     joustVelocity = ccpSub(joustPosition, desiredLocation);

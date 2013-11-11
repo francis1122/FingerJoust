@@ -140,10 +140,8 @@
             blackOverlay.scaleY = -1;
         }
         
-
         blackOverlay.color = COLOR_GAMEBORDER;
         [blackLayer addChild:blackOverlay];
-        
         
         displayedTime = ROUND_TIME;
         roundTimer = ROUND_TIME;
@@ -151,7 +149,6 @@
         self.timerLabel.color = ccWHITE;
         timerLabel.position = ccp(topLayer.contentSize.width/2, 30);
         [bottomLayer addChild:timerLabel z:4];
-        
         
         //victory stuff
         //holders for the victory spots

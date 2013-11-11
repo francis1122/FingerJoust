@@ -8,6 +8,7 @@
 
 #import "PlayerManager.h"
 #import "Player.h"
+#import "ZRIAPHelper.h"
 
 @implementation PlayerManager
 
@@ -25,6 +26,22 @@ static PlayerManager *sharedInstance = nil;
 
 -(id) init{
     if(self = [super init]){
+        
+        //have this called only when the app is opening for the first time on device
+        if(![[NSUserDefaults standardUserDefaults] boolForKey:@"AppOpenedBefore"]){
+            [[ZRIAPHelper sharedInstance] restoreCompletedTransactions];
+            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"AppOpenedBefore"];
+        }
+        
+        [[ZRIAPHelper sharedInstance] requestProductsWithCompletionHandler:^(BOOL success, NSArray *_products) {
+            if (success) {
+                products = [[NSArray alloc] initWithArray:_products];
+            }else{
+                NSLog(@"In App Purchase Products Not Populated!");
+            }
+        }];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(productPurchased:) name:IAPHelperProductPurchasedNotification object:nil];
         self.playerArray = [NSMutableArray array];
         windEvent = EventOn;
         bombEvent = EventOn;
@@ -56,7 +73,42 @@ static PlayerManager *sharedInstance = nil;
     return self;
 }
 
+
+- (void)productPurchased:(NSNotification *)notification {
+    NSString *title = @"Game Unlocked Successfully";
+    NSString *message = nil;
+    NSString * productIdentifier = notification.object;
+    if ([productIdentifier isEqualToString:@"UnlockGameID"]) {
+        [self unlockTheGame];
+    }
+    
+    if (message) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
+                                                        message:message
+                                                       delegate:self
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
+        [alert release];
+    }
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"Notification_PurchaseCallback" object:nil];
+    
+    
+}
+
+-(void) purchaseProduct{
+    for (SKProduct *product in products){
+        if ([product.productIdentifier isEqualToString:@"UnlockGameID"]) {
+            NSLog(@"Buying %@...", product.productIdentifier);
+            [[ZRIAPHelper sharedInstance] buyProduct:product];
+            break;
+        }
+    }
+}
+
 -(void) unlockTheGame{
+    self.isGameUnlocked = YES;
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"unlockGame"];
 }
 

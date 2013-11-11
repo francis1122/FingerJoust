@@ -123,7 +123,8 @@
     CCSprite *normal = [CCSprite spriteWithSpriteFrameName:@"unlock"];
     CCSprite *selected = [CCSprite spriteWithSpriteFrameName:@"unlock"];
     CCMenuItemSprite *unlockItem = [CCMenuItemSprite itemWithNormalSprite:normal selectedSprite:selected block:^(id sender) {
-        NSLog(@"buy the app");
+        PlayerManager *PM = [PlayerManager sharedInstance];
+        [PM purchaseProduct];
     }];
     position = ccp(xPos + otheroffsetX - 54, offset + 49);
     CCMenu *unlockMenu = [CCMenu menuWithItems:unlockItem, nil];

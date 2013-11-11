@@ -24,7 +24,7 @@
 			<key>MaxSheetSize</key>
 			<integer>4096</integer>
 			<key>NpotSize</key>
-			<string>{2052, 2032}</string>
+			<string>{2052, 4088}</string>
 			<key>Padding</key>
 			<integer>8</integer>
 			<key>PixelFormat</key>
@@ -135,9 +135,9 @@
 						<key>FlipY</key>
 						<false/>
 						<key>Frame</key>
-						<string>{{946, 812}, {65, 64}}</string>
+						<string>{{750, 1328}, {65, 64}}</string>
 						<key>Frame-HD</key>
-						<string>{{1892, 1624}, {130, 128}}</string>
+						<string>{{1500, 2656}, {130, 128}}</string>
 						<key>Image</key>
 						<string>JoustF_JoustF.png</string>
 						<key>Image-HD</key>
@@ -163,7 +163,7 @@
 						<key>OriginalSize</key>
 						<string>{130, 128}</string>
 						<key>Position</key>
-						<string>{1892, 1624}</string>
+						<string>{1500, 2656}</string>
 						<key>Scale</key>
 						<string>{1, 1}</string>
 						<key>SpriteSize</key>
@@ -276,9 +276,9 @@
 						<key>FlipY</key>
 						<false/>
 						<key>Frame</key>
-						<string>{{868, 890}, {65, 64}}</string>
+						<string>{{930, 1848}, {65, 64}}</string>
 						<key>Frame-HD</key>
-						<string>{{1736, 1780}, {130, 128}}</string>
+						<string>{{1860, 3696}, {130, 128}}</string>
 						<key>Image</key>
 						<string>JoustF_JoustF.png</string>
 						<key>Image-HD</key>
@@ -304,7 +304,7 @@
 						<key>OriginalSize</key>
 						<string>{130, 128}</string>
 						<key>Position</key>
-						<string>{1736, 1780}</string>
+						<string>{1860, 3696}</string>
 						<key>Scale</key>
 						<string>{1, 1}</string>
 						<key>SpriteSize</key>
@@ -417,9 +417,9 @@
 						<key>FlipY</key>
 						<false/>
 						<key>Frame</key>
-						<string>{{946, 880}, {65, 64}}</string>
+						<string>{{750, 1396}, {65, 64}}</string>
 						<key>Frame-HD</key>
-						<string>{{1892, 1760}, {130, 128}}</string>
+						<string>{{1500, 2792}, {130, 128}}</string>
 						<key>Image</key>
 						<string>JoustF_JoustF.png</string>
 						<key>Image-HD</key>
@@ -445,7 +445,7 @@
 						<key>OriginalSize</key>
 						<string>{130, 128}</string>
 						<key>Position</key>
-						<string>{1892, 1760}</string>
+						<string>{1500, 2792}</string>
 						<key>Scale</key>
 						<string>{1, 1}</string>
 						<key>SpriteSize</key>
@@ -558,9 +558,9 @@
 						<key>FlipY</key>
 						<false/>
 						<key>Frame</key>
-						<string>{{394, 578}, {300, 250}}</string>
+						<string>{{750, 1464}, {300, 250}}</string>
 						<key>Frame-HD</key>
-						<string>{{788, 1156}, {600, 500}}</string>
+						<string>{{1500, 2928}, {600, 500}}</string>
 						<key>Image</key>
 						<string>JoustF_JoustF.png</string>
 						<key>Image-HD</key>
@@ -570,7 +570,7 @@
 						<key>IsDrawable</key>
 						<true/>
 						<key>IsRotated</key>
-						<false/>
+						<true/>
 						<key>IsTrimmed</key>
 						<false/>
 						<key>Name</key>
@@ -586,7 +586,7 @@
 						<key>OriginalSize</key>
 						<string>{600, 500}</string>
 						<key>Position</key>
-						<string>{788, 1156}</string>
+						<string>{1500, 2928}</string>
 						<key>Scale</key>
 						<string>{1, 1}</string>
 						<key>SpriteSize</key>
@@ -698,9 +698,9 @@
 						<key>FlipY</key>
 						<false/>
 						<key>Frame</key>
-						<string>{{698, 732}, {175, 165.5}}</string>
+						<string>{{750, 1768}, {175, 165.5}}</string>
 						<key>Frame-HD</key>
-						<string>{{1396, 1464}, {350, 331}}</string>
+						<string>{{1500, 3536}, {350, 331}}</string>
 						<key>Image</key>
 						<string>JoustF_JoustF.png</string>
 						<key>Image-HD</key>
@@ -710,7 +710,7 @@
 						<key>IsDrawable</key>
 						<true/>
 						<key>IsRotated</key>
-						<true/>
+						<false/>
 						<key>IsTrimmed</key>
 						<false/>
 						<key>Name</key>
@@ -726,7 +726,7 @@
 						<key>OriginalSize</key>
 						<string>{350, 331}</string>
 						<key>Position</key>
-						<string>{1396, 1464}</string>
+						<string>{1500, 3536}</string>
 						<key>Scale</key>
 						<string>{1, 1}</string>
 						<key>SpriteSize</key>
@@ -839,9 +839,9 @@
 						<key>FlipY</key>
 						<false/>
 						<key>Frame</key>
-						<string>{{4, 832}, {50, 47.5}}</string>
+						<string>{{270, 1682}, {50, 47.5}}</string>
 						<key>Frame-HD</key>
-						<string>{{8, 1664}, {100, 95}}</string>
+						<string>{{540, 3364}, {100, 95}}</string>
 						<key>Image</key>
 						<string>JoustF_JoustF.png</string>
 						<key>Image-HD</key>
@@ -851,7 +851,7 @@
 						<key>IsDrawable</key>
 						<true/>
 						<key>IsRotated</key>
-						<true/>
+						<false/>
 						<key>IsTrimmed</key>
 						<false/>
 						<key>Name</key>
@@ -867,7 +867,7 @@
 						<key>OriginalSize</key>
 						<string>{100, 95}</string>
 						<key>Position</key>
-						<string>{8, 1664}</string>
+						<string>{540, 3364}</string>
 						<key>Scale</key>
 						<string>{1, 1}</string>
 						<key>SpriteSize</key>
@@ -980,9 +980,9 @@
 						<key>FlipY</key>
 						<false/>
 						<key>Frame</key>
-						<string>{{784, 966}, {50, 47.5}}</string>
+						<string>{{216, 1682}, {50, 47.5}}</string>
 						<key>Frame-HD</key>
-						<string>{{1568, 1932}, {100, 95}}</string>
+						<string>{{432, 3364}, {100, 95}}</string>
 						<key>Image</key>
 						<string>JoustF_JoustF.png</string>
 						<key>Image-HD</key>
@@ -1008,7 +1008,7 @@
 						<key>OriginalSize</key>
 						<string>{100, 95}</string>
 						<key>Position</key>
-						<string>{1568, 1932}</string>
+						<string>{432, 3364}</string>
 						<key>Scale</key>
 						<string>{1, 1}</string>
 						<key>SpriteSize</key>
@@ -1120,9 +1120,9 @@
 						<key>FlipY</key>
 						<false/>
 						<key>Frame</key>
-						<string>{{946, 732}, {75, 75}}</string>
+						<string>{{930, 1768}, {75, 75}}</string>
 						<key>Frame-HD</key>
-						<string>{{1892, 1464}, {150, 150}}</string>
+						<string>{{1860, 3536}, {150, 150}}</string>
 						<key>Image</key>
 						<string>JoustF_JoustF.png</string>
 						<key>Image-HD</key>
@@ -1148,7 +1148,7 @@
 						<key>OriginalSize</key>
 						<string>{150, 150}</string>
 						<key>Position</key>
-						<string>{1892, 1464}</string>
+						<string>{1860, 3536}</string>
 						<key>Scale</key>
 						<string>{1, 1}</string>
 						<key>SpriteSize</key>
@@ -1260,9 +1260,9 @@
 						<key>FlipY</key>
 						<false/>
 						<key>Frame</key>
-						<string>{{4, 4}, {421.5, 291}}</string>
+						<string>{{4, 1008}, {421.5, 291}}</string>
 						<key>Frame-HD</key>
-						<string>{{8, 8}, {843, 582}}</string>
+						<string>{{8, 2016}, {843, 582}}</string>
 						<key>Image</key>
 						<string>JoustF_JoustF.png</string>
 						<key>Image-HD</key>
@@ -1288,7 +1288,7 @@
 						<key>OriginalSize</key>
 						<string>{843, 582}</string>
 						<key>Position</key>
-						<string>{8, 8}</string>
+						<string>{8, 2016}</string>
 						<key>Scale</key>
 						<string>{1, 1}</string>
 						<key>SpriteSize</key>
@@ -1400,9 +1400,9 @@
 						<key>FlipY</key>
 						<false/>
 						<key>Frame</key>
-						<string>{{936, 948}, {56.5, 56}}</string>
+						<string>{{230, 1622}, {56.5, 56}}</string>
 						<key>Frame-HD</key>
-						<string>{{1872, 1896}, {113, 112}}</string>
+						<string>{{460, 3244}, {113, 112}}</string>
 						<key>Image</key>
 						<string>JoustF_JoustF.png</string>
 						<key>Image-HD</key>
@@ -1412,7 +1412,7 @@
 						<key>IsDrawable</key>
 						<true/>
 						<key>IsRotated</key>
-						<true/>
+						<false/>
 						<key>IsTrimmed</key>
 						<false/>
 						<key>Name</key>
@@ -1428,7 +1428,7 @@
 						<key>OriginalSize</key>
 						<string>{113, 112}</string>
 						<key>Position</key>
-						<string>{1872, 1896}</string>
+						<string>{460, 3244}</string>
 						<key>Scale</key>
 						<string>{1, 1}</string>
 						<key>SpriteSize</key>
@@ -1541,9 +1541,9 @@
 						<key>FlipY</key>
 						<false/>
 						<key>Frame</key>
-						<string>{{836, 412}, {56.5, 56}}</string>
+						<string>{{930, 1976}, {56.5, 56}}</string>
 						<key>Frame-HD</key>
-						<string>{{1672, 824}, {113, 112}}</string>
+						<string>{{1860, 3952}, {113, 112}}</string>
 						<key>Image</key>
 						<string>JoustF_JoustF.png</string>
 						<key>Image-HD</key>
@@ -1569,7 +1569,7 @@
 						<key>OriginalSize</key>
 						<string>{113, 112}</string>
 						<key>Position</key>
-						<string>{1672, 824}</string>
+						<string>{1860, 3952}</string>
 						<key>Scale</key>
 						<string>{1, 1}</string>
 						<key>SpriteSize</key>
@@ -1682,9 +1682,9 @@
 						<key>FlipY</key>
 						<false/>
 						<key>Frame</key>
-						<string>{{896, 412}, {56.5, 56}}</string>
+						<string>{{108, 1622}, {56.5, 56}}</string>
 						<key>Frame-HD</key>
-						<string>{{1792, 824}, {113, 112}}</string>
+						<string>{{216, 3244}, {113, 112}}</string>
 						<key>Image</key>
 						<string>JoustF_JoustF.png</string>
 						<key>Image-HD</key>
@@ -1694,7 +1694,7 @@
 						<key>IsDrawable</key>
 						<true/>
 						<key>IsRotated</key>
-						<true/>
+						<false/>
 						<key>IsTrimmed</key>
 						<false/>
 						<key>Name</key>
@@ -1710,7 +1710,7 @@
 						<key>OriginalSize</key>
 						<string>{113, 112}</string>
 						<key>Position</key>
-						<string>{1792, 824}</string>
+						<string>{216, 3244}</string>
 						<key>Scale</key>
 						<string>{1, 1}</string>
 						<key>SpriteSize</key>
@@ -1823,9 +1823,9 @@
 						<key>FlipY</key>
 						<false/>
 						<key>Frame</key>
-						<string>{{956, 412}, {56.5, 56}}</string>
+						<string>{{170, 1622}, {56.5, 56}}</string>
 						<key>Frame-HD</key>
-						<string>{{1912, 824}, {113, 112}}</string>
+						<string>{{340, 3244}, {113, 112}}</string>
 						<key>Image</key>
 						<string>JoustF_JoustF.png</string>
 						<key>Image-HD</key>
@@ -1835,7 +1835,7 @@
 						<key>IsDrawable</key>
 						<true/>
 						<key>IsRotated</key>
-						<true/>
+						<false/>
 						<key>IsTrimmed</key>
 						<false/>
 						<key>Name</key>
@@ -1851,7 +1851,7 @@
 						<key>OriginalSize</key>
 						<string>{113, 112}</string>
 						<key>Position</key>
-						<string>{1912, 824}</string>
+						<string>{340, 3244}</string>
 						<key>Scale</key>
 						<string>{1, 1}</string>
 						<key>SpriteSize</key>
@@ -1964,9 +1964,9 @@
 						<key>FlipY</key>
 						<false/>
 						<key>Frame</key>
-						<string>{{822, 208}, {200, 200}}</string>
+						<string>{{822, 1212}, {200, 200}}</string>
 						<key>Frame-HD</key>
-						<string>{{1644, 416}, {400, 400}}</string>
+						<string>{{1644, 2424}, {400, 400}}</string>
 						<key>Image</key>
 						<string>JoustF_JoustF.png</string>
 						<key>Image-HD</key>
@@ -1992,7 +1992,7 @@
 						<key>OriginalSize</key>
 						<string>{400, 400}</string>
 						<key>Position</key>
-						<string>{1644, 416}</string>
+						<string>{1644, 2424}</string>
 						<key>Scale</key>
 						<string>{1, 1}</string>
 						<key>SpriteSize</key>
@@ -2105,9 +2105,9 @@
 						<key>FlipY</key>
 						<false/>
 						<key>Frame</key>
-						<string>{{784, 912}, {50, 50}}</string>
+						<string>{{108, 1682}, {50, 50}}</string>
 						<key>Frame-HD</key>
-						<string>{{1568, 1824}, {100, 100}}</string>
+						<string>{{216, 3364}, {100, 100}}</string>
 						<key>Image</key>
 						<string>JoustF_JoustF.png</string>
 						<key>Image-HD</key>
@@ -2133,7 +2133,7 @@
 						<key>OriginalSize</key>
 						<string>{100, 100}</string>
 						<key>Position</key>
-						<string>{1568, 1824}</string>
+						<string>{216, 3364}</string>
 						<key>Scale</key>
 						<string>{1, 1}</string>
 						<key>SpriteSize</key>
@@ -2246,9 +2246,9 @@
 						<key>FlipY</key>
 						<false/>
 						<key>Frame</key>
-						<string>{{776, 412}, {56.5, 56}}</string>
+						<string>{{930, 1916}, {56.5, 56}}</string>
 						<key>Frame-HD</key>
-						<string>{{1552, 824}, {113, 112}}</string>
+						<string>{{1860, 3832}, {113, 112}}</string>
 						<key>Image</key>
 						<string>JoustF_JoustF.png</string>
 						<key>Image-HD</key>
@@ -2258,7 +2258,7 @@
 						<key>IsDrawable</key>
 						<true/>
 						<key>IsRotated</key>
-						<true/>
+						<false/>
 						<key>IsTrimmed</key>
 						<false/>
 						<key>Name</key>
@@ -2274,7 +2274,7 @@
 						<key>OriginalSize</key>
 						<string>{113, 112}</string>
 						<key>Position</key>
-						<string>{1552, 824}</string>
+						<string>{1860, 3832}</string>
 						<key>Scale</key>
 						<string>{1, 1}</string>
 						<key>SpriteSize</key>
@@ -2291,46 +2291,46 @@
 						<integer>0</integer>
 					</dict>
 				</dict>
-				<key>playGame</key>
+				<key>play</key>
 				<dict>
 					<key>DocumentSecurityImageBookmark</key>
 					<data>
-					Ym9va8wDAAAAAAQQMAAAAAAAAAAAAAAAAAAA
-					AAAAAAAAAAAAAAAAAAAAAAAAAAAApAIAAAUA
+					Ym9va8QDAAAAAAQQMAAAAAAAAAAAAAAAAAAA
+					AAAAAAAAAAAAAAAAAAAAAAAAAAAAnAIAAAUA
 					AAABAQAAVXNlcnMAAAAKAAAAAQEAAGpvaG53
 					aWxzb24AAAcAAAABAQAARHJvcGJveAAIAAAA
-					AQEAAEpvdXN0ZXJGDAAAAAEBAABwbGF5R2Ft
-					ZS5wbmcUAAAAAQYAAAQAAAAUAAAAKAAAADgA
-					AABIAAAACAAAAAQDAACfkQAAAAAAAAgAAAAE
-					AwAAnqsFAAAAAAAIAAAABAMAAC2V2goAAAAA
-					CAAAAAQDAAB3WBoLAAAAAAgAAAAEAwAAJmJF
-					CwAAAAAUAAAAAQYAAHgAAACIAAAAmAAAAKgA
-					AAC4AAAACAAAAAAEAABBuCL8zgAAABgAAAAB
-					AgAAAQAAAAAAAAAPAAAAAAAAAAAAAAAAAAAA
-					AAAAAAEFAAAEAAAAAwMAAAUAAAAEAAAAAwMA
-					AAMAAAAIAAAABAMAAAMAAAAAAAAABAAAAAMD
-					AAD1AQAABgAAAAEBAABNYWMgSEQAAAgAAAAE
-					AwAAAAB0BToAAAAIAAAAAAQAAEGzL9+8AAAA
-					JAAAAAEBAAA5NUM2MTMwNi0xQTUyLTM4NTAt
-					QjY2OC0wMTE0ODU0REZGNUUYAAAAAQIAAIEA
-					AAABAAgA7z8AAAEACAAAAAAAAAAAAAEAAAAB
-					AQAALwAAAAQAAAADAwAAAAEAALcAAAABAgAA
-					ZWFhMzBjMjY3YTU5OWMwNWFkZmY1N2JjNzBl
-					YzkyMWY4MWNlMWY5MzswMDAwMDAwMDswMDAw
-					MDAwMDAwMDAwMDIwO2NvbS5hcHBsZS5hcHAt
-					c2FuZGJveC5yZWFkLXdyaXRlOzAwMDAwMDAx
-					OzAxMDAwMDAyOzAwMDAwMDAwMGI0NTYyMjY7
-					L3VzZXJzL2pvaG53aWxzb24vZHJvcGJveC9q
-					b3VzdGVyZi9wbGF5Z2FtZS5wbmcAAPAAAAD+
-					////AQAAAAAAAAATAAAABBAAAFwAAAAAAAAA
-					BRAAAMgAAAAAAAAAEBAAAPQAAAAAAAAAQBAA
-					AOQAAAAAAAAAVBAAABwBAAAAAAAAVRAAACgB
-					AAAAAAAAVhAAABQBAAAAAAAAAiAAAMwBAAAA
-					AAAAECAAAFABAAAAAAAAESAAAIABAAAAAAAA
-					EiAAAGABAAAAAAAAEyAAAHABAAAAAAAAICAA
-					AKwBAAAAAAAAMCAAABQBAAAAAAAAAcAAADQB
-					AAAAAAAAEcAAABQAAAAAAAAAEsAAAEQBAAAA
-					AAAAENAAANgBAAAAAAAAgPAAAOQBAAAAAAAA
+					AQEAAEpvdXN0ZXJGCAAAAAEBAABwbGF5LnBu
+					ZxQAAAABBgAABAAAABQAAAAoAAAAOAAAAEgA
+					AAAIAAAABAMAAJ+RAAAAAAAACAAAAAQDAACe
+					qwUAAAAAAAgAAAAEAwAALZXaCgAAAAAIAAAA
+					BAMAAHdYGgsAAAAACAAAAAQDAABKKkkLAAAA
+					ABQAAAABBgAAdAAAAIQAAACUAAAApAAAALQA
+					AAAIAAAAAAQAAEG4KgfgAAAAGAAAAAECAAAB
+					AAAAAAAAAA8AAAAAAAAAAAAAAAAAAAAAAAAA
+					AQUAAAQAAAADAwAABQAAAAQAAAADAwAAAwAA
+					AAgAAAAEAwAAAwAAAAAAAAAEAAAAAwMAAPUB
+					AAAGAAAAAQEAAE1hYyBIRAAACAAAAAQDAAAA
+					AHQFOgAAAAgAAAAABAAAQbMv37wAAAAkAAAA
+					AQEAADk1QzYxMzA2LTFBNTItMzg1MC1CNjY4
+					LTAxMTQ4NTRERkY1RRgAAAABAgAAgQAAAAEA
+					CADvPwAAAQAIAAAAAAAAAAAAAQAAAAEBAAAv
+					AAAABAAAAAMDAAAAAQAAswAAAAECAABlZmYw
+					YjBhNzQzZmM0NDg5NTYzYjc0NzlkNmEyNzc1
+					MmMyNzA4ZTViOzAwMDAwMDAwOzAwMDAwMDAw
+					MDAwMDAwMjA7Y29tLmFwcGxlLmFwcC1zYW5k
+					Ym94LnJlYWQtd3JpdGU7MDAwMDAwMDE7MDEw
+					MDAwMDI7MDAwMDAwMDAwYjQ5MmE0YTsvdXNl
+					cnMvam9obndpbHNvbi9kcm9wYm94L2pvdXN0
+					ZXJmL3BsYXkucG5nAADwAAAA/v///wEAAAAA
+					AAAAEwAAAAQQAABYAAAAAAAAAAUQAADEAAAA
+					AAAAABAQAADwAAAAAAAAAEAQAADgAAAAAAAA
+					AFQQAAAYAQAAAAAAAFUQAAAkAQAAAAAAAFYQ
+					AAAQAQAAAAAAAAIgAADIAQAAAAAAABAgAABM
+					AQAAAAAAABEgAAB8AQAAAAAAABIgAABcAQAA
+					AAAAABMgAABsAQAAAAAAACAgAACoAQAAAAAA
+					ADAgAAAQAQAAAAAAAAHAAAAwAQAAAAAAABHA
+					AAAUAAAAAAAAABLAAABAAQAAAAAAABDQAADU
+					AQAAAAAAAIDwAADgAQAAAAAAAA==
 					</data>
 					<key>IsSHSprite</key>
 					<true/>
@@ -2362,7 +2362,7 @@
 					<key>SHSheetName</key>
 					<string>JoustF</string>
 					<key>SHSpriteName</key>
-					<string>playGame</string>
+					<string>play</string>
 					<key>SheetImage</key>
 					<string>JoustF_JoustF.png</string>
 					<key>SheetImage-HD</key>
@@ -2386,9 +2386,9 @@
 						<key>FlipY</key>
 						<false/>
 						<key>Frame</key>
-						<string>{{868, 812}, {75, 75}}</string>
+						<string>{{4, 1836}, {175, 100}}</string>
 						<key>Frame-HD</key>
-						<string>{{1736, 1624}, {150, 150}}</string>
+						<string>{{8, 3672}, {350, 200}}</string>
 						<key>Image</key>
 						<string>JoustF_JoustF.png</string>
 						<key>Image-HD</key>
@@ -2398,27 +2398,27 @@
 						<key>IsDrawable</key>
 						<true/>
 						<key>IsRotated</key>
-						<false/>
+						<true/>
 						<key>IsTrimmed</key>
 						<false/>
 						<key>Name</key>
-						<string>playGame</string>
+						<string>play</string>
 						<key>Opacity</key>
 						<real>1</real>
 						<key>OriginalImage</key>
-						<string>/Users/johnwilson/Dropbox/JousterF/playGame.png</string>
+						<string>/Users/johnwilson/Dropbox/JousterF/play.png</string>
 						<key>OriginalImage_RelativePath</key>
-						<string>../../../../Dropbox/JousterF/playGame.png/</string>
+						<string>../../../../Dropbox/JousterF/play.png/</string>
 						<key>OriginalRect</key>
-						<string>{{0, 0}, {150, 150}}</string>
+						<string>{{0, 0}, {350, 200}}</string>
 						<key>OriginalSize</key>
-						<string>{150, 150}</string>
+						<string>{350, 200}</string>
 						<key>Position</key>
-						<string>{1736, 1624}</string>
+						<string>{8, 3672}</string>
 						<key>Scale</key>
 						<string>{1, 1}</string>
 						<key>SpriteSize</key>
-						<string>{75, 75}</string>
+						<string>{175, 100}</string>
 						<key>SpriteWasBreaked</key>
 						<false/>
 						<key>Tag</key>
@@ -2527,9 +2527,9 @@
 						<key>FlipY</key>
 						<false/>
 						<key>Frame</key>
-						<string>{{724, 958}, {56.5, 56}}</string>
+						<string>{{290, 1622}, {56.5, 56}}</string>
 						<key>Frame-HD</key>
-						<string>{{1448, 1916}, {113, 112}}</string>
+						<string>{{580, 3244}, {113, 112}}</string>
 						<key>Image</key>
 						<string>JoustF_JoustF.png</string>
 						<key>Image-HD</key>
@@ -2539,7 +2539,7 @@
 						<key>IsDrawable</key>
 						<true/>
 						<key>IsRotated</key>
-						<true/>
+						<false/>
 						<key>IsTrimmed</key>
 						<false/>
 						<key>Name</key>
@@ -2555,7 +2555,7 @@
 						<key>OriginalSize</key>
 						<string>{113, 112}</string>
 						<key>Position</key>
-						<string>{1448, 1916}</string>
+						<string>{580, 3244}</string>
 						<key>Scale</key>
 						<string>{1, 1}</string>
 						<key>SpriteSize</key>
@@ -2668,9 +2668,9 @@
 						<key>FlipY</key>
 						<false/>
 						<key>Frame</key>
-						<string>{{4, 300}, {314.5, 385}}</string>
+						<string>{{4, 1304}, {314.5, 385}}</string>
 						<key>Frame-HD</key>
-						<string>{{8, 600}, {629, 770}}</string>
+						<string>{{8, 2608}, {629, 770}}</string>
 						<key>Image</key>
 						<string>JoustF_JoustF.png</string>
 						<key>Image-HD</key>
@@ -2696,7 +2696,7 @@
 						<key>OriginalSize</key>
 						<string>{629, 770}</string>
 						<key>Position</key>
-						<string>{8, 600}</string>
+						<string>{8, 2608}</string>
 						<key>Scale</key>
 						<string>{1, 1}</string>
 						<key>SpriteSize</key>
@@ -2809,9 +2809,9 @@
 						<key>FlipY</key>
 						<false/>
 						<key>Frame</key>
-						<string>{{4, 958}, {49, 716}}</string>
+						<string>{{698, 1328}, {49, 716}}</string>
 						<key>Frame-HD</key>
-						<string>{{8, 1916}, {98, 1432}}</string>
+						<string>{{1396, 2656}, {98, 1432}}</string>
 						<key>Image</key>
 						<string>JoustF_JoustF.png</string>
 						<key>Image-HD</key>
@@ -2821,7 +2821,7 @@
 						<key>IsDrawable</key>
 						<true/>
 						<key>IsRotated</key>
-						<true/>
+						<false/>
 						<key>IsTrimmed</key>
 						<false/>
 						<key>Name</key>
@@ -2837,7 +2837,7 @@
 						<key>OriginalSize</key>
 						<string>{98, 1432}</string>
 						<key>Position</key>
-						<string>{8, 1916}</string>
+						<string>{1396, 2656}</string>
 						<key>Scale</key>
 						<string>{1, 1}</string>
 						<key>SpriteSize</key>
@@ -2866,9 +2866,9 @@
 					eS5wbmcUAAAAAQYAAAQAAAAUAAAAKAAAADgA
 					AABIAAAACAAAAAQDAACfkQAAAAAAAAgAAAAE
 					AwAAnqsFAAAAAAAIAAAABAMAAC2V2goAAAAA
-					CAAAAAQDAAB3WBoLAAAAAAgAAAAEAwAAMWJF
+					CAAAAAQDAAB3WBoLAAAAAAgAAAAEAwAAVipJ
 					CwAAAAAUAAAAAQYAAHgAAACIAAAAmAAAAKgA
-					AAC4AAAACAAAAAAEAABBuCL9QQAAABgAAAAB
+					AAC4AAAACAAAAAAEAABBuCoHtwAAABgAAAAB
 					AgAAAQAAAAAAAAAPAAAAAAAAAAAAAAAAAAAA
 					AAAAAAEFAAAEAAAAAwMAAAUAAAAEAAAAAwMA
 					AAMAAAAIAAAABAMAAAMAAAAAAAAABAAAAAMD
@@ -2878,11 +2878,11 @@
 					QjY2OC0wMTE0ODU0REZGNUUYAAAAAQIAAIEA
 					AAABAAgA7z8AAAEACAAAAAAAAAAAAAEAAAAB
 					AQAALwAAAAQAAAADAwAAAAEAALcAAAABAgAA
-					MmE5ZDYzZjczNWZkNzBhZTliOWQ5MWYxODAw
-					ZjE2NjBiZWUxMzBlNjswMDAwMDAwMDswMDAw
+					ZmVlZWVjMGQ4ZWVkZWQ0ZjIxYTJjMjJlYjNk
+					YzQwM2I4MmYyYzM3MTswMDAwMDAwMDswMDAw
 					MDAwMDAwMDAwMDIwO2NvbS5hcHBsZS5hcHAt
 					c2FuZGJveC5yZWFkLXdyaXRlOzAwMDAwMDAx
-					OzAxMDAwMDAyOzAwMDAwMDAwMGI0NTYyMzE7
+					OzAxMDAwMDAyOzAwMDAwMDAwMGI0OTJhNTY7
 					L3VzZXJzL2pvaG53aWxzb24vZHJvcGJveC9q
 					b3VzdGVyZi90ZWFtcGxheS5wbmcAAPAAAAD+
 					////AQAAAAAAAAATAAAABBAAAFwAAAAAAAAA
@@ -2949,9 +2949,9 @@
 						<key>FlipY</key>
 						<false/>
 						<key>Frame</key>
-						<string>{{698, 324}, {150, 75}}</string>
+						<string>{{750, 1938}, {175, 100}}</string>
 						<key>Frame-HD</key>
-						<string>{{1396, 648}, {300, 150}}</string>
+						<string>{{1500, 3876}, {350, 200}}</string>
 						<key>Image</key>
 						<string>JoustF_JoustF.png</string>
 						<key>Image-HD</key>
@@ -2961,7 +2961,7 @@
 						<key>IsDrawable</key>
 						<true/>
 						<key>IsRotated</key>
-						<true/>
+						<false/>
 						<key>IsTrimmed</key>
 						<false/>
 						<key>Name</key>
@@ -2973,15 +2973,15 @@
 						<key>OriginalImage_RelativePath</key>
 						<string>../../../../Dropbox/JousterF/teamPlay.png/</string>
 						<key>OriginalRect</key>
-						<string>{{0, 0}, {300, 150}}</string>
+						<string>{{0, 0}, {350, 200}}</string>
 						<key>OriginalSize</key>
-						<string>{300, 150}</string>
+						<string>{350, 200}</string>
 						<key>Position</key>
-						<string>{1396, 648}</string>
+						<string>{1500, 3876}</string>
 						<key>Scale</key>
 						<string>{1, 1}</string>
 						<key>SpriteSize</key>
-						<string>{150, 75}</string>
+						<string>{175, 100}</string>
 						<key>SpriteWasBreaked</key>
 						<false/>
 						<key>Tag</key>
@@ -3090,9 +3090,9 @@
 						<key>FlipY</key>
 						<false/>
 						<key>Frame</key>
-						<string>{{822, 4}, {203, 199.5}}</string>
+						<string>{{822, 1008}, {203, 199.5}}</string>
 						<key>Frame-HD</key>
-						<string>{{1644, 8}, {406, 399}}</string>
+						<string>{{1644, 2016}, {406, 399}}</string>
 						<key>Image</key>
 						<string>JoustF_JoustF.png</string>
 						<key>Image-HD</key>
@@ -3118,7 +3118,7 @@
 						<key>OriginalSize</key>
 						<string>{406, 399}</string>
 						<key>Position</key>
-						<string>{1644, 8}</string>
+						<string>{1644, 2016}</string>
 						<key>Scale</key>
 						<string>{1, 1}</string>
 						<key>SpriteSize</key>
@@ -3232,9 +3232,9 @@
 						<key>FlipY</key>
 						<false/>
 						<key>Frame</key>
-						<string>{{430, 4}, {316, 387}}</string>
+						<string>{{430, 1008}, {316, 387}}</string>
 						<key>Frame-HD</key>
-						<string>{{860, 8}, {632, 774}}</string>
+						<string>{{860, 2016}, {632, 774}}</string>
 						<key>Image</key>
 						<string>JoustF_JoustF.png</string>
 						<key>Image-HD</key>
@@ -3260,7 +3260,7 @@
 						<key>OriginalSize</key>
 						<string>{632, 774}</string>
 						<key>Position</key>
-						<string>{860, 8}</string>
+						<string>{860, 2016}</string>
 						<key>Scale</key>
 						<string>{1, 1}</string>
 						<key>SpriteSize</key>
@@ -3289,9 +3289,9 @@
 					cG5nAAAUAAAAAQYAAAQAAAAUAAAAKAAAADgA
 					AABIAAAACAAAAAQDAACfkQAAAAAAAAgAAAAE
 					AwAAnqsFAAAAAAAIAAAABAMAAC2V2goAAAAA
-					CAAAAAQDAAB3WBoLAAAAAAgAAAAEAwAAKGJF
+					CAAAAAQDAAB3WBoLAAAAAAgAAAAEAwAAUipJ
 					CwAAAAAUAAAAAQYAAHgAAACIAAAAmAAAAKgA
-					AAC4AAAACAAAAAAEAABBuCL8tAAAABgAAAAB
+					AAC4AAAACAAAAAAEAABBuCoH8AAAABgAAAAB
 					AgAAAQAAAAAAAAAPAAAAAAAAAAAAAAAAAAAA
 					AAAAAAEFAAAEAAAAAwMAAAUAAAAEAAAAAwMA
 					AAMAAAAIAAAABAMAAAMAAAAAAAAABAAAAAMD
@@ -3301,11 +3301,11 @@
 					QjY2OC0wMTE0ODU0REZGNUUYAAAAAQIAAIEA
 					AAABAAgA7z8AAAEACAAAAAAAAAAAAAEAAAAB
 					AQAALwAAAAQAAAADAwAAAAEAALUAAAABAgAA
-					NmQyNzYwZDc1YjdjYzA0MTdkNThhNDEzY2M1
-					YWUxZDZhMTU1NzNlYTswMDAwMDAwMDswMDAw
+					MDg2MjRmNGUzNGI2OGQ1ZmNkOGU1M2M5NTc3
+					MDgwZjk4MTFkMDExNjswMDAwMDAwMDswMDAw
 					MDAwMDAwMDAwMDIwO2NvbS5hcHBsZS5hcHAt
 					c2FuZGJveC5yZWFkLXdyaXRlOzAwMDAwMDAx
-					OzAxMDAwMDAyOzAwMDAwMDAwMGI0NTYyMjg7
+					OzAxMDAwMDAyOzAwMDAwMDAwMGI0OTJhNTI7
 					L3VzZXJzL2pvaG53aWxzb24vZHJvcGJveC9q
 					b3VzdGVyZi91bmxvY2sucG5nAAAAAPAAAAD+
 					////AQAAAAAAAAATAAAABBAAAFwAAAAAAAAA
@@ -3372,9 +3372,150 @@
 						<key>FlipY</key>
 						<false/>
 						<key>Frame</key>
-						<string>{{868, 732}, {75, 75}}</string>
+						<string>{{4, 1622}, {175, 100}}</string>
 						<key>Frame-HD</key>
-						<string>{{1736, 1464}, {150, 150}}</string>
+						<string>{{8, 3244}, {350, 200}}</string>
+						<key>Image</key>
+						<string>JoustF_JoustF.png</string>
+						<key>Image-HD</key>
+						<string>JoustF_JoustF-ipadhd.png</string>
+						<key>IsCropped</key>
+						<false/>
+						<key>IsDrawable</key>
+						<true/>
+						<key>IsRotated</key>
+						<true/>
+						<key>IsTrimmed</key>
+						<false/>
+						<key>Name</key>
+						<string>unlock</string>
+						<key>Opacity</key>
+						<real>1</real>
+						<key>OriginalImage</key>
+						<string>/Users/johnwilson/Dropbox/JousterF/unlock.png</string>
+						<key>OriginalImage_RelativePath</key>
+						<string>../../../../Dropbox/JousterF/unlock.png/</string>
+						<key>OriginalRect</key>
+						<string>{{0, 0}, {350, 200}}</string>
+						<key>OriginalSize</key>
+						<string>{350, 200}</string>
+						<key>Position</key>
+						<string>{8, 3244}</string>
+						<key>Scale</key>
+						<string>{1, 1}</string>
+						<key>SpriteSize</key>
+						<string>{175, 100}</string>
+						<key>SpriteWasBreaked</key>
+						<false/>
+						<key>Tag</key>
+						<integer>0</integer>
+						<key>TextureOffset</key>
+						<string>{0, 0}</string>
+						<key>UsesBatchRendering</key>
+						<true/>
+						<key>ZOrder</key>
+						<integer>0</integer>
+					</dict>
+				</dict>
+				<key>victoryRay</key>
+				<dict>
+					<key>DocumentSecurityImageBookmark</key>
+					<data>
+					Ym9va9QDAAAAAAQQMAAAAAAAAAAAAAAAAAAA
+					AAAAAAAAAAAAAAAAAAAAAAAAAAAArAIAAAUA
+					AAABAQAAVXNlcnMAAAAKAAAAAQEAAGpvaG53
+					aWxzb24AAAcAAAABAQAARHJvcGJveAAIAAAA
+					AQEAAEpvdXN0ZXJGDgAAAAEBAAB2aWN0b3J5
+					UmF5LnBuZwAAFAAAAAEGAAAEAAAAFAAAACgA
+					AAA4AAAASAAAAAgAAAAEAwAAn5EAAAAAAAAI
+					AAAABAMAAJ6rBQAAAAAACAAAAAQDAAAtldoK
+					AAAAAAgAAAAEAwAAd1gaCwAAAAAIAAAABAMA
+					AIXGRgsAAAAAFAAAAAEGAAB8AAAAjAAAAJwA
+					AACsAAAAvAAAAAgAAAAABAAAQbgohd8AAAAY
+					AAAAAQIAAAEAAAAAAAAADwAAAAAAAAAAAAAA
+					AAAAAAAAAAABBQAABAAAAAMDAAAFAAAABAAA
+					AAMDAAADAAAACAAAAAQDAAADAAAAAAAAAAQA
+					AAADAwAA9QEAAAYAAAABAQAATWFjIEhEAAAI
+					AAAABAMAAAAAdAU6AAAACAAAAAAEAABBsy/f
+					vAAAACQAAAABAQAAOTVDNjEzMDYtMUE1Mi0z
+					ODUwLUI2NjgtMDExNDg1NERGRjVFGAAAAAEC
+					AACBAAAAAQAIAO8/AAABAAgAAAAAAAAAAAAB
+					AAAAAQEAAC8AAAAEAAAAAwMAAAABAAC5AAAA
+					AQIAAGYwOTlkMjcwMjEyZjk1ZjQ4NGIxYmIy
+					ZDFiZmEzY2I2ZWQwNDFiZGQ7MDAwMDAwMDA7
+					MDAwMDAwMDAwMDAwMDAyMDtjb20uYXBwbGUu
+					YXBwLXNhbmRib3gucmVhZC13cml0ZTswMDAw
+					MDAwMTswMTAwMDAwMjswMDAwMDAwMDBiNDZj
+					Njg1Oy91c2Vycy9qb2hud2lsc29uL2Ryb3Bi
+					b3gvam91c3RlcmYvdmljdG9yeXJheS5wbmcA
+					AAAA8AAAAP7///8BAAAAAAAAABMAAAAEEAAA
+					YAAAAAAAAAAFEAAAzAAAAAAAAAAQEAAA+AAA
+					AAAAAABAEAAA6AAAAAAAAABUEAAAIAEAAAAA
+					AABVEAAALAEAAAAAAABWEAAAGAEAAAAAAAAC
+					IAAA0AEAAAAAAAAQIAAAVAEAAAAAAAARIAAA
+					hAEAAAAAAAASIAAAZAEAAAAAAAATIAAAdAEA
+					AAAAAAAgIAAAsAEAAAAAAAAwIAAAGAEAAAAA
+					AAABwAAAOAEAAAAAAAARwAAAFAAAAAAAAAAS
+					wAAASAEAAAAAAAAQ0AAA3AEAAAAAAACA8AAA
+					6AEAAAAAAAA=
+					</data>
+					<key>IsSHSprite</key>
+					<true/>
+					<key>PhysicProperties</key>
+					<dict>
+						<key>AngularDamping</key>
+						<real>0.0</real>
+						<key>AngularVelocity</key>
+						<real>0.0</real>
+						<key>CanSleep</key>
+						<true/>
+						<key>FixedRot</key>
+						<false/>
+						<key>GravityScale</key>
+						<real>1</real>
+						<key>HandledBySH</key>
+						<true/>
+						<key>IsBullet</key>
+						<false/>
+						<key>LinearDamping</key>
+						<real>0.0</real>
+						<key>LinearVelocity</key>
+						<string>{0, 0}</string>
+						<key>SH_ComplexShapes</key>
+						<array/>
+						<key>Type</key>
+						<integer>3</integer>
+					</dict>
+					<key>SHSheetName</key>
+					<string>JoustF</string>
+					<key>SHSpriteName</key>
+					<string>victoryRay</string>
+					<key>SheetImage</key>
+					<string>JoustF_JoustF.png</string>
+					<key>SheetImage-HD</key>
+					<string>JoustF_JoustF-ipadhd.png</string>
+					<key>TextureProperties</key>
+					<dict>
+						<key>Angle</key>
+						<integer>0</integer>
+						<key>Border</key>
+						<integer>0</integer>
+						<key>CanBeTrimmed</key>
+						<true/>
+						<key>Color</key>
+						<string>{{1, 1}, {1, 1}}</string>
+						<key>ConvertedFromOldFormat</key>
+						<false/>
+						<key>CustomClassName</key>
+						<string></string>
+						<key>FlipX</key>
+						<false/>
+						<key>FlipY</key>
+						<false/>
+						<key>Frame</key>
+						<string>{{4, 4}, {1000, 1000}}</string>
+						<key>Frame-HD</key>
+						<string>{{8, 8}, {2000, 2000}}</string>
 						<key>Image</key>
 						<string>JoustF_JoustF.png</string>
 						<key>Image-HD</key>
@@ -3388,23 +3529,23 @@
 						<key>IsTrimmed</key>
 						<false/>
 						<key>Name</key>
-						<string>unlock</string>
+						<string>victoryRay</string>
 						<key>Opacity</key>
 						<real>1</real>
 						<key>OriginalImage</key>
-						<string>/Users/johnwilson/Dropbox/JousterF/unlock.png</string>
+						<string>/Users/johnwilson/Dropbox/JousterF/victoryRay.png</string>
 						<key>OriginalImage_RelativePath</key>
-						<string>../../../../Dropbox/JousterF/unlock.png/</string>
+						<string>../../../../Dropbox/JousterF/victoryRay.png/</string>
 						<key>OriginalRect</key>
-						<string>{{0, 0}, {150, 150}}</string>
+						<string>{{0, 0}, {2000, 2000}}</string>
 						<key>OriginalSize</key>
-						<string>{150, 150}</string>
+						<string>{2000, 2000}</string>
 						<key>Position</key>
-						<string>{1736, 1464}</string>
+						<string>{8, 8}</string>
 						<key>Scale</key>
 						<string>{1, 1}</string>
 						<key>SpriteSize</key>
-						<string>{75, 75}</string>
+						<string>{1000, 1000}</string>
 						<key>SpriteWasBreaked</key>
 						<false/>
 						<key>Tag</key>
@@ -3512,9 +3653,9 @@
 						<key>FlipY</key>
 						<false/>
 						<key>Frame</key>
-						<string>{{838, 958}, {50, 50}}</string>
+						<string>{{162, 1682}, {50, 50}}</string>
 						<key>Frame-HD</key>
-						<string>{{1676, 1916}, {100, 100}}</string>
+						<string>{{324, 3364}, {100, 100}}</string>
 						<key>Image</key>
 						<string>JoustF_JoustF.png</string>
 						<key>Image-HD</key>
@@ -3540,7 +3681,7 @@
 						<key>OriginalSize</key>
 						<string>{100, 100}</string>
 						<key>Position</key>
-						<string>{1676, 1916}</string>
+						<string>{324, 3364}</string>
 						<key>Scale</key>
 						<string>{1, 1}</string>
 						<key>SpriteSize</key>
@@ -3653,9 +3794,9 @@
 						<key>FlipY</key>
 						<false/>
 						<key>Frame</key>
-						<string>{{698, 478}, {300, 250}}</string>
+						<string>{{394, 1582}, {300, 250}}</string>
 						<key>Frame-HD</key>
-						<string>{{1396, 956}, {600, 500}}</string>
+						<string>{{788, 3164}, {600, 500}}</string>
 						<key>Image</key>
 						<string>JoustF_JoustF.png</string>
 						<key>Image-HD</key>
@@ -3681,7 +3822,7 @@
 						<key>OriginalSize</key>
 						<string>{600, 500}</string>
 						<key>Position</key>
-						<string>{1396, 956}</string>
+						<string>{788, 3164}</string>
 						<key>Scale</key>
 						<string>{1, 1}</string>
 						<key>SpriteSize</key>
@@ -3794,9 +3935,9 @@
 						<key>FlipY</key>
 						<false/>
 						<key>Frame</key>
-						<string>{{394, 324}, {300, 250}}</string>
+						<string>{{394, 1328}, {300, 250}}</string>
 						<key>Frame-HD</key>
-						<string>{{788, 648}, {600, 500}}</string>
+						<string>{{788, 2656}, {600, 500}}</string>
 						<key>Image</key>
 						<string>JoustF_JoustF.png</string>
 						<key>Image-HD</key>
@@ -3822,7 +3963,7 @@
 						<key>OriginalSize</key>
 						<string>{600, 500}</string>
 						<key>Position</key>
-						<string>{788, 648}</string>
+						<string>{788, 2656}</string>
 						<key>Scale</key>
 						<string>{1, 1}</string>
 						<key>SpriteSize</key>
@@ -3841,7 +3982,7 @@
 				</dict>
 			</dict>
 			<key>Size</key>
-			<string>{4096, 2048}</string>
+			<string>{4096, 4096}</string>
 			<key>Trim</key>
 			<false/>
 			<key>ZOrder</key>

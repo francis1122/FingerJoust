@@ -71,19 +71,22 @@
             if(!jouster.isDead){
                 //distance
                 float redDistance = ccpDistance(vortex.position, jouster.position);
-                
-                //normalized direction to vortex
-                CGPoint redToVortex = ccpNormalize(ccpSub(vortex.position, jouster.position));
-                
-                float maxDistance = VORTEX_DISTANCE;
-                float redPullPower = maxDistance - redDistance;
-                redPullPower = redPullPower * redPullPower;
-                // adjust the strength of the vortex
-                redPullPower = redPullPower/70;
-                CGPoint redVortexVel = ccpMult(redToVortex, redPullPower);
-                
-                //add vortex velocity to jouster's velocity
-                jouster.outsideVelocity = ccpAdd(jouster.outsideVelocity,ccpMult(redVortexVel, dt));
+                if(redDistance < VORTEX_DISTANCE){
+                    //normalized direction to vortex
+                    CGPoint redToVortex = ccpNormalize(ccpSub(vortex.position, jouster.position));
+                    
+                    float maxDistance = VORTEX_DISTANCE;
+                    float redPullPower = maxDistance - redDistance;
+                    //                redPullPower = redPullPower * redPullPower;
+                    // adjust the strength of the vortex
+                    //              redPullPower = redPullPower/77;
+                    redPullPower = 600;
+                    
+                    CGPoint redVortexVel = ccpMult(redToVortex, redPullPower);
+                    
+                    //add vortex velocity to jouster's velocity
+                    jouster.outsideVelocity = ccpAdd(jouster.outsideVelocity,ccpMult(redVortexVel, dt));
+                }
             }
         }
         [vortex update:dt];

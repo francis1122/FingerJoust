@@ -23,6 +23,8 @@ typedef enum {
 
 
 @interface PlayerManager : NSObject{
+    NSArray *products;
+    
     NSMutableArray *playerArray;
     BOOL isTeamPlay;
     
@@ -49,5 +51,7 @@ typedef enum {
 -(BOOL) isPlayerActive:(int) playerNumber;
 -(float) getGameSpeedScaler;
 -(void) unlockTheGame;
+-(void) purchaseProduct;
+- (void)productPurchased:(NSNotification *)notification;
 
 @end

@@ -166,11 +166,29 @@
     [label setHorizontalAlignment:kCCTextAlignmentLeft];
     label.position = ccp(self.contentSize.width/2, offset);
     [self addChild:label];
-
     
-
-    
-
+    //locked shit
+    if(!PM.isGameUnlocked){
+        PM.hurricaneEvent = 0;
+        PM.missileEvent = 0;
+        PM.spikeEvent = 0;
+//        put locks down
+        CCSprite *lock = [CCSprite spriteWithSpriteFrameName:@"Lock"];
+        lock.position = gameSpeedActive.position;
+        [self addChild:lock z:100];
+        
+        lock = [CCSprite spriteWithSpriteFrameName:@"Lock"];
+        lock.position = missileActive.position;
+        [self addChild:lock z:100];
+        
+        lock = [CCSprite spriteWithSpriteFrameName:@"Lock"];
+        lock.position = hurricaneActive.position;
+        [self addChild:lock z:100];
+        
+        lock = [CCSprite spriteWithSpriteFrameName:@"Lock"];
+        lock.position = spikeActive.position;
+        [self addChild:lock z:100];
+    }
 }
 
 
@@ -229,26 +247,34 @@
 
 -(void) hurricaneCallback:(CCMenuItemFont*) sender{
     PlayerManager *PM = [PlayerManager sharedInstance];
-    PM.hurricaneEvent = sender.tag;
-    hurricaneActive.position = ccp(sender.parent.position.x + sender.position.x, sender.parent.position.y);
+    if(PM.isGameUnlocked){
+        PM.hurricaneEvent = sender.tag;
+        hurricaneActive.position = ccp(sender.parent.position.x + sender.position.x, sender.parent.position.y);
+    }
 }
 
 -(void) missileCallback:(CCMenuItemFont*) sender{
     PlayerManager *PM = [PlayerManager sharedInstance];
-    PM.missileEvent = sender.tag;
-    missileActive.position = ccp(sender.parent.position.x + sender.position.x, sender.parent.position.y);
+    if(PM.isGameUnlocked){
+        PM.missileEvent = sender.tag;
+        missileActive.position = ccp(sender.parent.position.x + sender.position.x, sender.parent.position.y);
+    }
 }
 
 -(void) spikeCallback:(CCMenuItemFont*) sender{
     PlayerManager *PM = [PlayerManager sharedInstance];
-    PM.spikeEvent = sender.tag;
-    spikeActive.position = ccp(sender.parent.position.x + sender.position.x, sender.parent.position.y);
+    if(PM.isGameUnlocked){
+        PM.spikeEvent = sender.tag;
+        spikeActive.position = ccp(sender.parent.position.x + sender.position.x, sender.parent.position.y);
+    }
 }
 
 -(void) gameSpeed:(CCMenuItemFont*) sender{
     PlayerManager *PM = [PlayerManager sharedInstance];
-    PM.gameSpeed = sender.tag;
-    gameSpeedActive.position = ccp(sender.parent.position.x + sender.position.x, sender.parent.position.y);
+    if(PM.isGameUnlocked){
+        PM.gameSpeed = sender.tag;
+        gameSpeedActive.position = ccp(sender.parent.position.x + sender.position.x, sender.parent.position.y);
+    }
 }
 
 -(void) frequencyCallback:(CCMenuItemFont*) sender{

@@ -97,7 +97,7 @@
     if(!addAlways && roundTimerElapsed > 1.5){
         addAlways = YES;
         if(PM.windEvent == EventAlways){
-            WindEvent *windEvent = [[[WindEvent alloc] initWithTime:20 WithForce:18 GameLayer:gameLayer] autorelease];
+            WindEvent *windEvent = [[[WindEvent alloc] initWithTime:20 WithForce:17 GameLayer:gameLayer] autorelease];
             [windEvent onStart];
             [self.eventArray addObject:windEvent];
         }
@@ -161,7 +161,7 @@
         int stu = [num intValue];
         if(stu == WindEvents){
             sinceLastEvent += arc4random()%4;
-            WindEvent *windEvent = [[[WindEvent alloc] initWithTime:6 WithForce:19 GameLayer:gameLayer] autorelease];
+            WindEvent *windEvent = [[[WindEvent alloc] initWithTime:6 WithForce:17 GameLayer:gameLayer] autorelease];
             [windEvent onStart];
             [self.eventArray addObject:windEvent];
         }else if(stu == MissileEvents){

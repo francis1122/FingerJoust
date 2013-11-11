@@ -72,6 +72,7 @@
 @property (nonatomic, assign) Player *player;
 @property (nonatomic, retain) CCParticleSystemQuad *motionStreak, *jousterMotionStreak;
 @property (nonatomic, assign) CCWarpSprite *jousterSprite;
+@property (nonatomic, assign) CCWarpSprite *bodyInnerSprite;
 @property CGPoint joustOutsideVelocity;
 
 

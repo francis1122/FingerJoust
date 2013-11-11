@@ -60,7 +60,8 @@
         CCSprite *normal = [CCSprite spriteWithSpriteFrameName:@"unlock"];
         CCSprite *selected = [CCSprite spriteWithSpriteFrameName:@"unlock"];
 		CCMenuItemSprite *unlockItem = [CCMenuItemSprite itemWithNormalSprite:normal selectedSprite:selected block:^(id sender) {
-            NSLog(@"buy the app");
+            PlayerManager *PM = [PlayerManager sharedInstance];
+            [PM purchaseProduct];
 		}];
         
         unlockMenu = [CCMenu menuWithItems:unlockItem, nil];
@@ -90,16 +91,16 @@
         float edgeOffset = 60;
         if(self.player.playerNumber == 0){
             pos = ccp(edgeOffset, edgeOffset);
-            unlockPos = ccp(150, 80);
+            unlockPos = ccp(150, 120);
         }else if(self.player.playerNumber == 1){
             pos = ccp( width - edgeOffset, edgeOffset);
-            unlockPos = ccp(150, 80);
+            unlockPos = ccp(150, 120);
         }else if(self.player.playerNumber == 2){
             pos = ccp(width - edgeOffset, self.contentSize.height - edgeOffset);
-            unlockPos = ccp(150, 310);
+            unlockPos = ccp(150, 270);
         }else if(self.player.playerNumber == 3){
             pos = ccp(edgeOffset, self.contentSize.height - edgeOffset);
-            unlockPos = ccp(150, 310);
+            unlockPos = ccp(150, 270);
         }
         pos = pos;
         unlockMenu.position = unlockPos;

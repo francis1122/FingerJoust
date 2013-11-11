@@ -40,7 +40,7 @@
         blockAnim = [CCCallBlock actionWithBlock:^{
             //spawn walls
             startUp = nil;
-            float durationMove = .4;
+            float durationMove = .8;
             topSpike = [CCSprite spriteWithSpriteFrameName:@"spikeWall"];
             topSpike.color = COLOR_GAMEBORDER;
             topSpike.rotation = -90;
@@ -97,7 +97,8 @@
 
 -(void) update:(ccTime) dt{
     [super update:dt];
-    if(elapsedTime > 1.75 && elapsedTime < (timeSpan - 0.55) ){
+    //1.75
+    if(elapsedTime > 2.5 && elapsedTime < (timeSpan - 0.55) ){
         for(Jouster* jouster in gameLayer.jousterArray){
             if(!jouster.isDead){
                 [self checkSpikeBoundaries:jouster];

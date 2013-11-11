@@ -186,6 +186,7 @@
 		DEA6ADC8180BAAB1000A4B0C /* StunParticles.plist in Resources */ = {isa = PBXBuildFile; fileRef = DEA6ADC7180BAAB1000A4B0C /* StunParticles.plist */; };
 		DEA6ADCA180C8593000A4B0C /* jousterDeathParticle.plist in Resources */ = {isa = PBXBuildFile; fileRef = DEA6ADC9180C8593000A4B0C /* jousterDeathParticle.plist */; };
 		DEA6ADD1180CF4DA000A4B0C /* CCShake.m in Sources */ = {isa = PBXBuildFile; fileRef = DEA6ADD0180CF4DA000A4B0C /* CCShake.m */; };
+		DEABC32A18317B5300F582FE /* JoustF_JoustF-ipadhd.plist in Resources */ = {isa = PBXBuildFile; fileRef = DEABC32918317B5300F582FE /* JoustF_JoustF-ipadhd.plist */; };
 		DEACD5901817450700BCA1CB /* WindEffect.plist in Resources */ = {isa = PBXBuildFile; fileRef = DEACD58F1817450700BCA1CB /* WindEffect.plist */; };
 		DEACD5931817454600BCA1CB /* WindEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = DEACD5921817454600BCA1CB /* WindEvent.m */; };
 		DEACD596181762A500BCA1CB /* BombEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = DEACD595181762A500BCA1CB /* BombEvent.m */; };
@@ -555,6 +556,7 @@
 		DEA6ADC9180C8593000A4B0C /* jousterDeathParticle.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = jousterDeathParticle.plist; sourceTree = "<group>"; };
 		DEA6ADCF180CF4DA000A4B0C /* CCShake.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCShake.h; sourceTree = "<group>"; };
 		DEA6ADD0180CF4DA000A4B0C /* CCShake.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCShake.m; sourceTree = "<group>"; };
+		DEABC32918317B5300F582FE /* JoustF_JoustF-ipadhd.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "JoustF_JoustF-ipadhd.plist"; sourceTree = "<group>"; };
 		DEACD58F1817450700BCA1CB /* WindEffect.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = WindEffect.plist; sourceTree = "<group>"; };
 		DEACD5911817454600BCA1CB /* WindEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WindEvent.h; sourceTree = "<group>"; };
 		DEACD5921817454600BCA1CB /* WindEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WindEvent.m; sourceTree = "<group>"; };
@@ -1092,6 +1094,7 @@
 		DE6055B717D4122800288F46 /* spriteSheet */ = {
 			isa = PBXGroup;
 			children = (
+				DEABC32918317B5300F582FE /* JoustF_JoustF-ipadhd.plist */,
 				DE6055BC17D4129C00288F46 /* JoustF_JoustF.plist */,
 				DE6055B817D4123800288F46 /* JoustF_JoustF-ipadhd.png */,
 				DE6055B917D4123800288F46 /* JoustF_JoustF.png */,
@@ -1307,6 +1310,7 @@
 				DE6055CB17D439BC00288F46 /* Grain.vsh in Resources */,
 				DE6055C817D4378100288F46 /* Grain.fsh in Resources */,
 				DE1CC7BE178FA31700CB1C59 /* Default.png in Resources */,
+				DEABC32A18317B5300F582FE /* JoustF_JoustF-ipadhd.plist in Resources */,
 				DE1CC7C0178FA31700CB1C59 /* Default@2x.png in Resources */,
 				DE1CC7C2178FA31800CB1C59 /* Default-568h@2x.png in Resources */,
 				DE1CC7C4178FA31800CB1C59 /* Default-Landscape~ipad.png in Resources */,

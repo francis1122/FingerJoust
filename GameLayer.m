@@ -55,6 +55,11 @@ NSString *const SECOND_FONT = @"SourceSansPro-Regular";
         currentRound = 0;
         _touchMode = NO;
         
+        centerLabel = [[[CCLabelTTF alloc] initWithString:@"closest to center wins" fontName:MAIN_FONT fontSize:24] autorelease];
+        centerLabel.color = COLOR_GAMEBORDER;
+        centerLabel.position = ccp(winSize.width/2, 100);
+        centerLabel.visible = NO;
+        [self addChild:centerLabel z:1];
         
         self.jousterArray = [[[NSMutableArray alloc] init] autorelease];
         PlayerManager *PM = [PlayerManager sharedInstance];
@@ -70,6 +75,15 @@ NSString *const SECOND_FONT = @"SourceSansPro-Regular";
                 [self addChild:jouster z:2];
             }
         }
+        
+        victorySprite = [CCSprite spriteWithSpriteFrameName:@"victoryRay"];
+        victorySprite.visible = NO;
+        victorySprite.opacity = 255;
+        [self addChild:victorySprite z:0];
+        
+        whiteOverlay = [CCLayerColor layerWithColor:ccc4(255, 255, 255, 255)];
+        whiteOverlay.opacity = 0;
+        [self addChild:whiteOverlay z:1000];
         
         //      self.powerStone = [[PowerStone alloc] init];
         //has to be called after jousters have been added
@@ -100,6 +114,7 @@ NSString *const SECOND_FONT = @"SourceSansPro-Regular";
         
         
         [self gameIntro];
+
     }
     return self;
 }
@@ -112,6 +127,31 @@ NSString *const SECOND_FONT = @"SourceSansPro-Regular";
     [super dealloc];
 }
 
+
+-(void) addMoveLabels{
+    CGSize winSize= [[CCDirector sharedDirector] winSize];
+    for(Jouster *jouster in self.jousterArray){
+        int player = jouster.player.playerNumber;
+        CCLabelTTF *moveLabel = [[[CCLabelTTF alloc] initWithString:@"slide finger here\nto move" fontName:MAIN_FONT fontSize:24] autorelease];
+        moveLabel.color = COLOR_GAMEBORDER;
+        CGPoint pos;
+        if(player == 0){
+            moveLabelOne = moveLabel;
+            pos = ccp(CONTROL_OFFSET/2, winSize.height - 220);
+        }else if(player == 1){
+            moveLabelTwo = moveLabel;
+            pos = ccp(winSize.width - CONTROL_OFFSET/2, winSize.height - 220);
+        }else if(player == 2){
+            moveLabelThree = moveLabel;
+            pos = ccp(winSize.width - CONTROL_OFFSET/2, 220);
+        }else if( player == 3){
+            moveLabelFour = moveLabel;
+            pos = ccp(CONTROL_OFFSET/2, 220);
+        }
+        moveLabel.position = pos;
+        [self.uiLayer addChild:moveLabel z:3000];
+    }
+}
 
 -(Jouster*) getJousterWithPlayerNumber:(int) playerNumber{
     for(Jouster *jouster in self.jousterArray){
@@ -196,6 +236,7 @@ NSString *const SECOND_FONT = @"SourceSansPro-Regular";
     [uiLayer refreshUI];
     centerSprite.scale = 1;
     [hazardLayer resetLayer];
+    centerLabel.visible = NO;
 }
 
 -(void) update:(ccTime)dt{
@@ -214,32 +255,38 @@ NSString *const SECOND_FONT = @"SourceSansPro-Regular";
         
     }else if(currentState == ROUND_START){
         
-/*        for(Jouster *jouster in self.jousterArray){
-            [jouster update:dt];
-            jouster.position = ccpAdd(jouster.position, ccpMult(jouster.velocity, dt));
-            jouster.jousterSprite.position = ccpAdd(jouster.joustPosition,  ccpMult(jouster.joustVelocity, dt));
-            [jouster checkBoundaries];
-        }
- */
+        /*        for(Jouster *jouster in self.jousterArray){
+         [jouster update:dt];
+         jouster.position = ccpAdd(jouster.position, ccpMult(jouster.velocity, dt));
+         jouster.jousterSprite.position = ccpAdd(jouster.joustPosition,  ccpMult(jouster.joustVelocity, dt));
+         [jouster checkBoundaries];
+         }
+         */
         
     }else if(currentState == ROUND_END){
-        dt = dt/5;
+        dt = dt/3;
         for(Jouster *jouster in self.jousterArray){
             [jouster update:dt];
             jouster.position = ccpAdd(jouster.position, ccpMult(jouster.velocity, dt));
             jouster.jousterSprite.position = ccpAdd(jouster.joustPosition,  ccpMult(jouster.joustVelocity, dt));
             [jouster checkBoundaries];
+        }
+        if(winningJouster){
+            victorySprite.position =  winningJouster.position;
         }
     }else if(currentState == GAME_OVER){
-        dt = dt/5;
+        dt = dt/3;
         for(Jouster *jouster in self.jousterArray){
             [jouster update:dt];
             jouster.position = ccpAdd(jouster.position, ccpMult(jouster.velocity, dt));
             jouster.jousterSprite.position = ccpAdd(jouster.joustPosition,  ccpMult(jouster.joustVelocity, dt));
-            [jouster checkBoundaries];
+//            [jouster checkBoundaries];
+        }
+        if(winningJouster){
+            victorySprite.position =  winningJouster.position;
         }
     }else if(currentState == GAME_START){
-        dt = dt/5;
+        dt = dt/3;
         for(Jouster *jouster in self.jousterArray){
             [jouster update:dt];
             jouster.position = ccpAdd(jouster.position, ccpMult(jouster.velocity, dt));
@@ -292,10 +339,10 @@ NSString *const SECOND_FONT = @"SourceSansPro-Regular";
     if((int)uiLayer.roundTimer < uiLayer.displayedTime){
         uiLayer.displayedTime = (int)uiLayer.roundTimer;
         uiLayer.timerLabel.string = [NSString stringWithFormat:@"%d", uiLayer.displayedTime];
-        
+
         if(uiLayer.displayedTime < 6 && !centerVisible){
             centerVisible = YES;
-            
+            centerLabel.visible = YES;
             CCFadeIn *fadeIn = [CCFadeIn actionWithDuration:2 * 1/gameSpeed];
             CCRotateBy *rotate = [CCRotateBy actionWithDuration:20 * 1/gameSpeed angle:1000];
             CCScaleTo *scale = [CCScaleTo actionWithDuration:5.0 * 1/gameSpeed scale:0];
@@ -320,22 +367,25 @@ NSString *const SECOND_FONT = @"SourceSansPro-Regular";
             if(!jouster.isDead){
                 //distance
                 float redDistance = ccpDistance(vortex.position, jouster.position);
-                
-                //normalized direction to vortex
-                CGPoint redToVortex = ccpNormalize(ccpSub(vortex.position, jouster.position));
-                
-                float maxDistance = VORTEX_DISTANCE;
-                float redPullPower = maxDistance - redDistance;
-                redPullPower = redPullPower * redPullPower;
-                // adjust the strength of the vortex
-                redPullPower = redPullPower/77;
-                CGPoint redVortexVel = ccpMult(redToVortex, redPullPower);
-                
-                //add vortex velocity to jouster's velocity
-                jouster.outsideVelocity = ccpAdd(jouster.outsideVelocity,ccpMult(redVortexVel, dt));
+                if(redDistance < VORTEX_DISTANCE){
+                    //normalized direction to vortex
+                    CGPoint redToVortex = ccpNormalize(ccpSub(vortex.position, jouster.position));
+                    
+                    float maxDistance = VORTEX_DISTANCE;
+                    float redPullPower = maxDistance - redDistance;
+                    //                redPullPower = redPullPower * redPullPower;
+                    // adjust the strength of the vortex
+                    //              redPullPower = redPullPower/77;
+                    redPullPower = 600;
+                    
+                    CGPoint redVortexVel = ccpMult(redToVortex, redPullPower);
+                    
+                    //add vortex velocity to jouster's velocity
+                    jouster.outsideVelocity = ccpAdd(jouster.outsideVelocity,ccpMult(redVortexVel, dt));
+                }
             }
         }
-            [vortex update:dt];
+        [vortex update:dt];
     }
     
     //delete old vortex
@@ -374,7 +424,7 @@ NSString *const SECOND_FONT = @"SourceSansPro-Regular";
             [uiLayer refreshUI];
         }
     }
-
+    
     /*
      float redDistance = ccpDistance(redJouster.position, centerPoint);
      float blueDistance = ccpDistance(blueJouster.position, centerPoint);
@@ -457,7 +507,7 @@ NSString *const SECOND_FONT = @"SourceSansPro-Regular";
             }
             if(didWin){
                 //the game is over jousterA won
-
+                
                 if([PlayerManager sharedInstance].isTeamPlay){
                     [self incrementWinsForTeam:jousterA.player.team];
                     lastWinner = jousterA.player.team;
@@ -466,7 +516,7 @@ NSString *const SECOND_FONT = @"SourceSansPro-Regular";
                     lastWinner = jousterA.player.playerNumber;
                 }
                 winner = [NSString stringWithFormat:@"player %i won", lastWinner];
-
+                
                 if(jousterA.wins > 2){
                     [self transitionToGameOver];
                 }else{
@@ -519,6 +569,7 @@ NSString *const SECOND_FONT = @"SourceSansPro-Regular";
                     if([MathHelper circleCollisionPositionA:[jousterA getWorldPositionOfJoust]  raidusA:[jousterA joustRadius] positionB:jousterB.position radiusB:jousterB.bodyRadius] ){
                         //jousterA got a kill
                         //kill jousterB
+                        [jousterA joustCollision: jousterB.position withRadius: jousterB.bodyRadius];
                         jousterB.isDead = YES;
                         [self deathEffect:jousterB];
                         [jousterB removeFromParentAndCleanup:YES];
@@ -627,8 +678,8 @@ NSString *const SECOND_FONT = @"SourceSansPro-Regular";
 #pragma mark - touch code
 -(BOOL) ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event{
     if(currentState == GAME_OVER || currentState == GAME_START){
-     return NO;
-     }
+        return NO;
+    }
     return YES;
 }
 
@@ -666,6 +717,32 @@ NSString *const SECOND_FONT = @"SourceSansPro-Regular";
             
             if(CGRectContainsPoint(touchArea, location) && !alreadyChosen){
                 if([jouster doesTouchDeltaMakeSense:location]){
+                    //remove touch instuctions
+                    if(jouster.player.playerNumber == 0){
+                        if(moveLabelOne){
+                            [moveLabelOne removeFromParentAndCleanup:YES];
+                            moveLabelOne = nil;
+                        }
+                    }else if(jouster.player.playerNumber == 1){
+                        if(moveLabelTwo){
+                            [moveLabelTwo removeFromParentAndCleanup:YES];
+                            moveLabelTwo = nil;
+                        }
+                    }else if(jouster.player.playerNumber == 2){
+                        if(moveLabelThree){
+                            [moveLabelThree removeFromParentAndCleanup:YES];
+                            moveLabelThree = nil;
+                        }
+                    }else if(jouster.player.playerNumber == 3){
+                        if(moveLabelFour){
+                            [moveLabelFour removeFromParentAndCleanup:YES];
+                            moveLabelFour = nil;
+                        }
+                    }
+                    
+                    
+                    
+                    
                     [jouster touch:location];
                     touchParticle.position = location;
                     if(!touchParticle.active){
@@ -679,7 +756,7 @@ NSString *const SECOND_FONT = @"SourceSansPro-Regular";
             [jouster resetTouch];
         }
     }
-
+    
 }
 
 - (void) ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{
@@ -687,7 +764,7 @@ NSString *const SECOND_FONT = @"SourceSansPro-Regular";
     for(Jouster *jouster in self.jousterArray){
         
         BOOL alreadyChosen = NO;
-
+        
         float reducedSpace = 30;
         CGRect touchArea;
         //        CGRect strictFirstTouchArea;
@@ -711,7 +788,7 @@ NSString *const SECOND_FONT = @"SourceSansPro-Regular";
                 touchArea =CGRectMake(winSize.width - EXTRA_CONTROL_OFFSET, 0, EXTRA_CONTROL_OFFSET, winSize.height);
             }
         }
-
+        
         [jouster resetTouch];
         for(UITouch* touch in touches){
             CGPoint location = [touch locationInView: [touch view]];
@@ -751,7 +828,7 @@ NSString *const SECOND_FONT = @"SourceSansPro-Regular";
                 touchArea =CGRectMake(winSize.width - EXTRA_CONTROL_OFFSET, 0, EXTRA_CONTROL_OFFSET, winSize.height);
             }
         }
-
+        
         [jouster resetTouch];
         for(UITouch* touch in touches){
             CGPoint location = [touch locationInView: [touch view]];
@@ -762,7 +839,7 @@ NSString *const SECOND_FONT = @"SourceSansPro-Regular";
             }
         }
     }
-  
+    
 }
 
 -(void) registerWithTouchDispatcher
@@ -794,6 +871,7 @@ NSString *const SECOND_FONT = @"SourceSansPro-Regular";
         [self removeChild:gameStartLabel];
         //transition to round Start
         [self transitionToStartRound];
+        [self addMoveLabels];
     }];
     CCSequence *seq = [CCSequence actionOne:delay two:block];
     [gameStartLabel runAction:seq];
@@ -802,6 +880,7 @@ NSString *const SECOND_FONT = @"SourceSansPro-Regular";
 
 -(void) transitionToStartRound{
     currentRound++;
+    victorySprite.visible = NO;
     //simulates the two centers smashing each other
     [self runAction:[CCShake actionWithDuration:.2f amplitude:ccp(20, 20) dampening:true shakes:0]];
     //reset the center sprite
@@ -843,6 +922,7 @@ NSString *const SECOND_FONT = @"SourceSansPro-Regular";
 
 -(void) transitionToEndRound{
     currentState = ROUND_END;
+    centerLabel.visible = NO;
     //show names of fighters
     CGSize winSize= [[CCDirector sharedDirector] winSize];
     CCLabelTTF *gameStartLabel = [[[CCLabelTTF alloc] initWithString:[NSString stringWithFormat:@"%@ Round", winner] fontName:@"MAIN_FONT" fontSize:32] autorelease];
@@ -850,14 +930,36 @@ NSString *const SECOND_FONT = @"SourceSansPro-Regular";
     [self addChild:gameStartLabel];
     
     //animation
-    CCDelayTime *delayAnim = [CCDelayTime actionWithDuration:1];
+    CCDelayTime *delayAnim = [CCDelayTime actionWithDuration:2];
     CCCallBlock *blockAnim = [CCCallBlock actionWithBlock:^{
         [uiLayer smashTopBottomAlreadyInPlace:YES];
     }];
     CCSequence *seqAnim = [CCSequence actionOne:delayAnim two:blockAnim];
     [gameStartLabel runAction:seqAnim];
     
-    CCDelayTime *delay = [CCDelayTime actionWithDuration:TRANSITION_TIME];
+    
+    //victory effect
+    Jouster *winnerJouster = nil;
+    for(Jouster *jouster in self.jousterArray){
+        if(!jouster.isDead){
+            winnerJouster = jouster;
+        }
+    }
+    winningJouster = nil;
+    if(winnerJouster){
+        [victorySprite stopAllActions];
+        CCRotateBy *rotate = [CCRotateBy actionWithDuration:20 * 1/gameSpeed angle:1500];
+        [victorySprite runAction:rotate];
+        victorySprite.color = winnerJouster.bodyInnerSprite.color;
+        victorySprite.position = winnerJouster.position;
+        victorySprite.visible = YES;
+        winningJouster = winnerJouster;
+        //white flash
+        CCFadeOut *fadeout = [CCFadeOut actionWithDuration:.4];
+        [whiteOverlay runAction:fadeout];;
+    }
+    
+    CCDelayTime *delay = [CCDelayTime actionWithDuration:3];
     CCCallBlock *block = [CCCallBlock actionWithBlock:^{
         [self removeChild:gameStartLabel];
         [self resetJousters];
@@ -869,14 +971,35 @@ NSString *const SECOND_FONT = @"SourceSansPro-Regular";
 
 -(void) transitionToGameOver{
     currentState = GAME_OVER;
+    centerLabel.visible = NO;
+    victorySprite.visible = NO;
     //say who won
     CGSize winSize= [[CCDirector sharedDirector] winSize];
-    CCLabelTTF *gameStartLabel = [[[CCLabelTTF alloc] initWithString:[NSString stringWithFormat:@"%@ Game", winner] fontName:MAIN_FONT fontSize:32] autorelease];
-    gameStartLabel.position = ccp(winSize.width/2, winSize.height/2);
-    [self addChild:gameStartLabel];
+    //victory effect
+    Jouster *winnerJouster = nil;
+    for(Jouster *jouster in self.jousterArray){
+        if(!jouster.isDead){
+            winnerJouster = jouster;
+        }
+    }
+    winningJouster = nil;
+    if(winnerJouster){
+        [victorySprite stopAllActions];
+        CCRotateBy *rotate = [CCRotateBy actionWithDuration:20 * 1/gameSpeed angle:1500];
+        [victorySprite runAction:rotate];
+        victorySprite.color = winnerJouster.bodyInnerSprite.color;
+        victorySprite.position = winnerJouster.position;
+        victorySprite.visible = YES;
+        winningJouster = winnerJouster;
+        //white flash
+        CCFadeOut *fadeout = [CCFadeOut actionWithDuration:.4];
+        [whiteOverlay runAction:fadeout];;
+    }
+    
+    
     
     [uiLayer animateTouchAreasOut];
-    CCDelayTime *delay = [CCDelayTime actionWithDuration:TRANSITION_TIME + 1];
+    CCDelayTime *delay = [CCDelayTime actionWithDuration:TRANSITION_TIME + 3];
     CCCallBlock *block = [CCCallBlock actionWithBlock:^{
         //transition to titleLayer
         TitleLayer *title = [TitleLayer node];
