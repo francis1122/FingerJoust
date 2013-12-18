@@ -17,6 +17,8 @@
     NSMutableArray *playerSelectArray;
     CCMenu *menu;
     CCSprite *logo;
+//    CCLabelTTF *ballLabel;
+//    CCLabelTTF *busterLabel;
 }
 
 @property (nonatomic, assign) SettingsPanel *settingsMenu;
@@ -27,4 +29,5 @@
 -(void) setWinner:(NSString*) winner;
 
 -(void) animateOut;
+
 @end

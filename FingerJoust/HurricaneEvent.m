@@ -11,7 +11,7 @@
 #import "GameLayer.h"
 #import "Jouster.h"
 #import "PlayerManager.h"
-
+#import "SimpleAudioEngine.h"
 
 @implementation HurricaneEvent
 
@@ -36,6 +36,9 @@
         hurricanesAmount = hurricaneAmount;
         self.vortexArray = [NSMutableArray array];
         timeSpan = time;
+        
+        SimpleAudioEngine* SAE = [SimpleAudioEngine sharedEngine];
+        soundID = [SAE playEffect:@"cold_snowy_blizzard.mp3" pitch:1.4 pan:0.0 gain:.2];
 
     }
     return self;
@@ -134,6 +137,9 @@
         [self.vortexArray removeObject:vortex];
         i--;
     }
+    
+    SimpleAudioEngine* SAE = [SimpleAudioEngine sharedEngine];
+    [SAE stopEffect:soundID];
 }
 
 -(void) onStart{

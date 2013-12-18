@@ -1,13 +1,13 @@
+////
+////  ZRIAPHelper.h
+////  ZooChase
+////
+////  Created by Joshua Scorca on 5/1/13.
+////
+////
 //
-//  ZRIAPHelper.h
-//  ZooChase
+//#import "IAPHelper.h"
 //
-//  Created by Joshua Scorca on 5/1/13.
-//
-//
-
-#import "IAPHelper.h"
-
-@interface ZRIAPHelper : IAPHelper
-+(ZRIAPHelper*)sharedInstance;
-@end
+//@interface ZRIAPHelper : IAPHelper
+//+(ZRIAPHelper*)sharedInstance;
+//@end

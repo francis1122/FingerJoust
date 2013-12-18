@@ -12,6 +12,7 @@
 #import "BombSprite.h"
 #import "MathHelper.h"
 #import "HazardLayer.h"
+#import "SimpleAudioEngine.h"
 
 @implementation BombEvent
 
@@ -26,6 +27,23 @@
         //add bomb stuff
         for(int i = 0; i < bombAmount; i++){
             BombSprite *bombSprite = [[[BombSprite alloc] init] autorelease];
+            
+            //set bomb position away from players
+            BOOL isProperDistance = NO;
+            while(!isProperDistance){
+                
+                isProperDistance = YES;
+                bombSprite.position = ccp( CONTROL_OFFSET + 100 + arc4random()%((int)(winSize.width - CONTROL_OFFSET * 2 - 200)),150 + arc4random()%((int)(winSize.height - 300)));
+                //cycle through players and check distance
+                
+                for(Jouster *jouster in gameLayer.jousterArray){
+                    if(ccpDistance(jouster.position, bombSprite.position) < 90){
+                        isProperDistance = NO;
+                    }
+                }
+            }
+
+            
             [gameLayer.hazardLayer addChild:bombSprite];
             [self.bombArray addObject:bombSprite];
         }
@@ -75,6 +93,9 @@
                     CGPoint jouserKnock = ccpMult(offset, -(bombMagnitude + 300));
                     jouster.velocity = jouserKnock;
                     
+                    SimpleAudioEngine* SAE = [SimpleAudioEngine sharedEngine];
+                    [SAE playEffect:@"wood_hit_brick_1.mp3" pitch:0.3 pan:0.0 gain:.2];
+                    
                     
                 }
             
@@ -86,6 +107,8 @@
                     offset = [MathHelper normalize:offset];
                     CGPoint redKnock = ccpMult(offset, 700);
                     bomb.velocity = redKnock;
+                    SimpleAudioEngine* SAE = [SimpleAudioEngine sharedEngine];
+                    [SAE playEffect:@"wood_hit_brick_1.mp3" pitch:0.3 pan:0.0 gain:.2];
 
                 }
         }
@@ -93,6 +116,10 @@
         if(bomb.isExploding){
             
             //leave explosion thing for a few seconds
+            
+            SimpleAudioEngine* SAE = [SimpleAudioEngine sharedEngine];
+            [SAE playEffect:@"explosion.mp3" pitch:1 pan:0.0 gain:.7];
+            
             CCSprite *explosion = [CCSprite spriteWithSpriteFrameName:@"explosion"];
             explosion.position = bomb.position;
             explosion.scale = 1.5;
@@ -126,7 +153,6 @@
     }
 }
 
-
 -(void) isFinished{
     for(int i = 0; i < self.bombArray.count; i++){
         //update bomb
@@ -150,6 +176,7 @@
         bomb.position = ccp(pos.x, winSize.height - radius - MIDDLEBAR_HEIGHT);
         bomb.velocity = ccp(bomb.velocity.x, bomb.velocity.y * -1);
         [gameLayer clashEffect:ccp(pos.x, winSize.height - MIDDLEBAR_HEIGHT - 1) otherPoint:ccp(pos.x, winSize.height - MIDDLEBAR_HEIGHT) withMagnitude:500 withStun:NO];
+        
     }
     
     //check south side

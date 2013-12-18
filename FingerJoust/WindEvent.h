@@ -7,12 +7,14 @@
 //
 
 #import "HazardEvent.h"
+#import "SimpleAudioEngine.h"
 
 @interface WindEvent : HazardEvent{
     float windForce;
     CCParticleSystemQuad *windEffect;
     float angle;
     BOOL warningDone;
+    ALuint soundID;
 }
 
 

@@ -89,6 +89,9 @@ extern NSString *const SECOND_FONT;
 #define PLAYER_ONE_COLOR ccORANGE
 #define PLAYER_TWO_COLOR ccYELLOW
 
+
+#define BUTTON_CLICK @"wood_hit_wood_1.mp3"
+
 typedef enum GameState
 {   
     GAMEPLAY  = 0,
@@ -144,6 +147,8 @@ typedef enum GameState
     
     CCLabelTTF *moveLabelOne, *moveLabelTwo, *moveLabelThree, *moveLabelFour, *centerLabel;
     
+    float tempSlowTimer;
+    BOOL isSlowedDown;
     
 }
 
@@ -184,6 +189,9 @@ typedef enum GameState
 -(void) transitionToEndRound;
 -(void) transitionToGameOver;
 
+-(void) activateSlow;
+
+-(void) deactiveSlow;
 
 //special effects
 //-(void) clashEffect:(CGPoint) p1 otherPoint:(CGPoint) p2;

@@ -13,7 +13,8 @@
 @interface AboutPanel : CCLayerColor {
     CCMenuItemFont *menuToggle;
     TitleLayer *titleLayer;
-    BOOL isActive;    
+    BOOL isActive;
+    CCSprite *closeImage;
 }
 @property (nonatomic, assign) TitleLayer *titleLayer;
 @property BOOL isActive;

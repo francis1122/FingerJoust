@@ -58,8 +58,14 @@
     CCParticleSystemQuad *stunParticles;
     CCParticleSystemQuad *motionStreak;
     CCParticleSystemQuad *jousterMotionStreak;
+    CGPoint touchPoint;
+    
+    BOOL isJousterInactive;
+    float jousterInactiveTimer;
 }
 
+@property BOOL isJousterInactive;
+@property float jousterInactiveTimer;
 @property BOOL isDisplay;
 @property int powerStones;
 @property int wins;

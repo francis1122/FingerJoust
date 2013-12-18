@@ -11,10 +11,9 @@
 #import "HazardEvent.h"
 #import "Jouster.h"
 #import "PlayerManager.h"
+#import "SimpleAudioEngine.h"
 
 @implementation WindEvent
-
-
 
 -(id) initWithTime:(float) time WithForce:(float) force GameLayer:(GameLayer*)gLayer{
     if(self = [super initWithGameLayer:gLayer]){
@@ -37,6 +36,8 @@
         
         timeSpan = time;
         windForce = force;
+        SimpleAudioEngine* SAE = [SimpleAudioEngine sharedEngine];
+        soundID = [SAE playEffect:@"cold_snowy_blizzard.mp3" pitch:1.0 pan:0.0 gain:.3];
 
     }
     return self;
@@ -45,7 +46,6 @@
 -(void) dealloc{
     [super dealloc];
 }
-
 
 -(void) update:(ccTime) dt{
     [super update:dt];
@@ -76,6 +76,8 @@
 
 -(void) isFinished{
     [windEffect stopSystem];
+    SimpleAudioEngine* SAE = [SimpleAudioEngine sharedEngine];
+    [SAE stopEffect:soundID];
 }
 
 -(void) onStart{

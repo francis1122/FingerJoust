@@ -117,6 +117,9 @@
     offset = [MathHelper normalize:offset];
     offset = ccpMult(offset, 350);
     joustVelocity = offset;
+    
+    jousterInactiveTimer = .15;
+    isJousterInactive = YES;
 }
 
 @end

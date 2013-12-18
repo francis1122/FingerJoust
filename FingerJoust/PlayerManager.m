@@ -26,14 +26,18 @@ static PlayerManager *sharedInstance = nil;
 
 -(id) init{
     if(self = [super init]){
+        //this makes it so the game doesn't need in app purchase
+        self.isGameUnlocked = YES;
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"unlockGame"];
+
         
         //have this called only when the app is opening for the first time on device
-        if(![[NSUserDefaults standardUserDefaults] boolForKey:@"AppOpenedBefore"]){
-            [[ZRIAPHelper sharedInstance] restoreCompletedTransactions];
-            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"AppOpenedBefore"];
-        }
+  //      if(![[NSUserDefaults standardUserDefaults] boolForKey:@"AppOpenedBefore"]){
+//            [[ZRIAPHelper sharedInstance] restoreCompletedTransactions];
+//            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"AppOpenedBefore"];
+    //    }
         
-        [[ZRIAPHelper sharedInstance] requestProductsWithCompletionHandler:^(BOOL success, NSArray *_products) {
+      /*  [[ZRIAPHelper sharedInstance] requestProductsWithCompletionHandler:^(BOOL success, NSArray *_products) {
             if (success) {
                 products = [[NSArray alloc] initWithArray:_products];
             }else{
@@ -41,7 +45,7 @@ static PlayerManager *sharedInstance = nil;
             }
         }];
         
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(productPurchased:) name:IAPHelperProductPurchasedNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(productPurchased:) name:IAPHelperProductPurchasedNotification object:nil];*/
         self.playerArray = [NSMutableArray array];
         windEvent = EventOn;
         bombEvent = EventOn;
@@ -61,13 +65,13 @@ static PlayerManager *sharedInstance = nil;
             [self.playerArray addObject:player];
         }
         
-        
+        /*
         if([[NSUserDefaults standardUserDefaults] boolForKey:@"unlockGame"]) {
             self.isGameUnlocked = YES;
         } else {
             self.isGameUnlocked = NO;
         }
-        
+        */
         
     }
     return self;
@@ -98,13 +102,13 @@ static PlayerManager *sharedInstance = nil;
 }
 
 -(void) purchaseProduct{
-    for (SKProduct *product in products){
-        if ([product.productIdentifier isEqualToString:@"UnlockGameID"]) {
-            NSLog(@"Buying %@...", product.productIdentifier);
-            [[ZRIAPHelper sharedInstance] buyProduct:product];
-            break;
-        }
-    }
+//    for (SKProduct *product in products){
+//        if ([product.productIdentifier isEqualToString:@"UnlockGameID"]) {
+//            NSLog(@"Buying %@...", product.productIdentifier);
+//            [[ZRIAPHelper sharedInstance] buyProduct:product];
+//            break;
+//        }
+//    }
 }
 
 -(void) unlockTheGame{

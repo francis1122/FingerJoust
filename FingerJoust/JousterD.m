@@ -10,6 +10,7 @@
 #import "GameLayer.h"
 #import "MathHelper.h"
 #import "Player.h"
+#import "SimpleAudioEngine.h"
 
 @implementation JousterD
 
@@ -158,6 +159,9 @@
     offset = [MathHelper normalize:offset];
     offset = ccpMult(offset, JOUSTER_JOUSTER_D_SPEED);
     joustVelocity = offset;
+    
+    jousterInactiveTimer = .15;
+    isJousterInactive = YES;
 }
 
 @end

@@ -28,6 +28,7 @@
 #import "HazardLayer.h"
 #import "PlayerManager.h"
 #import "JousterParticle.h"
+#import "SimpleAudioEngine.h"
 
 @implementation GameLayer
 
@@ -40,6 +41,17 @@ NSString *const SECOND_FONT = @"SourceSansPro-Regular";
 -(id) init{
     if(self = [super initWithColor:COLOR_GAMEAREA_B4] ){
         CGSize winSize= [[CCDirector sharedDirector] winSize];
+        //background particles
+//        ccc3(195,185,170)
+       /* CCParticleSystemQuad *bgParticles = [[CCParticleSystemQuad alloc] initWithFile: @"BackGroundParticles.plist"];
+        bgParticles.position = ccp(winSize.width/2, winSize.height/2);
+        bgParticles.posVar = ccp(winSize.width/2, winSize.height/2);
+        bgParticles.startColor = ccc4f(230, 220, 210, 20);
+        bgParticles.endColor = ccc4f(230, 220, 210, 20);
+        [self addChild:bgParticles];
+       */
+        
+
         self.vortexArray = [[[NSMutableArray alloc] init] autorelease];
         self.touchParticleArray = [[[NSMutableArray alloc] init] autorelease];
         
@@ -47,7 +59,9 @@ NSString *const SECOND_FONT = @"SourceSansPro-Regular";
         [self addChild:uiLayer z:10];
         self.hazardLayer = [[[HazardLayer alloc] initWithGameLayer:self] autorelease];
         [self addChild:hazardLayer z:5];
-        
+        SimpleAudioEngine* SAE = [SimpleAudioEngine sharedEngine];
+        [SAE setBackgroundMusicVolume:0.3];
+        [SAE playBackgroundMusic:@"funky_drum_and_bass.mp3" loop:YES];
         //labels to display who is winning
         
         [self scheduleUpdate];
@@ -55,7 +69,9 @@ NSString *const SECOND_FONT = @"SourceSansPro-Regular";
         currentRound = 0;
         _touchMode = NO;
         
-        centerLabel = [[[CCLabelTTF alloc] initWithString:@"closest to center wins" fontName:MAIN_FONT fontSize:24] autorelease];
+
+        
+        centerLabel = [[[CCLabelTTF alloc] initWithString:@"closest to center wins" fontName:MAIN_FONT fontSize:36] autorelease];
         centerLabel.color = COLOR_GAMEBORDER;
         centerLabel.position = ccp(winSize.width/2, 100);
         centerLabel.visible = NO;
@@ -114,7 +130,7 @@ NSString *const SECOND_FONT = @"SourceSansPro-Regular";
         
         
         [self gameIntro];
-
+        
     }
     return self;
 }
@@ -237,11 +253,35 @@ NSString *const SECOND_FONT = @"SourceSansPro-Regular";
     centerSprite.scale = 1;
     [hazardLayer resetLayer];
     centerLabel.visible = NO;
+    [self deactiveSlow];
+}
+
+-(void) activateSlow{
+    tempSlowTimer = .15;
+    isSlowedDown = YES;
+    ///    self.color = ccBLACK;
+}
+
+-(void) deactiveSlow{
+    isSlowedDown = NO;
+    tempSlowTimer = -0.2;
+    self.color = COLOR_GAMEAREA;
 }
 
 -(void) update:(ccTime)dt{
     if(currentState == GAMEPLAY){
         dt *= gameSpeed;
+        if(tempSlowTimer > 0){
+            tempSlowTimer -= dt;
+            
+            //            dt *= .1;
+            if(tempSlowTimer <= 0){
+                //undo slow stuff
+                [self deactiveSlow];
+            }
+            return;
+        }
+        
         [hazardLayer update: dt];
         for(Jouster *jouster in self.jousterArray){
             if(!jouster.isDead){
@@ -280,7 +320,7 @@ NSString *const SECOND_FONT = @"SourceSansPro-Regular";
             [jouster update:dt];
             jouster.position = ccpAdd(jouster.position, ccpMult(jouster.velocity, dt));
             jouster.jousterSprite.position = ccpAdd(jouster.joustPosition,  ccpMult(jouster.joustVelocity, dt));
-//            [jouster checkBoundaries];
+            //            [jouster checkBoundaries];
         }
         if(winningJouster){
             victorySprite.position =  winningJouster.position;
@@ -339,7 +379,7 @@ NSString *const SECOND_FONT = @"SourceSansPro-Regular";
     if((int)uiLayer.roundTimer < uiLayer.displayedTime){
         uiLayer.displayedTime = (int)uiLayer.roundTimer;
         uiLayer.timerLabel.string = [NSString stringWithFormat:@"%d", uiLayer.displayedTime];
-
+        
         if(uiLayer.displayedTime < 6 && !centerVisible){
             centerVisible = YES;
             centerLabel.visible = YES;
@@ -571,9 +611,11 @@ NSString *const SECOND_FONT = @"SourceSansPro-Regular";
                         //kill jousterB
                         [jousterA joustCollision: jousterB.position withRadius: jousterB.bodyRadius];
                         jousterB.isDead = YES;
+                        [self clashEffect:[jousterA getWorldPositionOfJoust] otherPoint:jousterB.position withMagnitude:1000 withStun:NO];
                         [self deathEffect:jousterB];
                         [jousterB removeFromParentAndCleanup:YES];
                         [jousterB update:0.001];
+                        [self activateSlow];
                         [uiLayer refreshUI];
                     }
                     
@@ -618,13 +660,16 @@ NSString *const SECOND_FONT = @"SourceSansPro-Regular";
     for(Jouster *jousterB in self.jousterArray){
         if(jousterB.player.playerNumber != jouster.player.playerNumber && !jousterB.isDead){
             //jousters hitting
-            if( [MathHelper circleCollisionPositionA:[jouster getWorldPositionOfJoust]  raidusA:[jouster joustRadius] positionB:[jousterB getWorldPositionOfJoust] radiusB: [jousterB joustRadius]]){
-                //bounce off eachother
-                [jouster joustCollision: [jousterB getWorldPositionOfJoust] withRadius: jousterB.joustRadius];
-                [jousterB joustCollision: [jouster getWorldPositionOfJoust] withRadius: jouster.joustRadius];
-                [self spawnVortexAtPoint:ccpMidpoint([jouster getWorldPositionOfJoust] , [jousterB getWorldPositionOfJoust])];
-                [self clashEffect:[jouster getWorldPositionOfJoust] otherPoint:[jousterB getWorldPositionOfJoust] withMagnitude:500 withStun:NO];
-                return YES;
+            if(!jousterB.isJousterInactive && !jouster.isJousterInactive){
+                if( [MathHelper circleCollisionPositionA:[jouster getWorldPositionOfJoust]  raidusA:[jouster joustRadius] positionB:[jousterB getWorldPositionOfJoust] radiusB: [jousterB joustRadius]]){
+                    //bounce off eachother
+                    [jouster joustCollision: [jousterB getWorldPositionOfJoust] withRadius: jousterB.joustRadius];
+                    [jousterB joustCollision: [jouster getWorldPositionOfJoust] withRadius: jouster.joustRadius];
+                    [self spawnVortexAtPoint:ccpMidpoint([jouster getWorldPositionOfJoust] , [jousterB getWorldPositionOfJoust])];
+                    [self clashEffect:[jouster getWorldPositionOfJoust] otherPoint:[jousterB getWorldPositionOfJoust] withMagnitude:500 withStun:NO];
+                    [self activateSlow];
+                    return YES;
+                }
             }
         }
     }
@@ -638,24 +683,83 @@ NSString *const SECOND_FONT = @"SourceSansPro-Regular";
     CGPoint redToBlue = ccpNormalize(ccpSub(jousterA.position, jousterB.position));
     CGPoint blueToRed = ccpMult(redToBlue, -1);
     
+    //    NSLog(@"redToBLUE %f, %f",redToBlue.x, redToBlue.y);
+    
     //multiply normalized vector by bodies velocity
-    CGPoint redRelativeVelocity = ccp(redToBlue.x * jousterA.velocity.x, redToBlue.y * jousterA.velocity.y);
-    CGPoint blueRelativeVelocity = ccp(blueToRed.x * jousterB.velocity.x, blueToRed.y * jousterB.velocity.y);
+    CGPoint redRelativeVelocity = ccp(redToBlue.x * (jousterA.velocity.x + jousterA.outsideVelocity.x), redToBlue.y * (jousterA.velocity.y + jousterA.outsideVelocity.y));
+    CGPoint blueRelativeVelocity = ccp(blueToRed.x * (jousterB.velocity.x + jousterB.outsideVelocity.x), blueToRed.y * (jousterB.velocity.y  + jousterB.outsideVelocity.y));
     
     //check if magnitude of that number is high enough to cause stun damage
     float redMagnitude = ccpLength(redRelativeVelocity);
     float blueMagnitude = ccpLength(blueRelativeVelocity);
     BOOL isStun = NO;
-    if(redMagnitude > STUN_CONTRAINT){
-        // stun blue
-        [jousterB stunBody];
-        isStun = YES;
+    //  NSLog(@"redMag   %f", redMagnitude);
+    //  NSLog(@"blueMag %f", blueMagnitude);
+    
+    //ensures only 1 player gets stunned on collision
+//        ccBlendFunc blend = {GL_DST_COLOR, GL_ONE};
+    
+    CCSprite * stunEffect = [CCSprite spriteWithSpriteFrameName:@"spikeWall"];;
+//    stunEffect.anchorPoint = ccp(0.0, 0.0);
+    if(redMagnitude > blueMagnitude){
+        
+        //hit effect
+
+//        float rotation = [MathHelper degreeAngleBetween:jousterA.position and:jousterB.position];
+//        CGPoint norm = ccpNormalize(jousterB.velocity);
+//        float rotation = CC_RADIANS_TO_DEGREES(atan2(norm.y, norm.x));
+//
+//        NSLog(@"rotation %f", rotation);
+//        /*if(rotation < 0){
+//            rotation = -rotation - 90;
+//        }*/
+//        stunEffect.rotation = -rotation - 90;
+//        CGPoint midPoint = ccpMidpoint(jousterA.position, jousterB.position);
+//        CGPoint newPos = ccp(midPoint.x - jousterB.position.x, midPoint.y - jousterB.position.y);
+//        stunEffect.position = newPos;
+//    
+////        [jousterB setBlendFunc:blend];
+//        [jousterB addChild:stunEffect];
+        //set timer
+        
+        
+        if(redMagnitude > STUN_CONTRAINT){
+            // stun blue
+            [jousterB stunBody];
+            isStun = YES;
+            [self activateSlow];
+        }
+        
+    }else{
+//        float rotation = [MathHelper degreeAngleBetween:jousterB.position and:jousterA.position];
+//        CGPoint norm = ccpNormalize(jousterA.velocity);
+//        float rotation = CC_RADIANS_TO_DEGREES(atan2(norm.y, norm.x));
+//
+//        NSLog(@"rotation %f", rotation);
+//        stunEffect.rotation = -rotation - 90;
+//        CGPoint midPoint = ccpMidpoint(jousterA.position, jousterB.position);
+//        CGPoint newPos = ccp(midPoint.x - jousterA.position.x, midPoint.y - jousterA.position.y);
+//        stunEffect.position = newPos;
+//
+////        [jousterA setBlendFunc:blend];
+//        [jousterA addChild:stunEffect];
+        
+        if(blueMagnitude > STUN_CONTRAINT){
+            // stun red
+            [jousterA stunBody];
+            isStun = YES;
+            [self activateSlow];
+        }
     }
-    if(blueMagnitude > STUN_CONTRAINT){
-        // stun red
-        [jousterA stunBody];
-        isStun = YES;
-    }
+    
+//    CCDelayTime *delayAnim = [CCDelayTime actionWithDuration:.5];
+//    CCCallBlock *blockAnim = [CCCallBlock actionWithBlock:^{
+//        [stunEffect removeFromParentAndCleanup:YES];
+//    }];
+//    CCSequence *seqAnim = [CCSequence actionOne:delayAnim two:blockAnim];
+//    [stunEffect runAction:seqAnim];
+    
+    
     
     //bounce off eachother
     //get direction
@@ -739,8 +843,6 @@ NSString *const SECOND_FONT = @"SourceSansPro-Regular";
                             moveLabelFour = nil;
                         }
                     }
-                    
-                    
                     
                     
                     [jouster touch:location];
@@ -917,10 +1019,17 @@ NSString *const SECOND_FONT = @"SourceSansPro-Regular";
 
 -(void) transitionToGamePlay{
     [self refreshUI];
+    SimpleAudioEngine* SAE = [SimpleAudioEngine sharedEngine];
+    [SAE setBackgroundMusicVolume:0.3];
     currentState = GAMEPLAY;
 }
 
 -(void) transitionToEndRound{
+    
+    SimpleAudioEngine* SAE = [SimpleAudioEngine sharedEngine];
+    [SAE setBackgroundMusicVolume:0.1];
+    [SAE playEffect:@"jack_1.mp3" pitch:1.0 pan:0.0 gain:1.0];
+
     currentState = ROUND_END;
     centerLabel.visible = NO;
     //show names of fighters
@@ -973,6 +1082,9 @@ NSString *const SECOND_FONT = @"SourceSansPro-Regular";
     currentState = GAME_OVER;
     centerLabel.visible = NO;
     victorySprite.visible = NO;
+    SimpleAudioEngine* SAE = [SimpleAudioEngine sharedEngine];
+    [SAE setBackgroundMusicVolume:0.1];
+    [SAE playEffect:@"jack_1.mp3" pitch:1.0 pan:0.0 gain:1.0];
     //say who won
     CGSize winSize= [[CCDirector sharedDirector] winSize];
     //victory effect
@@ -1016,9 +1128,15 @@ NSString *const SECOND_FONT = @"SourceSansPro-Regular";
 
 -(void) clashEffect:(CGPoint) p1 otherPoint:(CGPoint) p2 withMagnitude:(float) magnitude withStun:(BOOL) stun{
     
+    //play sound
+    SimpleAudioEngine* SAE = [SimpleAudioEngine sharedEngine];
+
     ccColor4F effectColor = ccc4f(1, 1, 1, 1);
     if(stun){
-        effectColor = ccc4f(1.0, 1.0, 0, 1);
+        effectColor = ccc4f(0.0, 0.0, 0, 1);
+        [SAE playEffect:@"wood_hit_aluminium_heavy_1.mp3" pitch:0.8 pan:0.0 gain:.3];
+    }else{
+        [SAE playEffect:@"wood_hit_metal_heavy_1.mp3" pitch:0.8 pan:0.0 gain:.2];
     }
     //how fast the particles move
     float particleSpeed = magnitude/2;
@@ -1052,6 +1170,10 @@ NSString *const SECOND_FONT = @"SourceSansPro-Regular";
 
 -(void) clashWeakEffect:(CGPoint) p1 otherPoint:(CGPoint) p2 withMagnitude:(float) magnitude withStun:(BOOL) stun{
     
+    SimpleAudioEngine* SAE = [SimpleAudioEngine sharedEngine];
+    float soundVariety = .5 + .4/(3+arc4random()%4);
+    [SAE playEffect:@"wood_hit_brick_1.mp3" pitch:soundVariety pan:0.0 gain:.4];
+
     ccColor4F effectColor = ccc4f(1, 1, 1, 1);
     if(stun){
         effectColor = ccc4f(1.0, 1.0, 0, 1);
@@ -1087,6 +1209,8 @@ NSString *const SECOND_FONT = @"SourceSansPro-Regular";
 }
 
 -(void) deathEffect:(Jouster*) deadJouster{
+    SimpleAudioEngine* SAE = [SimpleAudioEngine sharedEngine];
+    [SAE playEffect:@"wood_hit_metal_heavy_1.mp3" pitch:1.3 pan:0.0 gain:.7];
     CCParticleSystemQuad *deathEffectJ = [[CCParticleSystemQuad alloc] initWithFile: @"jousterDeathParticle.plist"];
     deathEffectJ.position = [deadJouster getWorldPositionOfJoust];
     deathEffectJ.autoRemoveOnFinish = YES;

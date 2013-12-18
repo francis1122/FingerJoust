@@ -18,6 +18,7 @@
 #import "JousterE.h"
 #import "JousterF.h"
 #import "CCWarpSprite.h"
+#import "SimpleAudioEngine.h"
 
 @implementation PlayerSelect
 
@@ -82,6 +83,8 @@
         CCMenuItemSprite *playItem = [CCMenuItemSprite itemWithNormalSprite:normalSprite
                                                              selectedSprite:selectedSprite
                                                                       block:^(CCMenuItemSprite *sender){
+                                                                          SimpleAudioEngine* SAE = [SimpleAudioEngine sharedEngine];
+                                                                          [SAE playEffect:BUTTON_CLICK pitch:0.5 pan:0.0 gain:.5];
                                                                           self.player.isActive = NO;
                                                                           [self deactivatePlayer];
                                                                       }];
@@ -129,6 +132,8 @@
                                                selectedSprite:selectedSprite
                                                         block:^(CCMenuItemSprite *sender){
                                                             //cycle between 4 teams
+                                                            SimpleAudioEngine* SAE = [SimpleAudioEngine sharedEngine];
+                                                            [SAE playEffect:BUTTON_CLICK pitch:0.6 pan:0.0 gain:.2];
                                                             int team = player.team;
                                                             team++;
                                                             if(team > 3){
@@ -168,9 +173,11 @@
                                                                              block:^(CCMenuItemSprite *sender){
                                                                                  //cycle between 4 teams
                                                                                  int jousterType = player.jousterType;
-                                                                                 jousterType++;
-                                                                                 if(jousterType > 4){
-                                                                                     jousterType = 0;
+                                                                                 SimpleAudioEngine* SAE = [SimpleAudioEngine sharedEngine];
+                                                                                 [SAE playEffect:BUTTON_CLICK pitch:0.6 pan:0.0 gain:.2];
+                                                                                 jousterType--;
+                                                                                 if(jousterType < 0){
+                                                                                     jousterType = 4;
                                                                                  }
                                                                                  player.jousterType = jousterType;
                                                                                  [self playerCharacterChangedTo:player.jousterType From:YES];
@@ -185,10 +192,12 @@
                                                                          selectedSprite:selectedSprite
                                                                                   block:^(CCMenuItemSprite *sender){
                                                                                       //cycle between 4 teams
+                                                                                      SimpleAudioEngine* SAE = [SimpleAudioEngine sharedEngine];
+                                                                                      [SAE playEffect:BUTTON_CLICK pitch:0.6 pan:0.0 gain:.2];
                                                                                       int jousterType = player.jousterType;
-                                                                                      jousterType--;
-                                                                                      if(jousterType < 0){
-                                                                                          jousterType = 4;
+                                                                                      jousterType++;
+                                                                                      if(jousterType > 4){
+                                                                                          jousterType = 0;
                                                                                       }
                                                                                       player.jousterType = jousterType;
                                                                                       [self playerCharacterChangedTo:player.jousterType From:NO];
@@ -360,19 +369,19 @@
     BOOL gameUnlock = PM.isGameUnlocked;
     NSString *characterString = @"";
     if(character == 0){
-        characterString = @"Orbit";
+        characterString = @"Spin";
         currentJouster = [[[JousterB alloc] initWithPlayer:self.player] autorelease];
         lock.visible = NO;
         self.isLocked = NO;
         unlockMenu.visible = NO;
     }else if(character == 1){
-        characterString = @"Ball and Chain";
+        characterString = @"Swing";
         currentJouster = [[[JousterA alloc] initWithPlayer:self.player] autorelease];
         lock.visible = NO;
         self.isLocked = NO;
         unlockMenu.visible = NO;
     }else if(character == 2){
-        characterString = @"Grower";
+        characterString = @"Pop";
         currentJouster = [[[JousterC alloc] initWithPlayer:self.player] autorelease];
         if(gameUnlock){
             lock.visible = NO;
@@ -384,7 +393,7 @@
         unlockMenu.visible = YES;
         }
     }else if(character == 3){
-        characterString = @"Bouncer";
+        characterString = @"Bounce";
         currentJouster = [[[JousterE alloc] initWithPlayer:self.player] autorelease];
         if(gameUnlock){
             lock.visible = NO;
@@ -473,6 +482,8 @@
             if(!player.isActive){
                 self.player.isActive = YES;
                 [self activatePlayer];
+                SimpleAudioEngine* SAE = [SimpleAudioEngine sharedEngine];
+                [SAE playEffect:BUTTON_CLICK pitch:0.6 pan:0.0 gain:.3];
             }
         }
     }

@@ -11,6 +11,7 @@
 #import "SettingsPanel.h"
 #import "TitleLayer.h"
 #import "PlayerManager.h"
+#import "SimpleAudioEngine.h"
 
 
 @implementation AboutPanel
@@ -28,6 +29,8 @@
             titleLayer.menu.enabled = YES;
             CCMoveTo *moveTo = [CCMoveTo actionWithDuration:0.35 position:ccp(CONTROL_OFFSET, -self.contentSize.height + 60)];
             [titleLayer.settingsMenu runAction:moveTo];
+            SimpleAudioEngine* SAE = [SimpleAudioEngine sharedEngine];
+            [SAE playEffect:BUTTON_CLICK pitch:0.6 pan:0.0 gain:.2];
             return;
         }
         
@@ -36,18 +39,35 @@
             titleLayer.menu.enabled = YES;
             CCMoveTo *moveTo = [CCMoveTo actionWithDuration:0.35 position:ccp(CONTROL_OFFSET, size.height - 60)];
             [self runAction:moveTo];
+            
+            [closeImage runAction: [CCFadeOut actionWithDuration:.35]];
+            SimpleAudioEngine* SAE = [SimpleAudioEngine sharedEngine];
+            [SAE playEffect:BUTTON_CLICK pitch:0.6 pan:0.0 gain:.2];
+            
         }else{
             isActive = YES;
             titleLayer.menu.enabled = NO;
             CCMoveTo *moveTo = [CCMoveTo actionWithDuration:0.35 position:ccp(CONTROL_OFFSET, size.height - self.contentSize.height)];
             [self runAction:moveTo];
+            [closeImage runAction: [CCFadeIn actionWithDuration:.35]];
+            SimpleAudioEngine* SAE = [SimpleAudioEngine sharedEngine];
+            [SAE playEffect:BUTTON_CLICK pitch:0.6 pan:0.0 gain:.2];
         }
     }];
+
+//    NSLog(@"menuActiveArea: %f, %f, %f, %f", menuToggle.activeArea.origin.x, menuToggle.activeArea.origin.y, menuToggle.activeArea.size.width, menuToggle.activeArea.size.height);
     menuToggle.color= ccWHITE;
     [menuToggle setFontName:MAIN_FONT];
     CCMenu *menu = [CCMenu menuWithItems:menuToggle, nil];
     menu.position = ccp(self.contentSize.width/2, 25);
     [self addChild:menu z:1];
+    menuToggle.activeArea = CGRectMake(-50, -10, 180, 55);
+    
+    closeImage = [CCSprite spriteWithSpriteFrameName:@"closebutton"];
+    closeImage.opacity = 0;
+    closeImage.position = ccp(self.contentSize.width/2 + 60, 22);
+    closeImage.scale = .5;
+    [self addChild:closeImage z:0];
     
     float offset = 605;
     float spacing = 45;
@@ -105,7 +125,7 @@
     [self addChild:label];
     
     position = ccp(xPos + otheroffsetX, offset);
-    label = [CCLabelTTF labelWithString:@"Andrew Luke" fontName:MAIN_FONT fontSize:fontSize dimensions:CGSizeMake(240, 30) hAlignment:kCCTextAlignmentLeft];
+    label = [CCLabelTTF labelWithString:@"http://www.freesfx.co.uk" fontName:MAIN_FONT fontSize:12 dimensions:CGSizeMake(240, 30) hAlignment:kCCTextAlignmentLeft];
     label.position = position;
     [self addChild:label];
     

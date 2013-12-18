@@ -15,7 +15,7 @@
 
 @implementation Jouster
 
-@synthesize velocity, waitingForTouch, bodyRadius, joustRadius, orbitalOffset,joustPosition, player, powerStones, jousterSprite, joustVelocity, motionStreak, isDead, wins, jousterMotionStreak, gameLayer, outsideVelocity, joustOutsideVelocity, isDisplay, bodyInnerSprite;
+@synthesize velocity, waitingForTouch, bodyRadius, joustRadius, orbitalOffset,joustPosition, player, powerStones, jousterSprite, joustVelocity, motionStreak, isDead, wins, jousterMotionStreak, gameLayer, outsideVelocity, joustOutsideVelocity, isDisplay, bodyInnerSprite, isJousterInactive, jousterInactiveTimer;
 
 -(id) initWithPlayer:(Player *) p{
     if(self = [super init]){
@@ -26,6 +26,8 @@
         [self resetJouster];
         bodyRadius = 30;
         joustRadius = 20;
+        isJousterInactive = NO;
+        jousterInactiveTimer = 0.0;
         bodyOuterSprite = [CCWarpSprite spriteWithSpriteFrameName:@"BodyOuter"];
         bodyOuterSprite.isWarping = NO;
         self.bodyInnerSprite = [CCWarpSprite spriteWithSpriteFrameName:@"BodyInner"];
@@ -143,6 +145,8 @@
     powerStones = 0;
     orbitalOffset = 0;
     CGPoint pos;
+    jousterInactiveTimer = 0.0;
+    isJousterInactive = NO;
     [stunParticles resetSystem];
     [stunParticles updateWithNoTime];
     [stunParticles stopSystem];
@@ -204,6 +208,7 @@
     isStunned = YES;
     stunTimer = STUN_TIME;
     bodyOuterSprite.color = ccBLACK;
+    
 }
 
 -(void) clampMaxSpeed{
@@ -218,7 +223,13 @@
     if(powerStones > 4){
         [self engageSuperMode];
     }
+    jousterInactiveTimer -= dt;
+    if(jousterInactiveTimer < 0){
+        isJousterInactive = NO;
+    }
     
+    self.velocity = ccpAdd(self.velocity, ccpMult(touchPoint,dt));
+    touchPoint = CGPointZero;
     if(self.parent && self.visible){
         jousterMotionStreak.visible = YES;
         motionStreak.visible = YES;
@@ -342,16 +353,17 @@
     if(isSuperMode){
         difference = ccp(difference.x * 5.5, difference.y *4.1);
     }else if(isStunned){
-        difference = ccp(difference.x * 2.3, difference.y *2.0);
+        difference = ccp(difference.x * 150.3, difference.y *130.0);
     }else{
         
 //        difference = ccp(difference.x * 2.7, difference.y *2.2);
-        difference = ccp(difference.x * 10, difference.y *10);
+        difference = ccp(difference.x * 930, difference.y *930);
 //        difference = ccp(difference.x * 2.0, difference.y *1.6);
 //        difference = ccp(difference.x * 6, difference.y *6);
 
     }
-    self.velocity = ccpAdd(velocity, difference);
+//    self.velocity = ccpAdd(velocity, difference);
+    touchPoint = difference;
     previousTouch = touch;
 }
 

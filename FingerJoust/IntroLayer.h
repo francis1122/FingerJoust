@@ -11,15 +11,21 @@
 #import "cocos2d.h"
 
 // HelloWorldLayer
+@class Jouster;
 @interface IntroLayer : CCLayerColor
 {
     
     BOOL introAnimation;
     CCLabelTTF *ballLabel, *busterLabel, *tapToPlayLabel;
     CCLayerColor *whiteFlash;
+    NSMutableArray *jousterArray;
 }
+
+@property (nonatomic, retain) NSMutableArray *jousterArray;
 
 // returns a CCScene that contains the HelloWorldLayer as the only child
 +(CCScene *) scene;
+
+-(void) checkBoundaries:(Jouster*) jouster;
 
 @end

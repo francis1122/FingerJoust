@@ -106,6 +106,10 @@
     offset = ccpMult(offset, 500);
     joustVelocity = offset;
     joustOutsideVelocity = offset;
+    isJousterInactive = NO;
+    
+    jousterInactiveTimer = .15;
+    isJousterInactive = YES;
 }
 
 @end

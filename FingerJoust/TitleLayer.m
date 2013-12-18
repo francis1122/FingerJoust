@@ -14,6 +14,7 @@
 #import "GameLayer.h"
 #import "SettingsPanel.h"
 #import "AboutPanel.h"
+#import "SimpleAudioEngine.h"
 
 @implementation TitleLayer
 
@@ -22,22 +23,29 @@
 
 -(id) init{
     if(self = [super initWithColor:COLOR_GAMEAREA_B4] ){
+        
 		CGSize size = [[CCDirector sharedDirector] winSize];
         // create and initialize a Label
         //		CCLabelTTF *label = [CCLabelTTF labelWithString:@"Ball Buster" fontName:MAIN_FONT fontSize:64];
         //		label.position =  ccp( size.width /2 , size.height-100 );
         //		[self addChild: label];
         
-        logo = [CCSprite spriteWithSpriteFrameName:@"Logo"];
-		logo.position =  ccp( size.width/2 + 30, size.height-200 );
-        [self addChild:logo];
+       /* logo = [CCSprite spriteWithSpriteFrameName:@"Logo_1"];
+		logo.position =  ccp( size.width/2, size.height-250 );
+        [self addChild:logo];*/
 		// ask director for the window size
-        
+//        ballLabel = [CCLabelTTF labelWithString:@"Battle" fontName:MAIN_FONT fontSize:128];
+//        busterLabel = [CCLabelTTF labelWithString:@"Balls" fontName:MAIN_FONT fontSize:128];
+//        
+//        ballLabel.position = ccp( size.width/2, size.height-160);
+//        busterLabel.position = ccp( size.width/2, size.height-275);
+//        [self addChild:ballLabel];
+//        [self addChild:busterLabel];
         
         
 		// position the label on the center of the screen
-        CCSprite *normal = [CCSprite spriteWithSpriteFrameName:@"play"];
-        CCSprite *selected = [CCSprite spriteWithSpriteFrameName:@"play"];
+        CCSprite *normal = [CCSprite spriteWithSpriteFrameName:@"Logo"];
+        CCSprite *selected = [CCSprite spriteWithSpriteFrameName:@"Logo_Pressed"];
 		CCMenuItemSprite *playItem = [CCMenuItemSprite itemWithNormalSprite:normal selectedSprite:selected block:^(id sender) {
             int activeCount = 0;
             NSMutableArray *teamArray  = [NSMutableArray array];
@@ -72,14 +80,21 @@
             }
             BOOL locked = NO;
             for(PlayerSelect *select in self.playerSelectArray){
-                if(select.isLocked){
-                    locked = YES;
+                if(select.player.isActive){
+                    if(select.isLocked){
+                        locked = YES;
+                    }
                 }
             }
             //temp code to allow anyone to play any character
-            locked = NO;
             if(activeCount > 1 && !locked && [teamArray count] > 1){
+                SimpleAudioEngine* SAE = [SimpleAudioEngine sharedEngine];
+                [SAE playEffect:BUTTON_CLICK pitch:1.2 pan:0.0 gain:.7];
                 [self animateOut];
+            }else{
+                //failed to start
+                SimpleAudioEngine* SAE = [SimpleAudioEngine sharedEngine];
+                [SAE playEffect:BUTTON_CLICK pitch:0.3 pan:0.0 gain:.4];
             }
 		}];
         
@@ -89,6 +104,8 @@
 		CCMenuItemSprite *teamPlayToggle = [CCMenuItemSprite itemWithNormalSprite:normal selectedSprite:selected block:^(CCMenuItemSprite *sender) {
 //        CCMenuItemFont *teamPlayToggle = [CCMenuItemFont itemWithString:@"Team Play Off" block:^(CCMenuItemFont *sender) {
             [PlayerManager sharedInstance].isTeamPlay = ![PlayerManager sharedInstance].isTeamPlay;
+            SimpleAudioEngine* SAE = [SimpleAudioEngine sharedEngine];
+            [SAE playEffect:BUTTON_CLICK pitch:0.6 pan:0.0 gain:.4];
             if([PlayerManager sharedInstance].isTeamPlay){
                 for(PlayerSelect *selectLayer in self.playerSelectArray){
                     [selectLayer turnOnTeamPlay];
@@ -106,8 +123,8 @@
         
 		menu = [CCMenu menuWithItems:playItem, teamPlayToggle, nil];
 		
-        [menu alignItemsVerticallyWithPadding:50];
-		[menu setPosition:ccp( size.width/2, size.height/2 - 50)];
+        [menu alignItemsVerticallyWithPadding:40];
+		[menu setPosition:ccp( size.width/2, size.height/2- 50)];
 		
         //settings menu
         settingsMenu = [SettingsPanel layerWithColor:COLOR_GAMEBORDER_B4
@@ -230,15 +247,22 @@
 #pragma mark - animations
 
 -(void) animateOut{
-    CGSize size = [[CCDirector sharedDirector] winSize];
     
+    
+    CGSize size = [[CCDirector sharedDirector] winSize];
+    [menu setEnabled:NO];
+    SimpleAudioEngine* SAE = [SimpleAudioEngine sharedEngine];
+    [SAE playEffect:@"sound_design_effect_metal_object_spin_drum_fast.mp3" pitch:.8 pan:0.0 gain:0.3];
+    [SAE stopBackgroundMusic];
     
     CCMoveTo *settingsMove = [CCMoveTo actionWithDuration:.3 position:ccp(CONTROL_OFFSET, -settingsMenu.contentSize.height)];
     CCMoveTo *aboutMove = [CCMoveTo actionWithDuration:.3 position:ccp(CONTROL_OFFSET, size.height)];
     CCFadeOut *menuFade = [CCFadeOut actionWithDuration:.5];
-    CCFadeOut *logoFade = [CCFadeOut actionWithDuration:.5];
+    CCFadeOut *titleOne = [CCFadeOut actionWithDuration:.5];
+  //  CCFadeOut *titleTwo = [CCFadeOut actionWithDuration:.5];
     
-    [logo runAction:logoFade];
+//    [logo runAction:titleOne];
+//    [busterLabel runAction:titleTwo];
     [menu runAction:menuFade];
     [settingsMenu runAction:settingsMove];
     [aboutMenu runAction:aboutMove];
@@ -271,9 +295,8 @@
     delay = [CCDelayTime actionWithDuration:1.3];
     block = [CCCallBlock actionWithBlock:^{
         GameLayer *gLayer = [[GameLayer alloc] init];
-        [[CCDirector sharedDirector] replaceScene:gLayer];
+        [[CCDirector sharedDirector] replaceScene: gLayer];
         [gLayer release];
-        
     }];
     seq = [CCSequence actionOne:delay two:block];
     [self runAction:seq];
@@ -281,8 +304,11 @@
 }
 
 -(void) animateIn{
+    SimpleAudioEngine* SAE = [SimpleAudioEngine sharedEngine];
+    [SAE playEffect:@"sound_design_effect_metal_object_spin_drum_fast.mp3" pitch:.8 pan:0.0 gain:0.3];
+    [SAE setBackgroundMusicVolume:.4];
+    [SAE playBackgroundMusic:@"grease_monkey.mp3" loop:YES];
     CGSize size = [[CCDirector sharedDirector] winSize];
-    
     for(PlayerSelect *selectionScreen in self.playerSelectArray){
         [selectionScreen stopAllActions];
         float width = 315;
@@ -301,7 +327,8 @@
         [selectionScreen runAction:easeIn];
     }
     
-    logo.opacity = 0;
+//    logo.opacity = 0;
+//    busterLabel.opacity = 0;
     menu.cascadeOpacityEnabled = YES;
     menu.opacity = 0;
     settingsMenu.position = ccp(CONTROL_OFFSET, -settingsMenu.contentSize.height);
@@ -312,9 +339,11 @@
         CCMoveTo *settingsMove = [CCMoveTo actionWithDuration:.3 position:ccp(CONTROL_OFFSET -2, -settingsMenu.contentSize.height + 60)];
         CCMoveTo *aboutMove = [CCMoveTo actionWithDuration:.3 position:ccp(CONTROL_OFFSET - 2, size.height - 60)];
         CCFadeIn *menuFade = [CCFadeIn actionWithDuration:.4];
-        CCFadeIn *logoFade = [CCFadeIn actionWithDuration:.4];
+        CCFadeIn *titleOne = [CCFadeIn actionWithDuration:.4];
+//        CCFadeIn *titleTwo = [CCFadeIn actionWithDuration:.4];
         
-        [logo runAction:logoFade];
+//        [logo runAction:titleOne];
+//        [busterLabel runAction:titleTwo];
         [menu runAction:menuFade];
         [settingsMenu runAction:settingsMove];
         [aboutMenu runAction:aboutMove];

@@ -41,7 +41,7 @@
 	<key>maxParticles</key>
 	<integer>120</integer>
 	<key>particleLifespan</key>
-	<real>0.300000011920929</real>
+	<real>0.400000011920929</real>
 	<key>particleLifespanVariance</key>
 	<real>0.1000000014901161</real>
 	<key>radialAccelVariance</key>

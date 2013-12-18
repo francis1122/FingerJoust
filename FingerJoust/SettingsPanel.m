@@ -11,6 +11,7 @@
 #import "TitleLayer.h"
 #import "GameLayer.h"
 #import "AboutPanel.h"
+#import "SimpleAudioEngine.h"
 
 @implementation SettingsPanel
 
@@ -25,6 +26,8 @@
                 titleLayer.menu.enabled = YES;
                 CCMoveTo *moveTo = [CCMoveTo actionWithDuration:0.35 position:ccp(CONTROL_OFFSET, size.height - 60)];
                 [titleLayer.aboutMenu runAction:moveTo];
+                SimpleAudioEngine* SAE = [SimpleAudioEngine sharedEngine];
+                [SAE playEffect:BUTTON_CLICK pitch:0.6 pan:0.0 gain:.2];
                 return;
             }
             
@@ -33,11 +36,17 @@
                         titleLayer.menu.enabled = YES;
             CCMoveTo *moveTo = [CCMoveTo actionWithDuration:0.35 position:ccp(CONTROL_OFFSET, -self.contentSize.height + 60)];
             [self runAction:moveTo];
+            [closeImage runAction: [CCFadeOut actionWithDuration:.35]];
+            SimpleAudioEngine* SAE = [SimpleAudioEngine sharedEngine];
+            [SAE playEffect:BUTTON_CLICK pitch:0.6 pan:0.0 gain:.2];
         }else{
             isActive = YES;
                         titleLayer.menu.enabled = NO;
             CCMoveTo *moveTo = [CCMoveTo actionWithDuration:0.35 position:ccp(CONTROL_OFFSET,0)];
             [self runAction:moveTo];
+            [closeImage runAction: [CCFadeIn actionWithDuration:.35]];
+            SimpleAudioEngine* SAE = [SimpleAudioEngine sharedEngine];
+            [SAE playEffect:BUTTON_CLICK pitch:0.6 pan:0.0 gain:.2];
         }
     }];
     menuToggle.color= ccWHITE;
@@ -46,6 +55,15 @@
     CCMenu *menu = [CCMenu menuWithItems:menuToggle, nil];
     menu.position = ccp(self.contentSize.width/2, self.contentSize.height - 25);
     [self addChild:menu];
+    menuToggle.activeArea = CGRectMake(-50, -10, 205, 60);
+    
+//    NSLog(@"menuActiveArea: %f, %f, %f, %f", menuToggle.activeArea.origin.x, menuToggle.activeArea.origin.y, menuToggle.activeArea.size.width, menuToggle.activeArea.size.height);
+    
+    closeImage = [CCSprite spriteWithSpriteFrameName:@"closebutton"];
+    closeImage.opacity = 0;
+    closeImage.position = ccp(self.contentSize.width/2 + 76, self.contentSize.height - 27);
+    closeImage.scale = .5;
+    [self addChild:closeImage z:0];
     
         PlayerManager *PM = [PlayerManager sharedInstance];
     //event items
@@ -237,12 +255,16 @@
         PlayerManager *PM = [PlayerManager sharedInstance];
     PM.windEvent = sender.tag;
     windActive.position = ccp(sender.parent.position.x + sender.position.x, sender.parent.position.y);
+    SimpleAudioEngine* SAE = [SimpleAudioEngine sharedEngine];
+    [SAE playEffect:BUTTON_CLICK pitch:0.6 pan:0.0 gain:.2];
 }
 
 -(void) bombCallback:(CCMenuItemFont*) sender{
     PlayerManager *PM = [PlayerManager sharedInstance];
     PM.bombEvent = sender.tag;
     bombActive.position = ccp(sender.parent.position.x + sender.position.x, sender.parent.position.y);
+    SimpleAudioEngine* SAE = [SimpleAudioEngine sharedEngine];
+    [SAE playEffect:BUTTON_CLICK pitch:0.6 pan:0.0 gain:.2];
 }
 
 -(void) hurricaneCallback:(CCMenuItemFont*) sender{
@@ -251,6 +273,8 @@
         PM.hurricaneEvent = sender.tag;
         hurricaneActive.position = ccp(sender.parent.position.x + sender.position.x, sender.parent.position.y);
     }
+    SimpleAudioEngine* SAE = [SimpleAudioEngine sharedEngine];
+    [SAE playEffect:BUTTON_CLICK pitch:0.6 pan:0.0 gain:.2];
 }
 
 -(void) missileCallback:(CCMenuItemFont*) sender{
@@ -259,6 +283,8 @@
         PM.missileEvent = sender.tag;
         missileActive.position = ccp(sender.parent.position.x + sender.position.x, sender.parent.position.y);
     }
+    SimpleAudioEngine* SAE = [SimpleAudioEngine sharedEngine];
+    [SAE playEffect:BUTTON_CLICK pitch:0.6 pan:0.0 gain:.2];
 }
 
 -(void) spikeCallback:(CCMenuItemFont*) sender{
@@ -267,6 +293,8 @@
         PM.spikeEvent = sender.tag;
         spikeActive.position = ccp(sender.parent.position.x + sender.position.x, sender.parent.position.y);
     }
+    SimpleAudioEngine* SAE = [SimpleAudioEngine sharedEngine];
+    [SAE playEffect:BUTTON_CLICK pitch:0.6 pan:0.0 gain:.2];
 }
 
 -(void) gameSpeed:(CCMenuItemFont*) sender{
@@ -275,13 +303,16 @@
         PM.gameSpeed = sender.tag;
         gameSpeedActive.position = ccp(sender.parent.position.x + sender.position.x, sender.parent.position.y);
     }
+    SimpleAudioEngine* SAE = [SimpleAudioEngine sharedEngine];
+    [SAE playEffect:BUTTON_CLICK pitch:0.6 pan:0.0 gain:.2];
 }
 
 -(void) frequencyCallback:(CCMenuItemFont*) sender{
     PlayerManager *PM = [PlayerManager sharedInstance];
     PM.frequencyEvent = sender.tag;
     frequencyActive.position = ccp(sender.parent.position.x + sender.position.x, sender.parent.position.y);
-    
+    SimpleAudioEngine* SAE = [SimpleAudioEngine sharedEngine];
+    [SAE playEffect:BUTTON_CLICK pitch:0.6 pan:0.0 gain:.2];
 }
 
 @end

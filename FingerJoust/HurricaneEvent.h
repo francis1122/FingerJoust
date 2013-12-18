@@ -7,10 +7,12 @@
 //
 
 #import "HazardEvent.h"
+#import "SimpleAudioEngine.h"
 
 @interface HurricaneEvent : HazardEvent{
     BOOL isWarningDone;
     int hurricanesAmount;
+    ALint soundID;
 }
 
 @property (nonatomic, retain) NSMutableArray *vortexArray;

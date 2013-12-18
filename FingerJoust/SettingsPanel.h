@@ -15,6 +15,7 @@
     CCMenuItemFont *menuToggle;
     TitleLayer *titleLayer;
     CCSprite *windActive, *bombActive, *hurricaneActive, *spikeActive, *missileActive, *gameSpeedActive, *frequencyActive;
+    CCSprite *closeImage;
 }
 
 @property BOOL isActive;

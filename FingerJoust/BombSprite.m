@@ -18,6 +18,7 @@
 -(id) init{
     if(self = [super init]){
         CGSize winSize= [[CCDirector sharedDirector] winSize];
+        
         displayTime = 4;
         count = 4.0;
         velocity = CGPointZero;
@@ -27,8 +28,8 @@
         blastRadius = [CCSprite spriteWithSpriteFrameName:@"timerCircle"];
         blastRadius.scale = 1.35;
         bomb = [CCSprite spriteWithSpriteFrameName:@"bomb"];
-        bomb.color = ccGRAY;
-        bomb.scale = 1.25;
+        bomb.color = ccBLACK;
+//        bomb.scale = 1.25;
         countDown = [CCLabelTTF labelWithString:@"4" fontName:MAIN_FONT fontSize:32];
         countDown.position = ccp(2,-8);
         countDown.color = ccWHITE;
@@ -39,9 +40,30 @@
         CCEaseIn *ease = [CCEaseIn actionWithAction:rotate rate:2.4];
         [blastRadius runAction:ease];
         
-        [self addChild:countDown z:1];
-        [self addChild:bomb];
-        [self addChild:blastRadius];
+        [self addChild:countDown z:2];
+        [self addChild:bomb z:1];
+        [self addChild:blastRadius z:1];
+        
+        
+        motionStreak = [[CCParticleSystemQuad alloc] initWithFile: @"MotionStreak.plist"];
+        
+            [motionStreak setStartColor:ccc4f(1.0, 1.0, 1.0, 1.0)];
+            [motionStreak setEndColor:ccc4f(1.0, 1.0, 1.0, 1.0)];
+        motionStreak.position = ccp(0,-8);
+        
+        motionStreak.positionType = kCCPositionTypeFree;
+        [self addChild:motionStreak];
+
+        bomb.scale = 0.0;
+        CCScaleTo *scale = [CCScaleTo actionWithDuration:.4 scale:1.25];
+        [bomb runAction:scale];
+        blastRadius.scale = 0.0;
+        CCScaleTo *scaleRadius = [CCScaleTo actionWithDuration:.4 scale:1.35];
+        [blastRadius runAction:scaleRadius];
+        countDown.scale = 0.0;
+        CCScaleTo *scaleText = [CCScaleTo actionWithDuration:.4 scale:1];
+        [countDown runAction:scaleText];
+        
     }
     return self;
 }

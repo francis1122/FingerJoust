@@ -11,6 +11,7 @@
 #import "Jouster.h"
 #import "Player.h"
 #import "PlayerManager.h"
+#import "SimpleAudioEngine.h"
 
 
 
@@ -386,6 +387,8 @@
 
 
 -(void) animateTouchAreasIn{
+    SimpleAudioEngine* SAE = [SimpleAudioEngine sharedEngine];
+    [SAE playEffect:@"sound_design_effect_metal_object_spin_drum_fast.mp3" pitch:.8 pan:0.0 gain:0.3];
     CGSize winSize= [[CCDirector sharedDirector] winSize];
     redLayer.position = ccp(-redLayer.contentSize.width - 20, winSize.height/2);
     blueLayer.position = ccp(winSize.width + 20, winSize.height/2);
@@ -422,6 +425,8 @@
 
 -(void) smashTopBottomAlreadyInPlace:(BOOL) inPlace{
     CGSize winSize= [[CCDirector sharedDirector] winSize];
+    SimpleAudioEngine* SAE = [SimpleAudioEngine sharedEngine];
+    [SAE playEffect:@"sound_design_effect_metal_object_spin_drum_fast.mp3" pitch:.8 pan:0.0 gain:0.3];
     if(inPlace){
         topLayer.position = ccp(CONTROL_OFFSET, MIDDLEBAR_HEIGHT - winSize.height/2);
         bottomLayer.position = ccp(CONTROL_OFFSET, winSize.height - MIDDLEBAR_HEIGHT);
@@ -435,6 +440,17 @@
     
     CCEaseIn *topEase = [CCEaseIn actionWithAction:topMove rate:2];
     CCEaseIn *bottomEase = [CCEaseIn actionWithAction:bottomMove rate:2];
+    
+    //play in block
+
+    
+    CCDelayTime *sound = [CCDelayTime actionWithDuration:1];
+    CCCallBlock *soundBlock = [CCCallBlock actionWithBlock:^{
+        //    SimpleAudioEngine* SAE = [SimpleAudioEngine sharedEngine];
+          [SAE playEffect:@"wood_hit_metal_heavy_1.mp3" pitch:1.4 pan:0.0 gain:0.8];
+    }];
+    CCSequence *soundSequence = [CCSequence actionOne:sound two:soundBlock];
+    [self runAction:soundSequence];
     
     CCActionInterval *topMoveBack = [CCMoveTo actionWithDuration:1 position:ccp(CONTROL_OFFSET, MIDDLEBAR_HEIGHT - winSize.height/2)];
     CCActionInterval *bottomMoveBack = [CCMoveTo actionWithDuration:1 position:ccp(CONTROL_OFFSET, winSize.height - MIDDLEBAR_HEIGHT)];
@@ -451,6 +467,9 @@
 
 -(void) animateTouchAreasOut{
     CGSize winSize= [[CCDirector sharedDirector] winSize];
+    SimpleAudioEngine* SAE = [SimpleAudioEngine sharedEngine];
+    [SAE playEffect:@"sound_design_effect_metal_object_spin_drum_fast.mp3" pitch:.8 pan:0.0 gain:0.3];
+
     ///    redLayer.position = ccp(-redLayer.contentSize.width, winSize.height/2);
     //    blueLayer.position = ccp(winSize.width, winSize.height/2);
     //    blackLayer.position = ccp(-redLayer.contentSize.width, 0);

@@ -10,6 +10,7 @@
 #import "Player.h"
 #import "CCWarpSprite.h"
 #import "MathHelper.h"
+#import "SimpleAudioEngine.h"
 
 
 @implementation JousterE
@@ -49,6 +50,9 @@
 -(void) checkJoustAndBodyTouching{
     float length = ccpLength(joustPosition);
     if(length < joustRadius + bodyRadius){
+        SimpleAudioEngine* SAE = [SimpleAudioEngine sharedEngine];
+        float soundVariety = .3 + .3/(3+arc4random()%4);
+        [SAE playEffect:@"wood_hit_brick_1.mp3" pitch:soundVariety pan:0.0 gain:.3];
         CGPoint awayFromCenter = ccpNormalize(joustPosition);
         joustPosition = ccpMult(awayFromCenter, joustRadius + bodyRadius);
 
@@ -113,6 +117,9 @@
     offset = ccpMult(offset, 500);
     joustVelocity = offset;
     joustOutsideVelocity = offset;
+    
+    jousterInactiveTimer = .15;
+    isJousterInactive = YES;
 }
 
 @end

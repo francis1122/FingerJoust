@@ -12,6 +12,7 @@
 #import "IntroLayer.h"
 #import "TitleLayer.h"
 #import "PlayerManager.h"
+#import "SimpleAudioEngine.h"
 #import "GameLayer.h"
 
 @implementation MyNavigationController
@@ -65,6 +66,30 @@
 	// Create the main window
 	window_ = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 
+    SimpleAudioEngine* SAE = [SimpleAudioEngine sharedEngine];
+    [SAE preloadBackgroundMusic:@"exciting_race_tune.mp3"];
+    [SAE preloadBackgroundMusic:@"get_off.mp3"];
+    [SAE preloadBackgroundMusic:@"grease_monkey.mp3"];
+    
+    
+    [SAE preloadEffect:@"wood_hit_metal_heavy_1.mp3"];
+    [SAE preloadEffect:@"wood_hit_brick_1.mp3"];
+    [SAE preloadEffect:@"wood_hit_aluminium_heavy_1.mp3"];
+    [SAE preloadEffect:@"wood_hit_wood_1.mp3"];
+    [SAE preloadEffect:@"wood_hit_wood_heavy_1.mp3"];
+    [SAE preloadEffect:@"explosion.mp3"];
+    [SAE preloadEffect:@"cold_snowy_blizzard.mp3"];
+    [SAE preloadEffect:@"sound.mp3"];
+    [SAE preloadEffect:@"explosion.mp3"];
+    [SAE preloadEffect:@"cold_snowy_blizzard.mp3"];
+    [SAE preloadEffect:@"electric_clock_ticking.mp3"];
+    
+    
+    [SAE preloadEffect:@"sound_design_effect_wind_cold.mp3"];
+    [SAE preloadEffect:@"sound_design_electicity_spark.mp3"];
+    [SAE preloadEffect:@"sound_design_effect_metal_object_spin_drum_fast.mp3"];
+    
+    
     //initiat player manager singleton
     [PlayerManager sharedInstance];
 	
@@ -96,7 +121,7 @@
 	director_.wantsFullScreenLayout = YES;
 	
 	// Display FSP and SPF
-	[director_ setDisplayStats:YES];
+	[director_ setDisplayStats:NO];
 	
 	// set FPS at 60
 	[director_ setAnimationInterval:1.0/60];
@@ -153,8 +178,8 @@
 //    NSArray *names = [UIFont fontNamesForFamilyName:@"Source Sans Pro"];
 
     
-    
-	
+
+
 	return YES;
 }
 

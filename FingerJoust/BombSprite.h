@@ -13,6 +13,7 @@
     CCLabelTTF *countDown;
     CCSprite *bomb;
     CCSprite *blastRadius;
+    CCParticleSystemQuad *motionStreak;
     
     int displayTime;
     float count;
